@@ -1,213 +1,1793 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masmundok Viajes y más</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Masmundok: requisitos de entrada, apps, tours, consejos, noticias de último momento y códigos de descuento para viajar. Por Yesi y Pablo.">
+<meta name="theme-color" content="#062A30">
+<meta property="og:title" content="Masmundok · Todo lo que necesitás saber antes de viajar">
+<meta property="og:description" content="Requisitos, noticias de último momento, ofertas y códigos de descuento para cada destino.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><circle cx='20' cy='20' r='19' fill='%233FCFCB'/><g fill='none' stroke='%23062A30' stroke-width='2'><ellipse cx='20' cy='20' rx='7' ry='18'/><path d='M2 20h36M5 11h30M5 29h30'/></g></svg>">
+<title>Masmundok</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Concepto: terminal de aeropuerto. Señalética, tablero de salidas, tickets perforados y sellos de pasaporte. */
+:root{
+  --bg:#EEF9F8; --surface:#FFFFFF; --surface-2:#DFF3F1; --ink:#0A3037; --ink-2:#44666D; --line:#C3E2DF;
+  --aqua:#3FCFCB; --aqua-deep:#0A7A80; --on-aqua:#062A30;
+  --stamp:#D9482B; --ok:#0A7D57; --warn:#A8690A;
+  --board:#062A30; --board-2:#0B3A42; --board-fg:#FFD25A; --board-dim:#86BCC0; --board-line:#14505A;
+  --f-display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --f-body:"Albert Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"DM Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --shadow:0 1px 0 rgba(6,42,48,.05),0 14px 34px -16px rgba(6,42,48,.35);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#061C21; --surface:#0B2A30; --surface-2:#0F363E; --ink:#E4F6F5; --ink-2:#92BEC2; --line:#1A4851;
+    --aqua:#46D6D2; --aqua-deep:#5FE0DC; --on-aqua:#062A30; --stamp:#FF7A55; --ok:#4ADE9A; --warn:#FFC83D;
+    --board:#031317; --board-2:#072229; --board-line:#103C44; --board-dim:#7DB0B4;
+    --shadow:0 14px 34px -16px rgba(0,0,0,.7); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#061C21; --surface:#0B2A30; --surface-2:#0F363E; --ink:#E4F6F5; --ink-2:#92BEC2; --line:#1A4851;
+  --aqua:#46D6D2; --aqua-deep:#5FE0DC; --on-aqua:#062A30; --stamp:#FF7A55; --ok:#4ADE9A; --warn:#FFC83D;
+  --board:#031317; --board-2:#072229; --board-line:#103C44; --board-dim:#7DB0B4;
+  --shadow:0 14px 34px -16px rgba(0,0,0,.7); color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:104px}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;font:400 16px/1.55 var(--f-body);background:var(--bg);color:var(--ink);-webkit-text-size-adjust:100%}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:60}
+h1,h2,h3,h4{font-family:var(--f-display);margin:0;line-height:1.08;letter-spacing:-.015em;text-wrap:balance}
+p{margin:0} ul{margin:0;padding:0;list-style:none}
+a{color:var(--aqua-deep)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--aqua-deep);outline-offset:2px;border-radius:4px}
+.dz :focus-visible{outline-color:#FFD25A}
+.in{max-width:1160px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.band{padding-block:clamp(44px,7vw,84px)}
+.eyebrow{font:500 12px/1.2 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--aqua-deep);display:inline-flex;align-items:center;gap:.6rem}
+.eyebrow::before{content:"";width:22px;height:2px;background:currentColor}
+.sh{display:grid;gap:.7rem;margin-bottom:clamp(24px,4vw,40px);max-width:64ch}
+.sh h2{font-size:clamp(1.8rem,4.2vw,2.7rem);font-weight:800}
+.sh p{color:var(--ink-2)}
+.ic{width:1.15em;height:1.15em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.72rem 1.2rem;border-radius:999px;font-weight:700;font-size:15px;line-height:1.2;border:2px solid transparent;cursor:pointer;text-decoration:none;transition:transform .15s,background .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--aqua);color:var(--on-aqua)}
+.btn-ghost{border-color:var(--line);background:transparent;color:var(--ink)}
+.btn-ghost:hover{border-color:var(--aqua-deep)}
+.btn-sm{padding:.45rem .85rem;font-size:13px}
+.btn.ok{background:var(--ok);color:#fff;border-color:transparent}
+.flag{display:inline-block;width:30px;height:20px;border-radius:3px;overflow:hidden;box-shadow:0 0 0 1px rgba(0,0,0,.2);flex:none;vertical-align:middle}
+.flag svg{display:block;width:100%;height:100%}
+.flag.lg{width:64px;height:43px;border-radius:5px}
+
+/* barra superior */
+.util{background:var(--board);color:#CDEBEA;font-size:13px}
+.util .in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 18px;padding-block:8px}
+.util .mail{display:flex;align-items:center;gap:8px;min-width:0}
+.util .mail span{font-family:var(--f-mono);overflow-wrap:anywhere}
+.util .mail button{background:transparent;border:1px solid var(--board-line);border-radius:999px;padding:2px 10px;font-size:12px;cursor:pointer;color:#CDEBEA}
+.util .mail button:hover{border-color:#FFD25A}
+.util .soc{display:flex;gap:6px}
+.util .soc a{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;color:#CDEBEA;border:1px solid var(--board-line)}
+.util .soc a:hover{color:#FFD25A;border-color:#FFD25A}
+
+/* header */
+.hdr{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--bg);border-bottom:1px solid var(--line)}
+.hdr .in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 20px;padding-block:10px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font:800 1.5rem/1 var(--f-display);letter-spacing:-.02em}
+.brand svg{width:34px;height:34px}
+.brand b{color:var(--aqua-deep);font-weight:800}
+.nav{display:flex;gap:4px;overflow-x:auto;max-width:100%;scrollbar-width:none;order:3;width:100%}
+.nav::-webkit-scrollbar{display:none}
+.nav a{white-space:nowrap;padding:.45rem .8rem;border-radius:999px;text-decoration:none;color:var(--ink);font-weight:600;font-size:14.5px}
+.nav a:hover{background:var(--surface-2)}
+@media (min-width:900px){.nav{order:0;width:auto}}
+
+/* hero */
+.hero{padding-block:clamp(36px,6vw,72px) clamp(48px,7vw,88px)}
+.hero-grid{display:grid;gap:44px;align-items:center;grid-template-columns:minmax(0,1fr)}
+.hero-grid>*{min-width:0}
+@media (min-width:960px){.hero-grid{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}}
+.hero h1{font-size:clamp(2.3rem,6.2vw,4.3rem);font-weight:800;margin:16px 0 18px}
+.hero h1 em{font-style:normal;background:linear-gradient(transparent 62%,var(--aqua) 62% 92%,transparent 92%);padding-inline:.06em}
+.lead{font-size:clamp(1.02rem,2vw,1.2rem);color:var(--ink-2);max-width:54ch}
+.search{position:relative;margin-top:26px;max-width:560px}
+.search label{display:block;font:500 12px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);margin-bottom:8px}
+.sbox{display:flex;align-items:center;gap:10px;background:var(--surface);border:2px solid var(--ink);border-radius:14px;padding:6px 6px 6px 16px;box-shadow:6px 6px 0 var(--aqua)}
+.sbox:focus-within{border-color:var(--aqua-deep)}
+.sbox input{flex:1;min-width:0;border:0;background:transparent;font:600 1.05rem var(--f-body);color:var(--ink);padding:.7rem 0;outline:0}
+.sbox input::placeholder{color:var(--ink-2);font-weight:500}
+.sres{position:absolute;left:0;right:0;top:calc(100% + 10px);z-index:20;background:var(--surface);border:2px solid var(--ink);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+.sres li{display:flex;align-items:center;gap:12px;padding:.7rem 1rem;cursor:pointer;font-weight:600}
+.sres li[aria-selected="true"],.sres li:hover{background:var(--surface-2)}
+.sres li small{margin-left:auto;color:var(--ink-2);font-weight:500}
+.sres .none{cursor:default;color:var(--ink-2);font-weight:500}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:.42rem .85rem .42rem .5rem;border:1px solid var(--line);background:var(--surface);border-radius:999px;font-weight:600;font-size:14px;text-decoration:none;color:var(--ink);cursor:pointer}
+.chip:hover{border-color:var(--aqua-deep)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip.txt{padding:.42rem .9rem}
+
+/* arte del hero: pasaporte + tarjeta de embarque */
+.hero-art{position:relative;padding-bottom:44px;max-width:460px;width:100%;margin-inline:auto}
+.pp{position:relative;aspect-ratio:5/4;background-color:var(--surface);background-image:repeating-linear-gradient(0deg,transparent 0 23px,var(--line) 23px 24px);border:1px solid var(--line);border-radius:6px 18px 18px 6px;box-shadow:var(--shadow);overflow:hidden}
+.pp::before{content:"";position:absolute;inset:0 auto 0 0;width:14px;background:repeating-linear-gradient(0deg,var(--aqua-deep) 0 6px,transparent 6px 12px)}
+.pp-title{position:absolute;top:10px;right:16px;font:500 10px/1 var(--f-mono);letter-spacing:.18em;color:var(--ink-2)}
+.stamp{position:absolute;display:grid;place-items:center;text-align:center;font:500 10px/1.2 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--c);border:2.5px solid var(--c);padding:.45rem .7rem;opacity:.92;transform:rotate(var(--rot));background:transparent}
+.stamp b{display:block;font:800 15px/1.1 var(--f-display);letter-spacing:.04em}
+.stamp.round{border-radius:50%;width:94px;height:94px;padding:0}
+.stamp.dbl{border-radius:8px;box-shadow:0 0 0 3px var(--surface),0 0 0 5px var(--c)}
+.bp{position:absolute;right:0;bottom:0;width:82%;background:var(--surface);border:2px solid var(--ink);border-radius:12px;box-shadow:8px 8px 0 var(--aqua);display:grid;grid-template-columns:1fr 70px}
+.bp-main{padding:12px 14px;display:grid;gap:8px}
+.bp-main .lbl{font:500 9px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2)}
+.bp-main .big{font:800 1.05rem/1.1 var(--f-display)}
+.bp-row{display:flex;gap:18px;flex-wrap:wrap}
+.bp-stub{border-left:2px dashed var(--ink);display:grid;place-items:center;padding:8px;background:repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 4px,var(--ink) 4px 5px,transparent 5px 8px);background-size:100% 42px;background-repeat:no-repeat;background-position:center}
+
+/* destinos */
+.dgrid{display:grid;gap:14px;grid-template-columns:repeat(2,minmax(0,1fr))}
+.dgrid .dcard:last-child{grid-column:span 2}
+@media (min-width:640px){.dgrid{grid-template-columns:repeat(6,minmax(0,1fr))}.dgrid .dcard{grid-column:span 2}.dgrid .dcard:nth-child(n+4){grid-column:span 3}}
+@media (min-width:1040px){.dgrid{grid-template-columns:repeat(5,minmax(0,1fr))}.dgrid .dcard,.dgrid .dcard:nth-child(n+4),.dgrid .dcard:last-child{grid-column:span 1}}
+.dcard{position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:260px;border-radius:16px;overflow:hidden;color:#fff;text-decoration:none;background-color:var(--c1);background-image:var(--photo,none),linear-gradient(155deg,var(--c1),var(--c2));background-size:cover;background-position:center;box-shadow:var(--shadow);transition:transform .2s}
+.dcard:hover{transform:translateY(-4px)}
+.dcard::before{content:"";position:absolute;right:-30px;top:-30px;width:150px;height:150px;border-radius:50%;border:2px solid rgba(255,255,255,.35);box-shadow:0 0 0 12px rgba(255,255,255,.1),0 0 0 26px rgba(255,255,255,.06)}
+.dcard .dc-flag{position:absolute;left:14px;top:14px}
+.dcard .dc-body{position:relative;padding:60px 16px 16px;background:linear-gradient(transparent,rgba(0,0,0,.62))}
+.dcard h3{font:800 1.45rem/1.05 var(--f-display)}
+.dcard p{font-size:13.5px;opacity:.92;margin-top:4px}
+.dcard .badge{display:inline-block;margin-top:10px;font:500 11px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;background:rgba(255,255,255,.2);padding:5px 8px;border-radius:4px;backdrop-filter:blur(4px)}
+.more{margin-top:26px;display:grid;gap:10px}
+.more p{color:var(--ink-2);font-size:14px}
+
+/* descuentos */
+.tband{background:var(--surface-2);--notch:var(--surface-2)}
+.tgrid{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr))}
+.tix{position:relative;background:var(--surface);border:2px solid var(--ink);border-radius:14px;box-shadow:6px 6px 0 var(--aqua)}
+.tix-main{padding:20px 20px 22px;display:grid;gap:8px}
+.tix-main .k{font:500 11px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--aqua-deep)}
+.tix-main h3{font:800 1.55rem/1.05 var(--f-display)}
+.tix-main p{color:var(--ink-2);font-size:14.5px}
+.tix-main .btn{justify-self:start;margin-top:6px}
+.tix-stub{position:relative;border-top:2px dashed var(--ink);padding:16px 20px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.tix-stub::before,.tix-stub::after{content:"";position:absolute;top:-13px;width:24px;height:24px;border-radius:50%;background:var(--notch);border:2px solid var(--ink)}
+.tix-stub::before{left:-14px;clip-path:inset(0 0 0 50%)}
+.tix-stub::after{right:-14px;clip-path:inset(0 50% 0 0)}
+.code small{display:block;font:500 10px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2);margin-bottom:5px}
+.code b{font:500 1.55rem/1 var(--f-mono);letter-spacing:.06em;user-select:all}
+.code em{font-style:normal;font:500 12px var(--f-mono);color:var(--stamp);margin-left:8px}
+.disc{margin-top:22px;color:var(--ink-2);font-size:13.5px;max-width:78ch}
+.cafe{margin-top:26px;display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center}
+
+/* videos y redes */
+.vtop{display:grid;gap:18px;margin-bottom:26px}
+@media (min-width:900px){.vtop{grid-template-columns:1.25fr 1fr}}
+.vgrid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr))}
+.vcard{display:flex;flex-direction:column;gap:10px;text-decoration:none;color:var(--ink)}
+.vthumb{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:linear-gradient(150deg,var(--c1),var(--c2));display:grid;place-items:center;box-shadow:var(--shadow)}
+.vthumb::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 15%,rgba(255,255,255,.28),transparent 45%)}
+.vplay{position:relative;width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.94);display:grid;place-items:center;color:#06262B;transition:transform .15s}
+.vcard:hover .vplay{transform:scale(1.1)}
+.vdur{position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,.72);color:#fff;font:500 12px/1 var(--f-mono);padding:4px 6px;border-radius:4px}
+.vcc{position:absolute;left:10px;top:10px;display:flex;align-items:center;gap:6px;background:rgba(0,0,0,.45);color:#fff;font:500 11px/1 var(--f-mono);letter-spacing:.06em;padding:5px 8px;border-radius:4px;text-transform:uppercase}
+.vcard h3{font:700 1rem/1.3 var(--f-body);letter-spacing:0}
+.vcard.big h3{font:800 1.4rem/1.15 var(--f-display)}
+.vtools{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.vfoot{margin-top:24px;display:flex;flex-wrap:wrap;gap:10px}
+.socs{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));margin-top:56px}
+.soc-card{display:grid;gap:10px;padding:22px;background:var(--surface);border:1px solid var(--line);border-radius:16px}
+.soc-card .ico{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:var(--ink);color:var(--bg)}
+.soc-card .ico .ic{width:24px;height:24px}
+.soc-card h3{font:800 1.3rem/1.1 var(--f-display)}
+.soc-card .h{font:500 13px var(--f-mono);color:var(--ink-2)}
+.soc-card p{color:var(--ink-2);font-size:14.5px}
+.soc-card .btn{justify-self:start}
+
+/* ===== Utilidades nuevas ===== */
+[hidden]{display:none!important}
+:root{--news-red:#D61F26}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.art{width:100%;height:100%;display:block}
+.art-wrap{position:absolute;inset:0;overflow:hidden}
+.ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .45s}
+.ph.ok{opacity:1}
+.btn-dark{background:var(--on-aqua);color:#fff;border-color:var(--on-aqua)}
+.btn-dark:hover{filter:brightness(1.25)}
+
+/* ===== News: estilo canal de noticias ===== */
+.board-band{background:var(--board);color:#E9F7F6}
+.nhead{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px 24px;margin-bottom:22px}
+.nhead .live{margin-bottom:12px}
+.nhead h2{font:800 clamp(2.6rem,8vw,4.6rem)/.9 var(--f-display);letter-spacing:-.04em;color:#fff;display:flex;align-items:baseline;gap:.3em .4em;flex-wrap:wrap}
+.nhead h2 span{font:700 clamp(1rem,2.4vw,1.5rem)/1.1 var(--f-body);letter-spacing:.02em;color:#ff8d91;text-transform:uppercase}
+.live{display:inline-flex;align-items:center;gap:8px;background:var(--news-red);color:#fff;font:800 12px/1 var(--f-body);letter-spacing:.14em;padding:7px 10px;border-radius:3px;text-transform:uppercase}
+.live i{width:8px;height:8px;border-radius:50%;background:#fff;animation:blink 1.3s infinite}
+@keyframes blink{50%{opacity:.25}}
+.nmeta{font:500 12px/1.4 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--board-dim);text-align:right}
+.nwrap{display:grid;gap:14px}
+@media (min-width:980px){.nwrap{grid-template-columns:minmax(0,1.75fr) minmax(300px,1fr);align-items:stretch}.screen{min-height:560px}}
+.screen{position:relative;min-height:500px;border-radius:8px;overflow:hidden;background:#041a1f;isolation:isolate;display:flex;flex-direction:column;justify-content:space-between;border:1px solid var(--board-line)}
+.sc-art{position:absolute;inset:0;z-index:-2;animation:artin .9s both}
+@keyframes artin{from{opacity:0;transform:scale(1.07)}to{opacity:1;transform:none}}
+.screen::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,0) 28%,rgba(0,0,0,0) 45%,rgba(0,0,0,.5))}
+.sc-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:16px}
+.brk{font:800 13px/1 var(--f-body);letter-spacing:.12em;text-transform:uppercase;padding:9px 12px;border-radius:2px;box-shadow:0 4px 14px rgba(0,0,0,.35);animation:lt .45s both}
+.brk.nt-ultimo{background:var(--news-red);color:#fff}.brk.nt-oferta{background:#46D68A;color:#04210F}.brk.nt-visa{background:#FFD25A;color:#1B1500}
+.brk.nt-equipaje{background:#8FE3DF;color:#06262B}.brk.nt-reglas{background:#FF9A7A;color:#2A0D05}.brk.nt-dato{background:#fff;color:#06262B}
+.bug{display:flex;align-items:stretch;font:800 13px/1 var(--f-display);letter-spacing:.06em;box-shadow:0 4px 14px rgba(0,0,0,.35);flex:none}
+.bug b{background:var(--news-red);color:#fff;padding:8px 8px}
+.bug span{background:#fff;color:#0A3037;padding:8px 9px}
+.sc-lower{animation:lt .55s both}
+@keyframes lt{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.lt-label{display:inline-flex;align-items:center;gap:8px;background:var(--news-red);color:#fff;font:800 13px/1 var(--f-body);letter-spacing:.1em;text-transform:uppercase;padding:9px 14px 9px 10px}
+.lt-head{background:rgba(3,19,23,.96);padding:14px 18px}
+.lt-head h3{font:800 clamp(1.45rem,3.2vw,2.3rem)/1.08 var(--f-display);color:#fff;letter-spacing:-.02em;text-wrap:balance}
+.lt-sub{background:#fff;color:#0A3037;padding:12px 18px;font-size:clamp(.95rem,1.5vw,1.05rem);line-height:1.45}
+.lt-meta{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;justify-content:space-between;background:#0A1F25;padding:9px 18px;font:500 12px/1.3 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:#9bd1d4}
+.lt-meta a{color:#fff;font-weight:500}
+.sc-bar{height:4px;background:rgba(255,255,255,.18)}
+.sc-bar i{display:block;height:100%;width:0;background:var(--news-red)}
+.rail-box{position:relative;background:var(--board-2);border:1px solid var(--board-line);border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
+.rail-hd{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px 10px 14px;border-bottom:1px solid var(--board-line);font:800 12px/1 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:#fff;min-height:52px}
+.cc{display:flex;align-items:center;gap:6px;font:500 12px var(--f-mono);color:var(--board-dim)}
+.cc button{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--board-line);background:transparent;color:#E4F6F5;cursor:pointer;display:grid;place-items:center}
+.cc button:hover{border-color:#fff;color:#fff}
+.rail{list-style:none;margin:0;padding:0;overflow-y:auto;max-height:320px}
+@media (min-width:980px){.rail{position:absolute;inset:52px 0 0 0;max-height:none}}
+.ri{display:grid;grid-template-columns:34px minmax(0,1fr);gap:10px;align-items:start;padding:12px 14px;width:100%;text-align:left;background:transparent;border:0;border-bottom:1px solid var(--board-line);color:#CFEAE9;cursor:pointer;position:relative;font:inherit}
+.ri:hover{background:rgba(255,255,255,.05)}
+.ri.on{background:rgba(214,31,38,.18);color:#fff}
+.ri.on::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--news-red)}
+.ri .flag{margin-top:2px}
+.ri small{display:block;font:800 10.5px/1 var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:#ff8d91;margin-bottom:5px}
+.ri .t{font:600 .95rem/1.3 var(--f-body);display:block}
+.ticker{display:flex;align-items:stretch;background:#0A1F25;border:1px solid var(--board-line);border-radius:6px;overflow:hidden;margin-top:14px}
+.tk-label{flex:none;background:var(--news-red);color:#fff;font:800 13px/1 var(--f-body);letter-spacing:.1em;padding:0 16px;display:flex;align-items:center;text-transform:uppercase}
+.tk-view{overflow:hidden;flex:1;min-width:0}
+.tk-track{display:flex;width:max-content;animation:tick 150s linear infinite}
+.tk-view:hover .tk-track{animation-play-state:paused}
+.tk-item{display:flex;align-items:center;gap:10px;padding:0 22px;white-space:nowrap;font:500 14px/1 var(--f-body);color:#E9F7F6;min-height:46px}
+.tk-item b{font:800 11px/1 var(--f-body);letter-spacing:.12em;color:#ff8d91}
+.tk-item::after{content:"";width:7px;height:7px;background:var(--news-red);transform:rotate(45deg);margin-left:12px}
+@keyframes tick{to{transform:translateX(-50%)}}
+.note{margin-top:18px;color:var(--board-dim);font-size:13px;max-width:78ch}
+
+/* ===== Imágenes en destinos y videos ===== */
+.dcard::before{display:none}
+.dcard .art-wrap{z-index:0;transition:transform .5s}
+.dcard:hover .art-wrap{transform:scale(1.06)}
+.dcard .dc-flag,.dcard .dc-body{z-index:1}
+.dcard .dc-body{background:linear-gradient(transparent,rgba(3,19,23,.78) 55%)}
+.vthumb::before{display:none}
+.vthumb .art-wrap{z-index:0}
+.vthumb .ph{z-index:1}
+.vthumb .vcc,.vthumb .vplay,.vthumb .vdur{z-index:2}
+.cbanner{position:relative;overflow:hidden}
+.cbanner .art-wrap{opacity:.95}
+.cbanner .art-wrap::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,19,23,.78),rgba(3,19,23,.35) 55%,rgba(3,19,23,0))}
+.cbanner .in{position:relative;z-index:1}
+
+/* ===== Asesoría ===== */
+.cta{background:var(--aqua);color:var(--on-aqua)}
+.cta-grid{display:grid;gap:28px;align-items:center}
+@media (min-width:900px){.cta-grid{grid-template-columns:1.25fr .75fr}}
+.cta .eyebrow{color:var(--on-aqua)}
+.cta h2{font:800 clamp(1.9rem,4.6vw,3.2rem)/1.02 var(--f-display);letter-spacing:-.03em;margin:12px 0 10px}
+.cta p{font-size:clamp(1.05rem,1.8vw,1.25rem);max-width:46ch;margin:0 0 22px}
+.cta-btns{display:flex;flex-wrap:wrap;gap:10px}
+.cta .btn-ghost{border-color:var(--on-aqua);color:var(--on-aqua);background:transparent}
+.cta-art{position:relative;aspect-ratio:5/3;border:3px solid var(--on-aqua);border-radius:16px;overflow:hidden;box-shadow:8px 8px 0 var(--on-aqua);max-width:100%}
+
+/* ===== ¿Te sirvió? y apoyo ===== */
+.help{background:var(--surface-2)}
+.help-grid{display:grid;gap:22px}
+@media (min-width:860px){.help-grid{grid-template-columns:1fr 1.15fr}}
+.fb,.sup{background:var(--surface);border:2px solid var(--ink);border-radius:16px;padding:24px;display:grid;gap:12px;align-content:start}
+.fb{box-shadow:6px 6px 0 var(--aqua)}
+.sup{box-shadow:6px 6px 0 #FFD25A}
+.fb h2,.sup h3{font:800 clamp(1.5rem,3vw,2.1rem)/1.05 var(--f-display)}
+.fb p,.sup p{margin:0;color:var(--ink-2)}
+.fb-btns,.sup-btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.fb-msg{font-weight:600;color:var(--ink)!important}
+.fb-msg a{font-weight:700}
+.help.compact{margin-top:30px;border-radius:16px;padding-block:26px}
+
+/* ===== Formulario ===== */
+.fstat{min-height:1.4em;font-weight:600}
+.fstat.ok{color:var(--ok)}.fstat.err{color:var(--stamp)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+
+/* ===== Mundito ===== */
+.mm{width:100%;height:100%;display:block;overflow:visible;--px:0px;--py:0px;--ox:0px;--oy:0px;--lt:6deg;--lf:4deg;--rt:-6deg;--rf:-4deg}
+.mm[data-pose="wave"]{--rt:-150deg;--rf:-24deg}
+.mm[data-pose="photo"]{--lt:-5deg;--lf:-93deg;--rt:5deg;--rf:93deg}
+.mm[data-pose="map"]{--lt:-12deg;--lf:-80deg;--rt:12deg;--rf:80deg;--oy:4px}
+.mm[data-pose="headgrab"]{--lt:130deg;--lf:103deg;--rt:-130deg;--rf:-103deg}
+.mm[data-pose="cheer"]{--lt:160deg;--lf:20deg;--rt:-160deg;--rf:-20deg}
+.m-armL{transform-origin:50px 108px;transform:rotate(var(--lt));transition:transform .55s cubic-bezier(.34,1.45,.5,1)}
+.m-foreL{transform-origin:50px 138px;transform:rotate(var(--lf));transition:transform .55s cubic-bezier(.34,1.45,.5,1)}
+.m-armR{transform-origin:150px 108px;transform:rotate(var(--rt));transition:transform .55s cubic-bezier(.34,1.45,.5,1)}
+.m-foreR{transform-origin:150px 138px;transform:rotate(var(--rf));transition:transform .55s cubic-bezier(.34,1.45,.5,1)}
+.m-all{transform-origin:100px 222px;animation:mbob 3.4s ease-in-out infinite}
+@keyframes mbob{50%{transform:translateY(-4px)}}
+.m-legL{transform-origin:86px 146px;animation:mlegl 3.4s ease-in-out infinite}
+.m-legR{transform-origin:114px 146px;animation:mlegr 3.4s ease-in-out infinite}
+@keyframes mlegl{50%{transform:rotate(3deg)}}
+@keyframes mlegr{50%{transform:rotate(-3deg)}}
+.m-eyes{transform-origin:100px 90px;animation:mblink 4.6s infinite}
+@keyframes mblink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.08)}}
+.m-pupils{transform:translate(calc(var(--px) + var(--ox)),calc(var(--py) + var(--oy)));transition:transform .15s}
+.m-brows{transition:transform .3s}
+.mo-grin,.mo-o{display:none}
+.m-cam,.m-map,.m-flash,.m-sweat,.m-q,.m-spark{opacity:0;transition:opacity .25s;transform-box:fill-box;transform-origin:center;pointer-events:none}
+.mm[data-pose="photo"] .mo-smile,.mm[data-pose="cheer"] .mo-smile,.mm[data-pose="wave"] .mo-smile{display:none}
+.mm[data-pose="photo"] .mo-grin,.mm[data-pose="cheer"] .mo-grin,.mm[data-pose="wave"] .mo-grin{display:inline}
+.mm[data-pose="photo"] .m-cam{opacity:1}
+.mm[data-pose="photo"] .m-flash{animation:mflash 1.2s .45s both}
+@keyframes mflash{0%{opacity:0;transform:scale(.2)}14%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.3)}}
+.mm[data-pose="map"] .mo-smile{display:none}
+.mm[data-pose="map"] .mo-o{display:inline;rx:4px;ry:4px}
+.mm[data-pose="map"] .m-map{opacity:1}
+.mm[data-pose="map"] .m-legL{animation:mwalk .45s ease-in-out infinite alternate}
+.mm[data-pose="map"] .m-legR{animation:mwalk .45s ease-in-out infinite alternate-reverse}
+@keyframes mwalk{from{transform:rotate(-12deg)}to{transform:rotate(12deg)}}
+.mm[data-pose="headgrab"] .mo-smile{display:none}
+.mm[data-pose="headgrab"] .mo-o{display:inline}
+.mm[data-pose="headgrab"] .m-brows{transform:translateY(-5px)}
+.mm[data-pose="headgrab"] .m-sweat,.mm[data-pose="headgrab"] .m-q{opacity:1}
+.mm[data-pose="headgrab"] .m-all{animation:mshake .32s linear infinite}
+@keyframes mshake{0%,100%{transform:translateX(-2px)}50%{transform:translateX(2px)}}
+.mm[data-pose="cheer"] .m-all{animation:mjump .5s ease-in-out infinite}
+@keyframes mjump{50%{transform:translateY(-12px)}}
+.mm[data-pose="cheer"] .m-spark{opacity:1;animation:mtw .6s ease-in-out infinite alternate}
+@keyframes mtw{from{transform:scale(.7) rotate(-8deg)}to{transform:scale(1.15) rotate(8deg)}}
+.mm[data-pose="wave"] .m-foreR{animation:mwave .5s ease-in-out infinite alternate}
+@keyframes mwave{from{transform:rotate(calc(var(--rf) - 24deg))}to{transform:rotate(calc(var(--rf) + 24deg))}}
+.mm-fab{position:fixed;right:max(12px,env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:70;width:88px;height:104px;padding:0;border:0;background:transparent;cursor:pointer;filter:drop-shadow(0 8px 12px rgba(3,19,23,.35));transition:transform .2s}
+.mm-fab:hover{transform:translateY(-3px) scale(1.05)}
+.mm-slot{display:block;width:100%;height:100%}
+.mm-tease{position:fixed;right:calc(max(12px,env(safe-area-inset-right,0px)) + 80px);bottom:calc(60px + env(safe-area-inset-bottom,0px));z-index:70;max-width:min(230px,calc(100vw - 130px));background:#fff;color:#0A3037;border:2px solid #0A3037;border-radius:14px 14px 4px 14px;padding:10px 28px 10px 12px;font-size:14px;line-height:1.3;display:grid;gap:2px;box-shadow:4px 4px 0 var(--aqua);animation:lt .4s both}
+.mm-x{position:absolute;right:4px;top:2px;border:0;background:transparent;font-size:20px;line-height:1;cursor:pointer;color:#0A3037;padding:4px 7px}
+.mm-panel{position:fixed;right:max(12px,env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:80;width:min(392px,calc(100vw - 24px));height:min(610px,calc(100dvh - 56px - env(safe-area-inset-bottom,0px) - env(safe-area-inset-top,0px)));display:flex;flex-direction:column;background:var(--bg);color:var(--ink);border:2px solid var(--ink);border-radius:18px;box-shadow:8px 8px 0 var(--aqua)}
+.mm-head{display:flex;align-items:center;gap:10px;padding:10px 12px 10px 10px;background:var(--board);color:#fff;border-radius:16px 16px 0 0;flex:none}
+.mm-slot.big{width:86px;height:100px;flex:none;margin-top:-42px;margin-bottom:-6px;cursor:pointer;filter:drop-shadow(0 4px 8px rgba(0,0,0,.4))}
+.mm-ttl{display:grid;gap:2px;min-width:0;flex:1}
+.mm-ttl b{font:800 1.2rem/1 var(--f-display)}
+.mm-ttl small{font-size:12.5px;color:var(--board-dim)}
+.mm-close{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--board-line);background:transparent;color:#fff;font-size:22px;line-height:1;cursor:pointer}
+.mm-msgs{flex:1;min-height:0;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;background:var(--bg)}
+.mm-msg{max-width:92%;padding:10px 12px;border-radius:14px;font-size:14.5px;line-height:1.45;overflow-wrap:anywhere}
+.mm-msg.bot{align-self:flex-start;background:var(--surface);border:1px solid var(--line);border-bottom-left-radius:4px}
+.mm-msg.me{align-self:flex-end;background:var(--aqua);color:var(--on-aqua);border-bottom-right-radius:4px;font-weight:600}
+.mm-msg p{margin:0 0 .55em}.mm-msg p:last-child{margin:0}
+.mm-msg ul{margin:.3em 0 .55em;padding-left:1.1em;display:grid;gap:3px}
+.mm-msg a{color:var(--aqua-deep);font-weight:700}
+.mm-fl{display:inline-flex;vertical-align:middle;margin-right:6px}
+.mm-sm{font-size:12.5px;color:var(--ink-2)}
+.mm-tags{display:flex;flex-wrap:wrap;gap:6px}
+.mm-tags a{display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--line);border-radius:999px;padding:4px 10px 4px 5px;text-decoration:none;color:var(--ink)}
+.mm-msg.typing{display:flex;gap:4px;align-items:center;padding:14px 14px}
+.mm-msg.typing i{width:7px;height:7px;border-radius:50%;background:var(--ink-2);animation:mdot 1s infinite}
+.mm-msg.typing i:nth-child(2){animation-delay:.15s}.mm-msg.typing i:nth-child(3){animation-delay:.3s}
+@keyframes mdot{0%,60%,100%{transform:translateY(0);opacity:.5}30%{transform:translateY(-4px);opacity:1}}
+.mm-chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 14px;background:var(--bg)}
+.mm-chips:not(:empty){padding-top:8px}
+.mm-chip{border:1.5px solid var(--ink);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 11px;font:600 13px var(--f-body);cursor:pointer}
+.mm-chip:hover{background:var(--aqua);color:var(--on-aqua)}
+.mm-form{display:flex;gap:8px;padding:10px 14px;background:var(--bg);flex:none}
+.mm-form input{flex:1;min-width:0;border:2px solid var(--ink);border-radius:10px;padding:.6rem .75rem;font:500 15px var(--f-body);background:var(--surface);color:var(--ink)}
+.mm-form input:focus{outline:3px solid var(--aqua-deep);outline-offset:1px}
+.mm-note{margin:0;padding:0 14px 12px;font-size:11.5px;color:var(--ink-2);background:var(--bg);border-radius:0 0 16px 16px;flex:none}
+@media (max-width:560px){
+  .mm-panel{right:0;left:0;bottom:0;width:auto;height:min(82dvh,660px);border-radius:18px 18px 0 0;box-shadow:none;padding-bottom:env(safe-area-inset-bottom,0px)}
+  .mm-note{padding-bottom:10px}
+}
+@media (prefers-reduced-motion:reduce){
+  .m-all,.m-legL,.m-legR,.m-eyes,.mm[data-pose] .m-all,.mm[data-pose] .m-foreR,.mm[data-pose] .m-legL,.mm[data-pose] .m-legR,.mm[data-pose] .m-spark,.live i,.tk-track{animation:none!important}
+  .sc-art,.sc-lower,.brk,.mm-tease{animation:none!important}
+}
+.ri-ic{display:grid;place-items:center;min-height:22px;color:#ff8d91}
+.ri-ic .ic{width:22px;height:22px}
+@media (max-width:700px){.rail{display:none}.rail-hd{border-bottom:0}}
+
+/* vista de país */
+.cbanner{color:#fff;background-color:var(--c1);background-image:var(--photo,none),linear-gradient(155deg,var(--c1),var(--c2));background-size:cover;background-position:center;padding-block:28px 40px;position:relative;overflow:hidden}
+.cbanner::before{content:"";position:absolute;right:-60px;bottom:-90px;width:320px;height:320px;border-radius:50%;border:2px solid rgba(255,255,255,.3);box-shadow:0 0 0 18px rgba(255,255,255,.08),0 0 0 40px rgba(255,255,255,.05)}
+.cbanner .in{position:relative;display:grid;gap:22px}
+.back{display:inline-flex;align-items:center;gap:8px;color:#fff;font-weight:600;text-decoration:none;font-size:14.5px;background:rgba(0,0,0,.28);padding:.4rem .9rem;border-radius:999px;justify-self:start}
+.cb-main{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.cbanner h1{font-size:clamp(2.4rem,7vw,4.6rem);font-weight:800;text-shadow:0 2px 18px rgba(0,0,0,.3)}
+.cbanner .tg{font-size:clamp(1rem,2vw,1.25rem);opacity:.95;text-shadow:0 1px 10px rgba(0,0,0,.35)}
+.jump{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:14px}
+.jump select{font:600 15px var(--f-body);padding:.5rem .8rem;border-radius:10px;border:0;background:rgba(255,255,255,.95);color:#06262B;max-width:100%}
+.cgrid{display:grid;gap:22px;grid-template-columns:minmax(0,1fr)}
+@media (min-width:980px){.cgrid{grid-template-columns:minmax(0,1fr) 340px}.cgrid>*{grid-column:1}.cgrid>.partners{grid-column:2;grid-row:1/span 12;align-self:start;position:sticky;top:110px}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px}
+.card h2{font:800 1.35rem/1.1 var(--f-display);margin-bottom:14px}
+.facts{display:grid;gap:0;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));padding:0;overflow:hidden}
+.fx{padding:16px 18px;border-top:1px solid var(--line)}
+.fx:first-child,.fx:nth-child(2){border-top:0}
+.fx small{display:block;font:500 11px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);margin-bottom:6px}
+.fx span{font-weight:600;font-size:15px}
+.req{display:grid;gap:18px;border:2px solid var(--ink);box-shadow:6px 6px 0 var(--aqua)}
+@media (min-width:640px){.req{grid-template-columns:200px minmax(0,1fr);align-items:start}}
+.rstamp{justify-self:start;align-self:center;font:500 1.15rem/1.1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;text-align:center;color:var(--sc);border:3px double var(--sc);padding:14px 16px;transform:rotate(-6deg);border-radius:8px}
+.rstamp.sin-visa{--sc:var(--ok)}.rstamp.evisa,.rstamp.voa{--sc:var(--warn)}.rstamp.visa{--sc:var(--stamp)}
+.rstamp small{display:block;font-size:10px;letter-spacing:.14em;margin-top:6px;opacity:.85}
+.req h2{margin-bottom:6px}
+.vbadge{display:inline-flex;align-items:center;gap:6px;font:500 12px var(--f-mono);color:var(--ink-2);margin-bottom:10px}
+.vbadge.y{color:var(--ok)}
+.chk li,.dot li{position:relative;padding-left:26px;margin-top:10px}
+.chk li::before{content:"";position:absolute;left:0;top:.35em;width:14px;height:8px;border-left:3px solid var(--ok);border-bottom:3px solid var(--ok);transform:rotate(-45deg)}
+.dot li::before{content:"";position:absolute;left:3px;top:.55em;width:9px;height:9px;background:var(--aqua);transform:rotate(45deg)}
+.dont li::before{background:var(--stamp)}
+.src{display:inline-block;margin-top:12px;font-size:13px;font-weight:600}
+.duo{display:grid;gap:22px}
+@media (min-width:700px){.duo{grid-template-columns:1fr 1fr}}
+.apps li{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line)}
+.apps li:first-child{border-top:0}
+.app-i{width:36px;height:36px;border-radius:10px;background:var(--ink);color:var(--bg);display:grid;place-items:center;font:800 1rem var(--f-display);flex:none}
+.apps b{display:block}
+.apps span{color:var(--ink-2);font-size:14px}
+.partners{display:grid;gap:16px}
+.partners .tix{box-shadow:4px 4px 0 var(--aqua)}
+.partners .tix-main{padding:16px 16px 18px}
+.partners .tix-main h3{font-size:1.25rem}
+.partners .tix-stub{padding:12px 16px 14px;--notch:var(--bg)}
+.partners .code b{font-size:1.2rem}
+.pt{font:800 1.2rem/1.1 var(--f-display)}
+.psub{color:var(--ink-2);font-size:13.5px}
+
+/* trabaja con nosotros */
+.wgrid{display:grid;gap:34px}
+@media (min-width:960px){.wgrid{grid-template-columns:1fr 1fr;align-items:start}}
+.wl h2{font-size:clamp(1.9rem,4.4vw,2.9rem);font-weight:800;margin:14px 0 14px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:22px 0}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px}
+.stat b{display:block;font:800 1.7rem/1 var(--f-display);color:var(--aqua-deep)}
+.stat span{font-size:12.5px;color:var(--ink-2)}
+.fmt li{padding:11px 0;border-top:1px solid var(--line);font-weight:600}
+.fmt li:first-child{border-top:0}
+.fmt li span{display:block;font-weight:400;color:var(--ink-2);font-size:14px}
+.proof{margin-top:20px;color:var(--ink-2);font-size:14px}
+.proof b{color:var(--ink)}
+.form{display:grid;gap:14px}
+.form label{display:grid;gap:6px;font:600 13.5px var(--f-body)}
+.form input,.form select,.form textarea{font:500 15px var(--f-body);padding:.65rem .8rem;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);width:100%}
+.form textarea{min-height:92px;resize:vertical}
+.form input:focus,.form select:focus,.form textarea:focus{outline:0;border-color:var(--aqua-deep)}
+.out{background:var(--board);color:#E4F6F5;border-radius:10px;padding:14px;font:400 13px/1.55 var(--f-mono);white-space:pre-wrap;overflow-wrap:anywhere;min-height:120px}
+.acts{display:flex;flex-wrap:wrap;gap:10px}
+.fnote{font-size:13px;color:var(--ink-2)}
+.mailrow{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;font-size:14px}
+.mailrow code{font:500 14px var(--f-mono);overflow-wrap:anywhere}
+
+/* pie */
+.foot{background:var(--board);color:#CDEBEA;padding-block:40px}
+.foot .in{display:grid;gap:22px}
+.foot .brand{color:#fff}.foot .brand b{color:#8FE3DF}
+.foot p{font-size:13px;color:var(--board-dim);max-width:84ch}
+.foot .links{display:flex;flex-wrap:wrap;gap:6px 18px}
+.foot .links a{color:#CDEBEA;font-weight:600;text-decoration:none;font-size:14px}
+.foot .links a:hover{color:#FFD25A}
+
+@media (prefers-reduced-motion:reduce){
+  .tk-track{animation:none}.tk-view{overflow-x:auto}.row{animation:none}.btn,.dcard,.vplay{transition:none}
+}
+</style>
+
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans">
+<body>
 
-    <!-- HEADER / NAVEGACIÓN -->
-    <header class="bg-slate-900 text-white sticky top-0 z-50 shadow-md">
-        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-3">
-                <i class="fa-solid fa-globe text-amber-400 text-2xl"></i>
-                <span class="text-xl font-bold tracking-wide">Masmundok <span class="text-amber-400 font-light">Viajes y más</span></span>
-            </div>
-            <nav class="hidden md:flex space-x-6 text-sm font-medium">
-                <a href="#inicio" class="hover:text-amber-400 transition">Inicio</a>
-                <a href="#viajes" class="hover:text-amber-400 transition">Paquetes y Destinos</a>
-                <a href="#requisitos" class="hover:text-amber-400 transition">Requisitos y Visas</a>
-                <a href="#tienda" class="hover:text-amber-400 transition">Tienda de Códigos</a>
-                <a href="#contacto" class="hover:text-amber-400 transition">Contacto</a>
-            </nav>
-            <!-- SELECTOR DE IDIOMA -->
-            <div class="flex items-center space-x-2 bg-slate-800 px-3 py-1.5 rounded-full text-xs">
-                <i class="fa-solid fa-language text-amber-400"></i>
-                <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-transparent text-white focus:outline-none cursor-pointer">
-                    <option value="es" class="bg-slate-900">ES</option>
-                    <option value="en" class="bg-slate-900">EN</option>
-                    <option value="pt" class="bg-slate-900">PT</option>
-                </select>
-            </div>
+<div class="util dz">
+  <div class="in">
+    <div class="mail">
+      <svg class="ic" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+      <span id="mailTxt">masmundo321@gmail.com</span>
+      <button type="button" id="mailCopy">Copiar</button>
+    </div>
+    <div class="soc" id="utilSoc"></div>
+  </div>
+</div>
+
+<header class="hdr">
+  <div class="in">
+    <a class="brand" href="#inicio" aria-label="Masmundok, inicio">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17" fill="#3FCFCB"/><g fill="none" stroke="#062A30" stroke-width="1.8"><ellipse cx="20" cy="20" rx="7" ry="17"/><path d="M3.5 20h33M6 11.5h28M6 28.5h28"/></g><path d="M23 9.5l9 3-9 3-2-1.6-5 .6 2.8-2z" fill="#062A30" transform="translate(-1 6) rotate(18 22 13)"/></svg>
+      <span>Mas<b>mundo</b>k</span>
+    </a>
+    <nav class="nav" aria-label="Secciones">
+      <a href="#destinos">Destinos</a>
+      <a href="#descuentos">Descuentos</a>
+      <a href="#noticias">News</a>
+      <a href="#videos">Videos y redes</a>
+      <a href="#trabaja">Trabajá con nosotros</a>
+    </nav>
+  </div>
+</header>
+
+<div id="view-home">
+  <section class="band hero" id="inicio">
+    <div class="in hero-grid">
+      <div>
+        <span class="eyebrow">Guía de viajes de Yesi y Pablo</span>
+        <h1>Todo lo que necesitás saber antes de viajar, <em>en un solo lugar.</em></h1>
+        <p class="lead">Requisitos de entrada, apps, tours, consejos y códigos de descuento para cada destino. Buscá tu país y salí tranquilo.</p>
+        <div class="search">
+          <label for="q">¿A dónde vas?</label>
+          <div class="sbox">
+            <svg class="ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input id="q" type="text" role="combobox" aria-expanded="false" aria-controls="sres" aria-autocomplete="list" autocomplete="off" placeholder="Tailandia, Bali, China, Aruba…">
+            <button type="button" class="btn btn-primary" id="qgo">Buscar</button>
+          </div>
+          <ul class="sres" id="sres" role="listbox" hidden></ul>
         </div>
-    </header>
-
-    <!-- HERO SECTION CON TUS FOTOS DE VIAJE -->
-    <section id="inicio" class="relative bg-slate-900 text-white py-24 overflow-hidden">
-        <div class="absolute inset-0 opacity-40">
-            <!-- Imagen inspirada en tus viajes reales (Pirámides/Egipto o Petra) -->
-            <img src="https://images.unsplash.com/photo-1539650116574-8efeb43e2750?auto=format&fit=crop&w=1920&q=80" alt="Masmundok Viajes" class="w-full h-full object-cover">
+        <div class="chips" id="heroChips" aria-label="Destinos más elegidos"></div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="pp">
+          <span class="pp-title">MASMUNDOK · VISADOS</span>
+          <span class="stamp round" style="top:11%;left:9%;--rot:-10deg;--c:var(--stamp)"><span><b>Tailandia</b>Admitido</span></span>
+          <span class="stamp dbl" style="top:16%;left:42%;--rot:6deg;--c:var(--aqua-deep)"><span><b>China</b>Entrada</span></span>
+          <span class="stamp" style="top:11%;right:5%;--rot:-4deg;--c:var(--ink)"><span><b>Brasil</b>Admitido</span></span>
+          <span class="stamp round" style="top:46%;left:12%;--rot:8deg;--c:var(--aqua-deep)"><span><b>Aruba</b>Entrada</span></span>
+          <span class="stamp" style="top:50%;left:44%;--rot:-7deg;--c:var(--stamp)"><span><b>Bolivia</b>Admitido</span></span>
         </div>
-        <div class="relative max-w-5xl mx-auto px-4 text-center">
-            <h1 id="hero-title" class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">Explora el mundo y automatiza tu vida</h1>
-            <p id="hero-subtitle" class="text-lg md:text-xl text-slate-200 mb-8 max-w-2xl mx-auto">Paquetes turísticos exclusivos, asesoría experta de viajes y herramientas de desarrollo creadas por viajeros.</p>
-            <div class="flex justify-center gap-4">
-                <a href="#viajes" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-8 py-3 rounded-xl shadow-lg transition">Ver Paquetes</a>
-                <a href="#tienda" class="bg-slate-800 hover:bg-slate-700 text-white border border-slate-600 font-semibold px-8 py-3 rounded-xl transition">Ver Mis Códigos</a>
-            </div>
+        <div class="bp">
+          <div class="bp-main">
+            <span class="lbl">Tarjeta de embarque</span>
+            <span class="big">Argentina → tu próximo destino</span>
+            <div class="bp-row"><div><span class="lbl">Pasajeros</span><br><b>Yesi y Pablo</b></div><div><span class="lbl">Puerta</span><br><b>Cualquiera</b></div></div>
+          </div>
+          <div class="bp-stub"><svg class="ic" viewBox="0 0 24 24" style="width:26px;height:26px"><path d="M2 16l20-6-3-3-6 2-6-5-3 1 4 6-5 2z"/></svg></div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- BUSCADOR DE VIAJES Y PAQUETES -->
-    <section id="viajes" class="py-16 max-w-7xl mx-auto px-4">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold text-slate-900 mb-2">Destinos Destacados</h2>
-            <p class="text-slate-600">Inspirados en nuestras propias aventuras por Egipto, Jordania y el mundo.</p>
+  <section class="band dz board-band" id="noticias">
+    <div class="in">
+      <div class="nhead">
+        <div>
+          <span class="live"><i></i>En vivo</span>
+          <h2>News <span>Últimas noticias</span></h2>
         </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Tarjeta 1: Egipto -->
-            <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition">
-                <div class="h-56 bg-slate-200 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=800&q=80" alt="Egipto" class="w-full h-full object-cover hover:scale-105 transition duration-500">
-                </div>
-                <div class="p-6">
-                    <span class="text-xs font-semibold bg-amber-100 text-amber-800 px-3 py-1 rounded-full">Egipto Milenario</span>
-                    <h3 class="text-xl font-bold mt-3 mb-2">Pirámides, Luxor y El Cairo</h3>
-                    <p class="text-slate-600 text-sm mb-4">Vivido en primera persona: templos, historia y navegación por el Nilo con asesoramiento completo.</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-lg font-bold text-amber-600">Desde $1,250 USD</span>
-                        <button onclick="openBooking('Egipto Milenario')" class="bg-slate-900 text-white text-sm px-4 py-2 rounded-lg hover:bg-amber-500 hover:text-slate-950 transition">Consultar</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tarjeta 2: Petra y Desierto de Jordania -->
-            <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition">
-                <div class="h-56 bg-slate-200 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=800&q=80" alt="Petra" class="w-full h-full object-cover hover:scale-105 transition duration-500">
-                </div>
-                <div class="p-6">
-                    <span class="text-xs font-semibold bg-amber-100 text-amber-800 px-3 py-1 rounded-full">Jordania Mágica</span>
-                    <h3 class="text-xl font-bold mt-3 mb-2">Petra y Glamping en Wadi Rum</h3>
-                    <p class="text-slate-600 text-sm mb-4">Duerme bajo las estrellas en domos de lujo en el desierto y recorre la ciudad perdida.</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-lg font-bold text-amber-600">Desde $1,400 USD</span>
-                        <button onclick="openBooking('Petra y Wadi Rum')" class="bg-slate-900 text-white text-sm px-4 py-2 rounded-lg hover:bg-amber-500 hover:text-slate-950 transition">Consultar</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tarjeta 3: Asia / Malasia -->
-            <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition">
-                <div class="h-56 bg-slate-200 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=800&q=80" alt="Kuala Lumpur" class="w-full h-full object-cover hover:scale-105 transition duration-500">
-                </div>
-                <div class="p-6">
-                    <span class="text-xs font-semibold bg-amber-100 text-amber-800 px-3 py-1 rounded-full">Sudeste Asiático</span>
-                    <h3 class="text-xl font-bold mt-3 mb-2">Kuala Lumpur y Conexiones</h3>
-                    <p class="text-slate-600 text-sm mb-4">Modernidad, rascacielos icónicos y culturas vibrantes listas para descubrir.</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-lg font-bold text-amber-600">Desde $980 USD</span>
-                        <button onclick="openBooking('Kuala Lumpur')" class="bg-slate-900 text-white text-sm px-4 py-2 rounded-lg hover:bg-amber-500 hover:text-slate-950 transition">Consultar</button>
-                    </div>
-                </div>
-            </div>
+        <span class="nmeta" id="nEdition"></span>
+      </div>
+      <div class="nwrap">
+        <div class="screen" id="screen" role="region" aria-roledescription="carrusel" aria-label="News de Masmundok: últimas noticias">
+          <div class="sc-art" id="scArt"></div>
+          <div class="sc-top"><span class="brk" id="scTag"></span><span class="bug" aria-hidden="true"><b>MM</b><span>NEWS</span></span></div>
+          <div class="sc-lower" id="scLower">
+            <span class="lt-label" id="scPlace"></span>
+            <div class="lt-head"><h3 id="scHead"></h3></div>
+            <div class="lt-sub" id="scText"></div>
+            <div class="lt-meta"><span id="scWhen"></span><span id="scSrc"></span></div>
+            <div class="sc-bar"><i id="scBar"></i></div>
+          </div>
         </div>
-    </section>
-
-    <!-- SECCIÓN DE REQUISITOS Y PASAPORTES -->
-    <section id="requisitos" class="bg-slate-100 py-16 border-y border-slate-200">
-        <div class="max-w-4xl mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold text-slate-900 mb-4">¿Qué necesitas para viajar?</h2>
-            <p class="text-slate-600 mb-8">Consulta requisitos de pasaporte, visados y vacunas actualizados en tiempo real.</p>
-            
-            <div class="bg-white p-6 rounded-2xl shadow-sm flex flex-col md:flex-row gap-4 justify-center items-center">
-                <select class="bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 w-full md:w-1/3 focus:outline-none">
-                    <option>País de Origen (Ej: Argentina)</option>
-                </select>
-                <select class="bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 w-full md:w-1/3 focus:outline-none">
-                    <option>Destino (Ej: Egipto / Jordania)</option>
-                </select>
-                <button onclick="alert('Consulta de visado en proceso... Te enviaremos el reporte completo.')" class="bg-amber-500 hover:bg-amber-600 font-bold text-slate-950 px-6 py-3 rounded-xl w-full md:w-auto transition">Consultar Requisitos</button>
-            </div>
+        <div class="rail-box">
+          <div class="rail-hd"><span>Más noticias</span>
+            <span class="cc"><span id="stCnt"></span>
+              <button type="button" id="nPrev" aria-label="Noticia anterior"><svg class="ic" viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></svg></button>
+              <button type="button" id="nPlay" aria-label="Pausar" aria-pressed="false"></button>
+              <button type="button" id="nNext" aria-label="Noticia siguiente"><svg class="ic" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></button>
+            </span>
+          </div>
+          <ol class="rail" id="rail"></ol>
         </div>
-    </section>
+      </div>
+      <div class="ticker" aria-label="Titulares">
+        <span class="tk-label">Últimas noticias</span>
+        <div class="tk-view"><div class="tk-track" id="tkTrack"></div></div>
+      </div>
+      <p class="note">Las reglas de ingreso, equipaje y multas cambian sin aviso. Antes de viajar confirmá siempre en el sitio oficial del país, en tu aerolínea o en el consulado.</p>
+    </div>
+  </section>
 
-    <!-- TIENDA DE CÓDIGOS Y PRODUCTOS DIGITALES -->
-    <section id="tienda" class="py-16 max-w-7xl mx-auto px-4">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold text-slate-900 mb-2">Tienda de Códigos y Herramientas</h2>
-            <p class="text-slate-600">Scripts, plantillas web y bots de automatización creados por nosotros.</p>
+  <section class="band" id="destinos">
+    <div class="in">
+      <div class="sh">
+        <span class="eyebrow">Destinos</span>
+        <h2>Elegí un destino y mirá la ficha completa</h2>
+        <p>Requisitos para pasaporte argentino, qué hacer, qué evitar, apps útiles, idioma, moneda y religión. Usá el buscador de arriba para ver el resto.</p>
+      </div>
+      <div class="dgrid" id="dgrid"></div>
+      <div class="more">
+        <span class="eyebrow">También tenemos ficha de</span>
+        <div class="chips" id="moreChips"></div>
+        <p>¿Te falta un país? Escribinos a <span id="mailTxt2"></span> y lo sumamos.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band tband" id="descuentos">
+    <div class="in">
+      <div class="sh">
+        <span class="eyebrow">Códigos y descuentos</span>
+        <h2>Viajá con nuestros códigos</h2>
+        <p>Copiá el código y usalo al pagar. Si entrás desde nuestro link, el descuento puede aplicarse solo.</p>
+      </div>
+      <div class="tgrid" id="tgrid"></div>
+      <p class="disc">Los links son de afiliado: si comprás con ellos nos llevamos una comisión, y vos no pagás de más. Es una de las formas en que financiamos el canal.</p>
+    </div>
+  </section>
+
+  <section class="band" id="videos">
+    <div class="in">
+      <div class="sh">
+        <span class="eyebrow">Videos y redes</span>
+        <h2>Los destinos, contados desde adentro</h2>
+        <p>Guías completas en YouTube, clips en TikTok y reels en Instagram. Filtrá por país.</p>
+      </div>
+      <div class="vtools chips" id="vChips"></div>
+      <div id="vTop" class="vtop"></div>
+      <div class="vgrid" id="vGrid"></div>
+      <div class="vfoot">
+        <button type="button" class="btn btn-ghost" id="vMore">Mostrar más videos</button>
+        <a class="btn btn-primary" id="ytAll" target="_blank" rel="noopener">Ver el canal en YouTube</a>
+      </div>
+      <div class="socs" id="socs"></div>
+    </div>
+  </section>
+
+  <section class="band cta" id="asesoria">
+    <div class="in cta-grid">
+      <div>
+        <span class="eyebrow">Asesoría de viaje</span>
+        <h2>¿Querés que te asesoremos en tu próximo viaje?</h2>
+        <p>Escribinos en nuestras redes y te asesoramos.</p>
+        <div class="cta-btns" id="ctaBtns"></div>
+      </div>
+      <div class="cta-art" id="ctaArt" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <section class="band tband" id="trabaja" style="--notch:var(--surface-2)">
+    <div class="in wgrid">
+      <div class="wl">
+        <span class="eyebrow">Trabajá con nosotros</span>
+        <h2>Mostramos tu marca a viajeros que están planeando su próximo viaje.</h2>
+        <p class="lead">Si tenés un destino, hotel, tour, aerolínea, app o producto de viaje, contanos y armamos una propuesta.</p>
+        <div class="stats">
+          <div class="stat"><b>~700 mil</b><span>vistas por mes</span></div>
+          <div class="stat"><b>16 mil</b><span>seguidores en TikTok</span></div>
+          <div class="stat"><b>7 mil</b><span>seguidores en Instagram</span></div>
         </div>
+        <ul class="fmt">
+          <li>Videos en YouTube<span>Guía completa de tu destino o servicio, con enlaces y código propio.</span></li>
+          <li>Reels y TikToks<span>Clips cortos con tu marca, filmados en el lugar.</span></li>
+          <li>Presencia en esta web<span>Tu marca en noticias, fichas de país y la sección de descuentos.</span></li>
+        </ul>
+        <p class="proof"><b>Ya trabajamos con</b> GetYourGuide, Travelpayouts, Assist 365 y Holafly. También colaboramos con organismos de turismo de Argentina, Chile y Aruba. Datos de audiencia de octubre de 2026.</p>
+      </div>
+      <div class="card">
+        <h2>Armá tu propuesta</h2>
+        <form class="form" id="wform" autocomplete="off" novalidate>
+          <label for="wn">Tu nombre<input id="wn" type="text" placeholder="Nombre y apellido"></label>
+          <label for="wb">Marca o empresa<input id="wb" type="text" placeholder="Nombre de tu marca"></label>
+          <label for="wc">Tu correo o Instagram, para responderte<input id="wc" type="text" placeholder="tucorreo@ejemplo.com o @tumarca"></label>
+          <input class="hp" id="wh" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <label for="wt">Qué querés hacer
+            <select id="wt">
+              <option>Publicitar un destino o servicio de turismo</option>
+              <option>Colaborar con un viaje (hotel, tour o aerolínea)</option>
+              <option>Promocionar un producto</option>
+              <option>Sumar un código de descuento para su comunidad</option>
+              <option>Otra propuesta</option>
+            </select>
+          </label>
+          <label for="wm">Contanos más<textarea id="wm" placeholder="Qué ofrecés, dónde y en qué fechas."></textarea></label>
+          <div class="acts">
+            <button type="submit" class="btn btn-primary" id="wsend">Enviar propuesta</button>
+          </div>
+          <p class="fstat" id="wstat" role="status" aria-live="polite"></p>
+          <div class="out" id="wout" aria-live="polite" hidden></div>
+          <div class="acts" id="wfallback" hidden>
+            <button type="button" class="btn btn-ghost" id="wcopy">Copiar mensaje</button>
+            <a class="btn btn-ghost" id="wmail" href="#trabaja">Abrir en mi correo</a>
+          </div>
+          <p class="fnote">Tu mensaje llega a Masmundok por correo. Para enviarlo usamos el servicio FormSubmit.</p>
+          <div class="mailrow"><span>Escribinos a</span><code id="wmailTxt"></code><button type="button" class="btn btn-ghost btn-sm" id="wmailCopy">Copiar correo</button></div>
+        </form>
+      </div>
+    </div>
+  </section>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
-                <div>
-                    <div class="text-amber-500 text-2xl mb-3"><i class="fa-solid fa-code"></i></div>
-                    <h3 class="text-xl font-bold mb-2">Template Web de Viajes (Next.js / Tailwind)</h3>
-                    <p class="text-slate-600 text-sm mb-4">Código fuente completo listo para desplegar tu propia agencia con soporte multilingüe.</p>
-                </div>
-                <div class="flex justify-between items-center mt-4 pt-4 border-t border-slate-100">
-                    <span class="font-bold text-lg">$29 USD</span>
-                    <button onclick="alert('Redirigiendo a pasarela de pago segura para adquirir el código...')" class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm hover:bg-amber-500 hover:text-slate-950 transition">Comprar Código</button>
-                </div>
-            </div>
+  <section class="band help" id="apoyo"><div class="in" id="helpHome"></div></section>
+</div>
 
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
-                <div>
-                    <div class="text-amber-500 text-2xl mb-3"><i class="fa-solid fa-robot"></i></div>
-                    <h3 class="text-xl font-bold mb-2">Bot Python de Automatización de Redes</h3>
-                    <p class="text-slate-600 text-sm mb-4">Script optimizado para gestionar publicaciones y extracción de métricas de contenido viajero.</p>
-                </div>
-                <div class="flex justify-between items-center mt-4 pt-4 border-t border-slate-100">
-                    <span class="font-bold text-lg">$45 USD</span>
-                    <button onclick="alert('Redirigiendo a pasarela de pago segura para adquirir el bot...')" class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm hover:bg-amber-500 hover:text-slate-950 transition">Comprar Código</button>
-                </div>
-            </div>
-        </div>
-    </section>
+<div id="view-country" hidden></div>
 
-    <!-- FOOTER / CONTACTO -->
-    <footer id="contacto" class="bg-slate-900 text-slate-400 py-12">
-        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-                <h3 class="text-white text-lg font-bold mb-3">Masmundok Viajes y más</h3>
-                <p class="text-sm">Tu portal definitivo para viajar sin límites y potenciar tus proyectos digitales con código y automatización.</p>
-            </div>
-            <div>
-                <h4 class="text-white font-semibold mb-3">Idiomas Soportados</h4>
-                <p class="text-sm">Español | English | Português</p>
-            </div>
-            <div>
-                <h4 class="text-white font-semibold mb-3">Contacto Directo</h4>
-                <p class="text-sm mb-2"><i class="fa-solid fa-envelope mr-2"></i> contacto@masmundok.com</p>
-                <div class="flex space-x-4 mt-4">
-                    <a href="#" class="text-white hover:text-amber-400 text-xl"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" class="text-white hover:text-amber-400 text-xl"><i class="fa-brands fa-tiktok"></i></a>
-                    <a href="#" class="text-white hover:text-amber-400 text-xl"><i class="fa-brands fa-youtube"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="max-w-7xl mx-auto px-4 mt-8 pt-8 border-t border-slate-800 text-center text-xs">
-            &copy; 2026 Masmundok Viajes y más. Todos los derechos reservados.
-        </div>
-    </footer>
+<footer class="foot dz">
+  <div class="in">
+    <a class="brand" href="#inicio"><span>Mas<b>mundo</b>k</span></a>
+    <div class="links">
+      <a href="#destinos">Destinos</a><a href="#descuentos">Descuentos</a><a href="#noticias">News</a><a href="#videos">Videos y redes</a><a href="#trabaja">Trabajá con nosotros</a>
+    </div>
+    <div class="soc" id="footSoc" style="display:flex;gap:8px"></div>
+    <p>Sitio actualizado el 2 de noviembre de 2026. La información de ingreso es orientativa y cambia con frecuencia: confirmá siempre en fuentes oficiales antes de viajar. Algunos enlaces son de afiliado.</p>
+  </div>
+</footer>
 
-    <!-- SCRIPT DE TRADUCCIÓN BÁSICA E INTERACTIVIDAD -->
-    <script>
-        function openBooking(dest) {
-            alert("¡Excelente elección! Estás consultando por el paquete: " + dest + ". Pronto nos pondremos en contacto contigo para personalizar tu viaje.");
-        }
+<script>
+/* ============ CONFIGURACIÓN: acá se cambia todo el contenido ============ */
+const SITE = {
+  email: 'masmundo321@gmail.com',
+  paypal: 'masmundo321@gmail.com',
+  youtube: 'https://www.youtube.com/@MasMundok',
+  tiktok: 'https://www.tiktok.com/@masmundok',
+  instagram: 'https://www.instagram.com/masmundok/',
+  reel: 'https://www.instagram.com/reel/DeRrhugCS_C/',
+  cafecito: 'https://cafecito.app/masmundok/c/69137e5b96e9d887414f4b30',
+  edicion: '2 de noviembre de 2026',
+  /* Formulario "Trabajá con nosotros": envía los mensajes por correo con FormSubmit (la primera vez hay que confirmar el correo). Dejalo vacío para que solo arme el mensaje. */
+  formEndpoint: 'https://formsubmit.co/ajax/masmundo321@gmail.com',
+  /* Chat con IA real (opcional): URL de un servicio propio que responda {answer}. Vacío = el chat usa la información de esta página. */
+  chatEndpoint: '',
+  /* Miniaturas reales de YouTube en las tarjetas de video (se ven en la web publicada). */
+  miniaturas: true
+};
 
-        function changeLanguage(lang) {
-            const title = document.getElementById('hero-title');
-            const subtitle = document.getElementById('hero-subtitle');
-            
-            if (lang === 'en') {
-                title.innerText = "Explore the world and automate your life";
-                subtitle.innerText = "Exclusive travel packages, expert travel advice, and development tools built by travelers.";
-            } else if (lang === 'pt') {
-                title.innerText = "Explore o mundo e automatize sua vida";
-                subtitle.innerText = "Pacotes de viagens exclusivos, consultoria especializada e ferramentas de desenvolvimento criadas por viajantes.";
-            } else {
-                title.innerText = "Explora el mundo y automatiza tu vida";
-                subtitle.innerText = "Paquetes turísticos exclusivos, asesoría experta de viajes y herramientas de desarrollo creadas por viajeros.";
-            }
-        }
-    </script>
+const PLACE = { th:'Tailandia', br:'Brasil', eg:'Egipto', cn:'China', jp:'Japón', sg:'Singapur', id:'Indonesia', cl:'Chile', pe:'Perú', bo:'Bolivia', aw:'Aruba', eu:'Europa', ar:'Argentina', uy:'Uruguay', hk:'Hong Kong' };
+
+/* Descuentos: agregar o quitar objetos de esta lista */
+const PARTNERS = [
+  { name:'Holafly', kind:'eSIM para viajar', blurb:'Internet apenas aterrizás, sin buscar chips locales.', code:'MASMUNDO', url:'https://holafly.sjv.io/masmundo', cta:'Ir a Holafly' },
+  { name:'Assist 365', kind:'Seguro de viaje', blurb:'Asistencia médica y cobertura de viaje. El voucher ya viaja en el link.', code:'MASMUNDO', url:'https://assist-365.com/?voucher=MASMUNDO', cta:'Cotizar seguro' },
+  { name:'GetYourGuide', kind:'Tours y entradas', blurb:'Reservá tours y entradas. Instalá la app con nuestro link y usá el código.', code:'MASMUNDOK5', off:'5% OFF', url:'https://gyg.me/masmundok-app', cta:'Instalar la app' }
+];
+
+/* ============ Banderas dibujadas (no dependen de emojis) ============ */
+function star(cx, cy, r, rot) {
+  const p = [];
+  for (let i = 0; i < 10; i++) {
+    const R = i % 2 ? r * 0.382 : r;
+    const a = (Math.PI / 180) * ((rot || 0) - 90 + i * 36);
+    p.push((cx + R * Math.cos(a)).toFixed(2) + ',' + (cy + R * Math.sin(a)).toFixed(2));
+  }
+  return '<polygon points="' + p.join(' ') + '"/>';
+}
+function pointTo(x, y, tx, ty) { return (Math.atan2(ty - y, tx - x) * 180) / Math.PI + 90; }
+const FLAGS = {
+  th: () => '<rect width="60" height="40" fill="#A51931"/><rect y="6.67" width="60" height="26.67" fill="#F4F5F8"/><rect y="13.33" width="60" height="13.34" fill="#2D2A4A"/>',
+  br: () => '<rect width="60" height="40" fill="#009C3B"/><polygon points="30,4.5 56,20 30,35.5 4,20" fill="#FFDF00"/><circle cx="30" cy="20" r="8.5" fill="#002776"/><path d="M21.8 18.2Q30 14.8 38.4 21.8" stroke="#fff" stroke-width="1.7" fill="none"/>',
+  eg: () => '<rect width="60" height="13.34" fill="#CE1126"/><rect y="13.33" width="60" height="13.34" fill="#fff"/><rect y="26.66" width="60" height="13.34" fill="#000"/><circle cx="30" cy="20" r="3.4" fill="#C09300"/>',
+  cn: () => {
+    const sm = [[20, 4], [24, 8], [24, 14], [20, 18]].map(p => star(p[0], p[1], 2, pointTo(p[0], p[1], 10, 10))).join('');
+    return '<rect width="60" height="40" fill="#DE2910"/><g fill="#FFDE00">' + star(10, 10, 6, 0) + sm + '</g>';
+  },
+  jp: () => '<rect width="60" height="40" fill="#fff"/><circle cx="30" cy="20" r="12" fill="#BC002D"/>',
+  sg: () => {
+    let s = '';
+    for (let i = 0; i < 5; i++) { const a = (-90 + i * 72) * Math.PI / 180; s += star(27 + 4.6 * Math.cos(a), 10 + 4.6 * Math.sin(a), 1.6, i * 72); }
+    return '<rect width="60" height="20" fill="#EF3340"/><rect y="20" width="60" height="20" fill="#fff"/><circle cx="14" cy="10" r="7" fill="#fff"/><circle cx="17" cy="10" r="6.2" fill="#EF3340"/><g fill="#fff">' + s + '</g>';
+  },
+  id: () => '<rect width="60" height="20" fill="#CE1126"/><rect y="20" width="60" height="20" fill="#fff"/>',
+  cl: () => '<rect width="60" height="40" fill="#fff"/><rect y="20" width="60" height="20" fill="#D52B1E"/><rect width="20" height="20" fill="#0039A6"/><g fill="#fff">' + star(10, 10, 6, 0) + '</g>',
+  pe: () => '<rect width="60" height="40" fill="#D91023"/><rect x="20" width="20" height="40" fill="#fff"/>',
+  bo: () => '<rect width="60" height="13.34" fill="#D52B1E"/><rect y="13.33" width="60" height="13.34" fill="#F9E300"/><rect y="26.66" width="60" height="13.34" fill="#007934"/>',
+  aw: () => '<rect width="60" height="40" fill="#418FDE"/><rect y="27" width="60" height="3" fill="#FBE122"/><rect y="32" width="60" height="3" fill="#FBE122"/><polygon points="11,3 12.8,8.2 18,10 12.8,11.8 11,17 9.2,11.8 4,10 9.2,8.2" fill="#EF3340" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/>',
+  ar: () => '<rect width="60" height="40" fill="#74ACDF"/><rect y="13.33" width="60" height="13.34" fill="#fff"/><circle cx="30" cy="20" r="3.2" fill="#F6B40E"/>',
+  uy: () => {
+    let r = '';
+    for (let i = 0; i < 9; i++) r += '<rect y="' + (i * 40 / 9).toFixed(2) + '" width="60" height="' + (40 / 9 + 0.05).toFixed(2) + '" fill="' + (i % 2 ? '#0038A8' : '#fff') + '"/>';
+    return r + '<rect width="22.2" height="22.2" fill="#fff"/><circle cx="11.1" cy="11.1" r="5" fill="#FCD116"/>';
+  },
+  hk: () => {
+    let p = '';
+    for (let k = 0; k < 5; k++) p += '<ellipse cx="30" cy="14" rx="3" ry="5.5" fill="#fff" transform="rotate(' + (k * 72) + ' 30 20)"/>';
+    return '<rect width="60" height="40" fill="#DE2910"/>' + p;
+  },
+  eu: () => {
+    let s = '';
+    for (let i = 0; i < 12; i++) { const a = i * 30 * Math.PI / 180; s += '<circle cx="' + (30 + 11 * Math.cos(a)).toFixed(2) + '" cy="' + (20 + 11 * Math.sin(a)).toFixed(2) + '" r="1.5"/>'; }
+    return '<rect width="60" height="40" fill="#003399"/><g fill="#FFCC00">' + s + '</g>';
+  }
+};
+function flag(code, big) {
+  const f = FLAGS[code];
+  const inner = f ? f() : '<rect width="60" height="40" fill="#0B3A42"/><path d="M14 27l32-9-4-4-9 3-9-7-4 1 6 8-8 3z" fill="#FFD25A"/>';
+  return '<span class="flag' + (big ? ' lg' : '') + '"><svg viewBox="0 0 60 40" preserveAspectRatio="xMidYMid slice" aria-hidden="true">' + inner + '</svg></span>';
+}
+
+/* ============ Destinos (parte 1) ============ */
+const DEST = [];
+DEST.push({
+  slug:'tailandia', code:'th', name:'Tailandia', featured:true, c1:'#12b5b0', c2:'#0a4a67',
+  tagline:'Playas, templos y mercados nocturnos', badge:'Sin visa · 90 días',
+  facts:{ 'Idioma':'Tailandés (en zonas turísticas se entiende inglés)', 'Moneda':'Baht tailandés (THB)', 'Religión':'Budismo theravada, mayoritario', 'Enchufe':'A, B, C, F y O · 230 V', 'Mejor época':'Noviembre a febrero: más seco y fresco' },
+  req:{ status:'sin-visa', stamp:'Sin visa', headline:'Hasta 90 días sin visa para turismo', verified:true,
+    items:['Pasaporte argentino con al menos 6 meses de vigencia al llegar.','Los argentinos tienen 90 días por acuerdo bilateral, aunque desde el 15/9/2026 terminó el esquema general de 60 días.','La TDAC online es obligatoria: completala hasta 72 horas antes de llegar y guardá el QR.','Pueden pedirte pasaje de salida y comprobante de alojamiento.'],
+    src:{ l:'TAT News', u:'https://www.tatnews.org/2026/07/thai-cabinet-approves-updated-visa-measures-pending-royal-gazette-publication/' } },
+  hacer:['Bangkok: Gran Palacio, Wat Pho y el Gran Buda de 69 metros.','Chinatown (Yaowarat) de noche para comer en la calle.','Krabi: Railay Beach y Phra Nang Beach.','Subir los 1.260 escalones del Tiger Cave Temple.','Mercados nocturnos como el de Ao Nang.'],
+  noHacer:['No hables mal de la monarquía: es delito.','No toques la cabeza de nadie ni apoyes los pies hacia una imagen de Buda.','No vapees ni traigas cigarrillos electrónicos: están prohibidos.','No subas a un tuk-tuk sin acordar el precio antes.'],
+  apps:[['Grab','Taxis y delivery con precio cerrado'],['12Go Asia','Trenes, buses y ferries entre ciudades'],['Google Maps','Transporte público y reseñas'],['Google Translate','Cámara para leer menús y carteles']],
+  tips:['Llevá efectivo: mercados y puestos callejeros no aceptan tarjeta.','Los cajeros cobran una comisión fija por retiro: sacá montos grandes de una vez.','Cubrí hombros y rodillas para entrar a templos.','Con eSIM tenés internet apenas aterrizás y podés pedir el Grab en el aeropuerto.']
+});
+DEST.push({
+  slug:'brasil', code:'br', name:'Brasil', featured:true, c1:'#2fbf71', c2:'#0b6b4a',
+  tagline:'Playas, selva y ciudades con ritmo', badge:'Solo con DNI',
+  facts:{ 'Idioma':'Portugués (con español se entiende bastante)', 'Moneda':'Real brasileño (BRL)', 'Religión':'Cristianismo (católicos y evangélicos), con influencia afrobrasileña', 'Enchufe':'Tipo N (y C) · 127/220 V según la zona', 'Mejor época':'Río: mayo a septiembre, más seco' },
+  req:{ status:'sin-visa', stamp:'Sin visa', headline:'Entrás con DNI o pasaporte, sin visa', verified:false,
+    items:['Los argentinos pueden entrar solo con DNI vigente y en buen estado, o con pasaporte.','Estadía de hasta 90 días, prorrogable.','Vacuna contra la fiebre amarilla: recomendada si vas a zonas de selva o al norte.','Llevá un seguro médico de viaje: la atención privada es cara para turistas.'] },
+  hacer:['Río: Cristo Redentor, Pan de Azúcar y Morro Dois Irmãos.','Escalera Selarón, Lapa y Santa Teresa.','Foz do Iguaçu: el lado brasileño de las Cataratas.','Florianópolis y sus playas.','Probar churrasco, açaí y pão de queijo.'],
+  noHacer:['No dejes el celular a la vista en la calle ni en la playa.','No lleves objetos de valor a la playa.','No tomes taxis sin app o sin acordar el precio.','No camines de noche por zonas poco transitadas.'],
+  apps:[['Uber','Traslados en las grandes ciudades'],['99','Taxis y viajes locales'],['Moovit','Colectivos y metro en tiempo real'],['iFood','Delivery de comida']],
+  tips:['Hay formas de subir a algunos miradores de Río sin pagar tour: mirá nuestros videos.','Se paga casi todo con tarjeta, pero llevá algo de efectivo para playas y puestos.','Usá protector solar y agua: el sol pega fuerte.']
+});
+DEST.push({
+  slug:'egipto', code:'eg', name:'Egipto', featured:true, c1:'#e3a86b', c2:'#8a4b2a',
+  tagline:'Faraones, desierto y el Nilo', badge:'Visa requerida',
+  facts:{ 'Idioma':'Árabe (en turismo se habla inglés)', 'Moneda':'Libra egipcia (EGP)', 'Religión':'Islam mayoritario; minoría cristiana copta', 'Enchufe':'C y F · 220 V', 'Mejor época':'Octubre a abril: menos calor' },
+  req:{ status:'evisa', stamp:'E-Visa', headline:'Necesitás visa: e-Visa online o a la llegada', verified:true,
+    items:['Pasaporte con al menos 6 meses de validez desde la llegada.','Podés tramitar la e-Visa antes de viajar en el sitio oficial o sacar la visa al llegar al aeropuerto.','Estadía turística de hasta 30 días.','Las tarifas se actualizaron en 2026: confirmá el valor vigente en el sitio oficial.','Drones: necesitan permiso previo y en el aeropuerto pueden retenerlos.'],
+    src:{ l:'Sitio oficial e-Visa', u:'https://visa2egypt.gov.eg' } },
+  hacer:['Pirámides de Giza y la Esfinge.','Gran Museo Egipcio, en Giza.','Crucero por el Nilo entre Luxor y Asuán.','Valle de los Reyes y templo de Karnak, en Luxor.','Abu Simbel al amanecer.'],
+  noHacer:['No aceptes "regalos" ni ayudas que después te cobran.','No tomes agua de la canilla ni hielo de origen dudoso.','No fotografíes instalaciones militares ni puentes.','No uses ropa muy corta en mezquitas y barrios locales.'],
+  apps:[['Uber','Funciona en El Cairo y Alejandría'],['Careem','Alternativa local a Uber'],['Maps.me','Mapas sin conexión'],['Google Translate','Árabe con cámara']],
+  tips:['Regateá en los bazares: el primer precio suele ser mucho más alto.','Reservá tours con empresas confiables: los guías improvisados insisten mucho.','Llevá billetes chicos para las propinas (baksheesh).','Evitá el mediodía en verano: el calor es muy fuerte.']
+});
+DEST.push({
+  slug:'china', code:'cn', name:'China', featured:true, c1:'#e0493a', c2:'#7c1d2a',
+  tagline:'Futuro, historia y comida infinita', badge:'Sin visa · 30 días',
+  facts:{ 'Idioma':'Mandarín (fuera de lo turístico casi no se habla inglés)', 'Moneda':'Yuan renminbi (CNY)', 'Religión':'Sin religión mayoritaria: budismo, taoísmo, islam y cristianismo', 'Enchufe':'A, C e I · 220 V', 'Mejor época':'Abril-mayo y septiembre-octubre' },
+  req:{ status:'sin-visa', stamp:'Sin visa', headline:'Hasta 30 días sin visa, por ahora hasta el 31/12/2026', verified:true,
+    items:['Aplica a turismo, negocios, visita a familiares y tránsito, con pasaporte ordinario.','La exención rige hasta el 31 de diciembre de 2026: confirmá si se prorroga para 2027.','Revisá si te piden completar la tarjeta de llegada digital de Inmigración.','Llevá reservas de hotel y pasaje de salida: te pueden pedir comprobantes.'],
+    src:{ l:'Sir Chandler', u:'https://www.sirchandler.com.ar/2025/11/china-extiende-ingreso-sin-visa-a-argentinos-hasta-final-del-2026/' } },
+  hacer:['Gran Muralla y Ciudad Prohibida, en Pekín.','Templo del Cielo y Palacio de Verano.','Guerreros de Terracota y muralla en bici tándem, en Xi’an.','Zhangjiajie y las montañas de Avatar.','Chengdu y sus pandas; Chongqing de noche.'],
+  noHacer:['No dependas de Google, Instagram ni YouTube: no funcionan sin VPN.','No viajes solo con efectivo: se paga casi todo con Alipay o WeChat.','No cuentes con que te entiendan en inglés: bajá el traductor offline.','No claves los palillos parados en el arroz.'],
+  apps:[['Alipay','Pagos: se vincula con tarjeta internacional'],['WeChat','Mensajes y pagos'],['Didi','Taxis, con versión en inglés'],['Amap / Baidu Maps','Mapas que sí funcionan'],['Trip.com','Trenes de alta velocidad y hoteles']],
+  tips:['Instalá la VPN y las apps de pago antes de salir de Argentina.','Los trenes de alta velocidad conectan casi todo: comprá con anticipación.','Llevá el pasaporte siempre encima: lo piden en hoteles, trenes y atracciones.','Tené papel higiénico y toallitas a mano: no siempre hay en baños públicos.']
+});
+DEST.push({
+  slug:'japon', code:'jp', name:'Japón', featured:true, c1:'#e87ca0', c2:'#3b2f6b',
+  tagline:'Tradición, tecnología y orden impecable', badge:'Sin visa',
+  facts:{ 'Idioma':'Japonés (inglés limitado fuera de las ciudades grandes)', 'Moneda':'Yen (JPY)', 'Religión':'Sintoísmo y budismo, muchas veces practicados juntos', 'Enchufe':'Tipo A · 100 V', 'Mejor época':'Marzo-mayo (cerezos) y octubre-noviembre' },
+  req:{ status:'sin-visa', stamp:'Sin visa', headline:'Sin visa para turismo', verified:false,
+    items:['Los argentinos entran como turistas sin visa, hasta 90 días.','Registrá tus datos en Visit Japan Web antes de llegar: agiliza migraciones y aduana.','Pasaporte vigente durante toda la estadía.','Desde el 1/7/2026 la tasa de salida es de ¥3.000, normalmente incluida en el pasaje.'],
+    src:{ l:'Adnkronos', u:'https://english.adnkronos.com/2026/06/29/japan-departure-tax-to-rise-to-3000-yen-on-wed/' } },
+  hacer:['Tokio: Shibuya, Asakusa y el templo Senso-ji.','Kioto: Fushimi Inari y Gion.','Osaka: Dotonbori y comida callejera.','Nara y sus ciervos.','Ver el Monte Fuji desde el lago Kawaguchi.'],
+  noHacer:['No dejes propina: no es costumbre.','No camines comiendo por la calle.','No hables por teléfono en trenes y colectivos.','No claves los palillos parados en el arroz ni pases comida de palillo a palillo.'],
+  apps:[['Google Maps','Trenes y horarios exactos'],['Japan Travel by NAVITIME','Rutas de trenes y metro'],['Visit Japan Web','Migraciones y aduana online'],['Google Translate','Cámara para leer carteles y menús']],
+  tips:['Llevá algo de efectivo: todavía hay lugares que no aceptan tarjeta.','Los enchufes son de 100 V: revisá que tus cargadores soporten ese voltaje.','Los konbini (7-Eleven, Lawson) tienen cajeros que aceptan tarjetas extranjeras.','Casi no hay tachos en la calle: llevá una bolsita para tu basura.']
+});
+
+
+/* ============ Destinos (parte 2: se ven con el buscador) ============ */
+DEST.push({
+  slug:'singapur', code:'sg', name:'Singapur', c1:'#ee6b6e', c2:'#2b4a8a',
+  tagline:'Ciudad-jardín del futuro, con reglas claras', badge:'Sin visa',
+  facts:{ 'Idioma':'Inglés, mandarín, malayo y tamil (el inglés se usa en todo)', 'Moneda':'Dólar de Singapur (SGD)', 'Religión':'Diversa: budismo, cristianismo, islam, taoísmo e hinduismo', 'Enchufe':'Tipo G · 230 V', 'Mejor época':'Febrero a abril: algo menos de lluvia' },
+  req:{ status:'sin-visa', stamp:'Sin visa', headline:'Sin visa para turismo', verified:false,
+    items:['Los argentinos pueden entrar como turistas sin visa; Migraciones fija los días al ingresar (lo habitual es hasta 30).','Completá la SG Arrival Card online, gratis, hasta 3 días antes de llegar.','Pasaporte con al menos 6 meses de vigencia.','Tené a mano el pasaje de salida y la reserva de alojamiento.'] },
+  hacer:['Gardens by the Bay y el show de luces de los Supertrees.','Mirador de Marina Bay Sands.','Comer en un hawker centre: platos locales muy baratos.','Sentosa y sus playas.','Chinatown, Little India y Kampong Glam.'],
+  noHacer:['No dejes de tirar la cadena en baños públicos: hay multa.','No vapees ni traigas vapes: están prohibidos.','No comas ni tomes en el metro (MRT): te pueden multar.','No lleves durián al transporte público.'],
+  apps:[['Grab','Taxis y delivery'],['Google Maps','Rutas y transporte público'],['MyTransport.SG','Buses y metro en tiempo real'],['Klook','Entradas y atracciones']],
+  tips:['El metro (MRT) y Grab llegan a casi todo: no necesitás auto.','Llevá un abrigo liviano: el aire acondicionado es fuerte en shoppings y metro.','Para comer barato, elegí hawker centres en vez de restaurantes.']
+});
+DEST.push({
+  slug:'indonesia', code:'id', name:'Indonesia (Bali)', c1:'#f2a541', c2:'#a8321e',
+  tagline:'Bali, templos y volcanes', badge:'Visa a la llegada',
+  facts:{ 'Idioma':'Indonesio (en Bali se habla mucho inglés)', 'Moneda':'Rupia indonesia (IDR)', 'Religión':'Islam mayoritario en el país; Bali es en su mayoría hindú', 'Enchufe':'C y F · 230 V', 'Mejor época':'Abril a octubre: temporada seca en Bali' },
+  req:{ status:'voa', stamp:'Visa a la llegada', headline:'Visa a la llegada (VOA) de IDR 500.000', verified:true,
+    items:['Los argentinos pueden sacar la visa a la llegada: IDR 500.000, unos US$30.','Son 30 días, ampliables una vez por otros 30.','Podés tramitar la e-VOA online (evisa.imigrasi.go.id) y ahorrarte la fila.','Si visitás Bali, pagá la tasa turística de IDR 150.000 por persona (unos US$10).','Pasaporte con 6 meses de vigencia.'],
+    src:{ l:'Wego', u:'https://blog.wego.com/indonesia-visa-on-arrival/' } },
+  hacer:['Ubud: templos, mercados y terrazas de arroz.','Atardecer en el templo de Uluwatu.','Nusa Penida: playas y acantilados, en bote desde Sanur.','Surf en Canggu o Uluwatu.','Subir al volcán Batur al amanecer.'],
+  noHacer:['No toques la cabeza ni uses la mano izquierda para dar o recibir.','No alquiles moto sin licencia internacional: el seguro puede no cubrirte.','No te subas a estructuras de templos y respetá las ofrendas del piso.','No lleves drogas: las penas son durísimas.'],
+  apps:[['Grab y Gojek','Taxis y motos con tarifa fija'],['Google Maps','Rutas y reseñas'],['Traveloka','Vuelos y hoteles locales'],['Google Translate','Indonesio con cámara']],
+  tips:['Cambiá dinero solo en casas de cambio autorizadas y contá los billetes.','Contratar un chofer por día suele ser más barato de lo que parece.','Tomá agua embotellada, no de la canilla.','Durante Nyepi (Día del Silencio) todo cierra, aeropuerto incluido.']
+});
+DEST.push({
+  slug:'chile', code:'cl', name:'Chile', c1:'#3a7bd5', c2:'#0b2e63',
+  tagline:'Cordillera, desierto y Patagonia', badge:'Solo con DNI',
+  facts:{ 'Idioma':'Español, con muchos chilenismos', 'Moneda':'Peso chileno (CLP)', 'Religión':'Cristianismo, con mayoría católica', 'Enchufe':'C y L · 220 V', 'Mejor época':'Septiembre a abril; esquí de junio a septiembre' },
+  req:{ status:'sin-visa', stamp:'Sin visa', headline:'Entrás con DNI, sin visa', verified:false,
+    items:['Los argentinos pueden ingresar con DNI o pasaporte vigente.','Podés quedarte hasta 90 días como turista.','Completá la declaración jurada del SAG: tenés que declarar productos agrícolas.','Si cruzás en auto, llevá los papeles y el seguro obligatorio al día.'] },
+  hacer:['Santiago: Cerro San Cristóbal, Sky Costanera y barrio Bellavista.','Valparaíso y sus cerros de colores.','Desierto de Atacama y Valle de la Luna.','Esquiar en Valle Nevado o Portillo.','Torres del Paine, en la Patagonia.'],
+  noHacer:['No entres con frutas, verduras, lácteos, carnes ni semillas sin declarar.','No cambies dólares en la calle.','No dejes objetos a la vista en el auto.','No subestimes la altura: San Pedro de Atacama está a más de 2.000 metros.'],
+  apps:[['Uber y Cabify','Traslados en Santiago'],['Moovit','Metro y buses'],['Google Maps','Rutas y transporte público'],['Google Translate','Para los chilenismos y la cámara']],
+  tips:['La tarjeta Bip! sirve para metro y buses en Santiago.','La propina sugerida en restaurantes es del 10%.','Santiago en 1 día o en 3: mirá nuestros dos videos.']
+});
+DEST.push({
+  slug:'peru', code:'pe', name:'Perú', c1:'#cf5b3a', c2:'#4a2d3d',
+  tagline:'Machu Picchu, Andes y gastronomía', badge:'Solo con DNI',
+  facts:{ 'Idioma':'Español (y quechua en los Andes)', 'Moneda':'Sol peruano (PEN)', 'Religión':'Católica mayoritaria, con tradiciones andinas', 'Enchufe':'A, B y C · 220 V', 'Mejor época':'Mayo a septiembre (seco) en Cusco' },
+  req:{ status:'sin-visa', stamp:'Sin visa', headline:'Entrás con DNI, sin visa', verified:false,
+    items:['Los argentinos pueden ingresar con DNI o pasaporte vigente.','La estadía turística permitida llega hasta 183 días.','Machu Picchu: la entrada es nominal y con horario, comprala con anticipación en el sitio oficial.','Vacuna contra la fiebre amarilla: recomendada si vas a la selva.'] },
+  hacer:['Machu Picchu, por el Camino Inca o en tren a Aguas Calientes.','Cusco y el Valle Sagrado.','Montaña de Colores (Vinicunca).','Comer en Lima: ceviche, causa y lomo saltado.','Lago Titicaca y las islas flotantes de los Uros.'],
+  noHacer:['No te exijas el primer día en Cusco (3.400 m): aclimatate.','No tomes agua de la canilla.','No vayas a Machu Picchu sin entrada comprada con horario.','No tomes taxis de la calle de noche: pedilos por app.'],
+  apps:[['Uber, Cabify e inDrive','Traslados en las ciudades'],['Google Maps','Rutas y reseñas'],['Rome2Rio','Cómo llegar entre ciudades'],['Google Translate','Cámara para menús y carteles']],
+  tips:['Probá el mate de coca: es la costumbre local para la altura.','Reservá Machu Picchu y los trenes con meses de anticipación en temporada alta.','Llevá efectivo en soles para mercados y transporte.']
+});
+DEST.push({
+  slug:'bolivia', code:'bo', name:'Bolivia', c1:'#e6b91e', c2:'#1b6b3a',
+  tagline:'Altura, salares y cultura andina', badge:'Solo con DNI',
+  facts:{ 'Idioma':'Español, quechua y aymara', 'Moneda':'Boliviano (BOB)', 'Religión':'Católica mayoritaria, con creencias andinas (Pachamama)', 'Enchufe':'A y C · 230 V', 'Mejor época':'Mayo a octubre: temporada seca' },
+  req:{ status:'sin-visa', stamp:'Sin visa', headline:'Entrás con DNI, sin visa', verified:false,
+    items:['Los argentinos pueden ingresar con DNI o pasaporte vigente.','Vacuna contra la fiebre amarilla: recomendada si vas a zonas bajas o de selva.','Llevá efectivo en bolivianos: no todos aceptan tarjeta.','Informate sobre bloqueos de rutas y falta de combustible antes de salir por tierra.'] },
+  hacer:['Camino de la Muerte (Yungas) en bicicleta.','Salar de Uyuni y el cementerio de trenes.','La Paz: teleféricos y Valle de la Luna.','Lago Titicaca desde Copacabana e Isla del Sol.','Sucre, la ciudad blanca.'],
+  noHacer:['No te exijas el primer día en La Paz (unos 3.600 m): aclimatate.','No tomes agua de la canilla.','No tomes taxis sin pedirlos por radio o app.','No fotografíes a personas sin pedir permiso.'],
+  apps:[['inDrive','Traslados con precio negociado'],['Google Maps','Rutas y reseñas'],['Maps.me','Mapas sin conexión'],['Google Translate','Traducción con cámara para carteles y menús']],
+  tips:['Probá el mate de coca y comé liviano los primeros días.','Para el Camino de la Muerte, elegí una agencia con buen equipo y seguro.','Viajá con billetes chicos para mercados y colectivos.','Mirá nuestro video sobre el Camino de la Muerte.']
+});
+DEST.push({
+  slug:'aruba', code:'aw', name:'Aruba', c1:'#2dc4e3', c2:'#1a5fb4',
+  tagline:'Sol casi todo el año y playas de agua turquesa', badge:'Sin visa · ED Card',
+  facts:{ 'Idioma':'Papiamento, neerlandés, inglés y español', 'Moneda':'Florín arubeño (AWG); aceptan dólares en casi todos lados', 'Religión':'Católica mayoritaria', 'Enchufe':'A y B · 127 V', 'Mejor época':'Todo el año: clima seco y soleado' },
+  req:{ status:'sin-visa', stamp:'Sin visa', headline:'Sin visa hasta 30 días, con ED Card', verified:true,
+    items:['Los argentinos no necesitan visa para turismo: estadía de hasta 30 días.','La ED Card online es obligatoria: completala hasta 7 días antes del viaje.','Quienes llegan en avión pagan US$20 de Sustainability Fee, que se cobra en la ED Card.','Pasaporte vigente durante toda la estadía y pasaje de regreso o continuación.','Conviene tener seguro médico de viaje.'],
+    src:{ l:'Visit Aruba', u:'https://www.visitaruba.com/traveling-to-aruba/entry-requirements-and-visas/' } },
+  hacer:['Baby Beach y Eagle Beach.','Faro California y el norte de la isla.','Oranjestad en tranvía y San Nicolás.','Mangel Halto para hacer snorkel.','Parque Nacional Arikok.'],
+  noHacer:['No te lleves arena, conchas ni corales.','No uses protectores solares dañinos para el arrecife: elegí uno "reef safe".','No alquiles auto, ATV o UTV sin revisar bien el seguro.','No dejes tus cosas sin vigilancia en la playa.'],
+  apps:[['Google Maps','Rutas y playas'],['WhatsApp','Contacto con tours y alquileres'],['Splitwise','Dividir gastos en pareja o grupo'],['Google Translate','Para papiamento y neerlandés']],
+  tips:['Los dólares se aceptan en todos lados, pero el vuelto puede venir en florines.','Alquilar auto o UTV da más libertad para recorrer el norte.','Mirá nuestros videos de Aruba: precios, Baby Beach y Faro California.']
+});
+
+
+/* ============ Noticiero. cat: ultimo | oferta | visa | equipaje | reglas | dato ============ */
+const NEWS = [
+  { cat:'ultimo', tag:'Último momento', c:'ar', place:'Cataratas del Iguazú', when:'Parte del 25 oct', t:'Iguazú: nuevo cierre parcial por la crecida del río', x:'El 25/10 cerraron el Circuito Superior del lado argentino, con el río en 12.800 m³/s. Siguen abiertos el Circuito Inferior y el sendero verde. El 12/10 el parque había cerrado entero y reabrió el 13/10. Confirmá el estado en los canales oficiales antes de ir.', src:{ l:'Noticias NQN', u:'https://www.noticiasnqn.com.ar/noticias/2026/10/25/358083-cerraron-parcialmente-las-cataratas-del-iguazu-por-la-crecida-del-rio' } },
+  { cat:'ultimo', tag:'Último momento', c:'ar', place:'Argentina', when:'8 al 11 nov', t:'El Papa León XIV visita Argentina del 8 al 11 de noviembre', x:'Estará en Buenos Aires, Luján y Córdoba, y después sigue a Perú (Lima, Chiclayo, Cusco y Pucallpa) hasta el 17/11. Si viajás a esas ciudades en esas fechas, reservá con tiempo y revisá los operativos de tránsito.', src:{ l:'Perfil', u:'https://www.perfil.com/noticias/sociedad/papa-leon-xiv-en-la-argentina-agenda-confirmada-fechas-y-que-lugares-visitara.phtml' } },
+  { cat:'oferta', tag:'Oferta', c:'br', place:'Maceió, Brasil', when:'Publicada el 29 oct', t:'Paquetes a Maceió en verano desde USD 900 por persona', x:'Incluye vuelo directo desde Buenos Aires y hotel con desayuno, según una oferta publicada el 29/10 (referencia: 29/1 al 5/2 de 2027). El precio y la disponibilidad cambian: confirmalos antes de reservar.', src:{ l:'Promos Aéreas', u:'https://promociones-aereas.com.ar/?p=360058' } },
+  { cat:'visa', tag:'Visa', c:'th', when:'Desde el 15 sep', t:'Tailandia terminó con los 60 días, pero los argentinos siguen con 90', x:'Desde el 15 de septiembre de 2026 rige un esquema de 30 días para unos 60 países. Argentina conserva los 90 días por acuerdo bilateral. Confirmalo en tu aerolínea o consulado antes de salir.', src:{ l:'TAT News', u:'https://www.tatnews.org/2026/07/thai-cabinet-approves-updated-visa-measures-pending-royal-gazette-publication/' } },
+  { cat:'visa', tag:'Trámite', c:'th', when:'Vigente', t:'En Tailandia la TDAC reemplazó a la tarjeta de papel', x:'Es obligatoria para todos los viajeros. Se completa online hasta 72 horas antes de llegar y te da un QR que te escanean en migraciones.', src:{ l:'Pattaya Mail', u:'https://www.pattayamail.com/latestnews/news/thailand-tightens-visa-exemptions-and-expands-digital-arrival-controls-561411' } },
+  { cat:'visa', tag:'Visa', c:'cn', when:'Hasta el 31 dic', t:'Sin visa para argentinos en China hasta el 31 de diciembre de 2026', x:'Hasta 30 días por viaje, para turismo, negocios, visita a familiares y tránsito. Todavía hay que confirmar si se prorroga para 2027.', src:{ l:'Sir Chandler', u:'https://www.sirchandler.com.ar/2025/11/china-extiende-ingreso-sin-visa-a-argentinos-hasta-final-del-2026/' } },
+  { cat:'visa', tag:'Impuesto', c:'jp', when:'Desde el 1 jul', t:'La tasa de salida de Japón subió a ¥3.000', x:'Desde el 1 de julio de 2026 el impuesto que paga cada turista al irse pasó de ¥1.000 a ¥3.000. Normalmente se cobra dentro del pasaje.', src:{ l:'Adnkronos', u:'https://english.adnkronos.com/2026/06/29/japan-departure-tax-to-rise-to-3000-yen-on-wed/' } },
+  { cat:'visa', tag:'Visa', c:'eg', when:'Vigente', t:'Egipto: los argentinos necesitan visa, e-Visa o a la llegada', x:'Estadía de hasta 30 días y pasaporte con 6 meses de vigencia. Las tarifas se actualizaron en 2026, así que mirá el valor vigente en el sitio oficial.', src:{ l:'Sitio oficial', u:'https://visa2egypt.gov.eg' } },
+  { cat:'visa', tag:'Trámite', c:'aw', when:'Vigente', t:'Aruba: ED Card online obligatoria y tasa de US$20', x:'Se completa hasta 7 días antes de viajar. Quienes llegan en avión pagan US$20 de Sustainability Fee, que se cobra en la misma ED Card. Los argentinos no necesitan visa por 30 días.', src:{ l:'Visit Aruba', u:'https://www.visitaruba.com/traveling-to-aruba/entry-requirements-and-visas/' } },
+  { cat:'visa', tag:'Visa', c:'id', when:'Vigente', t:'Indonesia: visa a la llegada de IDR 500.000 y tasa para Bali', x:'Son 30 días, ampliables una vez por otros 30. Aparte, quien visita Bali paga una tasa turística de IDR 150.000, unos US$10.', src:{ l:'Wego', u:'https://blog.wego.com/indonesia-visa-on-arrival/' } },
+  { cat:'visa', tag:'Trámite', c:'eu', place:'Europa (Schengen)', when:'Sin fecha', t:'El ETIAS todavía no tiene fecha oficial', x:'Costará €7 y lo van a necesitar los viajeros sin visa, como los argentinos. Se esperaba para fines de 2026, pero 2027 aparece como lo más probable. El control biométrico EES arrancó en octubre de 2025, de forma gradual.', src:{ l:'ETIAS-EU.net', u:'https://etias-eu.net/en/etias-postponed/' } },
+  { cat:'equipaje', tag:'Equipaje', c:'', place:'En el avión', when:'Desde mar 2026', t:'Power banks: siempre en cabina, máximo 2 y sin usarlos en vuelo', x:'Hasta 100 Wh viajan sin permiso; de 101 a 160 Wh necesitás aprobación de la aerolínea. Varias aerolíneas ya prohíben usarlos o recargarlos a bordo y piden no guardarlos en el compartimiento superior.', src:{ l:'JetsetterGuide', u:'https://jetsetterguide.com/asia/power-trip-new-airline-power-bank-rules-for-2026' } },
+  { cat:'equipaje', tag:'Drones', c:'', place:'En el avión', when:'Siempre', t:'Drones: baterías de repuesto en cabina, nunca en bodega', x:'Las baterías de litio sueltas van en el equipaje de mano, con los bornes protegidos y de menos de 100 Wh cada una. Fijate la política de tu aerolínea para el drone y qué permiso pide cada país: en Egipto, por ejemplo, pueden retenerlo en el aeropuerto.' },
+  { cat:'reglas', tag:'Multas', c:'sg', when:'Vigente', t:'Singapur multa hasta por no tirar la cadena en un baño público', x:'Son S$150 y puede llegar hasta S$1.000. También multan por vapear (desde S$200), tirar basura (hasta S$1.000) y llevar durián en el transporte público (S$500).', src:{ l:'Time Out', u:'https://www.timeout.com/singapore/things-to-do/odd-things-that-are-illegal-in-singapore' } },
+  { cat:'reglas', tag:'Reglas', c:'th', when:'Vigente', t:'Tailandia: vapes prohibidos y respeto a la monarquía', x:'Los cigarrillos electrónicos están prohibidos y criticar a la familia real es delito. Lo mejor es evitar ambos temas.' },
+  { cat:'reglas', tag:'Aduana', c:'cl', when:'Vigente', t:'Chile: declará frutas, lácteos y semillas en la aduana', x:'El SAG controla todo lo agrícola y las multas por no declarar son altas. Ante la duda, declará.' },
+  { cat:'dato', tag:'Dato', c:'jp', when:'Para saber', t:'En Japón no se deja propina', x:'No es costumbre y puede incomodar a quien te atiende. Un "gracias" y una reverencia leve alcanzan.' },
+  { cat:'dato', tag:'Dato', c:'cn', when:'Para saber', t:'En China, Google, YouTube e Instagram no funcionan sin VPN', x:'Configurá la VPN y las apps de pago (Alipay o WeChat) antes de salir de Argentina.' },
+  { cat:'dato', tag:'Dato', c:'id', when:'Para saber', t:'En Bali, el Día del Silencio cierra hasta el aeropuerto', x:'Durante Nyepi todo el isla se frena por 24 horas, aeropuerto incluido. Revisá la fecha antes de reservar vuelos y hoteles.' }
+];
+
+/* ============ Videos de YouTube (IDs reales del canal) ============ */
+const V = (id, c, m, t, top) => ({ id, c, m, t, top });
+const VIDEOS = [
+  V('j3TisBQg2Rw','cl','21:28','Un día en Santiago de Chile: la ciudad más moderna de LATAM',true),
+  V('GEWE7flaox8','uy','22:31','Argentinos enamorados de Montevideo: ¿la ciudad más linda de Uruguay?'),
+  V('iXEBwuIB5Mg','cl','45:12','3 días en Santiago de Chile'),
+  V('1G4I9WLhdc4','aw','15:54','Aruba: ¿es tan caro como dicen? La verdad sobre los precios'),
+  V('-MLIuivUgtM','bo','23:26','Camino de la Muerte: nuestra experiencia extrema en Bolivia'),
+  V('pCukIqrGHX0','br','30:11','¿Cómo subir al Cristo Redentor gratis?'),
+  V('07hpQBl0a9Q','th','29:37','Bangkok: el impresionante Gran Buda de 69 metros'),
+  V('aCAULldG1k0','cn','37:17','No vengas a China sin saber esto: guía, precios y lugares'),
+  V('rcDOEr38Esg','ar','22:12','¿El mejor lado de las Cataratas? Explorando el lado argentino a fondo'),
+  V('u5jabwhWuig','br','18:56','Foz de Iguazú nos dejó sin palabras: ¿vale la pena el lado brasileño?'),
+  V('9lQinmNZCHg','aw','13:54','¿La playa más linda de Aruba? Visitamos Baby Beach'),
+  V('thfAucp7fXs','aw','27:00','Descubriendo el norte de Aruba y su famoso Faro California'),
+  V('l5K1pKxOCj4','aw','9:45','Oranjestad: qué hacer en la capital de Aruba'),
+  V('-nZvwgvt-8I','aw','18:12','Aruba vlog día 2: San Nicolás y Mangel Halto'),
+  V('5I36RAz99Ac','bo','10:59','El país que nos robó el corazón: Bolivia'),
+  V('BsefEj13pUk','br','28:21','¿Subir gratis al Pan de Azúcar? Y las playas icónicas de Río'),
+  V('pvgNmerZ-6I','br','21:33','Así es subir al Morro Dois Irmãos: Río desde arriba'),
+  V('oBkHi-VwslE','br','19:25','Río de Janeiro más allá de las playas: Selarón, Lapa y Santa Teresa'),
+  V('ToAGLcuE_Bs','br','12:52','Florianópolis: qué hacer en 1 día'),
+  V('BG_jD4z6QaQ','th','33:49','Bangkok: ¿vale la pena el Gran Palacio?'),
+  V('Nm3HHJUMmkU','th','25:07','Khao San Road: la calle más loca de Bangkok'),
+  V('CDzkeAku7Z4','th','15:05','Enamorados de Chinatown Bangkok: guía completa y consejos'),
+  V('kr8z1FFGY5Y','th','32:15','No vayas a Railay Beach sin ver esto: viewpoint y laguna secreta'),
+  V('bRBiGBPovLk','th','14:36','Phra Nang Beach: ¿la playa más linda de Tailandia?'),
+  V('qFC2cfUHS7U','th','35:20','Playa escondida: el tesoro oculto de Krabi'),
+  V('KK6AisNzpnQ','th','20:44','Tiger Cave Temple: ¿vale la pena subir los 1.260 escalones?'),
+  V('WtI-N0kYBys','th','33:31','Krabi: ¿vale la pena visitar Tonsai Beach?'),
+  V('AIYhzEHD9Rs','th','17:55','Ao Nang: ¿el mejor mercado nocturno de Krabi?'),
+  V('mMUCoTfOcpU','cn','33:37','Shanghái: lo que sí o sí tenés que ver, guía de 3 días'),
+  V('kYaaZzF8Ah4','cn','27:48','Pekín: Templo del Cielo y Palacio de Verano, guía completa'),
+  V('gCyzUSpu3Xc','cn','18:20','Guerreros de Terracota: el secreto más oscuro de China'),
+  V('ds-4Jg_3iAo','cn','20:39','Xi’an: muralla en bici tándem y el barrio musulmán'),
+  V('UCE2ATc0lXM','cn','28:28','¡Pandora existe! De Hong Kong a las montañas de Avatar (Zhangjiajie)'),
+  V('WpI6Cs13saE','cn','31:41','Tianmen Mountain: la Puerta del Cielo y las pasarelas de cristal'),
+  V('yawiSv2Ka4s','cn','29:06','Chongqing: ¿la ciudad más futurista de China?'),
+  V('d5r0HTmvjME','cn','20:37','Enamorados de Chengdu: ¿la ciudad más increíble de China?'),
+  V('nEZztT1ABmk','cn','12:13','Chengdu: padres buscando pareja para sus hijos en el parque'),
+  V('PCKl2Tb2MQ0','cn','24:31','Viajamos al Disney de Shanghái: ¿vale la pena el viaje?'),
+  V('X0oMQiCJ9KU','hk','24:13','Hong Kong: el Gran Buda y el templo Wong Tai Sin'),
+  V('WQ0NIJddbDY','hk','10:41','Cómo llegar al Gran Buda de Hong Kong sin tour y ahorrar dinero'),
+  V('wTkoGA5pOm0','ar','26:51','Recorrimos Buenos Aires a pie en un solo día'),
+  V('6D2zBhv2Mcw','ar','21:33','Bariloche: Circuito Chico y Cerro Llao Llao, guía completa'),
+  V('YAZHR_keC5Y','ar','27:09','Bariloche: guía completa del Cerro Campanario'),
+  V('LqdNVJnJkjw','ar','17:15','Cerro Catedral, Bariloche: guía completa y precios 2026')
+];
+const HUE = { th:['#12b5b0','#0a4a67'], br:['#2fbf71','#0b6b4a'], eg:['#e3a86b','#8a4b2a'], cn:['#e0493a','#7c1d2a'], jp:['#e87ca0','#3b2f6b'], sg:['#ee6b6e','#2b4a8a'], id:['#f2a541','#a8321e'], cl:['#3a7bd5','#0b2e63'], pe:['#cf5b3a','#4a2d3d'], bo:['#e6b91e','#1b6b3a'], aw:['#2dc4e3','#1a5fb4'], ar:['#5aa9e6','#1d4e89'], uy:['#4a90d9','#1b3d78'], hk:['#d9573f','#5c2230'], eu:['#3a5fcf','#14307a'] };
+
+
+/* ============ Ilustraciones de destinos (SVG propio, sin depender de fotos externas) ============ */
+const INK = '#0b2a33';
+const sv = inner => '<svg class="art" viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">' + inner + '</svg>';
+const prang = (cx, b, w, h, f) => {
+  const t = b - h, k = f || '#f6efe2';
+  return '<path d="M' + cx + ' ' + t + ' L' + (cx + w * .1) + ' ' + (t + h * .2) + ' L' + (cx + w * .22) + ' ' + (t + h * .45) + ' L' + (cx + w * .32) + ' ' + (t + h * .7) + ' L' + (cx + w * .5) + ' ' + b + ' L' + (cx - w * .5) + ' ' + b + ' L' + (cx - w * .32) + ' ' + (t + h * .7) + ' L' + (cx - w * .22) + ' ' + (t + h * .45) + ' L' + (cx - w * .1) + ' ' + (t + h * .2) + 'Z" fill="' + k + '" stroke="' + INK + '" stroke-width="2" stroke-linejoin="round"/>' +
+    '<path d="M' + (cx - w * .16) + ' ' + (t + h * .2) + 'H' + (cx + w * .16) + 'M' + (cx - w * .24) + ' ' + (t + h * .45) + 'H' + (cx + w * .24) + 'M' + (cx - w * .34) + ' ' + (t + h * .7) + 'H' + (cx + w * .34) + '" stroke="' + INK + '" stroke-width="1.6"/>' +
+    '<path d="M' + cx + ' ' + (t - 16) + 'V' + t + '" stroke="' + INK + '" stroke-width="2.4"/><circle cx="' + cx + '" cy="' + (t - 18) + '" r="2.6" fill="' + INK + '"/>';
+};
+const cloud = (x, y, s, o) => '<g transform="translate(' + x + ' ' + y + ') scale(' + s + ')" fill="#fff" opacity="' + (o || .9) + '"><ellipse cx="0" cy="0" rx="26" ry="9"/><ellipse cx="-14" cy="-6" rx="14" ry="9"/><ellipse cx="10" cy="-9" rx="16" ry="11"/></g>';
+const palm = (x, y, s, c) => '<g transform="translate(' + x + ' ' + y + ') scale(' + s + ')"><path d="M0 0 C2 -20 2 -38 8 -56" stroke="' + INK + '" stroke-width="5" fill="none" stroke-linecap="round"/><g fill="' + (c || '#2e9b57') + '" stroke="' + INK + '" stroke-width="1.6" stroke-linejoin="round"><path d="M8 -56 C-6 -70 -26 -66 -36 -54 C-22 -60 -12 -58 8 -56Z"/><path d="M8 -56 C22 -72 44 -68 52 -54 C38 -60 24 -58 8 -56Z"/><path d="M8 -56 C-2 -76 8 -88 22 -90 C14 -80 12 -70 8 -56Z"/><path d="M8 -56 C-10 -52 -22 -40 -22 -30 C-14 -42 -4 -50 8 -56Z"/><path d="M8 -56 C24 -50 36 -38 36 -28 C28 -40 16 -48 8 -56Z"/></g></g>';
+
+const SCENES = {
+  th: sv(
+    '<rect width="400" height="240" fill="#0a4a67"/><rect y="46" width="400" height="130" fill="#1a8a97"/><rect y="104" width="400" height="72" fill="#f0a35e"/>' +
+    '<circle cx="292" cy="150" r="66" fill="#FFD25A" opacity=".18"/><circle cx="292" cy="150" r="42" fill="#FFD25A"/>' +
+    '<rect y="172" width="400" height="68" fill="#0a4a67"/><rect y="170" width="400" height="6" fill="#06303f"/>' +
+    '<g stroke="#fff" stroke-opacity=".24" stroke-width="2.2" stroke-linecap="round"><path d="M20 192h60M130 204h90M60 220h120M240 188h40M300 226h80M350 200h30"/></g>' +
+    '<g fill="#FFD25A" opacity=".55"><rect x="284" y="182" width="16" height="3"/><rect x="278" y="192" width="28" height="3"/><rect x="288" y="202" width="12" height="3"/></g>' +
+    prang(96, 172, 40, 62) + prang(204, 172, 40, 62) + prang(150, 172, 74, 128) +
+    '<path d="M262 208 Q300 220 344 204 L340 210 Q300 226 266 214Z" fill="#b0402a" stroke="' + INK + '" stroke-width="2"/><path d="M342 204 L378 184" stroke="' + INK + '" stroke-width="3" stroke-linecap="round"/><path d="M300 206V192" stroke="' + INK + '" stroke-width="2"/>' +
+    cloud(60, 40, 1, .5) + cloud(340, 64, .8, .45)
+  ),
+  br: sv(
+    '<rect width="400" height="240" fill="#ff8a5b"/><rect y="70" width="400" height="90" fill="#ffb36b"/><rect y="130" width="400" height="60" fill="#ffd89a"/>' +
+    '<circle cx="326" cy="112" r="52" fill="#fff0b8" opacity=".35"/><circle cx="326" cy="112" r="32" fill="#fff0b8"/>' +
+    '<path d="M0 176 Q60 130 130 160 T270 150 T400 170 V240 H0Z" fill="#26a56a" opacity=".8"/>' +
+    '<path d="M286 196 C288 150 322 128 346 144 C368 160 372 190 388 200Z" fill="#2a6a4a" stroke="' + INK + '" stroke-width="2"/>' +
+    '<path d="M50 204 C86 146 136 82 190 84 C242 86 282 154 306 204Z" fill="#167a4f" stroke="' + INK + '" stroke-width="2"/><path d="M190 84 C242 86 282 154 306 204 L250 204 C240 150 216 100 190 84Z" fill="#0f5d3b" opacity=".6"/>' +
+    '<g fill="#f2efe6" stroke="' + INK + '" stroke-width="1.8" stroke-linejoin="round"><rect x="184" y="72" width="12" height="12"/><path d="M186 72 L184 52 L196 52 L194 72Z"/><rect x="160" y="50" width="60" height="7" rx="3.5"/><circle cx="190" cy="42" r="6"/></g>' +
+    '<rect y="200" width="400" height="40" fill="#1f9bc4"/><path d="M0 214 q20 -8 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0" stroke="#fff" stroke-opacity=".4" stroke-width="2" fill="none"/>' +
+    '<g fill="#f5e6c8" stroke="' + INK + '" stroke-width="1.4"><rect x="30" y="188" width="14" height="14"/><rect x="48" y="182" width="12" height="20"/><rect x="64" y="190" width="16" height="12"/><rect x="330" y="190" width="12" height="12"/><rect x="346" y="184" width="14" height="18"/></g>' +
+    cloud(70, 36, 1, .55)
+  ),
+  eg: sv(
+    '<rect width="400" height="240" fill="#f2b86b"/><rect y="60" width="400" height="100" fill="#f8d08c"/><rect y="120" width="400" height="60" fill="#fde7bd"/>' +
+    '<circle cx="312" cy="72" r="50" fill="#fff4d2" opacity=".4"/><circle cx="312" cy="72" r="30" fill="#fff4d2"/>' +
+    '<g stroke="' + INK + '" stroke-width="2" stroke-linejoin="round"><path d="M200 66 L60 196 L204 196Z" fill="#eec17c"/><path d="M200 66 L204 196 L340 196Z" fill="#c98c47"/>' +
+    '<path d="M296 124 L246 196 L298 196Z" fill="#eec17c"/><path d="M296 124 L298 196 L352 196Z" fill="#c98c47"/>' +
+    '<path d="M60 150 L26 196 L62 196Z" fill="#eec17c"/><path d="M60 150 L62 196 L96 196Z" fill="#c98c47"/></g>' +
+    '<path d="M0 206 C70 182 140 190 210 204 C280 216 340 192 400 200 V240 H0Z" fill="#e2a85a"/><path d="M0 224 C80 206 160 218 240 226 C310 232 360 216 400 222 V240 H0Z" fill="#c98c47"/>' +
+    palm(352, 214, .7, '#3a9a4f') + cloud(80, 38, .9, .4)
+  ),
+  cn: sv(
+    '<rect width="400" height="240" fill="#5b1a33"/><rect y="50" width="400" height="90" fill="#b8323a"/><rect y="110" width="400" height="60" fill="#f2a266"/>' +
+    '<circle cx="204" cy="120" r="62" fill="#ffe4b0" opacity=".25"/><circle cx="204" cy="120" r="38" fill="#ffe4b0" opacity=".9"/>' +
+    '<path d="M0 170 Q50 120 110 150 T220 130 T330 140 T400 120 V240 H0Z" fill="#7a2a44"/><path d="M0 200 Q60 150 130 184 T260 170 T400 176 V240 H0Z" fill="#3d1a38"/>' +
+    '<path d="M0 182 L58 160 L112 168 L162 138 L216 150 L272 120 L332 134 L400 108" fill="none" stroke="#e2bd8f" stroke-width="9" stroke-linejoin="round"/><path d="M0 182 L58 160 L112 168 L162 138 L216 150 L272 120 L332 134 L400 108" fill="none" stroke="' + INK + '" stroke-width="2" stroke-dasharray="6 5" transform="translate(0 -5)"/>' +
+    '<g fill="#c99b6e" stroke="' + INK + '" stroke-width="2"><rect x="150" y="116" width="26" height="26"/><path d="M146 116 L163 102 L180 116Z" fill="#7a2a1e"/><rect x="262" y="98" width="26" height="26"/><path d="M258 98 L275 84 L292 98Z" fill="#7a2a1e"/></g>' +
+    '<g stroke="#e6b94a" stroke-width="2"><path d="M44 0V26M364 0V30"/></g><g fill="#d6262c" stroke="#e6b94a" stroke-width="2"><ellipse cx="44" cy="40" rx="15" ry="18"/><ellipse cx="364" cy="44" rx="15" ry="18"/></g><g stroke="#e6b94a" stroke-width="2"><path d="M44 58v14M364 62v14"/></g>'
+  ),
+  jp: sv(
+    '<rect width="400" height="240" fill="#f7c6d6"/><rect y="90" width="400" height="150" fill="#ffe0ea"/>' +
+    '<circle cx="200" cy="96" r="38" fill="#d93a3a"/>' +
+    '<path d="M30 208 C106 192 170 104 190 86 L210 86 C230 104 294 192 372 208Z" fill="#5a5f9a" stroke="' + INK + '" stroke-width="2" stroke-linejoin="round"/>' +
+    '<path d="M190 86 L210 86 C216 94 222 104 232 118 L216 111 L205 124 L196 111 L178 120 C190 104 188 96 190 86Z" fill="#fff" stroke="' + INK + '" stroke-width="1.6" stroke-linejoin="round"/>' +
+    '<rect y="206" width="400" height="34" fill="#9db4de"/><path d="M0 220q25 -7 50 0t50 0t50 0t50 0t50 0t50 0t50 0t50 0" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="2"/>' +
+    '<g fill="#d93a3a" stroke="' + INK + '" stroke-width="2" stroke-linejoin="round"><rect x="82" y="124" width="9" height="84"/><rect x="130" y="124" width="9" height="84"/><path d="M68 120 Q110 108 154 120 L152 131 L70 131Z"/><rect x="76" y="140" width="70" height="7"/></g>' +
+    '<path d="M360 0 C330 30 316 50 276 74" fill="none" stroke="#5b3a2e" stroke-width="5" stroke-linecap="round"/><g fill="#ff9fbd" stroke="#e0709a" stroke-width="1.2"><circle cx="352" cy="22" r="9"/><circle cx="334" cy="38" r="8"/><circle cx="318" cy="52" r="10"/><circle cx="300" cy="62" r="8"/><circle cx="282" cy="72" r="9"/><circle cx="366" cy="42" r="7"/><circle cx="340" cy="60" r="7"/></g>' +
+    '<g fill="#ff9fbd" opacity=".85"><circle cx="250" cy="130" r="3"/><circle cx="296" cy="160" r="3"/><circle cx="60" cy="70" r="3"/><circle cx="320" cy="110" r="2.5"/></g>'
+  ),
+  sg: sv(
+    '<rect width="400" height="240" fill="#0d1b3e"/><rect y="70" width="400" height="90" fill="#2b4a8a"/><rect y="130" width="400" height="50" fill="#ee6b6e"/>' +
+    '<g fill="#fff" opacity=".8"><circle cx="40" cy="24" r="1.6"/><circle cx="110" cy="46" r="1.2"/><circle cx="170" cy="18" r="1.6"/><circle cx="300" cy="30" r="1.4"/><circle cx="360" cy="58" r="1.6"/><circle cx="250" cy="52" r="1.1"/></g>' +
+    '<g fill="#1b2d5f"><rect x="10" y="150" width="22" height="50"/><rect x="36" y="134" width="18" height="66"/><rect x="58" y="158" width="24" height="42"/><rect x="290" y="146" width="20" height="54"/><rect x="314" y="126" width="22" height="74"/><rect x="340" y="152" width="18" height="48"/><rect x="362" y="136" width="30" height="64"/></g>' +
+    '<g fill="#dfe6f2" stroke="' + INK + '" stroke-width="2" stroke-linejoin="round"><path d="M138 200 L144 86 L162 86 L160 200Z"/><path d="M168 200 L172 80 L190 80 L190 200Z"/><path d="M198 200 L200 86 L218 86 L222 200Z"/><path d="M118 78 L252 78 L262 70 L274 76 L244 90 L124 90Z" fill="#c4cfe4"/></g>' +
+    '<g stroke="#9fb0d4" stroke-width="1.4"><path d="M151 100V196M181 96V196M209 100V196"/></g><path d="M126 83H240" stroke="#3fcfcb" stroke-width="3" stroke-linecap="round"/>' +
+    '<g stroke="' + INK + '" stroke-width="2"><path d="M64 200 L66 150M96 200 L98 160" fill="none"/></g><g fill="#3fbf7f" stroke="' + INK + '" stroke-width="2"><path d="M46 150 Q66 128 86 150Z"/><path d="M80 160 Q98 140 116 160Z"/></g>' +
+    '<rect y="200" width="400" height="40" fill="#14265a"/><g stroke-linecap="round" stroke-width="3"><path d="M146 210h30" stroke="#ffd25a" opacity=".6"/><path d="M180 218h40" stroke="#3fcfcb" opacity=".6"/><path d="M60 214h30M300 212h50" stroke="#ee6b6e" opacity=".6"/></g>'
+  ),
+  id: sv(
+    '<rect width="400" height="240" fill="#a8321e"/><rect y="50" width="400" height="90" fill="#f2a541"/><rect y="110" width="400" height="60" fill="#ffd27a"/>' +
+    '<circle cx="312" cy="120" r="56" fill="#fff0b8" opacity=".3"/><circle cx="312" cy="120" r="32" fill="#fff0b8"/>' +
+    '<path d="M110 186 C170 150 188 98 204 78 C220 98 238 150 330 186Z" fill="#6a3040" stroke="' + INK + '" stroke-width="2" stroke-linejoin="round"/><path d="M204 78 C220 98 238 150 330 186 L260 186 C240 140 220 100 204 78Z" fill="#4a2030" opacity=".6"/>' +
+    '<g fill="#e6b4b0" opacity=".7"><ellipse cx="214" cy="62" rx="22" ry="9"/><ellipse cx="236" cy="50" rx="16" ry="7"/></g>' +
+    '<g fill="#7a5a52" stroke="' + INK + '" stroke-width="2" stroke-linejoin="round"><path d="M44 200 V170 H56 V152 H68 V134 H80 V116 H90 V200Z"/><path d="M174 200 V116 H184 V134 H196 V152 H208 V170 H220 V200Z" transform="translate(-34 0)"/></g>' +
+    '<path d="M0 196 C70 176 130 190 200 184 C270 178 330 194 400 180 V240 H0Z" fill="#3fa35a"/><path d="M0 214 C80 196 160 212 240 204 C310 198 360 212 400 204 V240 H0Z" fill="#2d8a4a"/><path d="M0 230 C90 214 170 228 250 220 C320 214 370 226 400 222 V240 H0Z" fill="#237a40"/>' +
+    '<g stroke="#8be28a" stroke-opacity=".5" stroke-width="2" fill="none"><path d="M20 200 q60 -10 120 -2M180 196 q70 -8 130 0M40 218 q80 -10 160 -2"/></g>' +
+    palm(336, 214, .8) + palm(372, 218, .6)
+  ),
+  cl: sv(
+    '<rect width="400" height="240" fill="#6bb8f0"/><rect y="90" width="400" height="90" fill="#a9d6f5"/><rect y="140" width="400" height="40" fill="#d9eefb"/>' +
+    '<path d="M0 170 L50 130 L96 156 L140 118 L180 150 L230 120 L290 158 L340 124 L400 164 V190 H0Z" fill="#9fb1c6"/><path d="M50 130 L40 144 L56 140 L66 144Z M140 118 L130 134 L150 130 L152 134Z M340 124 L330 138 L350 134Z" fill="#fff"/>' +
+    '<g stroke="' + INK + '" stroke-width="2" stroke-linejoin="round"><path d="M128 194 L130 76 L152 68 L156 194Z" fill="#a39a92"/><path d="M164 194 L166 50 L184 40 L196 194Z" fill="#8a8179"/><path d="M206 194 L212 70 L236 76 L240 194Z" fill="#a39a92"/></g>' +
+    '<g fill="#d8c9b8" opacity=".9"><path d="M166 50 L184 40 L186 70 L168 78Z"/><path d="M130 76 L152 68 L152 90 L131 98Z"/><path d="M212 70 L236 76 L236 98 L211 90Z"/></g>' +
+    '<rect y="190" width="400" height="50" fill="#3ec1c8"/><path d="M0 206q25 -6 50 0t50 0t50 0t50 0t50 0t50 0t50 0t50 0" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="2"/><path d="M0 232 C80 214 160 232 240 222 C320 214 360 230 400 224 V240 H0Z" fill="#2f7a4a"/>' +
+    '<path d="M300 66 q14 -12 28 0 q14 -12 28 0 q-14 4 -28 8 q-14 -4 -28 -8Z" fill="' + INK + '"/>' + cloud(60, 52, 1.1, .85) + cloud(350, 100, .8, .7)
+  ),
+  pe: sv(
+    '<rect width="400" height="240" fill="#6fb7ee"/><rect y="80" width="400" height="90" fill="#a8d8f6"/>' +
+    '<path d="M176 200 C214 120 238 76 256 50 C272 74 296 130 340 200Z" fill="#2f6f4a" stroke="' + INK + '" stroke-width="2" stroke-linejoin="round"/><path d="M256 50 C272 74 296 130 340 200 L292 200 C284 130 268 84 256 50Z" fill="#1f5236" opacity=".6"/>' +
+    '<path d="M0 150 C60 110 130 130 180 150 C130 170 60 190 0 190Z" fill="#3d8a58" opacity=".85"/>' +
+    cloud(310, 130, 1.2, .8) + cloud(90, 70, .9, .8) + cloud(230, 152, 1, .9) +
+    '<path d="M0 240 V160 L70 160 V172 L140 172 V184 L210 184 V196 L280 196 V210 L400 210 V240Z" fill="#4aa35e" stroke="' + INK + '" stroke-width="2"/><path d="M0 168 H70 M70 180 H140 M140 192 H210 M210 204 H280 M280 218 H400" stroke="#2d7a45" stroke-width="5"/>' +
+    '<g fill="#c9b99f" stroke="' + INK + '" stroke-width="1.6"><rect x="96" y="150" width="22" height="22"/><rect x="152" y="162" width="20" height="22"/><rect x="224" y="172" width="22" height="24"/></g><g fill="#a07a3a" stroke="' + INK + '" stroke-width="1.6"><path d="M92 150 L107 138 L122 150Z"/><path d="M148 162 L162 150 L176 162Z"/><path d="M220 172 L235 160 L250 172Z"/></g>' +
+    '<g fill="#efe0c6" stroke="' + INK + '" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><ellipse cx="338" cy="210" rx="22" ry="12"/><path d="M352 202 C358 180 356 170 362 160 L372 162 C368 172 370 182 366 204Z"/><path d="M362 160 C364 152 372 150 380 154 L378 162Z"/><path d="M322 218 V232M334 220 V232M346 220 V232M354 216 V232" fill="none"/></g>'
+  ),
+  bo: sv(
+    '<rect width="400" height="240" fill="#2a6fcb"/><rect y="40" width="400" height="80" fill="#6fb2ee"/><rect y="90" width="400" height="30" fill="#bfe0f8"/>' +
+    '<rect y="120" width="400" height="120" fill="#bfe0f8"/><rect y="120" width="400" height="30" fill="#bfe0f8"/><rect y="150" width="400" height="30" fill="#6fb2ee"/><rect y="180" width="400" height="60" fill="#3a7fd0"/>' +
+    '<circle cx="200" cy="108" r="26" fill="#ffe8a0"/><circle cx="200" cy="132" r="26" fill="#ffe8a0" opacity=".5"/>' +
+    '<path d="M0 120 L40 100 L84 116 L136 92 L190 118 L250 98 L310 116 L360 96 L400 112 V120Z" fill="#7d6a8f"/><path d="M0 120 L40 140 L84 124 L136 148 L190 122 L250 142 L310 124 L360 144 L400 128 V120Z" fill="#7d6a8f" opacity=".55"/>' +
+    '<line x1="0" y1="120" x2="400" y2="120" stroke="#fff" stroke-opacity=".7" stroke-width="2"/>' +
+    cloud(80, 56, 1.2, .9) + cloud(300, 72, 1, .85) + cloud(110, 186, 1.2, .35) + cloud(310, 168, 1, .3) +
+    '<g stroke="#fff" stroke-opacity=".5" stroke-width="1.6" fill="none"><path d="M0 210 L60 196 L120 214 L190 198 L260 216 L330 200 L400 212"/><path d="M60 196 L50 240M120 214 L130 240M190 198 L200 240M260 216 L250 240M330 200 L340 240"/></g>'
+  ),
+  aw: sv(
+    '<rect width="400" height="240" fill="#29b6e8"/><rect y="70" width="400" height="60" fill="#7fd6f0"/>' +
+    '<circle cx="334" cy="52" r="44" fill="#ffe58a" opacity=".3"/><circle cx="334" cy="52" r="24" fill="#ffe58a"/>' +
+    '<rect y="120" width="400" height="120" fill="#1fc1d8"/><rect y="150" width="400" height="90" fill="#11a2c9"/><rect y="180" width="400" height="60" fill="#0f7fbd"/>' +
+    '<g stroke="#fff" stroke-opacity=".5" stroke-width="2.2" stroke-linecap="round"><path d="M30 140h50M150 134h60M280 144h70M90 164h70M230 170h60M330 160h40"/></g>' +
+    '<path d="M0 240 V206 C70 190 150 210 240 214 C320 218 360 208 400 200 V240Z" fill="#f7ecd4" stroke="' + INK + '" stroke-width="2"/><path d="M0 228 C100 216 220 232 400 218" fill="none" stroke="#e5d3ae" stroke-width="3"/>' +
+    '<path d="M122 212 C118 188 128 170 148 162 C160 158 170 160 176 164" fill="none" stroke="' + INK + '" stroke-width="7" stroke-linecap="round"/><path d="M148 162 C130 168 100 164 74 152 C70 140 100 132 130 138 C160 132 196 134 214 146 C216 158 190 166 164 166Z" fill="#2e9b57" stroke="' + INK + '" stroke-width="2.2" stroke-linejoin="round"/>' +
+    palm(330, 214, .9) + '<path d="M276 118 L276 98 L296 118Z" fill="#fff" stroke="' + INK + '" stroke-width="1.6"/><path d="M270 120 H302" stroke="' + INK + '" stroke-width="3" stroke-linecap="round"/>' + cloud(60, 36, 1, .7)
+  ),
+  ar: sv(
+    '<rect width="400" height="240" fill="#79c4f0"/><rect y="70" width="400" height="90" fill="#b6e0f7"/>' +
+    '<g fill="none" stroke-width="5" opacity=".75"><path d="M270 150 a70 70 0 0 1 120 -30" stroke="#ff6b6b"/><path d="M276 150 a64 64 0 0 1 108 -28" stroke="#ffd25a"/><path d="M282 150 a58 58 0 0 1 96 -26" stroke="#6fd08c"/><path d="M288 150 a52 52 0 0 1 84 -24" stroke="#6fb2ee"/></g>' +
+    '<path d="M0 112 C40 92 90 98 124 108 L124 210 H0Z" fill="#1f7a4a" stroke="' + INK + '" stroke-width="2"/><path d="M400 118 C360 100 318 104 286 112 L286 210 H400Z" fill="#26904f" stroke="' + INK + '" stroke-width="2"/>' +
+    '<g fill="#fff" stroke="#bfe3f3" stroke-width="2" stroke-linejoin="round"><path d="M124 108 H148 L146 196 H126Z"/><path d="M150 112 H176 L174 206 H152Z"/><path d="M178 106 H214 L216 214 H176Z"/><path d="M218 110 H244 L242 202 H220Z"/><path d="M246 108 H286 L284 194 H248Z"/></g>' +
+    '<g stroke="#bfe3f3" stroke-width="2" stroke-linecap="round"><path d="M134 120V186M162 124V196M190 120V204M198 120V204M230 122V194M262 120V184M274 120V184"/></g>' +
+    '<rect y="206" width="400" height="34" fill="#3aa0c8"/>' +
+    cloud(176, 214, 2, .85) + cloud(250, 206, 1.4, .8) + cloud(120, 208, 1.2, .8) +
+    palm(48, 168, .9) + palm(352, 172, .8) + cloud(60, 44, 1, .8)
+  ),
+  mundo: sv(
+    '<rect width="400" height="240" fill="#0a4a67"/><rect y="90" width="400" height="150" fill="#12b5b0"/><rect y="170" width="400" height="70" fill="#3fcfcb"/>' +
+    '<circle cx="288" cy="116" r="64" fill="#2ab3e3" stroke="' + INK + '" stroke-width="3"/><path d="M250 86 C258 74 276 76 280 88 C284 100 272 108 274 120 C262 126 248 112 250 86Z" fill="#6fd08c"/><path d="M296 120 C310 108 330 116 328 132 C326 148 310 156 300 148 C292 140 290 128 296 120Z" fill="#6fd08c"/><path d="M236 116 a52 52 0 0 1 14 -34" stroke="#fff" stroke-opacity=".5" stroke-width="3" fill="none" stroke-linecap="round"/>' +
+    '<path d="M-10 190 Q120 110 220 70" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="3" stroke-dasharray="3 9" stroke-linecap="round"/>' +
+    '<g transform="translate(224 62) rotate(-24)"><path d="M0 8 L52 0 L0 -8 L10 0Z" fill="#fff" stroke="' + INK + '" stroke-width="2" stroke-linejoin="round"/><path d="M12 0 L26 -22 L34 -20 L26 0Z M12 0 L26 22 L34 20 L26 0Z" fill="#fff" stroke="' + INK + '" stroke-width="2" stroke-linejoin="round"/></g>' +
+    cloud(70, 150, 1.4, .85) + cloud(190, 196, 1.6, .9) + cloud(340, 206, 1.2, .8) + cloud(40, 50, .9, .35)
+  )
+};
+function sceneSVG(code) { return SCENES[code] || SCENES.mundo; }
+
+
+/* ============ Utilidades ============ */
+const $ = (s, r) => (r || document).querySelector(s);
+const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+const norm = s => String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
+const RM = window.matchMedia('(prefers-reduced-motion: reduce)');
+const ICON = {
+  yt:'<svg class="ic" viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="m10 9.5 5 2.5-5 2.5z" fill="currentColor"/></svg>',
+  tt:'<svg class="ic" viewBox="0 0 24 24"><path d="M14 3v11.2a3.7 3.7 0 1 1-3.7-3.7"/><path d="M14 3c.3 2.4 1.9 4.2 4.6 4.5"/></svg>',
+  ig:'<svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6" fill="currentColor"/></svg>',
+  play:'<svg class="ic" viewBox="0 0 24 24" style="width:24px;height:24px"><path d="m8 5 11 7-11 7z" fill="currentColor"/></svg>',
+  arrow:'<svg class="ic" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+  back:'<svg class="ic" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>',
+  plane:'<svg class="ic" viewBox="0 0 24 24"><path d="M2 16l20-6-3-3-6 2-6-5-3 1 4 6-5 2z"/></svg>'
+};
+async function copyText(text, btn, src) {
+  const label = btn.dataset.l || btn.textContent;
+  btn.dataset.l = label;
+  const reset = () => { btn.textContent = label; btn.classList.remove('ok'); };
+  try {
+    await navigator.clipboard.writeText(text);
+    btn.textContent = 'Copiado'; btn.classList.add('ok'); setTimeout(reset, 1800);
+  } catch (e) {
+    if (src) { const r = document.createRange(); r.selectNodeContents(src); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+    btn.textContent = 'Seleccionado: copialo'; setTimeout(reset, 2600);
+  }
+}
+const placeName = c => PLACE[c] || '';
+const ytUrl = id => 'https://www.youtube.com/watch?v=' + id;
+const monthYear = 'noviembre de 2026';
+
+/* ============ Redes y correo ============ */
+function socLinks() {
+  return [['YouTube', SITE.youtube, ICON.yt], ['TikTok', SITE.tiktok, ICON.tt], ['Instagram', SITE.instagram, ICON.ig]]
+    .map(a => '<a href="' + a[1] + '" target="_blank" rel="noopener" aria-label="' + a[0] + ' de Masmundok">' + a[2] + '</a>').join('');
+}
+function renderStatic() {
+  $('#utilSoc').innerHTML = socLinks();
+  $('#footSoc').innerHTML = socLinks().replace(/<a /g, '<a style="display:grid;place-items:center;width:34px;height:34px;border-radius:50%;border:1px solid var(--board-line);color:#CDEBEA" ');
+  $('#mailTxt').textContent = SITE.email;
+  $('#mailTxt2').innerHTML = '<b>' + esc(SITE.email) + '</b>';
+  $('#wmailTxt').textContent = SITE.email;
+  $('#nEdition').textContent = 'Edición del ' + SITE.edicion;
+  $('#ytAll').href = SITE.youtube;
+  $('#mailCopy').addEventListener('click', e => copyText(SITE.email, e.currentTarget, $('#mailTxt')));
+  $('#wmailCopy').addEventListener('click', e => copyText(SITE.email, e.currentTarget, $('#wmailTxt')));
+}
+
+/* ============ Destinos ============ */
+const FEATURED = DEST.filter(d => d.featured);
+function chipFor(d) { return '<a class="chip" href="#pais-' + d.slug + '">' + flag(d.code) + d.name + '</a>'; }
+function renderDestinos() {
+  $('#heroChips').innerHTML = FEATURED.map(chipFor).join('');
+  $('#dgrid').innerHTML = FEATURED.map(d =>
+    '<a class="dcard" href="#pais-' + d.slug + '" style="--c1:' + d.c1 + ';--c2:' + d.c2 + '"><span class="art-wrap">' + sceneSVG(d.code) + (d.photo ? '<img class="ph" alt="" loading="lazy" src="' + d.photo + '">' : '') + '</span>' +
+    '<span class="dc-flag">' + flag(d.code, true) + '</span>' +
+    '<span class="dc-body"><h3>' + d.name + '</h3><p>' + esc(d.tagline) + '</p><span class="badge">' + esc(d.badge) + '</span></span></a>').join('');
+  $('#moreChips').innerHTML = DEST.filter(d => !d.featured).map(chipFor).join('');
+}
+
+/* ============ Tickets de descuento ============ */
+function ticketHTML(p) {
+  return '<article class="tix"><div class="tix-main"><span class="k">' + esc(p.kind) + '</span><h3>' + esc(p.name) + '</h3><p>' + esc(p.blurb) + '</p>' +
+    '<a class="btn btn-primary btn-sm" href="' + p.url + '" target="_blank" rel="noopener">' + esc(p.cta) + ' ' + ICON.arrow + '</a></div>' +
+    '<div class="tix-stub"><div class="code"><small>Código</small><b>' + esc(p.code) + '</b>' + (p.off ? '<em>' + esc(p.off) + '</em>' : '') + '</div>' +
+    '<button type="button" class="btn btn-ghost btn-sm" data-copy="' + esc(p.code) + '">Copiar código</button></div></article>';
+}
+function bindCopy(root) {
+  $$('[data-copy]', root).forEach(b => b.addEventListener('click', () => copyText(b.dataset.copy, b, b.closest('.tix-stub').querySelector('b'))));
+}
+function renderTickets() {
+  $('#tgrid').innerHTML = PARTNERS.map(ticketHTML).join('');
+  bindCopy($('#tgrid'));
+}
+
+/* ============ News ============ */
+const NDUR = 9500;
+let ni = 0, nElapsed = 0, nHold = false, nPaused = false, nLast = performance.now(), railEls = [];
+ICON.pause = '<svg class="ic" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></svg>';
+function showNews(i) {
+  ni = (i + NEWS.length) % NEWS.length; nElapsed = 0;
+  const n = NEWS[ni], art = $('#scArt'), low = $('#scLower'), tag = $('#scTag');
+  [art, low, tag].forEach(el => { el.style.animation = 'none'; void el.offsetWidth; el.style.animation = ''; });
+  art.innerHTML = sceneSVG(n.c);
+  tag.className = 'brk nt-' + n.cat; tag.textContent = n.tag;
+  $('#scPlace').innerHTML = (n.c ? flag(n.c) : ICON.plane) + esc(n.place || placeName(n.c) || 'Viajes');
+  $('#scHead').textContent = n.t; $('#scText').textContent = n.x; $('#scWhen').textContent = n.when;
+  $('#scSrc').innerHTML = n.src ? '<a href="' + n.src.u + '" target="_blank" rel="noopener">Fuente: ' + esc(n.src.l) + '</a>' : '';
+  $('#stCnt').textContent = (ni + 1) + ' / ' + NEWS.length;
+  railEls.forEach((r, j) => { r.classList.toggle('on', j === ni); r.setAttribute('aria-current', String(j === ni)); });
+  const r = railEls[ni], rail = $('#rail');
+  if (r) {
+    const rr = r.getBoundingClientRect(), bb = rail.getBoundingClientRect();
+    if (rr.top < bb.top || rr.bottom > bb.bottom) rail.scrollTo({ top: rail.scrollTop + (rr.top - bb.top) - 6, behavior: RM.matches ? 'auto' : 'smooth' });
+  }
+}
+function setPlay() {
+  const p = $('#nPlay');
+  p.innerHTML = nPaused ? ICON.play : ICON.pause;
+  p.setAttribute('aria-label', nPaused ? 'Seguir' : 'Pausar');
+  p.setAttribute('aria-pressed', String(nPaused));
+}
+function initNoticiero() {
+  $('#rail').innerHTML = NEWS.map((n, j) => '<li><button type="button" class="ri" data-i="' + j + '"><span class="ri-ic">' + (n.c ? flag(n.c) : ICON.plane) + '</span><span><small>' + esc(n.tag) + '</small><span class="t">' + esc(n.t) + '</span></span></button></li>').join('');
+  railEls = $$('.ri', $('#rail'));
+  railEls.forEach((b, j) => b.addEventListener('click', () => showNews(j)));
+  nPaused = RM.matches;
+  setPlay(); showNews(0);
+  $('#nPrev').addEventListener('click', () => showNews(ni - 1));
+  $('#nNext').addEventListener('click', () => showNews(ni + 1));
+  $('#nPlay').addEventListener('click', () => { nPaused = !nPaused; setPlay(); });
+  const box = $('.nwrap');
+  ['mouseenter', 'focusin'].forEach(ev => box.addEventListener(ev, () => { nHold = true; }));
+  ['mouseleave', 'focusout'].forEach(ev => box.addEventListener(ev, () => { nHold = false; }));
+  function loop(now) {
+    const dt = Math.min(now - nLast, 100); nLast = now;
+    if (!nHold && !nPaused && !document.hidden) {
+      nElapsed += dt;
+      if (nElapsed >= NDUR) showNews(ni + 1);
+      else $('#scBar').style.width = (nElapsed / NDUR * 100) + '%';
+    }
+    if (nHold || nPaused) { /* la barra queda donde está */ }
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+}
+function renderTicker() {
+  const one = NEWS.map(n => '<span class="tk-item">' + (n.c ? flag(n.c) : '') + '<b>' + esc(n.tag.toUpperCase()) + '</b>' + esc(n.t) + '</span>').join('');
+  $('#tkTrack').innerHTML = one + one;
+}
+
+/* ============ Imágenes con respaldo ============ */
+function onImg(e) {
+  const t = e.target;
+  if (!(t instanceof HTMLImageElement) || !t.classList.contains('ph')) return;
+  const bad = e.type === 'error' || t.naturalWidth <= 120;
+  if (!bad) { t.classList.add('ok'); return; }
+  if (t.dataset.big === '1' && !t.dataset.fb) { t.dataset.fb = '1'; t.src = t.src.replace('maxresdefault', 'mqdefault'); return; }
+  t.remove();
+}
+document.addEventListener('load', onImg, true);
+document.addEventListener('error', onImg, true);
+
+/* ============ Videos ============ */
+let vCountry = 'todos', vShown = 6;
+function thumbHTML(v, big) {
+  if (!SITE.miniaturas) return '';
+  return '<img class="ph" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-big="' + (big ? 1 : 0) + '" src="https://i.ytimg.com/vi/' + v.id + (big ? '/maxresdefault.jpg' : '/mqdefault.jpg') + '">';
+}
+function vcard(v, big) {
+  const h = HUE[v.c] || ['#12b5b0', '#0a4a67'];
+  return '<a class="vcard' + (big ? ' big' : '') + '" href="' + ytUrl(v.id) + '" target="_blank" rel="noopener">' +
+    '<span class="vthumb" style="--c1:' + h[0] + ';--c2:' + h[1] + '"><span class="art-wrap">' + sceneSVG(v.c) + '</span>' + thumbHTML(v, big) + '<span class="vcc">' + flag(v.c) + esc(placeName(v.c)) + '</span>' +
+    '<span class="vplay">' + ICON.play + '</span><span class="vdur">' + v.m + '</span></span><h3>' + esc(v.t) + '</h3></a>';
+}
+function renderVideos() {
+  const codes = [];
+  VIDEOS.forEach(v => { if (!codes.includes(v.c)) codes.push(v.c); });
+  $('#vChips').innerHTML = '<button type="button" class="chip txt" data-c="todos" aria-pressed="' + (vCountry === 'todos') + '">Todos</button>' +
+    codes.map(c => '<button type="button" class="chip" data-c="' + c + '" aria-pressed="' + (vCountry === c) + '">' + flag(c) + placeName(c) + '</button>').join('');
+  $$('.chip', $('#vChips')).forEach(b => b.addEventListener('click', () => { vCountry = b.dataset.c; vShown = 6; renderVideos(); }));
+  const list = VIDEOS.filter(v => vCountry === 'todos' || v.c === vCountry);
+  const top = vCountry === 'todos' ? list.find(v => v.top) : null;
+  const rest = list.filter(v => v !== top);
+  const first = vCountry === 'todos' ? rest.slice(0, 2) : [];
+  $('#vTop').innerHTML = top ? vcard(top, true) + '<div class="vgrid" style="grid-template-columns:1fr">' + first.map(v => vcard(v)).join('') + '</div>' : '';
+  $('#vTop').style.display = top ? '' : 'none';
+  const grid = vCountry === 'todos' ? rest.slice(2) : rest;
+  $('#vGrid').innerHTML = grid.slice(0, vShown).map(v => vcard(v)).join('');
+  $('#vMore').hidden = grid.length <= vShown;
+}
+function renderSocs() {
+  const S = [
+    ['YouTube', ICON.yt, '@MasMundok', 'Guías completas de cada destino, con precios, rutas y consejos.', SITE.youtube, 'Ver el canal'],
+    ['TikTok', ICON.tt, '@masmundok', 'Clips cortos con lo que no podés perderte en cada lugar.', SITE.tiktok, 'Seguir en TikTok'],
+    ['Instagram', ICON.ig, '@masmundok', 'Reels, historias y tips para viajar mejor y más barato.', SITE.instagram, 'Seguir en Instagram']
+  ];
+  $('#socs').innerHTML = S.map(s => '<article class="soc-card"><span class="ico">' + s[1] + '</span><h3>' + s[0] + '</h3><span class="h">' + s[2] + '</span><p>' + s[3] + '</p><a class="btn btn-primary btn-sm" href="' + s[4] + '" target="_blank" rel="noopener">' + s[5] + '</a></article>').join('');
+}
+
+/* ============ Trabajá con nosotros ============ */
+function composeMsg() {
+  const n = $('#wn').value.trim() || '[tu nombre]';
+  const b = $('#wb').value.trim() || '[tu marca]';
+  const c = $('#wc').value.trim() || '[tu correo o Instagram]';
+  const m = $('#wm').value.trim() || '[contanos qué ofrecés, dónde y en qué fechas]';
+  const body = 'Hola Yesi y Pablo, soy ' + n + ' de ' + b + '.\nQuiero hablar sobre: ' + $('#wt').value + '.\n\n' + m + '\n\nPueden responderme en: ' + c + '\n\n¡Gracias!';
+  $('#wout').textContent = body;
+  $('#wmail').href = 'mailto:' + SITE.email + '?subject=' + encodeURIComponent('Propuesta para Masmundok: ' + b) + '&body=' + encodeURIComponent(body);
+  return body;
+}
+async function sendForm(e) {
+  e.preventDefault();
+  const st = $('#wstat'), btn = $('#wsend');
+  if ($('#wh').value) return;
+  const n = $('#wn').value.trim(), c = $('#wc').value.trim(), m = $('#wm').value.trim(), b = $('#wb').value.trim();
+  if (!n || !c || !m) { st.className = 'fstat err'; st.textContent = 'Completá tu nombre, cómo responderte y tu mensaje.'; return; }
+  const body = composeMsg();
+  btn.disabled = true; st.className = 'fstat'; st.textContent = 'Enviando…';
+  let ok = false;
+  if (SITE.formEndpoint) {
+    try {
+      const r = await fetch(SITE.formEndpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ nombre: n, marca: b, contacto: c, tema: $('#wt').value, mensaje: m, _subject: 'Propuesta para Masmundok: ' + (b || n), _template: 'table', _captcha: 'false' }) });
+      const j = await r.json().catch(() => ({}));
+      ok = r.ok && (j.success === true || j.success === 'true');
+    } catch (err) { ok = false; }
+  }
+  btn.disabled = false;
+  if (ok) {
+    st.className = 'fstat ok'; st.textContent = '¡Listo! Recibimos tu propuesta y te respondemos pronto.';
+    $('#wout').hidden = true; $('#wfallback').hidden = true; $('#wform').reset();
+    try { setPose('cheer', 3200); } catch (er) {}
+  } else {
+    st.className = 'fstat err'; st.textContent = 'No pudimos enviarlo desde acá. Copiá el mensaje y mandalo a ' + SITE.email + '.';
+    $('#wout').hidden = false; $('#wfallback').hidden = false;
+  }
+}
+function initForm() {
+  ['wn', 'wb', 'wc', 'wt', 'wm'].forEach(id => $('#' + id).addEventListener('input', composeMsg));
+  $('#wform').addEventListener('submit', sendForm);
+  $('#wcopy').addEventListener('click', e => copyText(composeMsg(), e.currentTarget, $('#wout')));
+  composeMsg();
+}
+
+/* ============ Asesoría, "¿Te sirvió?" y apoyo ============ */
+function renderCTA() {
+  $('#ctaBtns').innerHTML =
+    '<a class="btn btn-dark" href="' + SITE.instagram + '" target="_blank" rel="noopener">Escribinos en Instagram</a>' +
+    '<a class="btn btn-ghost" href="' + SITE.tiktok + '" target="_blank" rel="noopener">TikTok</a>' +
+    '<a class="btn btn-ghost" href="' + SITE.youtube + '" target="_blank" rel="noopener">YouTube</a>' +
+    '<button type="button" class="btn btn-ghost" data-mm>Preguntale a Mundito</button>';
+  $('#ctaBtns').addEventListener('click', e => { if (e.target.closest('[data-mm]')) window.openMundito && window.openMundito(); });
+  $('#ctaArt').innerHTML = sceneSVG('mundo');
+}
+function helpHTML() {
+  return '<div class="help-grid"><div class="fb"><span class="eyebrow">Tu opinión cuenta</span><h2>¿Te sirvió esta información?</h2>' +
+    '<p>Contanos y la seguimos mejorando.</p><div class="fb-btns"><button type="button" class="btn btn-primary" data-fb="si">Sí, me sirvió</button><button type="button" class="btn btn-ghost" data-fb="no">Le falta algo</button></div><p class="fb-msg" role="status" aria-live="polite"></p></div>' +
+    '<div class="sup"><h3>¡Siempre pueden contar con nosotros para lo que necesiten!</h3>' +
+    '<p>Si querés apoyar nuestro trabajo, invitanos un cafecito o aportá por PayPal.</p>' +
+    '<div class="sup-btns"><a class="btn btn-primary" href="' + SITE.cafecito + '" target="_blank" rel="noopener">Invitanos un cafecito</a><a class="btn btn-ghost" href="https://www.paypal.com/" target="_blank" rel="noopener">Abrir PayPal</a></div>' +
+    '<div class="mailrow"><span>PayPal</span><code>' + esc(SITE.paypal) + '</code><button type="button" class="btn btn-ghost btn-sm" data-pp>Copiar</button></div></div></div>';
+}
+function bindHelp(root, ctx) {
+  const msg = $('.fb-msg', root), key = 'mm-fb-' + ctx;
+  const say = v => {
+    msg.innerHTML = v === 'si'
+      ? '¡Gracias! Siempre pueden contar con nosotros para lo que necesiten.'
+      : 'Contanos qué te faltó en <a href="' + SITE.instagram + '" target="_blank" rel="noopener">Instagram</a> o preguntale a <a href="#" data-mm>Mundito</a>, y lo sumamos.';
+  };
+  try { const v = localStorage.getItem(key); if (v) say(v); } catch (e) {}
+  root.addEventListener('click', e => {
+    const f = e.target.closest('[data-fb]');
+    if (f) { say(f.dataset.fb); try { localStorage.setItem(key, f.dataset.fb); } catch (er) {} if (f.dataset.fb === 'si') { try { setPose('cheer', 3000); } catch (er) {} } return; }
+    const m = e.target.closest('[data-mm]'); if (m) { e.preventDefault(); window.openMundito && window.openMundito(); return; }
+    const p = e.target.closest('[data-pp]'); if (p) copyText(SITE.paypal, p, p.parentNode.querySelector('code'));
+  });
+}
+
+
+/* ============ Mundito: mascota viajera ============ */
+function mascotSVG() {
+  const arm = (side, sx) => {
+    const c = side === 'L' ? 'armL' : 'armR', f = side === 'L' ? 'foreL' : 'foreR';
+    return '<g class="m-' + c + '"><line x1="' + sx + '" y1="108" x2="' + sx + '" y2="138" stroke="#0B3A42" stroke-width="8" stroke-linecap="round"/>' +
+      '<g class="m-' + f + '"><line x1="' + sx + '" y1="138" x2="' + sx + '" y2="164" stroke="#0B3A42" stroke-width="8" stroke-linecap="round"/>' +
+      '<circle cx="' + sx + '" cy="166" r="8.5" fill="#fff" stroke="' + INK + '" stroke-width="2.6"/></g></g>';
+  };
+  const leg = (side, hx) => {
+    const fx = side === 'L' ? 80 : 120;
+    return '<g class="m-leg' + side + '"><line x1="' + hx + '" y1="146" x2="' + (hx + (side === 'L' ? -2 : 2)) + '" y2="198" stroke="#0B3A42" stroke-width="8" stroke-linecap="round"/>' +
+      '<line x1="' + (hx + (side === 'L' ? -2 : 2)) + '" y1="186" x2="' + (hx + (side === 'L' ? -2 : 2)) + '" y2="198" stroke="#fff" stroke-width="9" stroke-linecap="round"/>' +
+      '<ellipse cx="' + fx + '" cy="206" rx="16" ry="8.5" fill="#fff" stroke="' + INK + '" stroke-width="2.6"/><path d="M' + (fx - 15) + ' 208 H' + (fx + 15) + '" stroke="#D9482B" stroke-width="3.4" stroke-linecap="round"/></g>';
+  };
+  return '<svg class="mm" viewBox="0 0 200 232" data-pose="idle" role="img" aria-label="Mundito, el mundo viajero de Masmundok">' +
+    '<defs><clipPath id="mmClip"><circle cx="100" cy="98" r="52"/></clipPath></defs>' +
+    '<ellipse class="m-shadow" cx="100" cy="225" rx="46" ry="6" fill="#000" opacity=".2"/>' +
+    '<g class="m-all">' +
+      '<g class="m-pack"><rect x="64" y="58" width="100" height="92" rx="20" fill="#E4572E" stroke="' + INK + '" stroke-width="3"/><rect x="76" y="48" width="66" height="16" rx="8" fill="#3FCFCB" stroke="' + INK + '" stroke-width="3"/><rect x="132" y="98" width="30" height="38" rx="8" fill="#C7421F" stroke="' + INK + '" stroke-width="3"/></g>' +
+      leg('L', 86) + leg('R', 114) +
+      '<circle cx="100" cy="98" r="54" fill="#2AB3E3" stroke="' + INK + '" stroke-width="3.2"/>' +
+      '<g clip-path="url(#mmClip)"><path d="M52 78 C54 64 68 58 76 64 C82 70 72 78 70 88 C68 98 74 110 66 124 C56 122 50 108 50 96Z" fill="#6FD08C"/><path d="M126 68 C136 60 152 64 154 78 C156 92 144 96 140 106 C138 116 144 126 134 132 C124 126 128 112 130 100 C132 90 122 84 124 76Z" fill="#6FD08C"/><ellipse cx="100" cy="152" rx="42" ry="9" fill="#fff" opacity=".9"/><path d="M66 56 C80 46 100 44 118 48" stroke="#fff" stroke-opacity=".45" stroke-width="5" fill="none" stroke-linecap="round"/></g>' +
+      '<g transform="rotate(-6 100 50)"><path d="M64 52 C66 28 134 28 136 52Z" fill="#FFD25A" stroke="' + INK + '" stroke-width="3" stroke-linejoin="round"/><path d="M65 47 C80 52 120 52 135 47 L136 53 C120 58 80 58 64 53Z" fill="#D9482B" stroke="' + INK + '" stroke-width="2"/><ellipse cx="100" cy="54" rx="48" ry="9" fill="#FFC233" stroke="' + INK + '" stroke-width="3"/></g>' +
+      '<g class="m-brows" fill="none" stroke="' + INK + '" stroke-width="3.2" stroke-linecap="round"><path d="M75 76 Q85 71 95 75"/><path d="M105 75 Q115 71 125 76"/></g>' +
+      '<g class="m-eyes"><circle cx="85" cy="90" r="10" fill="#fff" stroke="' + INK + '" stroke-width="2.6"/><circle cx="115" cy="90" r="10" fill="#fff" stroke="' + INK + '" stroke-width="2.6"/>' +
+        '<g class="m-pupils"><circle cx="85" cy="91" r="4.6" fill="' + INK + '"/><circle cx="115" cy="91" r="4.6" fill="' + INK + '"/><circle cx="86.6" cy="89" r="1.5" fill="#fff"/><circle cx="116.6" cy="89" r="1.5" fill="#fff"/></g></g>' +
+      '<circle cx="73" cy="108" r="6" fill="#FF8FA3" opacity=".6"/><circle cx="127" cy="108" r="6" fill="#FF8FA3" opacity=".6"/>' +
+      '<path class="mo-smile" d="M88 111 Q100 123 112 111" fill="none" stroke="' + INK + '" stroke-width="3.6" stroke-linecap="round"/>' +
+      '<path class="mo-grin" d="M86 109 Q100 131 114 109Z" fill="#7A1F2B" stroke="' + INK + '" stroke-width="3" stroke-linejoin="round"/>' +
+      '<ellipse class="mo-o" cx="100" cy="117" rx="6" ry="7.5" fill="#7A1F2B" stroke="' + INK + '" stroke-width="3"/>' +
+      '<g class="m-cam"><rect x="78" y="119" width="44" height="28" rx="6" fill="#2D3E48" stroke="' + INK + '" stroke-width="3"/><rect x="90" y="112" width="16" height="9" rx="2" fill="#2D3E48" stroke="' + INK + '" stroke-width="3"/><rect x="111" y="123" width="7" height="5" rx="1.5" fill="#FFD25A"/><circle cx="100" cy="134" r="10.5" fill="#1B2A33" stroke="#8FE3DF" stroke-width="2.4"/><circle cx="100" cy="134" r="5.5" fill="#4AC8E8"/><circle cx="97.8" cy="131.8" r="1.8" fill="#fff"/></g>' +
+      '<polygon class="m-flash" points="100,134 108,112 112,132 134,126 116,140 132,158 108,146 100,170 94,146 70,158 86,140 66,126 90,132 92,112" fill="#fff" stroke="#FFD25A" stroke-width="2"/>' +
+      '<g class="m-map"><path d="M68 122 L84 127 L100 121 L116 127 L132 122 L132 150 L116 155 L100 149 L84 155 L68 150Z" fill="#FFF3C4" stroke="' + INK + '" stroke-width="2.6" stroke-linejoin="round"/><path d="M84 127V155M100 121V149M116 127V155" stroke="' + INK + '" stroke-opacity=".25" stroke-width="1.6"/><path d="M74 142 Q90 130 102 139 T124 134" fill="none" stroke="#D9482B" stroke-width="2.4" stroke-dasharray="4 4" stroke-linecap="round"/><circle cx="124" cy="134" r="4.2" fill="#D9482B" stroke="' + INK + '" stroke-width="1.6"/></g>' +
+      arm('L', 50) + arm('R', 150) +
+      '<path class="m-sweat" d="M160 54 C154 64 152 70 158 74 C164 76 168 70 160 54Z" fill="#8FE3F5" stroke="' + INK + '" stroke-width="2"/>' +
+      '<text class="m-q" x="26" y="48" font-family="Bricolage Grotesque,Trebuchet MS,sans-serif" font-weight="800" font-size="30" fill="#D9482B" stroke="#fff" stroke-width="1.2" paint-order="stroke">?!</text>' +
+      '<g class="m-spark" fill="#FFD25A" stroke="' + INK + '" stroke-width="1.6" stroke-linejoin="round"><path d="M22 70 l4 9 9 4 -9 4 -4 9 -4 -9 -9 -4 9 -4Z"/><path d="M176 40 l3 7 7 3 -7 3 -3 7 -3 -7 -7 -3 7 -3Z"/><path d="M168 130 l3 6 6 3 -6 3 -3 6 -3 -6 -6 -3 6 -3Z"/></g>' +
+    '</g></svg>';
+}
+
+const Mundito = { el: null, timer: null, auto: null };
+function setPose(p, hold) {
+  const el = Mundito.el; if (!el) return;
+  el.setAttribute('data-pose', p);
+  clearTimeout(Mundito.timer);
+  if (hold) Mundito.timer = setTimeout(() => el.setAttribute('data-pose', 'idle'), hold);
+}
+function poseLook(dx, dy) {
+  const el = Mundito.el; if (!el) return;
+  el.style.setProperty('--px', dx.toFixed(1) + 'px'); el.style.setProperty('--py', dy.toFixed(1) + 'px');
+}
+
+/* ============ Chat: respuestas con la información de esta página ============ */
+const Chat = { open: false, pending: null, busy: false, hist: [] };
+const TOPICS = [
+  ['apoyo', /cafecito|paypal|donar|donacion|apoyar|apoyo|invitar.* cafe/],
+  ['trabajo', /publicit|auspici|trabajar con|trabaja con|colaborac|colaborar con|propuesta|sponsor|canje|contratar|difundir|mi marca|nuestra marca|mi empresa/],
+  ['asesor', /asesor|armar (mi|el|un) viaje|planific|itinerario|ayuda con (mi|el) viaje|organizar (mi|el) viaje/],
+  ['equipaje', /power ?bank|bateria|cargador portatil|\bdron|drone|litio|valija|equipaje|cabina|bodega|maleta/],
+  ['multas', /multa|prohibid|ilegal|sancion|arrest|leyes|ley /],
+  ['tours', /\btours?\b|excursion|entradas|getyourguide|gyg/],
+  ['descuento', /codigo|descuento|cupon|holafly|esim|e-sim|\bchip\b|internet|datos moviles|assist|seguro|asistencia/],
+  ['ofertas', /vuelo|pasaje|aereo|oferta|paquete|promo(s|cion)? de/],
+  ['noticias', /noticia|novedad|ultimo momento|ultimas|que paso|actualidad|\bnews\b|cerro|abrio|reabrio/],
+  ['videos', /video|youtube|canal|reel|tiktok/],
+  ['visa', /visa|requisit|ingres|entrar|pasaporte|\bdni\b|document|papeles|migracion|permiso|tramite|etias|tdac|arrival|que necesito|tasa de/],
+  ['hacer', /que hacer|que visitar|visitar|conocer|lugares|imperdible|actividad|atraccion|recorrer|paseo|que ver/],
+  ['nohacer', /que no hacer|no hacer|evitar|errores|cuidado|peligr|estaf|seguridad/],
+  ['apps', /\bapps?\b|aplicacion|aplicaciones/],
+  ['consejos', /consejo|\btips?\b|recomend|truco|ahorrar|barato/],
+  ['idioma', /idioma|lengua|hablan|hablar|se habla/],
+  ['moneda', /moneda|plata|dinero|cambio|dolar|efectivo|pagar|tarjeta|propina|cuanto cuesta/],
+  ['religion', /religi|creenc|culto|rezar|templo/],
+  ['enchufe', /enchufe|adaptador|voltaje|corriente/],
+  ['epoca', /epoca|cuando ir|cuando viajar|mejor momento|clima|temporada|llueve|\bcalor\b|\bfrio\b/],
+  ['destinos', /destinos|paises|que paises|lista|donde puedo ir|tienen ficha/],
+  ['contacto', /contact|escribir|mail|correo|whatsapp|instagram|redes|hablar con|comunicar/],
+  ['quien', /quien(es)? son|quien sos|que sos|que haces|que podes|como funcion|ayuda/],
+  ['gracias', /gracias|genial|buenisimo|excelente|me sirvio|perfecto|crack|capo|joya|barbaro/],
+  ['saludo', /^(hola|holaa|buenas|buen dia|buenos dias|buenas tardes|buenas noches|hey|que tal|como va|ey)\b/]
+];
+const NEEDS_COUNTRY = ['visa', 'hacer', 'nohacer', 'apps', 'consejos', 'idioma', 'moneda', 'religion', 'enchufe', 'epoca'];
+const FACT_KEY = { idioma: 'Idioma', moneda: 'Moneda', religion: 'Religión', enchufe: 'Enchufe', epoca: 'Mejor época' };
+
+function findCountry(n) {
+  for (const d of DEST) {
+    const toks = [d.slug, norm(d.name).replace(/\(.*\)/, '').trim(), norm(d.name).replace(/.*\((.*)\)/, '$1')];
+    if (toks.some(t => t && new RegExp('(^|[^a-z])' + t + '([^a-z]|$)').test(n))) return d;
+  }
+  for (const k of Object.keys(ALIAS)) if (new RegExp('(^|[^a-z])' + k + '([^a-z]|$)').test(n)) return DEST.find(d => d.slug === ALIAS[k]);
+  return null;
+}
+function findTopic(n) { for (const t of TOPICS) if (t[1].test(n)) return t[0]; return null; }
+const ul = a => '<ul>' + a.map(x => '<li>' + x + '</li>').join('') + '</ul>';
+const lnk = (u, t, ext) => '<a href="' + u + '"' + (ext ? ' target="_blank" rel="noopener"' : '') + '>' + esc(t) + '</a>';
+const countryChips = () => FEATURED.slice(0, 5).map(d => d.name);
+
+function answer(q) {
+  const n = norm(q);
+  let d = findCountry(n), topic = findTopic(n);
+  if (d && !topic && Chat.pending) { topic = Chat.pending; }
+  if (!d && /^(si|dale|ok|okey|claro)$/.test(n) && Chat.pending) return { h: '<p>Decime de qué país y te cuento.</p>', chips: countryChips(), pose: 'map' };
+  if (topic && NEEDS_COUNTRY.indexOf(topic) >= 0 && !d) {
+    Chat.pending = topic;
+    return { h: '<p>¿De qué país querés saber? Tengo ficha de ' + DEST.length + ' destinos.</p>', chips: countryChips().concat(['Ver todos los destinos']), pose: 'map' };
+  }
+  if (topic && NEEDS_COUNTRY.indexOf(topic) >= 0) Chat.pending = null;
+  const fl = d ? '<span class="mm-fl">' + flag(d.code) + '</span>' : '';
+  const ficha = d ? '<p>' + lnk('#pais-' + d.slug, 'Ver la ficha completa de ' + d.name) + '</p>' : '';
+  switch (topic) {
+    case 'visa': {
+      const r = d.req;
+      return { pose: 'photo', chips: ['Qué hacer en ' + d.name, 'Apps útiles en ' + d.name, 'Códigos de descuento'],
+        h: '<p>' + fl + '<b>' + esc(d.name) + ' con pasaporte argentino:</b> ' + esc(r.headline) + '.</p>' + ul(r.items.slice(0, 4).map(esc)) +
+          '<p class="mm-sm">' + (r.verified ? 'Fuentes revisadas el 2/11/2026.' : 'Información general: confirmá en el consulado o con tu aerolínea antes de viajar.') + '</p>' + ficha };
+    }
+    case 'hacer': return { pose: 'map', chips: ['Qué no hacer en ' + d.name, 'Tours con descuento'], h: '<p>' + fl + '<b>Qué hacer en ' + esc(d.name) + ':</b></p>' + ul(d.hacer.slice(0, 5).map(esc)) + ficha };
+    case 'nohacer': return { pose: 'headgrab', chips: ['Qué hacer en ' + d.name, 'Requisitos de ' + d.name], h: '<p>' + fl + '<b>Qué no hacer en ' + esc(d.name) + ':</b></p>' + ul(d.noHacer.map(esc)) + ficha };
+    case 'apps': return { pose: 'photo', chips: ['Consejos para ' + d.name, 'Internet con eSIM'], h: '<p>' + fl + '<b>Apps útiles en ' + esc(d.name) + ':</b></p>' + ul(d.apps.map(a => '<b>' + esc(a[0]) + '</b>: ' + esc(a[1]))) + ficha };
+    case 'consejos': return { pose: 'wave', chips: ['Requisitos de ' + d.name, 'Qué no hacer en ' + d.name], h: '<p>' + fl + '<b>Consejos para ' + esc(d.name) + ':</b></p>' + ul(d.tips.map(esc)) + ficha };
+    case 'idioma': case 'moneda': case 'religion': case 'enchufe': case 'epoca': {
+      const k = FACT_KEY[topic], names = { idioma: 'Idioma', moneda: 'Moneda', religion: 'Religión', enchufe: 'Enchufe', epoca: 'Mejor época para ir' };
+      return { pose: 'photo', chips: ['Requisitos de ' + d.name, 'Qué hacer en ' + d.name], h: '<p>' + fl + '<b>' + names[topic] + ' en ' + esc(d.name) + ':</b> ' + esc(d.facts[k]) + '.</p>' + ficha };
+    }
+    case 'equipaje': {
+      const pb = /power|bateria|cargador|litio/.test(n), dr = /dron/.test(n);
+      const items = NEWS.filter(x => x.cat === 'equipaje' && (pb === dr ? true : (pb ? /Power/.test(x.t) : /Dron/i.test(x.t))));
+      return { pose: 'photo', chips: ['Multas y reglas', 'Últimas noticias'], h: items.map(x => '<p><b>' + esc(x.t) + '</b><br>' + esc(x.x) + '</p>').join('') + '<p class="mm-sm">Cada aerolínea puede tener reglas propias: confirmalo antes de volar.</p>' };
+    }
+    case 'multas': {
+      if (d) return { pose: 'headgrab', chips: ['Requisitos de ' + d.name, 'Qué hacer en ' + d.name], h: '<p>' + fl + '<b>Lo que no tenés que hacer en ' + esc(d.name) + ':</b></p>' + ul(d.noHacer.map(esc)) + ficha };
+      const m = NEWS.filter(x => x.cat === 'reglas').slice(0, 3);
+      return { pose: 'headgrab', chips: ['Qué no hacer en Singapur', 'Qué no hacer en Tailandia'], h: m.map(x => '<p><b>' + esc(x.t) + '</b><br>' + esc(x.x) + '</p>').join('') + '<p class="mm-sm">Decime un país y te cuento qué evitar.</p>' };
+    }
+    case 'tours': {
+      const g = PARTNERS.find(p => p.name === 'GetYourGuide');
+      return { pose: 'map', chips: ['Códigos de descuento', d ? 'Qué hacer en ' + d.name : 'Qué hacer en Tailandia'], h: '<p><b>Tours y entradas con descuento:</b> usá el código <b>' + esc(g.code) + '</b> (' + esc(g.off) + ') en GetYourGuide.</p><p>' + lnk(g.url, 'Instalar la app de GetYourGuide', 1) + '</p>' + (d ? ul(d.hacer.slice(0, 3).map(esc)) : '') };
+    }
+    case 'descuento': {
+      let list = PARTNERS;
+      if (/esim|e-sim|chip|internet|datos/.test(n)) list = PARTNERS.filter(p => p.name === 'Holafly');
+      else if (/seguro|assist|asistencia/.test(n)) list = PARTNERS.filter(p => p.name === 'Assist 365');
+      return { pose: 'cheer', chips: ['Tours con descuento', 'Últimas noticias'], h: '<p><b>Nuestros códigos:</b></p>' + ul(list.map(p => '<b>' + esc(p.name) + '</b> (' + esc(p.kind) + '): código <b>' + esc(p.code) + '</b>' + (p.off ? ' · ' + esc(p.off) : '') + '. ' + lnk(p.url, p.cta, 1))) + '<p>' + lnk('#descuentos', 'Ver la sección de descuentos') + '</p>' };
+    }
+    case 'ofertas': {
+      const o = NEWS.filter(x => x.cat === 'oferta');
+      return { pose: 'cheer', chips: ['Códigos de descuento', 'Últimas noticias'], h: o.map(x => '<p><b>' + esc(x.t) + '</b><br>' + esc(x.x) + (x.src ? ' ' + lnk(x.src.u, 'Fuente: ' + x.src.l, 1) : '') + '</p>').join('') + '<p class="mm-sm">Los precios cambian rápido: confirmalos antes de reservar.</p>' };
+    }
+    case 'noticias': {
+      const list = d ? NEWS.filter(x => x.c === d.code) : NEWS.slice(0, 4);
+      return { pose: 'photo', chips: ['Ofertas de vuelos', 'Power bank y drones'], h: '<p><b>' + (d ? 'Noticias de ' + esc(d.name) : 'Lo último en News') + ':</b></p>' + (list.length ? ul(list.map(x => '<b>' + esc(x.tag) + '</b>: ' + esc(x.t))) : '<p>Todavía no hay noticias sobre ' + esc(d.name) + '.</p>') + '<p>' + lnk('#noticias', 'Ir a la sección News') + '</p>' };
+    }
+    case 'videos': {
+      const v = d ? VIDEOS.filter(x => x.c === d.code).slice(0, 3) : [];
+      return { pose: 'wave', chips: ['Códigos de descuento'], h: v.length ? '<p><b>Nuestros videos de ' + esc(d.name) + ':</b></p>' + ul(v.map(x => lnk(ytUrl(x.id), x.t, 1))) : '<p>Tenemos guías de cada destino en YouTube.</p><p>' + lnk(SITE.youtube, 'Ver el canal', 1) + ' · ' + lnk('#videos', 'Ver los videos en esta página') + '</p>' };
+    }
+    case 'destinos': return { pose: 'map', chips: [], h: '<p><b>Destinos con ficha:</b></p><p class="mm-tags">' + DEST.map(x => '<a href="#pais-' + x.slug + '">' + flag(x.code) + esc(x.name) + '</a>').join('') + '</p>' };
+    case 'apoyo': return { pose: 'cheer', chips: [], h: '<p>¡Gracias por querer apoyarnos! Podés invitarnos un ' + lnk(SITE.cafecito, 'cafecito', 1) + ' o enviar tu aporte por PayPal a <b>' + esc(SITE.paypal) + '</b>.</p>' };
+    case 'trabajo': return { pose: 'wave', chips: [], h: '<p>Para publicitar o colaborar, completá el formulario de ' + lnk('#trabaja', 'Trabajá con nosotros') + ' o escribinos a <b>' + esc(SITE.email) + '</b>.</p>' };
+    case 'asesor': case 'contacto': return { pose: 'wave', chips: ['Requisitos de un país', 'Códigos de descuento'], h: '<p>¿Querés que te asesoremos en tu próximo viaje? Escribinos en nuestras redes y te asesoramos: ' + lnk(SITE.instagram, 'Instagram', 1) + ' · ' + lnk(SITE.tiktok, 'TikTok', 1) + ' · ' + lnk(SITE.youtube, 'YouTube', 1) + '.</p><p>También por correo: <b>' + esc(SITE.email) + '</b>.</p>' };
+    case 'quien': return { pose: 'wave', chips: ['¿Qué visa necesito?', 'Últimas noticias', 'Códigos de descuento'], h: '<p>Soy Mundito, la mascota viajera de Masmundok. Te cuento requisitos de entrada, qué hacer y qué no, apps, idioma, moneda, equipaje, descuentos y noticias de los destinos que tenemos cargados.</p>' };
+    case 'gracias': return { pose: 'cheer', chips: ['Códigos de descuento', 'Apoyar con un cafecito'], h: '<p>¡De nada! Siempre pueden contar con nosotros para lo que necesiten.</p>' };
+    case 'saludo': return { pose: 'wave', chips: ['¿Qué visa necesito?', 'Últimas noticias', 'Códigos de descuento'], h: '<p>¡Hola! Soy Mundito. ¿A dónde viajás?</p>' };
+  }
+  if (d) {
+    return { pose: 'photo', chips: ['Requisitos de ' + d.name, 'Qué hacer en ' + d.name, 'Apps útiles en ' + d.name, 'Qué no hacer en ' + d.name],
+      h: '<p>' + fl + '<b>' + esc(d.name) + '</b>: ' + esc(d.tagline) + '. Con pasaporte argentino: ' + esc(d.req.headline) + '.</p>' + ficha };
+  }
+  return { pose: 'headgrab', chips: ['¿Qué visa necesito?', 'Últimas noticias', 'Asesoría para mi viaje'],
+    h: '<p>Eso todavía no lo tengo cargado. Escribinos en nuestras redes y te asesoramos: ' + lnk(SITE.instagram, 'Instagram', 1) + ' · ' + lnk(SITE.tiktok, 'TikTok', 1) + '.</p>' };
+}
+
+/* ============ Chat: interfaz ============ */
+function mmAdd(role, html) {
+  const box = $('#mmMsgs'), m = document.createElement('div');
+  m.className = 'mm-msg ' + role; m.innerHTML = html;
+  box.appendChild(m); box.scrollTop = box.scrollHeight; return m;
+}
+function mmChips(list) {
+  $('#mmChips').innerHTML = (list || []).slice(0, 5).map(c => '<button type="button" class="mm-chip">' + esc(c) + '</button>').join('');
+}
+async function remoteAnswer(q) {
+  if (!SITE.chatEndpoint) return null;
+  try {
+    const ctx = DEST.map(d => d.name + ': ' + d.req.headline).join('; ') + '. Códigos: ' + PARTNERS.map(p => p.name + ' ' + p.code).join(', ');
+    const r = await fetch(SITE.chatEndpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ question: q, history: Chat.hist.slice(-6), context: ctx }) });
+    if (!r.ok) return null;
+    const j = await r.json();
+    return j && j.answer ? '<p>' + esc(j.answer).replace(/\n+/g, '</p><p>') + '</p>' : null;
+  } catch (e) { return null; }
+}
+async function mmAsk(q) {
+  q = q.trim(); if (!q || Chat.busy) return;
+  Chat.busy = true; Chat.hist.push({ role: 'user', content: q });
+  mmAdd('me', esc(q)); mmChips([]); $('#mmIn').value = '';
+  const typing = mmAdd('bot typing', '<i></i><i></i><i></i>');
+  setPose('map');
+  const t0 = Date.now();
+  let a = answer(q), remote = null;
+  if (SITE.chatEndpoint) remote = await remoteAnswer(q);
+  const wait = Math.max(0, 650 - (Date.now() - t0));
+  setTimeout(() => {
+    typing.remove();
+    mmAdd('bot', remote || a.h);
+    Chat.hist.push({ role: 'assistant', content: (remote || a.h).replace(/<[^>]+>/g, ' ') });
+    mmChips(a.chips); setPose(a.pose || 'idle', a.pose === 'wave' || !a.pose ? 2600 : 3600);
+    Chat.busy = false;
+  }, wait);
+}
+function mmOpen(on) {
+  Chat.open = on;
+  const panel = $('#mmPanel'), fab = $('#mmFab');
+  panel.hidden = !on; fab.hidden = on; $('#mmTease').hidden = true;
+  const slot = on ? $('#mmHeadSlot') : $('#mmFabSlot');
+  slot.appendChild(Mundito.el);
+  if (on) {
+    if (!$('#mmMsgs').children.length) {
+      mmAdd('bot', '<p>¡Hola! Soy <b>Mundito</b>, tu guía de viaje. Preguntame por requisitos, qué hacer, apps, equipaje, descuentos o noticias de nuestros destinos.</p>');
+      mmChips(['¿Qué visa necesito?', 'Últimas noticias', 'Códigos de descuento', 'Power bank y drones', 'Asesoría para mi viaje']);
+    }
+    setPose('wave', 2400); setTimeout(() => $('#mmIn').focus(), 60);
+  } else { fab.focus(); setPose('idle'); }
+}
+function initChat() {
+  const root = document.createElement('div'); root.id = 'mm-root';
+  root.innerHTML =
+    '<button type="button" class="mm-fab" id="mmFab" aria-label="Abrir el chat con Mundito, tu guía de viaje"><span class="mm-slot" id="mmFabSlot"></span></button>' +
+    '<div class="mm-tease" id="mmTease" hidden><button type="button" class="mm-x" id="mmTeaseX" aria-label="Cerrar el aviso">×</button><b>¡Hola, soy Mundito!</b><span>¿Te ayudo con tu próximo viaje?</span></div>' +
+    '<section class="mm-panel" id="mmPanel" role="dialog" aria-label="Chat con Mundito" hidden>' +
+      '<header class="mm-head"><span class="mm-slot big" id="mmHeadSlot"></span><div class="mm-ttl"><b>Mundito</b><small>Tu guía de viaje de Masmundok</small></div><button type="button" class="mm-close" id="mmClose" aria-label="Cerrar el chat">×</button></header>' +
+      '<div class="mm-msgs" id="mmMsgs" aria-live="polite"></div>' +
+      '<div class="mm-chips" id="mmChips"></div>' +
+      '<form class="mm-form" id="mmForm"><label class="sr" for="mmIn">Tu pregunta</label><input id="mmIn" type="text" autocomplete="off" maxlength="200" placeholder="Preguntame por un país, visas o descuentos"><button class="btn btn-primary" type="submit">Enviar</button></form>' +
+      '<p class="mm-note">Respondo con la información de esta página. Confirmá siempre en fuentes oficiales antes de viajar.</p>' +
+    '</section>';
+  document.body.appendChild(root);
+  const wrap = document.createElement('div'); wrap.innerHTML = mascotSVG(); Mundito.el = wrap.firstChild;
+  $('#mmFabSlot').appendChild(Mundito.el);
+  $('#mmFab').addEventListener('click', () => mmOpen(true));
+  $('#mmClose').addEventListener('click', () => mmOpen(false));
+  $('#mmTeaseX').addEventListener('click', () => { $('#mmTease').hidden = true; });
+  $('#mmForm').addEventListener('submit', e => { e.preventDefault(); mmAsk($('#mmIn').value); });
+  $('#mmChips').addEventListener('click', e => { const b = e.target.closest('.mm-chip'); if (b) mmAsk(b.textContent); });
+  $('#mmMsgs').addEventListener('click', e => { const a = e.target.closest('a[href^="#"]'); if (a && window.innerWidth < 700) mmOpen(false); });
+  $('#mmHeadSlot').addEventListener('click', () => { const p = ['photo', 'map', 'headgrab', 'cheer', 'wave']; setPose(p[Math.floor(Math.random() * p.length)], 2600); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && Chat.open) mmOpen(false); });
+  document.addEventListener('pointermove', e => {
+    if (!Mundito.el || RM.matches) return;
+    const r = Mundito.el.getBoundingClientRect(); if (!r.width) return;
+    const dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height * .4), m = Math.hypot(dx, dy) || 1;
+    poseLook(dx / m * 3.4, dy / m * 2.6);
+  }, { passive: true });
+  if (!RM.matches) {
+    setTimeout(() => { if (!Chat.open) setPose('wave', 2400); }, 900);
+    setInterval(() => {
+      if (Chat.open || document.hidden) return;
+      const p = ['photo', 'map', 'wave', 'headgrab', 'cheer'];
+      setPose(p[Math.floor(Math.random() * p.length)], 2400);
+    }, 9000);
+    let seen = false; try { seen = sessionStorage.getItem('mm-tease') === '1'; } catch (e) {}
+    if (!seen) setTimeout(() => {
+      if (Chat.open) return;
+      $('#mmTease').hidden = false; try { sessionStorage.setItem('mm-tease', '1'); } catch (e) {}
+      setTimeout(() => { $('#mmTease').hidden = true; }, 9000);
+    }, 4500);
+  }
+  window.openMundito = () => mmOpen(true);
+}
+
+
+/* ============ Vista de país ============ */
+function liList(arr, cls) { return '<ul class="' + cls + '">' + arr.map(t => '<li>' + esc(t) + '</li>').join('') + '</ul>'; }
+function renderCountry(d) {
+  const facts = Object.keys(d.facts).map(k => '<div class="fx"><small>' + k + '</small><span>' + esc(d.facts[k]) + '</span></div>').join('');
+  const vids = VIDEOS.filter(v => v.c === d.code).slice(0, 6);
+  const r = d.req;
+  const gyg = PARTNERS.find(p => p.name === 'GetYourGuide');
+  const partners = [
+    Object.assign({}, PARTNERS[0], { kind:'Internet en ' + d.name, blurb:'Una eSIM para tener datos apenas aterrizás en ' + d.name + '.' }),
+    Object.assign({}, PARTNERS[1], { kind:'Seguro para ' + d.name }),
+    Object.assign({}, gyg, { kind:'Tours en ' + d.name, blurb:'Entradas y excursiones para ' + d.name + ' con descuento.' })
+  ];
+  const sel = DEST.map(x => '<option value="' + x.slug + '"' + (x.slug === d.slug ? ' selected' : '') + '>' + esc(x.name) + '</option>').join('');
+  const el = $('#view-country');
+  el.innerHTML =
+    '<section class="band cbanner" style="--c1:' + d.c1 + ';--c2:' + d.c2 + '"><span class="art-wrap">' + sceneSVG(d.code) + (d.photo ? '<img class="ph" alt="" src="' + d.photo + '">' : '') + '</span><div class="in">' +
+      '<a class="back" href="#destinos">' + ICON.back + ' Todos los destinos</a>' +
+      '<div class="cb-main">' + flag(d.code, true) + '<div><h1>' + esc(d.name) + '</h1><p class="tg">' + esc(d.tagline) + '</p></div></div>' +
+      '<div class="jump"><label for="jumpSel">Ir a otro país</label><select id="jumpSel">' + sel + '</select></div>' +
+    '</div></section>' +
+    '<section class="band" style="padding-top:34px"><div class="in cgrid">' +
+      '<div class="card facts">' + facts + '</div>' +
+      '<section class="card req"><div class="rstamp ' + r.status + '">' + esc(r.stamp) + '<small>Pasaporte argentino</small></div><div>' +
+        '<h2>' + esc(r.headline) + '</h2>' +
+        '<p class="vbadge' + (r.verified ? ' y' : '') + '">' + (r.verified ? 'Fuentes revisadas el 2/11/2026' : 'Información general: confirmá antes de viajar') + '</p>' +
+        liList(r.items, 'chk') +
+        (r.src ? '<a class="src" href="' + r.src.u + '" target="_blank" rel="noopener">Fuente: ' + esc(r.src.l) + '</a>' : '') +
+      '</div></section>' +
+      '<aside class="partners" aria-label="Descuentos para ' + esc(d.name) + '"><div><p class="pt">Antes de salir</p><p class="psub">Códigos de nuestra comunidad para ' + esc(d.name) + '.</p></div>' + partners.map(ticketHTML).join('') +
+        '<p class="psub">Links de afiliado: no pagás de más.</p></aside>' +
+      '<div class="duo"><section class="card"><h2>Qué hacer</h2>' + liList(d.hacer, 'dot') + '</section>' +
+        '<section class="card"><h2>Qué no hacer</h2>' + liList(d.noHacer, 'dot dont') + '</section></div>' +
+      '<section class="card"><h2>Apps útiles</h2><ul class="apps">' + d.apps.map(a => '<li><span class="app-i">' + esc(a[0].charAt(0)) + '</span><div><b>' + esc(a[0]) + '</b><span>' + esc(a[1]) + '</span></div></li>').join('') + '</ul></section>' +
+      '<section class="card"><h2>Consejos</h2>' + liList(d.tips, 'dot') + '</section>' +
+      (vids.length ? '<section><h2 style="font:800 1.35rem/1.1 var(--f-display);margin-bottom:14px">Nuestros videos de ' + esc(d.name) + '</h2><div class="vgrid">' + vids.map(v => vcard(v)).join('') + '</div></section>' : '') +
+      '<p class="psub" style="max-width:70ch">La información de ingreso cambia con frecuencia. Confirmá siempre en el sitio oficial, tu aerolínea o el consulado antes de viajar.</p>' +
+    '</div></section>' +
+    '<section class="band help"><div class="in">' + helpHTML() + '</div></section>';
+  bindCopy(el);
+  bindHelp(el, 'pais');
+  $('#jumpSel').addEventListener('change', e => { location.hash = 'pais-' + e.target.value; });
+}
+
+/* ============ Buscador de países ============ */
+const ALIAS = { bali:'indonesia', ubud:'indonesia', bangkok:'tailandia', krabi:'tailandia', rio:'brasil', 'rio de janeiro':'brasil', iguazu:'brasil', pekin:'china', beijing:'china', shanghai:'china', tokio:'japon', kioto:'japon', cairo:'egipto', cusco:'peru', 'machu picchu':'peru', santiago:'chile', 'la paz':'bolivia', uyuni:'bolivia', oranjestad:'aruba' };
+let sel = -1, matches = [];
+function searchList(q) {
+  const n = norm(q);
+  if (!n) return [];
+  const a = ALIAS[n];
+  return DEST.filter(d => norm(d.name).includes(n) || d.slug.includes(n) || (a && d.slug === a) || Object.keys(ALIAS).some(k => k.startsWith(n) && ALIAS[k] === d.slug));
+}
+function drawResults(q) {
+  const box = $('#sres'), inp = $('#q');
+  matches = searchList(q); sel = matches.length ? 0 : -1;
+  if (!norm(q)) { box.hidden = true; inp.setAttribute('aria-expanded', 'false'); return; }
+  box.innerHTML = matches.length
+    ? matches.map((d, i) => '<li role="option" data-slug="' + d.slug + '" aria-selected="' + (i === 0) + '">' + flag(d.code) + '<span>' + esc(d.name) + '</span><small>' + esc(d.badge) + '</small></li>').join('')
+    : '<li class="none">Todavía no tenemos ficha de "' + esc(q) + '". Escribinos y la sumamos.</li>';
+  box.hidden = false; inp.setAttribute('aria-expanded', 'true');
+  $$('li[data-slug]', box).forEach(li => li.addEventListener('mousedown', e => { e.preventDefault(); go(li.dataset.slug); }));
+}
+function go(slug) { $('#sres').hidden = true; $('#q').value = ''; location.hash = 'pais-' + slug; }
+function moveSel(dir) {
+  const items = $$('#sres li[data-slug]');
+  if (!items.length) return;
+  sel = (sel + dir + items.length) % items.length;
+  items.forEach((li, i) => li.setAttribute('aria-selected', String(i === sel)));
+}
+function initSearch() {
+  const inp = $('#q');
+  inp.addEventListener('input', () => drawResults(inp.value));
+  inp.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown') { e.preventDefault(); moveSel(1); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); moveSel(-1); }
+    else if (e.key === 'Escape') { $('#sres').hidden = true; inp.setAttribute('aria-expanded', 'false'); }
+    else if (e.key === 'Enter') { e.preventDefault(); if (matches[sel]) go(matches[sel].slug); }
+  });
+  inp.addEventListener('blur', () => setTimeout(() => { $('#sres').hidden = true; inp.setAttribute('aria-expanded', 'false'); }, 120));
+  $('#qgo').addEventListener('click', () => { if (!matches.length) drawResults(inp.value); if (matches[sel]) go(matches[sel].slug); });
+}
+
+/* ============ Rutas por hash ============ */
+function route() {
+  const h = decodeURIComponent(location.hash.slice(1));
+  const home = $('#view-home'), cv = $('#view-country');
+  if (h.indexOf('pais-') === 0) {
+    const d = DEST.find(x => x.slug === h.slice(5));
+    if (d) { renderCountry(d); home.hidden = true; cv.hidden = false; window.scrollTo(0, 0); return; }
+  }
+  cv.hidden = true; home.hidden = false;
+  const t = h && document.getElementById(h);
+  if (t) requestAnimationFrame(() => t.scrollIntoView());
+  else if (!h || h === 'inicio') window.scrollTo(0, 0);
+}
+
+/* ============ Arranque ============ */
+renderStatic();
+renderDestinos();
+renderCTA();
+$('#helpHome').innerHTML = helpHTML();
+bindHelp($('#helpHome'), 'home');
+renderTickets();
+initNoticiero();
+renderTicker();
+renderVideos();
+renderSocs();
+initForm();
+initSearch();
+initChat();
+$('#vMore').addEventListener('click', () => { vShown += 6; renderVideos(); });
+window.addEventListener('hashchange', route);
+route();
+
+</script>
 </body>
 </html>
