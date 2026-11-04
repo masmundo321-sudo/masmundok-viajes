@@ -1096,6 +1096,8 @@ const AFILIADOS = {
       url: () => 'https://www.expedia.com/Vacation-Packages' }
   ],
   hoteles: [
+    { name:'Hotels.com', nota:'Muchos hoteles en todo el mundo', p:'9123', campaign:'637', home:'https://www.hotels.com/',
+      url: q => 'https://www.hotels.com/Hotel-Search?destination=' + encodeURIComponent(q.d.n) + '&startDate=' + q.out + '&endDate=' + q.ret + '&adults=' + q.pax },
     { name:'Agoda', nota:'Fuerte en hoteles de Asia', p:'2854', campaign:'104', home:'https://www.agoda.com/es-ar/',
       url: q => 'https://www.agoda.com/es-ar/search?textToSearch=' + encodeURIComponent(q.d.n) + '&checkIn=' + q.out + '&checkOut=' + q.ret + '&adults=' + q.pax + '&rooms=1&currency=USD' },
     { name:'Trip.com Hoteles', nota:'Ofertas con vuelo incluido', p:'8980', campaign:'121', home:'https://www.trip.com/hotels/',
