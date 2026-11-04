@@ -1084,7 +1084,7 @@ const AFILIADOS = {
       url: q => 'https://www.kayak.com.ar/flights/' + q.o.c + '-' + q.d.c + '/' + q.out + (q.oneway ? '' : '/' + q.ret) + '/' + q.pax + 'adults' }
   ],
   hoteles: [
-    { name:'Agoda', nota:'Suele ganar en Asia', p:'', campaign:'', home:'https://www.agoda.com/es-ar/',
+    { name:'Agoda', nota:'Fuerte en hoteles de Asia', p:'2854', campaign:'104', home:'https://www.agoda.com/es-ar/',
       url: q => 'https://www.agoda.com/es-ar/search?textToSearch=' + encodeURIComponent(q.d.n) + '&checkIn=' + q.out + '&checkOut=' + q.ret + '&adults=' + q.pax + '&rooms=1&currency=USD' },
     { name:'Trip.com Hoteles', nota:'Ofertas con vuelo incluido', p:'8980', campaign:'121', home:'https://www.trip.com/hotels/',
       url: q => 'https://www.trip.com/hotels/list?searchWord=' + encodeURIComponent(q.d.n) + '&checkin=' + q.out + '&checkout=' + q.ret + '&adult=' + q.pax + '&crn=1&locale=es-ES&curr=USD' }
