@@ -1081,11 +1081,11 @@ const AFILIADOS = {
   ],
   getyourguide: { partnerId: '', cmp: 'masmundok', sinId: 'https://gyg.me/masmundok-app' },
   vuelos: [
-    { name:'Traveloka', nota:'Fuerte en vuelos dentro de Asia', fijo:true, p:'9048', campaign:'632', home:'https://www.traveloka.com/', url: () => 'https://www.traveloka.com/' },
-    { name:'Aviasales', nota:'Compara aerolíneas y agencias', p:'', campaign:'', home:'https://www.aviasales.com/',
+    { name:'Aviasales', nota:'Compara aerolíneas y agencias', p:'4114', campaign:'100', home:'https://www.aviasales.com/',
       url: q => 'https://www.aviasales.com/search/' + q.o.c + ddmm(q.out) + q.d.c + (q.oneway ? '' : ddmm(q.ret)) + q.pax + '?currency=usd' },
     { name:'Trip.com', nota:'Fuerte en Asia y vuelos largos', p:'8980', campaign:'121', home:'https://www.trip.com/flights/',
       url: q => 'https://www.trip.com/flights/showfarefirst?dcity=' + q.o.c.toLowerCase() + '&acity=' + q.d.c.toLowerCase() + '&ddate=' + q.out + (q.oneway ? '&triptype=ow' : '&rdate=' + q.ret + '&triptype=rt') + '&class=y&quantity=' + q.pax + '&locale=es-ES&curr=USD' },
+    { name:'Traveloka', nota:'Fuerte en vuelos dentro de Asia', fijo:true, p:'9048', campaign:'632', home:'https://www.traveloka.com/', url: () => 'https://www.traveloka.com/' },
     { name:'KAYAK', nota:'Mira cientos de sitios a la vez', p:'', campaign:'', home:'https://www.kayak.com.ar/flights',
       url: q => 'https://www.kayak.com.ar/flights/' + q.o.c + '-' + q.d.c + '/' + q.out + (q.oneway ? '' : '/' + q.ret) + '/' + q.pax + 'adults' }
   ],
@@ -2193,7 +2193,7 @@ function initBuscadores() {
   const ideas = () => { $('#skIdeasT').textContent = IDEAS.length + ' ideas desde ' + origen().n + ' para un viaje de una semana'; };
 
   if (!AFILIADOS.travelpayouts.marker || !AFILIADOS.getyourguide.partnerId) {
-    $('#skFlag').innerHTML = '<p class="sk-flag"><b>Vista previa:</b> faltan los códigos de Travelpayouts y GetYourGuide en el bloque AFILIADOS. Hasta cargarlos, estas búsquedas no generan comisión.</p>';
+    $('#skFlag').innerHTML = '<p class="sk-flag"><b>Vista previa:</b> faltan códigos en el bloque AFILIADOS. Hasta cargarlos, algunas búsquedas no generan comisión.</p>';
   }
   function ponerMarcas(qr) {
     const grupo = (titulo, lista, fn) => { const ls = marcasActivas(lista); return ls.length ? '<p class="sk-gl">' + titulo + '</p><div class="sk-ags">' + ls.map(a => {
