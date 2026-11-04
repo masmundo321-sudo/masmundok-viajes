@@ -1079,7 +1079,7 @@ const AFILIADOS = {
     { name:'Tripadvisor', p:'4456', campaign:'149', url: t => t ? 'https://www.tripadvisor.com/Search?q=' + encodeURIComponent(t) : 'https://www.tripadvisor.com/Attractions' },
     { name:'Klook', p:'4110', campaign:'137', url: t => t ? 'https://www.klook.com/es/search/result/?query=' + encodeURIComponent(t) : 'https://www.klook.com/es/' }
   ],
-  getyourguide: { partnerId: '', cmp: 'masmundok', sinId: 'https://gyg.me/masmundok-app' },
+  getyourguide: { p:'3965', campaign:'108' },
   vuelos: [
     { name:'Aviasales', nota:'Compara aerolíneas y agencias', p:'4114', campaign:'100', home:'https://www.aviasales.com/',
       url: q => 'https://www.aviasales.com/search/' + q.o.c + ddmm(q.out) + q.d.c + (q.oneway ? '' : ddmm(q.ret)) + q.pax + '?currency=usd' },
@@ -2162,9 +2162,8 @@ function linkTP(a, url) {
 }
 function marcasActivas(lista) { return AFILIADOS.travelpayouts.marker ? lista.filter(a => a.p) : lista; }
 function linkGYG(term) {
-  const g = AFILIADOS.getyourguide;
-  if (!g.partnerId) return g.sinId;
-  return 'https://www.getyourguide.com/s/?q=' + encodeURIComponent(term || '') + '&partner_id=' + encodeURIComponent(g.partnerId) + '&cmp=' + encodeURIComponent(g.cmp);
+  const t = (term || '').trim();
+  return linkTP(AFILIADOS.getyourguide, t ? 'https://www.getyourguide.com/s/?q=' + encodeURIComponent(t) : 'https://www.getyourguide.com/');
 }
 function buscarCiudad(txt) {
   const t = ' ' + sinTilde(txt).replace(/[^a-z0-9 ]/g, ' ') + ' ';
@@ -2192,7 +2191,7 @@ function initBuscadores() {
   const origen = () => { const o = from.options[from.selectedIndex]; return { n:o.textContent, c:o.value }; };
   const ideas = () => { $('#skIdeasT').textContent = IDEAS.length + ' ideas desde ' + origen().n + ' para un viaje de una semana'; };
 
-  if (!AFILIADOS.travelpayouts.marker || !AFILIADOS.getyourguide.partnerId) {
+  if (!AFILIADOS.travelpayouts.marker) {
     $('#skFlag').innerHTML = '<p class="sk-flag"><b>Vista previa:</b> faltan códigos en el bloque AFILIADOS. Hasta cargarlos, algunas búsquedas no generan comisión.</p>';
   }
   function ponerMarcas(qr) {
