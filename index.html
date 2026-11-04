@@ -835,7 +835,7 @@ button{font:inherit;color:inherit}
         </div>
         <div class="sk-q" id="gyQuick"></div>
         <div class="sk-coupon">Buscá en GetYourGuide y usá nuestro código: <code id="gyCode"></code><button type="button" class="btn btn-ghost btn-sm" id="gyCopy">Copiar</button> <span id="gyOff"></span></div>
-        <p class="sk-coupon">El mismo tour también puede cambiar de precio: <a id="gyTa" target="_blank" rel="noopener sponsored">compará en Tripadvisor</a></p>
+        <p class="sk-coupon">El mismo tour también puede cambiar de precio: compará en <span id="gyTa"></span></p>
         <div id="stB"></div>
       </div>
     </div>
@@ -1076,7 +1076,8 @@ const PARTNERS = [
 const AFILIADOS = {
   travelpayouts: { marker: '768557', proyecto: '565499' },
   tours: [
-    { name:'Tripadvisor', p:'4456', campaign:'149', url: t => t ? 'https://www.tripadvisor.com/Search?q=' + encodeURIComponent(t) : 'https://www.tripadvisor.com/Attractions' }
+    { name:'Tripadvisor', p:'4456', campaign:'149', url: t => t ? 'https://www.tripadvisor.com/Search?q=' + encodeURIComponent(t) : 'https://www.tripadvisor.com/Attractions' },
+    { name:'Klook', p:'4110', campaign:'137', url: t => t ? 'https://www.klook.com/es/search/result/?query=' + encodeURIComponent(t) : 'https://www.klook.com/es/' }
   ],
   getyourguide: { partnerId: '', cmp: 'masmundok', sinId: 'https://gyg.me/masmundok-app' },
   vuelos: [
@@ -2269,7 +2270,7 @@ function initBuscadores() {
 
   /* GetYourGuide */
   const gq = $('#gyQ'), gg = $('#gyGo'), gy = PARTNERS.find(p => p.name === 'GetYourGuide');
-  const syncG = () => { const t = gq.value.trim(), ta = AFILIADOS.tours[0]; gg.href = linkGYG(t); $('#gyTa').href = linkTP(ta, ta.url(t)); };
+  const syncG = () => { const t = gq.value.trim(); gg.href = linkGYG(t); $('#gyTa').innerHTML = AFILIADOS.tours.map(a => '<a target="_blank" rel="noopener sponsored" href="' + esc(linkTP(a, a.url(t))) + '">' + esc(a.name) + '</a>').join(' o '); };
   gq.addEventListener('input', syncG); syncG();
   $('#gyForm').addEventListener('submit', e => { e.preventDefault(); gg.click(); });
   $('#gyQuick').innerHTML = ['Templos en Bangkok','Cataratas del Iguazú','Pirámides de Egipto','Muralla China','Machu Picchu','Cristo Redentor'].map(t => '<a target="_blank" rel="noopener sponsored" href="' + esc(linkGYG(t)) + '">' + esc(t) + '</a>').join('');
