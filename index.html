@@ -1088,6 +1088,9 @@ const AFILIADOS = {
     { name:'KAYAK', nota:'Mira cientos de sitios a la vez', p:'', campaign:'', home:'https://www.kayak.com.ar/flights',
       url: q => 'https://www.kayak.com.ar/flights/' + q.o.c + '-' + q.d.c + '/' + q.out + (q.oneway ? '' : '/' + q.ret) + '/' + q.pax + 'adults' }
   ],
+  transporte: [
+    { name:'12Go', nota:'Trenes, buses y ferris, sobre todo en Asia', p:'1764', campaign:'44', home:'https://12go.com', url: () => 'https://12go.com' }
+  ],
   paquetes: [
     { name:'Expedia', nota:'Vuelo y hotel en una sola compra', p:'8645', campaign:'594', home:'https://www.expedia.com/Vacation-Packages',
       url: () => 'https://www.expedia.com/Vacation-Packages' }
@@ -2196,6 +2199,7 @@ function initBuscadores() {
     if (mode.v === 'paquetes') h += grupo('Todo junto en un solo lugar', AFILIADOS.paquetes, x => x);
     if (mode.v !== 'hoteles') h += grupo(mode.v === 'paquetes' ? 'O armalo vos: primero el vuelo' : 'Mirá el vuelo en cada sitio', AFILIADOS.vuelos, x => x);
     if (mode.v !== 'vuelos') h += grupo((mode.v === 'paquetes' ? 'Después sumá' : 'Mirá') + ' el hotel con las mismas fechas', AFILIADOS.hoteles, paraHotel);
+    if (mode.v !== 'hoteles') h += grupo('Y para moverte por tierra', AFILIADOS.transporte, x => x);
     $('#skAgs').innerHTML = h;
   }
   function pintarModo() {
