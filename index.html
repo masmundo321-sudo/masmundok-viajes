@@ -1081,6 +1081,7 @@ const AFILIADOS = {
   ],
   getyourguide: { partnerId: '', cmp: 'masmundok', sinId: 'https://gyg.me/masmundok-app' },
   vuelos: [
+    { name:'Traveloka', nota:'Fuerte en vuelos dentro de Asia', fijo:true, p:'9048', campaign:'632', home:'https://www.traveloka.com/', url: () => 'https://www.traveloka.com/' },
     { name:'Aviasales', nota:'Compara aerolíneas y agencias', p:'', campaign:'', home:'https://www.aviasales.com/',
       url: q => 'https://www.aviasales.com/search/' + q.o.c + ddmm(q.out) + q.d.c + (q.oneway ? '' : ddmm(q.ret)) + q.pax + '?currency=usd' },
     { name:'Trip.com', nota:'Fuerte en Asia y vuelos largos', p:'8980', campaign:'121', home:'https://www.trip.com/flights/',
@@ -1089,10 +1090,10 @@ const AFILIADOS = {
       url: q => 'https://www.kayak.com.ar/flights/' + q.o.c + '-' + q.d.c + '/' + q.out + (q.oneway ? '' : '/' + q.ret) + '/' + q.pax + 'adults' }
   ],
   transporte: [
-    { name:'12Go', nota:'Trenes, buses y ferris, sobre todo en Asia', p:'1764', campaign:'44', home:'https://12go.com', url: () => 'https://12go.com' }
+    { name:'12Go', nota:'Trenes, buses y ferris, sobre todo en Asia', fijo:true, p:'1764', campaign:'44', home:'https://12go.com', url: () => 'https://12go.com' }
   ],
   paquetes: [
-    { name:'Expedia', nota:'Vuelo y hotel en una sola compra', p:'8645', campaign:'594', home:'https://www.expedia.com/Vacation-Packages',
+    { name:'Expedia', nota:'Vuelo y hotel en una sola compra', fijo:true, p:'8645', campaign:'594', home:'https://www.expedia.com/Vacation-Packages',
       url: () => 'https://www.expedia.com/Vacation-Packages' }
   ],
   hoteles: [
@@ -2194,7 +2195,7 @@ function initBuscadores() {
   function ponerMarcas(qr) {
     const grupo = (titulo, lista, fn) => { const ls = marcasActivas(lista); return ls.length ? '<p class="sk-gl">' + titulo + '</p><div class="sk-ags">' + ls.map(a => {
       const url = linkTP(a, qr ? a.url(fn(qr)) : a.home);
-      return '<a class="sk-ag" href="' + esc(url) + '" target="_blank" rel="noopener sponsored"><span><b>' + esc(a.name) + '</b><small>' + esc(a.nota) + '</small></span><em>' + (qr ? 'Ver precio →' : 'Abrir →') + '</em></a>'; }).join('') + '</div>' : ''; };
+      return '<a class="sk-ag" href="' + esc(url) + '" target="_blank" rel="noopener sponsored"><span><b>' + esc(a.name) + '</b><small>' + esc(a.nota) + '</small></span><em>' + (qr && !a.fijo ? 'Ver precio →' : 'Abrir →') + '</em></a>'; }).join('') + '</div>' : ''; };
     const ruta = !qr ? '' : '<span class="sk-route">' + (mode.v === 'hoteles' ? esc(qr.d.n) : esc(qr.o.n) + ' → ' + esc(qr.d.n)) + ' · ' + fechaCorta(qr.out) + (qr.oneway && mode.v === 'vuelos' ? '' : ' – ' + fechaCorta(qr.ret)) + ' · ' + qr.pax + (mode.v === 'hoteles' ? ' huésp.' : ' pas.') + '</span>';
     const paraHotel = x => Object.assign({}, x, { ret: x.oneway ? sumarDias(x.out, 7) : x.ret });
     let h = ruta;
