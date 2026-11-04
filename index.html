@@ -1073,12 +1073,12 @@ const PARTNERS = [
    p y campaign: los códigos de cada marca, salen del generador de links de Travelpayouts.
    Una marca sin p no se muestra en la web publicada, así ningún clic queda sin comisión. */
 const AFILIADOS = {
-  travelpayouts: { marker: '', proyecto: '' },
+  travelpayouts: { marker: '768557', proyecto: '565499' },
   getyourguide: { partnerId: '', cmp: 'masmundok', sinId: 'https://gyg.me/masmundok-app' },
   vuelos: [
-    { name:'Aviasales', nota:'Compara aerolíneas y agencias', p:'4114', campaign:'100', home:'https://www.aviasales.com/',
+    { name:'Aviasales', nota:'Compara aerolíneas y agencias', p:'', campaign:'', home:'https://www.aviasales.com/',
       url: q => 'https://www.aviasales.com/search/' + q.o.c + ddmm(q.out) + q.d.c + (q.oneway ? '' : ddmm(q.ret)) + q.pax + '?currency=usd' },
-    { name:'Trip.com', nota:'Fuerte en Asia y vuelos largos', p:'', campaign:'', home:'https://www.trip.com/flights/',
+    { name:'Trip.com', nota:'Fuerte en Asia y vuelos largos', p:'8980', campaign:'121', home:'https://www.trip.com/flights/',
       url: q => 'https://www.trip.com/flights/showfarefirst?dcity=' + q.o.c.toLowerCase() + '&acity=' + q.d.c.toLowerCase() + '&ddate=' + q.out + (q.oneway ? '&triptype=ow' : '&rdate=' + q.ret + '&triptype=rt') + '&class=y&quantity=' + q.pax + '&locale=es-ES&curr=USD' },
     { name:'KAYAK', nota:'Mira cientos de sitios a la vez', p:'', campaign:'', home:'https://www.kayak.com.ar/flights',
       url: q => 'https://www.kayak.com.ar/flights/' + q.o.c + '-' + q.d.c + '/' + q.out + (q.oneway ? '' : '/' + q.ret) + '/' + q.pax + 'adults' }
@@ -1086,7 +1086,7 @@ const AFILIADOS = {
   hoteles: [
     { name:'Agoda', nota:'Suele ganar en Asia', p:'', campaign:'', home:'https://www.agoda.com/es-ar/',
       url: q => 'https://www.agoda.com/es-ar/search?textToSearch=' + encodeURIComponent(q.d.n) + '&checkIn=' + q.out + '&checkOut=' + q.ret + '&adults=' + q.pax + '&rooms=1&currency=USD' },
-    { name:'Trip.com Hoteles', nota:'Ofertas con vuelo incluido', p:'', campaign:'', home:'https://www.trip.com/hotels/',
+    { name:'Trip.com Hoteles', nota:'Ofertas con vuelo incluido', p:'8980', campaign:'121', home:'https://www.trip.com/hotels/',
       url: q => 'https://www.trip.com/hotels/list?searchWord=' + encodeURIComponent(q.d.n) + '&checkin=' + q.out + '&checkout=' + q.ret + '&adult=' + q.pax + '&crn=1&locale=es-ES&curr=USD' }
   ]
 };
