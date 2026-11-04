@@ -1089,6 +1089,9 @@ const AFILIADOS = {
     { name:'KAYAK', nota:'Mira cientos de sitios a la vez', p:'', campaign:'', home:'https://www.kayak.com.ar/flights',
       url: q => 'https://www.kayak.com.ar/flights/' + q.o.c + '-' + q.d.c + '/' + q.out + (q.oneway ? '' : '/' + q.ret) + '/' + q.pax + 'adults' }
   ],
+  esim: [
+    { name:'Airalo', p:'8310', campaign:'541', home:'https://www.airalo.com/' }
+  ],
   transporte: [
     { name:'12Go', nota:'Trenes, buses y ferris, sobre todo en Asia', fijo:true, p:'1764', campaign:'44', home:'https://12go.com', url: () => 'https://12go.com' }
   ],
@@ -2272,7 +2275,7 @@ function initBuscadores() {
     return '<button type="button" class="sk-card" data-idea="' + i[1] + '"><span class="sk-art" style="--c1:' + d.c1 + '">' + sceneSVG(d.code) + '<b>' + esc(d.name) + '</b><i>' + esc(d.tagline) + '</i></span><span class="sk-card-b"><span>' + esc(c.n) + ' · ida y vuelta</span><span class="sk-badge">Ver precio de hoy</span></span></button>';
   }).join('');
   $('#skCards').addEventListener('click', e => { const b = e.target.closest('[data-idea]'); if (!b) return; const c = CITIES.find(x => x.c === b.dataset.idea); q.value = c.n; if (mode.v === 'hoteles') { mode.v = 'vuelos'; pintarModo(); } resolver(c); });
-  $('#skCodes').innerHTML = PARTNERS.map(p => '<a href="' + esc(p.url) + '" target="_blank" rel="noopener sponsored">' + esc(p.name) + ' <code>' + esc(p.code) + '</code></a>').join('');
+  $('#skCodes').innerHTML = PARTNERS.map(p => '<a href="' + esc(p.url) + '" target="_blank" rel="noopener sponsored">' + esc(p.name) + ' <code>' + esc(p.code) + '</code></a>').join('') + AFILIADOS.esim.map(a => '<a href="' + esc(linkTP(a, a.home)) + '" target="_blank" rel="noopener sponsored">' + esc(a.name) + ' <code>eSIM</code></a>').join('');
   ideas(); pintarModo();
 
   /* GetYourGuide */
