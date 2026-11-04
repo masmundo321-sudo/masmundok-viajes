@@ -10,3 +10,7 @@ Para cambiar contenido, buscá estos bloques dentro de `index.html`:
 - `NEWS`: noticias de la sección News.
 - `DEST`: fichas de cada país.
 - `VIDEOS`: lista de videos.
+- `AFILIADOS`: códigos de Travelpayouts y GetYourGuide y marcas de los buscadores.
+- `CITIES` e `IDEAS`: ciudades del buscador y destinos sugeridos.
+- `FESTEJOS`: frases y animaciones de Yesi y Pablo.
+- `COMUNIDAD` y `COMENTARIOS`: números reales, contador de visitas y comentarios aprobados.

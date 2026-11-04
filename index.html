@@ -483,6 +483,213 @@ button{font:inherit;color:inherit}
 @media (prefers-reduced-motion:reduce){
   .tk-track{animation:none}.tk-view{overflow-x:auto}.row{animation:none}.btn,.dcard,.vplay{transition:none}
 }
+/* ============ Buscadores: cielo claro, buscador en píldora, filtros y tarjetas ============ */
+.sk{--sk-bg:#fff;--sk-card:#fff;--sk-soft:#EAF2FE;--sk-line:#D5E0F0;--sk-ink:#1F2A3C;--sk-dim:#5A6678;--sk-blue:#1B66DE;--sk-blue-2:#0F4CB5;--sk-grad:linear-gradient(90deg,#1B66DE,#0A7A80);--sk-sky:#C4DBFA;--sk-sky-2:#DCE9FC;--sk-ok:#0B7A3E;background:var(--sk-bg);color:var(--sk-ink);padding-block:0 clamp(40px,6vw,72px)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .sk{--sk-bg:#0C1626;--sk-card:#14213A;--sk-soft:#1A2B49;--sk-line:#2B3D5E;--sk-ink:#E8EEF8;--sk-dim:#A5B3C8;--sk-blue:#7DB0FF;--sk-blue-2:#A6C9FF;--sk-grad:linear-gradient(90deg,#7DB0FF,#5FE0DC);--sk-sky:#22395F;--sk-sky-2:#1A2C4C;--sk-ok:#57D68D}}
+:root[data-theme="dark"] .sk{--sk-bg:#0C1626;--sk-card:#14213A;--sk-soft:#1A2B49;--sk-line:#2B3D5E;--sk-ink:#E8EEF8;--sk-dim:#A5B3C8;--sk-blue:#7DB0FF;--sk-blue-2:#A6C9FF;--sk-grad:linear-gradient(90deg,#7DB0FF,#5FE0DC);--sk-sky:#22395F;--sk-sky-2:#1A2C4C;--sk-ok:#57D68D}
+.sk-sky{position:relative;height:clamp(60px,10vw,120px);overflow:hidden;background:linear-gradient(180deg,var(--sk-sky-2),transparent)}
+.sk-sky svg{position:absolute;bottom:0;height:100%;width:auto;color:var(--sk-sky)}
+.sk-sky .l{left:max(0px,calc(50% - 600px))}.sk-sky .r{right:max(0px,calc(50% - 600px))}
+.sk-head{text-align:center;display:grid;gap:8px;justify-items:center;margin-top:-6px}
+.sk-kick{font-weight:600;font-size:15px;color:var(--sk-ink)}
+.sk-head h2{font:800 clamp(2rem,6vw,3.4rem)/1.06 var(--f-display);background:var(--sk-grad);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:.08em}
+.sk-from{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:center;color:var(--sk-dim);font-size:15px}
+.sk-from label{display:inline-flex;align-items:center;gap:4px;border-bottom:1px dashed var(--sk-dim);color:var(--sk-ink);font-weight:600;cursor:pointer}
+.sk-from select{appearance:none;-webkit-appearance:none;border:0;background:transparent;color:inherit;font:inherit;font-weight:600;padding:2px 0;max-width:210px;cursor:pointer}
+.sk-from select option{color:#1F2A3C;background:#fff}
+.sk-tabs{display:flex;justify-content:center;gap:6px;margin:18px auto 14px;flex-wrap:wrap}
+.sk-tab{border:1px solid var(--sk-line);background:var(--sk-card);color:var(--sk-ink);border-radius:999px;padding:.5rem 1rem;font-weight:600;font-size:14px;cursor:pointer;display:inline-flex;gap:.4rem;align-items:center}
+.sk-tab[aria-pressed="true"]{background:var(--sk-soft);border-color:var(--sk-blue);color:var(--sk-blue-2)}
+.sk-pillwrap{position:relative;max-width:760px;margin-inline:auto}
+.sk-pill{display:flex;align-items:center;gap:10px;background:var(--sk-card);border:1px solid var(--sk-line);border-radius:999px;padding:6px 6px 6px 18px;box-shadow:0 2px 8px rgba(27,102,222,.12),0 10px 26px -14px rgba(27,102,222,.4)}
+.sk-pill:focus-within{border-color:var(--sk-blue);box-shadow:0 0 0 3px color-mix(in srgb,var(--sk-blue) 22%,transparent)}
+.sk-pill .ic{color:var(--sk-blue)}
+.sk-pill input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:var(--sk-ink);font:500 16px/1.3 var(--f-body);padding:9px 0}
+.sk-pill input::placeholder{color:var(--sk-dim)}
+.sk-go{flex:none;width:54px;height:42px;border:0;border-radius:999px;background:var(--sk-blue);color:#fff;display:grid;place-items:center;cursor:pointer;text-decoration:none}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .sk-go{color:#0C1626}}
+:root[data-theme="dark"] .sk-go{color:#0C1626}
+.sk-go:hover{background:var(--sk-blue-2)}
+.sk-pill .sk-go .ic{color:inherit;width:20px;height:20px}
+.sk-sug{position:absolute;z-index:30;left:12px;right:12px;top:calc(100% + 6px);background:var(--sk-card);border:1px solid var(--sk-line);border-radius:14px;box-shadow:0 18px 34px -18px rgba(10,30,70,.5);overflow:hidden}
+.sk-sug button{display:flex;justify-content:space-between;gap:10px;width:100%;text-align:left;padding:.65rem 1rem;background:none;border:0;cursor:pointer;color:var(--sk-ink)}
+.sk-sug button:hover,.sk-sug button:focus-visible{background:var(--sk-soft)}
+.sk-sug small{color:var(--sk-dim)}
+.sk-filters{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:14px}
+.sk-chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--sk-line);border-radius:10px;background:var(--sk-card);padding:0 10px;min-height:38px;font-size:13px;font-weight:500;color:var(--sk-ink)}
+.sk-chip span{color:var(--sk-dim)}
+.sk-chip select,.sk-chip input{border:0;background:transparent;color:inherit;font:inherit;font-weight:600;outline:0;padding:6px 0;min-width:0}
+.sk-chip input[type=date]{width:124px}
+.sk-chip select option{color:#1F2A3C;background:#fff}
+.sk-chip:focus-within{border-color:var(--sk-blue)}
+.sk-msg{min-height:1.3em;text-align:center;font-size:14px;color:var(--sk-dim);margin-top:10px}
+.sk-msg.err{color:#C4381B}
+.sk-flag{max-width:760px;margin:14px auto 0;border:1.5px dashed #C97A10;background:#FFF6E4;color:#6B4406;border-radius:12px;padding:10px 14px;font-size:13.5px}
+.sk-sh{display:flex;align-items:flex-start;gap:8px;margin:34px 0 4px;font-weight:700;font-size:16px}
+.sk-sh .ic{color:var(--sk-blue);margin-top:2px}
+.sk-sub{color:var(--sk-dim);font-size:13px;margin:0 0 14px 28px}
+.sk-cards{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(250px,1fr);gap:14px;overflow-x:auto;padding:2px 2px 12px;scroll-snap-type:x proximity}
+@media (min-width:980px){.sk-cards{grid-auto-flow:row;grid-template-columns:repeat(3,1fr);overflow:visible}}
+.sk-card{scroll-snap-align:start;display:flex;flex-direction:column;background:var(--sk-card);border:1px solid var(--sk-line);border-radius:22px;overflow:hidden;text-align:left;color:inherit;cursor:pointer;padding:0;box-shadow:0 8px 22px -18px rgba(10,30,70,.6);transition:transform .2s}
+.sk-card:hover{transform:translateY(-3px)}
+.sk-art{position:relative;display:block;height:170px;background:var(--c1,#0a7a80);overflow:hidden}
+.sk-art svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.sk-art::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 38%,rgba(0,0,0,.62))}
+.sk-art b{position:absolute;z-index:1;left:14px;bottom:30px;color:#fff;font:800 1.45rem/1.1 var(--f-display)}
+.sk-art i{position:absolute;z-index:1;left:14px;bottom:12px;color:rgba(255,255,255,.92);font:500 12.5px/1.2 var(--f-body);right:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sk-card-b{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:11px 14px;font-size:13px;color:var(--sk-dim)}
+.sk-badge{flex:none;background:#E5F6EC;color:#0B6A37;border-radius:999px;padding:3px 10px;font-weight:700;font-size:12.5px}
+.sk-cmp{margin-top:28px;background:var(--sk-soft);border-radius:24px;padding:clamp(18px,3.4vw,32px)}
+.sk-cmp h3{font:800 clamp(1.4rem,3.4vw,2.1rem)/1.1 var(--f-display);color:var(--sk-ink)}
+.sk-cmp>p{color:var(--sk-dim);margin-top:6px;max-width:64ch}
+.sk-route{display:inline-block;margin-top:12px;font:500 13px/1.3 var(--f-mono);background:var(--sk-card);border:1px solid var(--sk-line);border-radius:999px;padding:6px 12px}
+.sk-ags{display:grid;gap:10px;margin-top:14px}
+@media (min-width:640px){.sk-ags{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:980px){.sk-ags{grid-template-columns:repeat(3,1fr)}}
+.sk-ag{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--sk-card);border:1px solid var(--sk-line);border-radius:14px;padding:12px 14px;text-decoration:none;color:var(--sk-ink)}
+.sk-ag:hover{border-color:var(--sk-blue)}
+.sk-ag b{display:block;font-size:15.5px}.sk-ag small{color:var(--sk-dim);font-size:12.5px;line-height:1.3;display:block}
+.sk-ag em{flex:none;font-style:normal;font-weight:700;font-size:13px;color:var(--sk-blue-2);white-space:nowrap}
+.sk-gl{font:500 11.5px/1.2 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--sk-dim);margin-top:18px}
+.sk-tips{display:grid;gap:10px;margin-top:18px}
+@media (min-width:760px){.sk-tips{grid-template-columns:repeat(3,1fr)}}
+.sk-tips li{background:var(--sk-card);border-radius:14px;padding:12px 14px;font-size:14px;color:var(--sk-dim)}
+.sk-tips b{display:block;color:var(--sk-ink);margin-bottom:2px}
+.sk-codes{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.sk-codes a{display:inline-flex;gap:6px;align-items:center;background:var(--sk-card);border:1px dashed var(--sk-blue);border-radius:10px;padding:6px 10px;font-size:13px;text-decoration:none;color:var(--sk-ink)}
+.sk-codes code{font:500 12.5px var(--f-mono);color:var(--sk-blue-2)}
+.sk-note{font-size:12.5px;color:var(--sk-dim);margin-top:14px;max-width:80ch}
+.sk-gyg{margin-top:clamp(34px,5vw,56px)}
+.sk-gyg .sk-head h2{font-size:clamp(1.7rem,4.6vw,2.7rem)}
+.sk-q{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:14px}
+.sk-q a{border:1px solid var(--sk-line);border-radius:999px;background:var(--sk-card);padding:.4rem .85rem;font-size:13px;font-weight:600;color:var(--sk-ink);text-decoration:none}
+.sk-q a:hover{border-color:var(--sk-blue)}
+.sk-coupon{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 12px;margin-top:14px;font-size:14px;color:var(--sk-dim)}
+.sk-coupon code{font:500 14px var(--f-mono);color:var(--sk-ink);border:1px dashed var(--sk-blue);border-radius:8px;padding:4px 10px;background:var(--sk-card)}
+
+/* Tira de apoyo cerca de cada buscador */
+.st{position:relative;display:grid;grid-template-columns:auto 1fr;gap:6px 16px;align-items:center;margin-top:22px;background:var(--sk-card);border:1px solid var(--sk-line);border-radius:22px;padding:12px 18px 12px 12px;overflow:hidden}
+.st-art{position:relative;width:128px;height:112px;grid-row:span 2}
+.st-art .cxs{position:absolute;inset:0;width:100%;height:100%}
+.st h4{font:800 1.15rem/1.15 var(--f-display);color:var(--sk-ink);align-self:end}
+.st p{color:var(--sk-dim);font-size:14px;margin-top:3px}
+.st-btns{display:flex;flex-wrap:wrap;gap:8px;grid-column:2;margin-top:4px;position:relative;z-index:2}
+.st-btns .btn{font-size:14px;padding:.55rem 1rem}
+.btn-pp{background:var(--sk-blue,#1B66DE);color:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn-pp{color:#0C1626}}
+:root[data-theme="dark"] .btn-pp{color:#0C1626}
+.st-bill{--fx:-92px;--fy:-34px;position:absolute;z-index:1;top:70%;left:186px;font:800 13px/1 var(--f-body);color:#fff;background:#169A55;border-radius:4px;padding:3px 8px;opacity:0;pointer-events:none;box-shadow:0 2px 5px rgba(0,0,0,.25)}
+@media (max-width:620px){.st-bill{--fx:-8px;--fy:-46px;top:auto;bottom:44px;left:64px}.st-bill:nth-of-type(2){top:auto;bottom:36px;left:96px}.st{grid-template-columns:92px 1fr;padding:12px}.st-art{width:92px;height:84px;grid-row:auto}.st-btns{grid-column:1/-1}.st-btns .btn{flex:1}.st h4{font-size:1.05rem}}
+
+/* Yesi y Pablo */
+.cxs{overflow:visible}
+.cxs *{transform-box:view-box}
+.cx-y{transform-origin:78px 196px}.cx-p{transform-origin:160px 196px}
+.cx-yl{transform-origin:62px 92px}.cx-yr{transform-origin:94px 92px}
+.cx-pl{transform-origin:144px 88px}.cx-pr{transform-origin:178px 88px}
+.cx-case{transform-origin:25px 170px}
+.cx-flash{opacity:0;transform-origin:206px 44px}
+.cx-cam{opacity:0}
+@media (prefers-reduced-motion:no-preference){
+  .st .cx-yr{animation:cxWave 2.2s ease-in-out infinite}
+  .st .cx-y,.st .cx-p{animation:cxHop 5s ease-in-out infinite}
+  .st .cx-p{animation-delay:.12s}
+  .st .cx-pl{animation:cxArmsIdle 5s ease-in-out infinite}
+  .st-bill{animation:stFly 5s ease-in-out infinite}
+  .st-bill:nth-of-type(2){animation-delay:.28s;top:78%}
+  .cxs.v-jump .cx-y,.cxs.v-jump .cx-p{animation:cxJump .62s cubic-bezier(.3,.7,.4,1) infinite alternate}
+  .cxs.v-jump .cx-p{animation-delay:.2s}
+  .cxs.v-jump .cx-yl,.cxs.v-jump .cx-pl{animation:cxUpL .62s ease-in-out infinite alternate}
+  .cxs.v-jump .cx-yr,.cxs.v-jump .cx-pr{animation:cxUpR .62s ease-in-out infinite alternate}
+  .cxs.v-high5 .cx-y{animation:cxLeanR .7s ease-in-out infinite alternate}
+  .cxs.v-high5 .cx-p{animation:cxLeanL .7s ease-in-out infinite alternate}
+  .cxs.v-high5 .cx-yr{animation:cxFiveY .7s ease-in-out infinite alternate}
+  .cxs.v-high5 .cx-pl{animation:cxFiveP .7s ease-in-out infinite alternate}
+  .cxs.v-selfie .cx-y,.cxs.v-selfie .cx-p{animation:cxBob 1s ease-in-out infinite alternate}
+  .cxs.v-selfie .cx-flash{animation:cxFlash 1.05s .4s infinite}
+  .cxs.v-toss .cx-case{animation:cxToss 1.25s cubic-bezier(.3,.6,.5,1) infinite}
+  .cxs.v-toss .cx-y{animation:cxBob .6s ease-in-out infinite alternate}
+  .cxs.v-toss .cx-p{animation:cxJump .62s ease-in-out infinite alternate}
+  .cxs.v-toss .cx-pl,.cxs.v-toss .cx-yl{animation:cxUpL .62s ease-in-out infinite alternate}
+  .cxs.v-dance .cx-y{animation:cxSwayA .6s ease-in-out infinite alternate}
+  .cxs.v-dance .cx-p{animation:cxSwayB .6s ease-in-out infinite alternate}
+  .cxs.v-dance .cx-yl,.cxs.v-dance .cx-pl{animation:cxUpL .6s ease-in-out infinite alternate}
+  .cxs.v-dance .cx-yr,.cxs.v-dance .cx-pr{animation:cxUpR .3s ease-in-out infinite alternate}
+}
+.cxs.v-jump .cx-yl,.cxs.v-jump .cx-pl,.cxs.v-dance .cx-yl,.cxs.v-dance .cx-pl{transform:rotate(112deg)}
+.cxs.v-jump .cx-yr,.cxs.v-jump .cx-pr,.cxs.v-dance .cx-yr,.cxs.v-dance .cx-pr{transform:rotate(-112deg)}
+.cxs.v-high5 .cx-yr{transform:rotate(-122deg)}.cxs.v-high5 .cx-pl{transform:rotate(122deg)}
+.cxs.v-selfie .cx-pr{transform:rotate(-118deg)}.cxs.v-selfie .cx-yl{transform:rotate(30deg)}
+.cxs.v-selfie .cx-cam,.cxs.v-selfie .cx-flash{opacity:1}
+.cxs.v-toss .cx-yr,.cxs.v-toss .cx-pr{transform:rotate(-112deg)}
+@keyframes cxWave{0%,100%{transform:rotate(-104deg)}50%{transform:rotate(-132deg)}}
+@keyframes cxHop{0%,62%,100%{transform:none}70%{transform:translateY(-12px)}78%{transform:none}84%{transform:translateY(-7px)}90%{transform:none}}
+@keyframes cxArmsIdle{0%,60%,92%,100%{transform:rotate(0)}68%,84%{transform:rotate(116deg)}}
+@keyframes stFly{0%,18%{opacity:0;transform:translate(0,0) rotate(0) scale(.8)}26%{opacity:1}56%{opacity:1}64%,100%{opacity:0;transform:translate(var(--fx),var(--fy)) rotate(-14deg) scale(1)}}
+@keyframes cxJump{from{transform:translateY(0) scaleY(.97)}to{transform:translateY(-22px)}}
+@keyframes cxUpL{from{transform:rotate(100deg)}to{transform:rotate(140deg)}}
+@keyframes cxUpR{from{transform:rotate(-100deg)}to{transform:rotate(-140deg)}}
+@keyframes cxLeanR{from{transform:rotate(-2deg)}to{transform:translateX(11px) rotate(5deg)}}
+@keyframes cxLeanL{from{transform:rotate(2deg)}to{transform:translateX(-11px) rotate(-5deg)}}
+@keyframes cxFiveY{from{transform:rotate(-104deg)}to{transform:rotate(-132deg)}}
+@keyframes cxFiveP{from{transform:rotate(104deg)}to{transform:rotate(132deg)}}
+@keyframes cxBob{from{transform:translateY(0)}to{transform:translateY(-6px)}}
+@keyframes cxFlash{0%,100%{opacity:0;transform:scale(.4)}12%{opacity:1;transform:scale(1.25)}34%{opacity:0;transform:scale(1.5)}}
+@keyframes cxToss{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(4px,-120px) rotate(360deg)}}
+@keyframes cxSwayA{from{transform:rotate(-7deg)}to{transform:rotate(7deg) translateY(-6px)}}
+@keyframes cxSwayB{from{transform:rotate(7deg) translateY(-6px)}to{transform:rotate(-7deg)}}
+
+/* Festejo a pantalla */
+.cx-layer{position:fixed;inset:0;z-index:90;pointer-events:none;overflow:hidden;display:grid;place-items:center;background:radial-gradient(circle at 50% 56%,rgba(6,42,48,.55),rgba(6,42,48,.18) 68%,transparent);animation:cxFade .25s both}
+.cx-layer.bye{animation:cxFadeOut .35s both}
+.cx-card{position:relative;width:min(92vw,420px);text-align:center;display:grid;justify-items:center;gap:4px;animation:cxPop .45s cubic-bezier(.2,1.5,.4,1) both}
+.cx-card .cxs{width:min(84vw,340px);height:auto;filter:drop-shadow(0 16px 20px rgba(0,0,0,.35))}
+.cx-bub{background:#fff;color:#062A30;border-radius:18px;padding:10px 18px;font:800 clamp(1.15rem,4.8vw,1.55rem)/1.15 var(--f-display);box-shadow:0 12px 26px -10px rgba(0,0,0,.55);max-width:100%}
+.cx-bub small{display:block;font:500 13.5px/1.3 var(--f-body);color:#3D5C63;margin-top:4px}
+.cx-p1{position:absolute;top:0;left:0;will-change:transform,opacity}
+.cx-bill{font:800 15px/1 var(--f-body);color:#fff;background:#169A55;border:1.5px solid #0E7A42;border-radius:4px;padding:5px 10px;animation:cxBillFly var(--d,1s) var(--w,0s) cubic-bezier(.3,.1,.3,1) both}
+.cx-conf{width:10px;height:15px;border-radius:2px;animation:cxFall var(--d,2s) var(--w,0s) linear both}
+.cx-emo{width:30px;height:30px;animation:cxRise var(--d,2s) var(--w,0s) ease-out both}
+.cx-pola{width:62px;height:72px;background:#fff;border-radius:3px;padding:5px 5px 18px;box-shadow:0 5px 12px rgba(0,0,0,.35);animation:cxFall var(--d,2.6s) var(--w,0s) ease-in both}
+.cx-pola span{display:block;width:100%;height:100%;background:linear-gradient(180deg,#7FD6F2 0 55%,#0FA9A0 55% 72%,#F2D08A 72%)}
+.cx-plane{position:absolute;top:12%;left:0;display:flex;align-items:center;gap:0;animation:cxPlane 3.2s linear both}
+.cx-plane b{background:#FFD25A;color:#062A30;font:800 15px/1 var(--f-display);padding:7px 12px;border-radius:4px;white-space:nowrap}
+.cx-plane svg{width:56px;height:36px}
+@keyframes cxFade{from{opacity:0}}@keyframes cxFadeOut{to{opacity:0}}
+@keyframes cxPop{from{transform:scale(.6) translateY(30px);opacity:0}}
+@keyframes cxBillFly{0%{opacity:0;transform:translate(var(--x0),var(--y0)) rotate(0) scale(.7)}12%{opacity:1}85%{opacity:1}100%{opacity:0;transform:translate(var(--x1),var(--y1)) rotate(var(--r)) scale(1.1)}}
+@keyframes cxFall{0%{opacity:0;transform:translate(var(--x0),-40px) rotate(0)}8%{opacity:1}90%{opacity:1}100%{opacity:0;transform:translate(var(--x1),105vh) rotate(var(--r))}}
+@keyframes cxRise{0%{opacity:0;transform:translate(var(--x0),var(--y0)) scale(.4)}25%{opacity:1}100%{opacity:0;transform:translate(var(--x1),var(--y1)) scale(1.3)}}
+@keyframes cxPlane{from{transform:translateX(-340px)}to{transform:translateX(110vw)}}
+@media (prefers-reduced-motion:reduce){.cx-p1,.cx-plane{display:none}.cx-layer,.cx-card{animation:none}}
+
+/* Comunidad: números reales y comentarios de personas reales */
+.cm-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.cm-stat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.cm-stat b{display:block;font:800 clamp(1.5rem,4vw,2.1rem)/1.1 var(--f-display);color:var(--aqua-deep)}
+.cm-stat span{font-size:13.5px;color:var(--ink-2)}
+.cm-src{font-size:12.5px;color:var(--ink-2);margin-top:8px}
+.cm-grid{display:grid;gap:22px;margin-top:26px}
+@media (min-width:860px){.cm-grid{grid-template-columns:1.15fr 1fr;align-items:start}}
+.cm-list{display:grid;gap:12px}
+.cm-item{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:grid;gap:5px}
+.cm-item small{color:var(--ink-2)}
+.cm-stars{color:#E0A100;letter-spacing:2px;font-size:16px}
+.cm-empty{background:var(--surface);border:1.5px dashed var(--line);border-radius:14px;padding:22px;color:var(--ink-2)}
+.cm-empty b{display:block;font:800 1.2rem/1.2 var(--f-display);color:var(--ink);margin-bottom:4px}
+.cm-form{background:var(--surface);border:2px solid var(--ink);border-radius:16px;padding:20px;box-shadow:6px 6px 0 #FFD25A}
+.cm-form h3{font:800 1.35rem/1.15 var(--f-display)}
+.cm-rate{display:flex;flex-direction:row-reverse;justify-content:flex-end;gap:2px;border:0;padding:0;margin:0}
+.cm-fs{border:0;padding:0;margin:0;min-width:0}.cm-fs legend{padding:0;font:600 13.5px var(--f-body);margin-bottom:4px}
+.cm-rate input{position:absolute;opacity:0;width:1px;height:1px}
+.cm-rate label{display:block;font-size:30px;line-height:1;color:var(--line);cursor:pointer;padding:0 2px}
+.cm-rate input:checked~label,.cm-rate label:hover,.cm-rate label:hover~label{color:#E0A100}
+.cm-rate input:focus-visible+label{outline:3px solid var(--aqua-deep);border-radius:4px}
+.cm-two{display:grid;gap:14px}
+@media (min-width:520px){.cm-two{grid-template-columns:1fr 1fr}}
+.cm-hp{position:absolute;left:-9999px}
+.cm-msg{font-size:14px;min-height:1.2em;color:var(--ink-2)}
+.cm-legal{font-size:12.5px;color:var(--ink-2)}
 </style>
 
 </head>
@@ -506,10 +713,12 @@ button{font:inherit;color:inherit}
       <span>Mas<b>mundo</b>k</span>
     </a>
     <nav class="nav" aria-label="Secciones">
+      <a href="#buscar">Vuelos y tours</a>
       <a href="#destinos">Destinos</a>
       <a href="#descuentos">Descuentos</a>
       <a href="#noticias">News</a>
       <a href="#videos">Videos y redes</a>
+      <a href="#comunidad">Comunidad</a>
       <a href="#trabaja">Trabajá con nosotros</a>
     </nav>
   </div>
@@ -550,6 +759,83 @@ button{font:inherit;color:inherit}
           </div>
           <div class="bp-stub"><svg class="ic" viewBox="0 0 24 24" style="width:26px;height:26px"><path d="M2 16l20-6-3-3-6 2-6-5-3 1 4 6-5 2z"/></svg></div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BUSCADORES: los textos y links se cambian en AFILIADOS (dentro del script) ============ -->
+  <section class="sk" id="buscar">
+    <div class="sk-sky" aria-hidden="true">
+      <svg class="l" viewBox="0 0 300 110" fill="currentColor"><path d="M0 110V82l34-30 22 20 40-52 34 44 26-22 44 40 30-14 40 34z"/><path d="M96 20l-11 14 11-4 10 5z" fill="#fff" opacity=".85"/><path d="M0 110c30-16 70-14 96-6 30-14 74-16 110 0 22-6 50-4 64 6z" fill="#fff" opacity=".45"/></svg>
+      <svg class="r" viewBox="0 0 300 110" fill="currentColor"><path d="M10 110V76h22v-16h20v30h16V40h26v26h16V22l14-12 14 12v50h22V52h24v28h18V66h20v44z"/><path d="M0 110c40-14 96-14 126-4 38-14 110-14 174 4z" fill="#fff" opacity=".45"/></svg>
+    </div>
+    <div class="in">
+      <div class="sk-head">
+        <span class="sk-kick">Soñá grande, gastá mejor</span>
+        <h2>Nosotros cuidamos tu plata</h2>
+        <div class="sk-from">desde
+          <label><select id="skFrom" aria-label="Ciudad de salida"></select><svg class="ic" viewBox="0 0 24 24" style="width:14px;height:14px"><path d="M4 20l1-4L16 5l3 3L8 19z"/></svg></label>
+        </div>
+      </div>
+      <div class="sk-tabs" role="group" aria-label="Qué querés buscar">
+        <button type="button" class="sk-tab" data-mode="vuelos" aria-pressed="true">Vuelos</button>
+        <button type="button" class="sk-tab" data-mode="hoteles" aria-pressed="false">Hoteles</button>
+        <button type="button" class="sk-tab" data-mode="paquetes" aria-pressed="false">Vuelo + hotel</button>
+      </div>
+      <form id="skForm" autocomplete="off">
+        <div class="sk-pillwrap">
+          <div class="sk-pill">
+            <svg class="ic" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z"/></svg>
+            <input id="skQ" type="text" aria-label="A dónde y cuándo querés viajar" placeholder="¿A dónde y cuándo querés viajar?">
+            <button class="sk-go" type="submit" aria-label="Buscar"><svg class="ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+          </div>
+          <div class="sk-sug" id="skSug" hidden></div>
+        </div>
+        <div class="sk-filters">
+          <label class="sk-chip" id="skTripWrap"><select id="skTrip" aria-label="Tipo de viaje"><option value="rt">Ida y vuelta</option><option value="ow">Solo ida</option></select></label>
+          <label class="sk-chip"><span id="skPaxL">Pasajeros</span><select id="skPax"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></label>
+          <label class="sk-chip"><span id="skOutL">Salida</span><input type="date" id="skOut"></label>
+          <label class="sk-chip" id="skRetWrap"><span id="skRetL">Vuelta</span><input type="date" id="skRet"></label>
+        </div>
+      </form>
+      <p class="sk-msg" id="skMsg" role="status" aria-live="polite"></p>
+      <div id="skFlag"></div>
+
+      <div class="sk-cmp" id="skCmp">
+        <h3>El mismo vuelo, distintos precios. Hay que saber comprar.</h3>
+        <p>Cada sitio vende el mismo asiento a un precio diferente. Te dejamos dónde mirar para que no gastes de más.</p>
+        <div id="skAgs"></div>
+        <ul class="sk-tips">
+          <li><b>Compará antes de pagar</b>Abrí dos sitios con las mismas fechas: el precio puede cambiar.</li>
+          <li><b>Mirá el precio final</b>Sumá valija, asiento y recargos antes de decidir.</li>
+          <li><b>Mové un par de días</b>Salir un día antes o después a veces baja la tarifa.</li>
+        </ul>
+        <p class="sk-gl">Y para tu viaje, con nuestros códigos</p>
+        <div class="sk-codes" id="skCodes"></div>
+        <p class="sk-note">Los precios los muestra cada sitio en vivo y pueden cambiar; nosotros no los fijamos. Algunos links son de afiliado: si comprás con ellos nos llevamos una comisión, y vos no pagás de más.</p>
+      </div>
+
+      <div class="sk-sh"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg><span id="skIdeasT"></span></div>
+      <p class="sk-sub">Tocá un destino y mirá el precio de hoy en cada sitio.</p>
+      <div class="sk-cards" id="skCards"></div>
+
+      <div id="stA"></div>
+
+      <div class="sk-gyg" id="tours">
+        <div class="sk-head">
+          <span class="sk-kick">Tours, entradas y excursiones</span>
+          <h2>¿Qué querés hacer allá?</h2>
+        </div>
+        <div class="sk-pillwrap" style="margin-top:16px">
+          <form class="sk-pill" id="gyForm">
+            <svg class="ic" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            <input id="gyQ" type="text" aria-label="Ciudad o actividad" placeholder="Ciudad o actividad: templos en Bangkok…">
+            <a class="sk-go" id="gyGo" target="_blank" rel="noopener sponsored" aria-label="Buscar en GetYourGuide"><svg class="ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
+          </form>
+        </div>
+        <div class="sk-q" id="gyQuick"></div>
+        <div class="sk-coupon">Buscá en GetYourGuide y usá nuestro código: <code id="gyCode"></code><button type="button" class="btn btn-ghost btn-sm" id="gyCopy">Copiar</button> <span id="gyOff"></span></div>
+        <div id="stB"></div>
       </div>
     </div>
   </section>
@@ -703,6 +989,41 @@ button{font:inherit;color:inherit}
     </div>
   </section>
 
+  <!-- ============ COMUNIDAD: números en SITE y COMUNIDAD, comentarios en COMENTARIOS (dentro del script) ============ -->
+  <section class="band" id="comunidad">
+    <div class="in">
+      <div class="sh">
+        <span class="eyebrow">Nuestra comunidad</span>
+        <h2>Viajamos juntos</h2>
+        <p>Esto es lo que venimos construyendo con ustedes. Si la página te sirvió, contanos: tu comentario ayuda a otros viajeros.</p>
+      </div>
+      <div class="cm-stats" id="cmStats"></div>
+      <p class="cm-src" id="cmSrc"></p>
+      <div class="cm-grid">
+        <div class="cm-list" id="cmList"></div>
+        <form class="cm-form form" id="cmForm">
+          <h3>Dejanos tu comentario</h3>
+          <fieldset class="cm-fs"><legend>¿Cuántas estrellas nos ponés?</legend><div class="cm-rate">
+            <input type="radio" name="cmS" id="cmS5" value="5" checked><label for="cmS5" aria-label="5 estrellas">★</label>
+            <input type="radio" name="cmS" id="cmS4" value="4"><label for="cmS4" aria-label="4 estrellas">★</label>
+            <input type="radio" name="cmS" id="cmS3" value="3"><label for="cmS3" aria-label="3 estrellas">★</label>
+            <input type="radio" name="cmS" id="cmS2" value="2"><label for="cmS2" aria-label="2 estrellas">★</label>
+            <input type="radio" name="cmS" id="cmS1" value="1"><label for="cmS1" aria-label="1 estrella">★</label>
+          </div></fieldset>
+          <div class="cm-two">
+            <label>Tu nombre<input id="cmN" required maxlength="40" placeholder="Como quieras aparecer"></label>
+            <label>De dónde sos<input id="cmP" maxlength="40" placeholder="País o ciudad"></label>
+          </div>
+          <label>Tu comentario<textarea id="cmT" required maxlength="500" placeholder="¿Qué te sirvió? ¿A dónde viajaste?"></textarea></label>
+          <input class="cm-hp" id="cmH" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button class="btn btn-primary" type="submit">Enviar comentario</button>
+          <p class="cm-msg" id="cmMsg" role="status" aria-live="polite"></p>
+          <p class="cm-legal">Lo leemos y lo publicamos con tu nombre y tu lugar.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
   <section class="band help" id="apoyo"><div class="in" id="helpHome"></div></section>
 </div>
 
@@ -746,6 +1067,60 @@ const PARTNERS = [
   { name:'Assist 365', kind:'Seguro de viaje', blurb:'Asistencia médica y cobertura de viaje. El voucher ya viaja en el link.', code:'MASMUNDO', url:'https://assist-365.com/?voucher=MASMUNDO', cta:'Cotizar seguro' },
   { name:'GetYourGuide', kind:'Tours y entradas', blurb:'Reservá tours y entradas. Instalá la app con nuestro link y usá el código.', code:'MASMUNDOK5', off:'5% OFF', url:'https://gyg.me/masmundok-app', cta:'Instalar la app' }
 ];
+
+/* ============ AFILIADOS: pegá acá tus códigos y todos los buscadores los usan ============
+   marker: tu ID de partner de Travelpayouts · proyecto: el ID del proyecto (trs)
+   p y campaign: los códigos de cada marca, salen del generador de links de Travelpayouts.
+   Una marca sin p no se muestra en la web publicada, así ningún clic queda sin comisión. */
+const AFILIADOS = {
+  travelpayouts: { marker: '', proyecto: '' },
+  getyourguide: { partnerId: '', cmp: 'masmundok', sinId: 'https://gyg.me/masmundok-app' },
+  vuelos: [
+    { name:'Aviasales', nota:'Compara aerolíneas y agencias', p:'4114', campaign:'100', home:'https://www.aviasales.com/',
+      url: q => 'https://www.aviasales.com/search/' + q.o.c + ddmm(q.out) + q.d.c + (q.oneway ? '' : ddmm(q.ret)) + q.pax + '?currency=usd' },
+    { name:'Trip.com', nota:'Fuerte en Asia y vuelos largos', p:'', campaign:'', home:'https://www.trip.com/flights/',
+      url: q => 'https://www.trip.com/flights/showfarefirst?dcity=' + q.o.c.toLowerCase() + '&acity=' + q.d.c.toLowerCase() + '&ddate=' + q.out + (q.oneway ? '&triptype=ow' : '&rdate=' + q.ret + '&triptype=rt') + '&class=y&quantity=' + q.pax + '&locale=es-ES&curr=USD' },
+    { name:'KAYAK', nota:'Mira cientos de sitios a la vez', p:'', campaign:'', home:'https://www.kayak.com.ar/flights',
+      url: q => 'https://www.kayak.com.ar/flights/' + q.o.c + '-' + q.d.c + '/' + q.out + (q.oneway ? '' : '/' + q.ret) + '/' + q.pax + 'adults' }
+  ],
+  hoteles: [
+    { name:'Agoda', nota:'Suele ganar en Asia', p:'', campaign:'', home:'https://www.agoda.com/es-ar/',
+      url: q => 'https://www.agoda.com/es-ar/search?textToSearch=' + encodeURIComponent(q.d.n) + '&checkIn=' + q.out + '&checkOut=' + q.ret + '&adults=' + q.pax + '&rooms=1&currency=USD' },
+    { name:'Trip.com Hoteles', nota:'Ofertas con vuelo incluido', p:'', campaign:'', home:'https://www.trip.com/hotels/',
+      url: q => 'https://www.trip.com/hotels/list?searchWord=' + encodeURIComponent(q.d.n) + '&checkin=' + q.out + '&checkout=' + q.ret + '&adult=' + q.pax + '&crn=1&locale=es-ES&curr=USD' }
+  ]
+};
+/* Ciudades del buscador: nombre, código de aeropuerto y otras formas de escribirla */
+const CITIES = [
+  ['Buenos Aires','BUE','Argentina','argentina'],['Córdoba','COR','Argentina'],['Mendoza','MDZ','Argentina'],['Rosario','ROS','Argentina'],['Bariloche','BRC','Argentina'],['Salta','SLA','Argentina'],['Tucumán','TUC','Argentina'],['Neuquén','NQN','Argentina'],['Iguazú','IGR','Argentina','cataratas'],['Ushuaia','USH','Argentina'],['El Calafate','FTE','Argentina','calafate'],
+  ['Río de Janeiro','RIO','Brasil','rio,brasil'],['São Paulo','SAO','Brasil','sao paulo'],['Florianópolis','FLN','Brasil','floripa'],['Salvador de Bahía','SSA','Brasil','salvador,bahia'],['Foz de Iguazú','IGU','Brasil','foz'],
+  ['Santiago de Chile','SCL','Chile','santiago,chile'],['Montevideo','MVD','Uruguay','uruguay'],['Asunción','ASU','Paraguay','paraguay'],['Lima','LIM','Perú','peru'],['Cusco','CUZ','Perú','machu picchu'],['La Paz','LPB','Bolivia','bolivia'],['Santa Cruz de la Sierra','SRZ','Bolivia','santa cruz'],
+  ['Bogotá','BOG','Colombia','colombia'],['Cartagena','CTG','Colombia'],['Medellín','MDE','Colombia'],['Quito','UIO','Ecuador','ecuador'],['Cancún','CUN','México'],['Ciudad de México','MEX','México','cdmx,mexico'],['Punta Cana','PUJ','República Dominicana','dominicana'],['La Habana','HAV','Cuba','cuba'],['Aruba','AUA','Aruba'],['Panamá','PTY','Panamá'],
+  ['Miami','MIA','Estados Unidos'],['Orlando','ORL','Estados Unidos'],['Nueva York','NYC','Estados Unidos','new york,estados unidos'],['Los Ángeles','LAX','Estados Unidos','los angeles'],
+  ['Madrid','MAD','España','espana'],['Barcelona','BCN','España'],['Roma','ROM','Italia','italia'],['París','PAR','Francia','francia'],['Londres','LON','Reino Unido','inglaterra'],['Lisboa','LIS','Portugal','portugal'],['Ámsterdam','AMS','Países Bajos','holanda'],['Estambul','IST','Turquía','turquia'],
+  ['Dubái','DXB','Emiratos Árabes','dubai,emiratos'],['Doha','DOH','Qatar','qatar'],['Riad','RUH','Arabia Saudita','arabia'],['El Cairo','CAI','Egipto','cairo,egipto'],
+  ['Bangkok','BKK','Tailandia','tailandia'],['Phuket','HKT','Tailandia'],['Chiang Mai','CNX','Tailandia'],['Bali','DPS','Indonesia','indonesia'],['Singapur','SIN','Singapur'],['Kuala Lumpur','KUL','Malasia','malasia'],['Hanói','HAN','Vietnam','hanoi,vietnam'],['Ho Chi Minh','SGN','Vietnam'],
+  ['Tokio','TYO','Japón','japon'],['Osaka','OSA','Japón'],['Seúl','SEL','Corea del Sur','seul,corea'],['Pekín','BJS','China','pekin,beijing,china'],['Shanghái','SHA','China','shanghai'],['Hong Kong','HKG','Hong Kong'],['Sídney','SYD','Australia','sidney,australia']
+].map(c => ({ n:c[0], c:c[1], p:c[2], k:[c[0]].concat(c[3] ? c[3].split(',') : []).map(sinTilde) }));
+const IDEAS = [ ['tailandia','BKK'], ['brasil','RIO'], ['egipto','CAI'], ['china','BJS'], ['aruba','AUA'], ['peru','LIM'] ];
+const FESTEJOS = [
+  { v:'jump', t:'¡Gracias, viajero!', s:'Con tu aporte seguimos actualizando la info para todos.', fx:'confetti' },
+  { v:'high5', t:'¡Chocá esos cinco!', s:'Cada aporte nos ayuda a sostener la página.', fx:'hearts' },
+  { v:'selfie', t:'¡Esta foto va para vos!', s:'Gracias por acompañarnos en cada viaje.', fx:'photos' },
+  { v:'toss', t:'¡Valijas al aire!', s:'Gracias a vos seguimos contando lo que aprendemos viajando.', fx:'confetti' },
+  { v:'dance', t:'¡Esto se festeja!', s:'Sos parte de Masmundok. ¡Gracias!', fx:'plane' }
+];
+
+/* ============ COMUNIDAD: números reales. Actualizalos cuando cambien. ============ */
+const COMUNIDAD = {
+  stats: [ ['700 mil','vistas por mes en nuestras redes'], ['16 mil','seguidores en TikTok'], ['7 mil','seguidores en Instagram'] ],
+  fuente: 'Datos de audiencia de octubre de 2026.',
+  /* Contador real de visitas a la web: suma 1 por cada ingreso. Se muestra recién al llegar a minimoVisible. */
+  contador: 'https://abacus.jasoncameron.dev/hit/masmundok-viajes/visitas',
+  minimoVisible: 1000
+};
+/* Comentarios aprobados: solo de personas reales. Formato: { n:'Nombre', p:'País', s:5, t:'Comentario' } */
+const COMENTARIOS = [];
 
 /* ============ Banderas dibujadas (no dependen de emojis) ============ */
 function star(cx, cy, r, rot) {
@@ -1384,7 +1759,7 @@ function helpHTML() {
     '<p>Contanos y la seguimos mejorando.</p><div class="fb-btns"><button type="button" class="btn btn-primary" data-fb="si">Sí, me sirvió</button><button type="button" class="btn btn-ghost" data-fb="no">Le falta algo</button></div><p class="fb-msg" role="status" aria-live="polite"></p></div>' +
     '<div class="sup"><h3>¡Siempre pueden contar con nosotros para lo que necesiten!</h3>' +
     '<p>Si querés apoyar nuestro trabajo, invitanos un cafecito o aportá por PayPal.</p>' +
-    '<div class="sup-btns"><a class="btn btn-primary" href="' + SITE.cafecito + '" target="_blank" rel="noopener">Invitanos un cafecito</a><a class="btn btn-ghost" href="https://www.paypal.com/" target="_blank" rel="noopener">Abrir PayPal</a></div>' +
+    '<div class="sup-btns"><a class="btn btn-primary" data-cx href="' + SITE.cafecito + '" target="_blank" rel="noopener">Invitanos un cafecito</a><a class="btn btn-ghost" data-cx href="' + linkPayPal() + '" target="_blank" rel="noopener">Aportar por PayPal</a></div>' +
     '<div class="mailrow"><span>PayPal</span><code>' + esc(SITE.paypal) + '</code><button type="button" class="btn btn-ghost btn-sm" data-pp>Copiar</button></div></div></div>';
 }
 function bindHelp(root, ctx) {
@@ -1756,6 +2131,257 @@ function initSearch() {
   $('#qgo').addEventListener('click', () => { if (!matches.length) drawResults(inp.value); if (matches[sel]) go(matches[sel].slug); });
 }
 
+/* ============ Buscadores de vuelos, hoteles, paquetes y tours ============ */
+function sinTilde(s) { return String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim(); }
+function ddmm(iso) { return iso.slice(8, 10) + iso.slice(5, 7); }
+function isoDe(dt) { return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0') + '-' + String(dt.getDate()).padStart(2, '0'); }
+function sumarDias(iso, n) { const p = iso.split('-').map(Number); return isoDe(new Date(p[0], p[1] - 1, p[2] + n)); }
+function fechaCorta(iso) { const p = iso.split('-').map(Number); return new Date(p[0], p[1] - 1, p[2]).toLocaleDateString('es-AR', { day:'numeric', month:'short' }); }
+function linkTP(a, url) {
+  const t = AFILIADOS.travelpayouts;
+  if (!t.marker || !a.p) return url;
+  return 'https://tp.media/r?marker=' + encodeURIComponent(t.marker) + (t.proyecto ? '&trs=' + encodeURIComponent(t.proyecto) : '') + '&p=' + a.p + '&u=' + encodeURIComponent(url) + (a.campaign ? '&campaign_id=' + a.campaign : '');
+}
+function marcasActivas(lista) { return AFILIADOS.travelpayouts.marker ? lista.filter(a => a.p) : lista; }
+function linkGYG(term) {
+  const g = AFILIADOS.getyourguide;
+  if (!g.partnerId) return g.sinId;
+  return 'https://www.getyourguide.com/s/?q=' + encodeURIComponent(term || '') + '&partner_id=' + encodeURIComponent(g.partnerId) + '&cmp=' + encodeURIComponent(g.cmp);
+}
+function buscarCiudad(txt) {
+  const t = ' ' + sinTilde(txt).replace(/[^a-z0-9 ]/g, ' ') + ' ';
+  let best = null, len = 0;
+  CITIES.forEach(c => c.k.forEach(k => { if (k.length > len && t.indexOf(' ' + k + ' ') >= 0) { best = c; len = k.length; } }));
+  return best;
+}
+function leerTexto(txt) {
+  const t = sinTilde(txt), meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'], hoy = new Date(), r = {};
+  const m = meses.findIndex(x => new RegExp('\\b' + x + '\\b').test(t));
+  if (m >= 0) {
+    const y = hoy.getFullYear() + (m < hoy.getMonth() || (m === hoy.getMonth() && hoy.getDate() > 15) ? 1 : 0);
+    r.out = isoDe(new Date(y, m, 15));
+  }
+  const d = t.match(/(\d+)\s*dias?/), s = t.match(/(\d+|una|dos|tres)?\s*semanas?/);
+  if (d) r.dias = +d[1];
+  else if (s) r.dias = 7 * ({ una:1, dos:2, tres:3 }[s[1]] || +s[1] || 1);
+  return r;
+}
+function initBuscadores() {
+  const mode = { v:'vuelos' }, q = $('#skQ'), sug = $('#skSug'), msg = $('#skMsg'), from = $('#skFrom'), out = $('#skOut'), ret = $('#skRet'), trip = $('#skTrip'), pax = $('#skPax');
+  const hoy = isoDe(new Date());
+  out.min = hoy; ret.min = hoy;
+  from.innerHTML = CITIES.filter(c => ['Argentina','Brasil','Chile','Uruguay','Paraguay','Perú','Bolivia','Colombia','México'].indexOf(c.p) >= 0).map(c => '<option value="' + c.c + '">' + esc(c.n) + '</option>').join('');
+  const origen = () => { const o = from.options[from.selectedIndex]; return { n:o.textContent, c:o.value }; };
+  const ideas = () => { $('#skIdeasT').textContent = IDEAS.length + ' ideas desde ' + origen().n + ' para un viaje de una semana'; };
+
+  if (!AFILIADOS.travelpayouts.marker || !AFILIADOS.getyourguide.partnerId) {
+    $('#skFlag').innerHTML = '<p class="sk-flag"><b>Vista previa:</b> faltan los códigos de Travelpayouts y GetYourGuide en el bloque AFILIADOS. Hasta cargarlos, estas búsquedas no generan comisión.</p>';
+  }
+  function ponerMarcas(qr) {
+    const grupo = (titulo, lista, fn) => { const ls = marcasActivas(lista); return ls.length ? '<p class="sk-gl">' + titulo + '</p><div class="sk-ags">' + ls.map(a => {
+      const url = linkTP(a, qr ? a.url(fn(qr)) : a.home);
+      return '<a class="sk-ag" href="' + esc(url) + '" target="_blank" rel="noopener sponsored"><span><b>' + esc(a.name) + '</b><small>' + esc(a.nota) + '</small></span><em>' + (qr ? 'Ver precio →' : 'Abrir →') + '</em></a>'; }).join('') + '</div>' : ''; };
+    const ruta = !qr ? '' : '<span class="sk-route">' + (mode.v === 'hoteles' ? esc(qr.d.n) : esc(qr.o.n) + ' → ' + esc(qr.d.n)) + ' · ' + fechaCorta(qr.out) + (qr.oneway && mode.v === 'vuelos' ? '' : ' – ' + fechaCorta(qr.ret)) + ' · ' + qr.pax + (mode.v === 'hoteles' ? ' huésp.' : ' pas.') + '</span>';
+    const paraHotel = x => Object.assign({}, x, { ret: x.oneway ? sumarDias(x.out, 7) : x.ret });
+    let h = ruta;
+    if (mode.v !== 'hoteles') h += grupo('1. Mirá el vuelo en cada sitio', AFILIADOS.vuelos, x => x);
+    if (mode.v !== 'vuelos') h += grupo((mode.v === 'paquetes' ? '2. Sumá' : 'Mirá') + ' el hotel con las mismas fechas', AFILIADOS.hoteles, paraHotel);
+    $('#skAgs').innerHTML = h;
+  }
+  function pintarModo() {
+    document.querySelectorAll('.sk-tab').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === mode.v)));
+    const hotel = mode.v === 'hoteles';
+    $('#skTripWrap').hidden = mode.v !== 'vuelos';
+    $('#skPaxL').textContent = hotel ? 'Huéspedes' : 'Pasajeros';
+    $('#skOutL').textContent = hotel ? 'Entrada' : 'Salida';
+    $('#skRetL').textContent = hotel ? 'Salida' : 'Vuelta';
+    $('#skRetWrap').hidden = mode.v === 'vuelos' && trip.value === 'ow';
+    q.placeholder = hotel ? '¿En qué ciudad buscás hotel?' : mode.v === 'paquetes' ? '¿A dónde querés ir? Vuelo y hotel juntos' : '¿A dónde y cuándo querés viajar?';
+    const h3 = $('#skCmp h3');
+    h3.textContent = hotel ? 'La misma habitación, distintos precios. Hay que saber comprar.' : 'El mismo vuelo, distintos precios. Hay que saber comprar.';
+    ponerMarcas(null);
+  }
+  function resolver(dest) {
+    const texto = leerTexto(q.value);
+    if (texto.out && !out.value) out.value = texto.out;
+    const salida = out.value && out.value >= hoy ? out.value : sumarDias(hoy, 30);
+    const dias = texto.dias || 7;
+    let vuelta = ret.value;
+    if (!vuelta || vuelta <= salida || texto.dias) vuelta = sumarDias(salida, dias);
+    out.value = salida; ret.value = vuelta;
+    const oneway = mode.v === 'vuelos' && trip.value === 'ow';
+    const qr = { o:origen(), d:dest, out:salida, ret:vuelta, pax:+pax.value, oneway:oneway };
+    ponerMarcas(qr);
+    msg.className = 'sk-msg'; msg.textContent = 'Listo. Abrí cada sitio y compará el precio final.';
+    $('#skCmp').scrollIntoView({ block:'start' });
+  }
+  async function porApi(term) {
+    try {
+      const ctl = new AbortController(), tm = setTimeout(() => ctl.abort(), 3500);
+      const r = await fetch('https://autocomplete.travelpayouts.com/places2?term=' + encodeURIComponent(term) + '&locale=es&types[]=city', { signal:ctl.signal });
+      clearTimeout(tm);
+      const a = await r.json();
+      if (a && a[0] && a[0].code) return { n:a[0].name, c:a[0].code, p:a[0].country_name || '' };
+    } catch (e) {}
+    return null;
+  }
+  $('#skForm').addEventListener('submit', async e => {
+    e.preventDefault(); sug.hidden = true;
+    const v = q.value.trim();
+    if (!v) { msg.className = 'sk-msg err'; msg.textContent = 'Escribí a dónde querés ir, por ejemplo: Bangkok en enero.'; q.focus(); return; }
+    const local = buscarCiudad(v);
+    if (local) return resolver(local);
+    msg.className = 'sk-msg'; msg.textContent = 'Buscando esa ciudad…';
+    const limpio = sinTilde(v).replace(/\b(en|de|a|para|por|una?|dos|tres|semanas?|\d+|dias?|enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)\b/g, ' ').replace(/\s+/g, ' ').trim();
+    const api = await porApi(limpio || v);
+    if (api) return resolver(api);
+    msg.className = 'sk-msg err'; msg.textContent = 'No encontramos esa ciudad. Probá con la ciudad principal o elegí un destino de abajo.';
+  });
+  q.addEventListener('input', () => {
+    const t = sinTilde(q.value);
+    if (t.length < 2) { sug.hidden = true; return; }
+    const hits = CITIES.filter(c => c.k.some(k => k.indexOf(t) === 0 || k.indexOf(' ' + t) >= 0)).slice(0, 6);
+    sug.innerHTML = hits.map(c => '<button type="button" data-c="' + c.c + '"><span>' + esc(c.n) + '</span><small>' + esc(c.p) + ' · ' + c.c + '</small></button>').join('');
+    sug.hidden = !hits.length;
+  });
+  sug.addEventListener('click', e => { const b = e.target.closest('[data-c]'); if (!b) return; const c = CITIES.find(x => x.c === b.dataset.c); q.value = c.n; sug.hidden = true; resolver(c); });
+  document.addEventListener('click', e => { if (!e.target.closest('.sk-pillwrap')) sug.hidden = true; });
+  document.querySelectorAll('.sk-tab').forEach(b => b.addEventListener('click', () => { mode.v = b.dataset.mode; pintarModo(); msg.textContent = ''; }));
+  trip.addEventListener('change', pintarModo);
+  from.addEventListener('change', ideas);
+
+  $('#skCards').innerHTML = IDEAS.map(i => {
+    const d = DEST.find(x => x.slug === i[0]), c = CITIES.find(x => x.c === i[1]);
+    return '<button type="button" class="sk-card" data-idea="' + i[1] + '"><span class="sk-art" style="--c1:' + d.c1 + '">' + sceneSVG(d.code) + '<b>' + esc(d.name) + '</b><i>' + esc(d.tagline) + '</i></span><span class="sk-card-b"><span>' + esc(c.n) + ' · ida y vuelta</span><span class="sk-badge">Ver precio de hoy</span></span></button>';
+  }).join('');
+  $('#skCards').addEventListener('click', e => { const b = e.target.closest('[data-idea]'); if (!b) return; const c = CITIES.find(x => x.c === b.dataset.idea); q.value = c.n; if (mode.v === 'hoteles') { mode.v = 'vuelos'; pintarModo(); } resolver(c); });
+  $('#skCodes').innerHTML = PARTNERS.map(p => '<a href="' + esc(p.url) + '" target="_blank" rel="noopener sponsored">' + esc(p.name) + ' <code>' + esc(p.code) + '</code></a>').join('');
+  ideas(); pintarModo();
+
+  /* GetYourGuide */
+  const gq = $('#gyQ'), gg = $('#gyGo'), gy = PARTNERS.find(p => p.name === 'GetYourGuide');
+  const syncG = () => { gg.href = linkGYG(gq.value.trim()); };
+  gq.addEventListener('input', syncG); syncG();
+  $('#gyForm').addEventListener('submit', e => { e.preventDefault(); gg.click(); });
+  $('#gyQuick').innerHTML = ['Templos en Bangkok','Cataratas del Iguazú','Pirámides de Egipto','Muralla China','Machu Picchu','Cristo Redentor'].map(t => '<a target="_blank" rel="noopener sponsored" href="' + esc(linkGYG(t)) + '">' + esc(t) + '</a>').join('');
+  $('#gyCode').textContent = gy.code; $('#gyOff').textContent = gy.off || '';
+  $('#gyCopy').addEventListener('click', e => copyText(gy.code, e.currentTarget, $('#gyCode')));
+
+  $('#stA').innerHTML = tiraApoyo('Si esta búsqueda te ayudó a ahorrar, invitanos un cafecito', 'Colaborá con la página para que podamos seguir actualizando la información para los viajeros.');
+  $('#stB').innerHTML = tiraApoyo('Vos disfrutás el viaje, nosotros festejamos con vos', 'Tu aporte nos ayuda a seguir probando tours y contándote cuáles valen la pena.');
+}
+
+/* ============ Yesi y Pablo: dibujo y festejos ============ */
+function coupleSVG(cls) {
+  const sk = '#E8B48C', skD = '#D39B72', hairY = '#5A2F1B', hairP = '#3A2A20';
+  return '<svg class="cxs ' + (cls || '') + '" viewBox="0 0 240 205" aria-hidden="true">' +
+    '<ellipse cx="120" cy="197" rx="108" ry="7" fill="#000" opacity=".14"/>' +
+    /* valija */
+    '<g class="cx-case"><path d="M17 136v-11h16v11" fill="none" stroke="#7B4B2A" stroke-width="4"/><rect x="6" y="136" width="38" height="52" rx="6" fill="#D9482B" stroke="#7E2614" stroke-width="2.5"/><path d="M17 136v52M33 136v52" stroke="#7E2614" stroke-width="2"/><circle cx="25" cy="154" r="6" fill="#FFD25A"/><rect x="11" y="168" width="11" height="8" rx="1.5" fill="#3FCFCB"/><circle cx="14" cy="191" r="3.5" fill="#333"/><circle cx="36" cy="191" r="3.5" fill="#333"/></g>' +
+    /* Yesi */
+    '<g class="cx-y">' +
+      '<rect x="54" y="84" width="48" height="50" rx="11" fill="#8A5A34"/><rect x="60" y="112" width="36" height="17" rx="5" fill="#6F4526"/>' +
+      '<path d="M66 148v40M90 148v40" stroke="' + sk + '" stroke-width="10" stroke-linecap="round"/><path d="M58 192h16M84 192h16" stroke="#FFF" stroke-width="7" stroke-linecap="round"/><path d="M58 192h16M84 192h16" stroke="#0A7A80" stroke-width="3" stroke-linecap="round"/>' +
+      '<path d="M60 124h36l5 28H55z" fill="#2F5E9E"/>' +
+      '<path d="M60 88q18-8 36 0l1 40H59z" fill="#3FCFCB"/><path d="M78 96l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z" fill="#fff" opacity=".85"/>' +
+      '<g class="cx-yl"><path d="M62 92 48 118" stroke="#3FCFCB" stroke-width="10" stroke-linecap="round"/><path d="M48 118 44 126" stroke="' + sk + '" stroke-width="9" stroke-linecap="round"/></g>' +
+      '<g class="cx-yr"><path d="M94 92 108 118" stroke="#3FCFCB" stroke-width="10" stroke-linecap="round"/><path d="M108 118 112 126" stroke="' + sk + '" stroke-width="9" stroke-linecap="round"/></g>' +
+      '<path d="M56 56q-16 14-11 42 3 8 9 8-5-24 8-44z" fill="' + hairY + '"/>' +
+      '<rect x="72" y="74" width="12" height="14" rx="4" fill="' + skD + '"/><circle cx="78" cy="60" r="22" fill="' + sk + '"/>' +
+      '<path d="M56 60q2-24 22-24t22 24q-8-14-22-14t-22 14z" fill="' + hairY + '"/>' +
+      '<path d="M50 44q28-10 56 0" fill="none" stroke="#E9C877" stroke-width="7" stroke-linecap="round"/><path d="M58 40q2-18 20-18t20 18q-20-7-40 0z" fill="#F4D98C"/><path d="M58 39q20-7 40 0" fill="none" stroke="#D9482B" stroke-width="3.5"/>' +
+      '<circle cx="70" cy="60" r="2.6" fill="#2A1A10"/><circle cx="87" cy="60" r="2.6" fill="#2A1A10"/><circle cx="63" cy="67" r="3.5" fill="#F29A86" opacity=".65"/><circle cx="94" cy="67" r="3.5" fill="#F29A86" opacity=".65"/><path d="M70 68q8 10 17 0z" fill="#8E2B1E"/>' +
+    '</g>' +
+    /* Pablo */
+    '<g class="cx-p">' +
+      '<rect x="134" y="78" width="54" height="58" rx="12" fill="#0A7A80"/><rect x="141" y="113" width="40" height="19" rx="5" fill="#075F64"/><path d="M138 86q23-12 46 0" fill="none" stroke="#FFD25A" stroke-width="5"/>' +
+      '<path d="M149 150v38M173 150v38" stroke="' + sk + '" stroke-width="11" stroke-linecap="round"/><path d="M141 192h17M165 192h17" stroke="#FFF" stroke-width="7" stroke-linecap="round"/><path d="M141 192h17M165 192h17" stroke="#D9482B" stroke-width="3" stroke-linecap="round"/>' +
+      '<path d="M141 122h40l3 34h-18l-5-12-5 12h-18z" fill="#74603F"/>' +
+      '<path d="M142 84q19-8 38 0l2 42h-42z" fill="#FFD25A"/><path d="M161 96v30" stroke="#D3A62E" stroke-width="2"/>' +
+      '<path d="M146 82l14 26M176 82l-14 26" stroke="#0A5D62" stroke-width="5"/>' +
+      '<g class="cx-pl"><path d="M144 88 130 116" stroke="#FFD25A" stroke-width="10.5" stroke-linecap="round"/><path d="M130 116 126 125" stroke="' + sk + '" stroke-width="9.5" stroke-linecap="round"/></g>' +
+      '<g class="cx-pr"><path d="M178 88 192 116" stroke="#FFD25A" stroke-width="10.5" stroke-linecap="round"/><path d="M192 116 196 125" stroke="' + sk + '" stroke-width="9.5" stroke-linecap="round"/><g class="cx-cam"><rect x="189" y="124" width="21" height="16" rx="3" fill="#20313A"/><circle cx="199" cy="132" r="5" fill="#8FE3E0" stroke="#fff" stroke-width="1.5"/></g></g>' +
+      '<rect x="155" y="70" width="13" height="14" rx="4" fill="' + skD + '"/><circle cx="161" cy="54" r="23" fill="' + sk + '"/>' +
+      '<path d="M139 58q0 22 22 24t22-24q-4 8-9 8-13-4-26 0-5 0-9-8z" fill="' + hairP + '"/>' +
+      '<path d="M138 46q2-22 23-22t23 22z" fill="#D9482B"/><path d="M161 44h35q4 0 2 4h-37z" fill="#A9301A"/><circle cx="161" cy="33" r="3" fill="#FFD25A"/>' +
+      '<circle cx="153" cy="55" r="2.6" fill="#2A1A10"/><circle cx="171" cy="55" r="2.6" fill="#2A1A10"/><path d="M152 65q9 9 18 0z" fill="#fff" stroke="#7A3A28" stroke-width="1.2"/>' +
+    '</g>' +
+    '<g class="cx-flash"><path d="M206 20l5 16 16 8-16 8-5 16-5-16-16-8 16-8z" fill="#FFF3A6" stroke="#FFD25A" stroke-width="1.5"/></g>' +
+  '</svg>';
+}
+function tiraApoyo(titulo, texto) {
+  return '<aside class="st" aria-label="Apoyá a Masmundok"><div class="st-art">' + coupleSVG() + '</div>' +
+    '<div><h4>' + esc(titulo) + '</h4><p>' + esc(texto) + '</p></div>' +
+    '<span class="st-bill" aria-hidden="true">$</span><span class="st-bill" aria-hidden="true">$</span>' +
+    '<div class="st-btns"><a class="btn btn-primary" data-cx href="' + SITE.cafecito + '" target="_blank" rel="noopener">☕ Invitanos un cafecito</a><a class="btn btn-pp" data-cx href="' + linkPayPal() + '" target="_blank" rel="noopener">Aportar por PayPal</a></div></aside>';
+}
+function linkPayPal() { return 'https://www.paypal.com/donate/?business=' + encodeURIComponent(SITE.paypal) + '&no_recurring=0&currency_code=USD&item_name=' + encodeURIComponent('Apoyo a Masmundok'); }
+const CX = { last:-1, timer:0, pend:false };
+function festejar(origen, texto) {
+  let i; do { i = Math.floor(Math.random() * FESTEJOS.length); } while (i === CX.last);
+  CX.last = i;
+  const f = Object.assign({}, FESTEJOS[i], texto || {}), old = $('.cx-layer'); if (old) old.remove();
+  clearTimeout(CX.timer);
+  const L = document.createElement('div');
+  L.className = 'cx-layer'; L.setAttribute('role', 'status');
+  L.innerHTML = '<div class="cx-card"><div class="cx-bub">' + esc(f.t) + '<small>' + esc(f.s) + '</small></div>' + coupleSVG('v-' + f.v) + '</div>';
+  document.body.appendChild(L);
+  const W = innerWidth, H = innerHeight, tx = W / 2, ty = H / 2 + 40;
+  const ox = origen ? origen.x : W / 2, oy = origen ? origen.y : H - 60;
+  const bit = (cls, css, inner) => { const e = document.createElement('div'); e.className = 'cx-p1 ' + cls; Object.keys(css).forEach(k => e.style.setProperty(k, css[k])); if (inner) e.innerHTML = inner; L.appendChild(e); };
+  for (let n = 0; n < 12; n++) bit('cx-bill', { '--x0':ox - 18 + 'px', '--y0':oy - 12 + 'px', '--x1':tx - 60 + Math.random() * 120 + 'px', '--y1':ty - 50 + Math.random() * 90 + 'px', '--r':-30 + Math.random() * 60 + 'deg', '--d':.9 + Math.random() * .5 + 's', '--w':n * .1 + 's' }, '$');
+  const R = (a, b) => a + Math.random() * (b - a);
+  if (f.fx === 'confetti') for (let n = 0; n < 44; n++) { const x = R(0, W); bit('cx-conf', { 'background':['#3FCFCB','#FFD25A','#D9482B','#1B66DE','#169A55','#fff'][n % 6], '--x0':x + 'px', '--x1':x + R(-70, 70) + 'px', '--r':R(240, 900) + 'deg', '--d':R(1.9, 3.3) + 's', '--w':R(.1, 1.1) + 's' }); }
+  if (f.fx === 'hearts') for (let n = 0; n < 22; n++) bit('cx-emo', { '--x0':tx + R(-70, 70) + 'px', '--y0':ty + 'px', '--x1':tx + R(-220, 220) + 'px', '--y1':ty - R(160, 340) + 'px', '--d':R(1.5, 2.6) + 's', '--w':R(.1, 1.8) + 's' }, '<svg viewBox="0 0 24 24" width="100%" height="100%"><path d="M12 21C5 15 2 11.5 2 8a5 5 0 0 1 10-1 5 5 0 0 1 10 1c0 3.5-3 7-10 13z" fill="' + (n % 2 ? '#D9482B' : '#FF8FA3') + '"/></svg>');
+  if (f.fx === 'photos') for (let n = 0; n < 12; n++) { const x = R(0, W - 60); bit('cx-pola', { '--x0':x + 'px', '--x1':x + R(-50, 50) + 'px', '--r':R(-50, 50) + 'deg', '--d':R(2.3, 3.2) + 's', '--w':R(.2, 1.2) + 's' }, '<span></span>'); }
+  if (f.fx === 'plane') { const p = document.createElement('div'); p.className = 'cx-plane'; p.innerHTML = '<b>¡Gracias por el aporte!</b><svg viewBox="0 0 60 36"><path d="M4 16h34l14-12h5l-7 14 7 2-7 3H12z" fill="#fff" stroke="#062A30" stroke-width="2"/></svg>'; L.appendChild(p); }
+  CX.timer = setTimeout(() => { L.classList.add('bye'); setTimeout(() => L.remove(), 380); }, 3900);
+}
+function initFestejos() {
+  document.addEventListener('click', e => {
+    const a = e.target.closest('[data-cx]'); if (!a) return;
+    const r = a.getBoundingClientRect();
+    festejar({ x:r.left + r.width / 2, y:r.top + r.height / 2 });
+    CX.pend = true;
+  });
+  /* Cuando vuelve de Cafecito o PayPal, otro festejo distinto */
+  document.addEventListener('visibilitychange', () => { if (!document.hidden && CX.pend) { CX.pend = false; setTimeout(() => festejar(), 350); } });
+}
+
+/* ============ Comunidad: contador real y comentarios ============ */
+function initComunidad() {
+  const box = $('#cmStats');
+  box.innerHTML = COMUNIDAD.stats.map(x => '<div class="cm-stat"><b>' + esc(x[0]) + '</b><span>' + esc(x[1]) + '</span></div>').join('');
+  $('#cmSrc').textContent = COMUNIDAD.fuente;
+  if (COMUNIDAD.contador) {
+    fetch(COMUNIDAD.contador).then(r => r.json()).then(d => {
+      const v = Number(d && d.value);
+      if (v >= COMUNIDAD.minimoVisible) box.insertAdjacentHTML('afterbegin', '<div class="cm-stat"><b>' + v.toLocaleString('es-AR') + '</b><span>visitas a esta página</span></div>');
+    }).catch(() => {});
+  }
+  $('#cmList').innerHTML = COMENTARIOS.length
+    ? COMENTARIOS.map(c => '<article class="cm-item"><span class="cm-stars" aria-label="' + c.s + ' de 5 estrellas">' + '★'.repeat(c.s) + '</span><p>' + esc(c.t) + '</p><small>' + esc(c.n) + (c.p ? ' · ' + esc(c.p) : '') + '</small></article>').join('')
+    : '<div class="cm-empty"><b>Tu comentario puede ser el primero</b>Contanos cómo te ayudó la página y lo sumamos acá.</div>';
+  const f = $('#cmForm'), msg = $('#cmMsg');
+  f.addEventListener('submit', async e => {
+    e.preventDefault();
+    if ($('#cmH').value) return;
+    const s = f.querySelector('input[name=cmS]:checked').value, btn = f.querySelector('button[type=submit]');
+    const texto = 'Estrellas: ' + s + '\nNombre: ' + $('#cmN').value + '\nDe: ' + $('#cmP').value + '\nComentario: ' + $('#cmT').value;
+    btn.disabled = true; msg.textContent = 'Enviando…';
+    try {
+      const r = await fetch(SITE.formEndpoint, { method:'POST', headers:{ 'Content-Type':'application/json', Accept:'application/json' }, body:JSON.stringify({ _subject:'Nuevo comentario en la web de Masmundok', _captcha:'false', message:texto }) });
+      if (!r.ok) throw new Error('envio');
+      msg.textContent = '¡Gracias! Ya nos llegó tu comentario.';
+      f.reset();
+      festejar(null, { t:'¡Gracias por tu comentario!', s:'Lo leemos con muchas ganas.' });
+    } catch (er) {
+      msg.innerHTML = 'No se pudo enviar. Escribinos a <a href="mailto:' + esc(SITE.email) + '">' + esc(SITE.email) + '</a>.';
+    }
+    btn.disabled = false;
+  });
+}
+
 /* ============ Rutas por hash ============ */
 function route() {
   const h = decodeURIComponent(location.hash.slice(1));
@@ -1774,6 +2400,9 @@ function route() {
 renderStatic();
 renderDestinos();
 renderCTA();
+initBuscadores();
+initFestejos();
+initComunidad();
 $('#helpHome').innerHTML = helpHTML();
 bindHelp($('#helpHome'), 'home');
 renderTickets();
