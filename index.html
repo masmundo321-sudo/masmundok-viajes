@@ -829,7 +829,7 @@ button{font:inherit;color:inherit}
         <div class="sk-pillwrap" style="margin-top:16px">
           <form class="sk-pill" id="gyForm">
             <svg class="ic" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
-            <input id="gyQ" type="text" aria-label="Ciudad o actividad" placeholder="Ciudad o actividad: templos en Bangkok…">
+            <input id="gyQ" type="text" aria-label="Destino" placeholder="¿A dónde vas? Bangkok, Río, Cusco…">
             <a class="sk-go" id="gyGo" target="_blank" rel="noopener sponsored" aria-label="Buscar en GetYourGuide"><svg class="ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
           </form>
         </div>
@@ -1079,7 +1079,13 @@ const AFILIADOS = {
     { name:'Tripadvisor', p:'4456', campaign:'149', url: t => t ? 'https://www.tripadvisor.com/Search?q=' + encodeURIComponent(t) : 'https://www.tripadvisor.com/Attractions' },
     { name:'Klook', p:'4110', campaign:'137', url: t => t ? 'https://www.klook.com/es/search/result/?query=' + encodeURIComponent(t) : 'https://www.klook.com/es/' }
   ],
-  getyourguide: { p:'3965', campaign:'108' },
+  getyourguide: { p:'3965', campaign:'108',
+    /* Páginas de GetYourGuide por lugar: palabras que la activan y dirección */
+    lugares: [
+      ['bangkok,tailandia','bangkok-l169'], ['rio,rio de janeiro,cristo','rio-de-janeiro-l9'], ['brasil','brazil-l169000'],
+      ['iguazu,cataratas','iguazu-falls-brazil-l541'], ['muralla','great-wall-of-china-l525'], ['pekin,beijing','beijing-l186'], ['china','china-l169032'],
+      ['machu picchu','machu-picchu-l1570'], ['cusco,cuzco','cusco-l359']
+    ] },
   vuelos: [
     { name:'Aviasales', nota:'Compara aerolíneas y agencias', p:'4114', campaign:'100', home:'https://www.aviasales.com/',
       url: q => 'https://www.aviasales.com/search/' + q.o.c + ddmm(q.out) + q.d.c + (q.oneway ? '' : ddmm(q.ret)) + q.pax + '?currency=usd' },
@@ -1100,12 +1106,10 @@ const AFILIADOS = {
       url: () => 'https://www.expedia.com/Vacation-Packages' }
   ],
   hoteles: [
+    { name:'Agoda', nota:'Fuerte en hoteles de Asia', fijo:true, p:'2854', campaign:'104', home:'https://www.agoda.com/es-ar/', url: () => 'https://www.agoda.com/es-ar/' },
     { name:'Hotels.com', nota:'Muchos hoteles en todo el mundo', p:'9123', campaign:'637', home:'https://www.hotels.com/',
       url: q => 'https://www.hotels.com/Hotel-Search?destination=' + encodeURIComponent(q.d.n) + '&startDate=' + q.out + '&endDate=' + q.ret + '&adults=' + q.pax },
-    { name:'Agoda', nota:'Fuerte en hoteles de Asia', p:'2854', campaign:'104', home:'https://www.agoda.com/es-ar/',
-      url: q => 'https://www.agoda.com/es-ar/search?textToSearch=' + encodeURIComponent(q.d.n) + '&checkIn=' + q.out + '&checkOut=' + q.ret + '&adults=' + q.pax + '&rooms=1&currency=USD' },
-    { name:'Trip.com Hoteles', nota:'Ofertas con vuelo incluido', p:'8980', campaign:'121', home:'https://www.trip.com/hotels/',
-      url: q => 'https://www.trip.com/hotels/list?searchWord=' + encodeURIComponent(q.d.n) + '&checkin=' + q.out + '&checkout=' + q.ret + '&adult=' + q.pax + '&crn=1&locale=es-ES&curr=USD' }
+    { name:'Trip.com Hoteles', nota:'Ofertas con vuelo incluido', fijo:true, p:'8980', campaign:'121', home:'https://www.trip.com/hotels/', url: () => 'https://www.trip.com/hotels/' }
   ]
 };
 /* Ciudades del buscador: nombre, código de aeropuerto y otras formas de escribirla */
@@ -2161,9 +2165,13 @@ function linkTP(a, url) {
   return 'https://tp.media/r?marker=' + encodeURIComponent(t.marker) + (t.proyecto ? '&trs=' + encodeURIComponent(t.proyecto) : '') + '&p=' + a.p + '&u=' + encodeURIComponent(url) + (a.campaign ? '&campaign_id=' + a.campaign : '');
 }
 function marcasActivas(lista) { return AFILIADOS.travelpayouts.marker ? lista.filter(a => a.p) : lista; }
+function lugarGYG(term) {
+  const t = ' ' + sinTilde(term || '') + ' ';
+  return AFILIADOS.getyourguide.lugares.find(l => l[0].split(',').some(k => t.indexOf(k) >= 0));
+}
 function linkGYG(term) {
-  const t = (term || '').trim();
-  return linkTP(AFILIADOS.getyourguide, t ? 'https://www.getyourguide.com/s/?q=' + encodeURIComponent(t) : 'https://www.getyourguide.com/');
+  const l = lugarGYG(term);
+  return linkTP(AFILIADOS.getyourguide, 'https://www.getyourguide.com/' + (l ? l[1] + '/' : ''));
 }
 function buscarCiudad(txt) {
   const t = ' ' + sinTilde(txt).replace(/[^a-z0-9 ]/g, ' ') + ' ';
@@ -2282,7 +2290,7 @@ function initBuscadores() {
   const syncG = () => { const t = gq.value.trim(); gg.href = linkGYG(t); $('#gyTa').innerHTML = AFILIADOS.tours.map(a => '<a target="_blank" rel="noopener sponsored" href="' + esc(linkTP(a, a.url(t))) + '">' + esc(a.name) + '</a>').join(' o '); };
   gq.addEventListener('input', syncG); syncG();
   $('#gyForm').addEventListener('submit', e => { e.preventDefault(); gg.click(); });
-  $('#gyQuick').innerHTML = ['Templos en Bangkok','Cataratas del Iguazú','Pirámides de Egipto','Muralla China','Machu Picchu','Cristo Redentor'].map(t => '<a target="_blank" rel="noopener sponsored" href="' + esc(linkGYG(t)) + '">' + esc(t) + '</a>').join('');
+  $('#gyQuick').innerHTML = ['Bangkok','Río de Janeiro','Cataratas del Iguazú','Muralla China','Machu Picchu','Cusco'].map(t => '<a target="_blank" rel="noopener sponsored" href="' + esc(linkGYG(t)) + '">' + esc(t) + '</a>').join('');
   $('#gyCode').textContent = gy.code; $('#gyOff').textContent = gy.off || '';
   $('#gyCopy').addEventListener('click', e => copyText(gy.code, e.currentTarget, $('#gyCode')));
 
