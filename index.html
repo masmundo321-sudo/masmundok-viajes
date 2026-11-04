@@ -1083,6 +1083,10 @@ const AFILIADOS = {
     { name:'KAYAK', nota:'Mira cientos de sitios a la vez', p:'', campaign:'', home:'https://www.kayak.com.ar/flights',
       url: q => 'https://www.kayak.com.ar/flights/' + q.o.c + '-' + q.d.c + '/' + q.out + (q.oneway ? '' : '/' + q.ret) + '/' + q.pax + 'adults' }
   ],
+  paquetes: [
+    { name:'Expedia', nota:'Vuelo y hotel en una sola compra', p:'8645', campaign:'594', home:'https://www.expedia.com/Vacation-Packages',
+      url: () => 'https://www.expedia.com/Vacation-Packages' }
+  ],
   hoteles: [
     { name:'Agoda', nota:'Fuerte en hoteles de Asia', p:'2854', campaign:'104', home:'https://www.agoda.com/es-ar/',
       url: q => 'https://www.agoda.com/es-ar/search?textToSearch=' + encodeURIComponent(q.d.n) + '&checkIn=' + q.out + '&checkOut=' + q.ret + '&adults=' + q.pax + '&rooms=1&currency=USD' },
@@ -2184,8 +2188,9 @@ function initBuscadores() {
     const ruta = !qr ? '' : '<span class="sk-route">' + (mode.v === 'hoteles' ? esc(qr.d.n) : esc(qr.o.n) + ' → ' + esc(qr.d.n)) + ' · ' + fechaCorta(qr.out) + (qr.oneway && mode.v === 'vuelos' ? '' : ' – ' + fechaCorta(qr.ret)) + ' · ' + qr.pax + (mode.v === 'hoteles' ? ' huésp.' : ' pas.') + '</span>';
     const paraHotel = x => Object.assign({}, x, { ret: x.oneway ? sumarDias(x.out, 7) : x.ret });
     let h = ruta;
-    if (mode.v !== 'hoteles') h += grupo('1. Mirá el vuelo en cada sitio', AFILIADOS.vuelos, x => x);
-    if (mode.v !== 'vuelos') h += grupo((mode.v === 'paquetes' ? '2. Sumá' : 'Mirá') + ' el hotel con las mismas fechas', AFILIADOS.hoteles, paraHotel);
+    if (mode.v === 'paquetes') h += grupo('Todo junto en un solo lugar', AFILIADOS.paquetes, x => x);
+    if (mode.v !== 'hoteles') h += grupo(mode.v === 'paquetes' ? 'O armalo vos: primero el vuelo' : 'Mirá el vuelo en cada sitio', AFILIADOS.vuelos, x => x);
+    if (mode.v !== 'vuelos') h += grupo((mode.v === 'paquetes' ? 'Después sumá' : 'Mirá') + ' el hotel con las mismas fechas', AFILIADOS.hoteles, paraHotel);
     $('#skAgs').innerHTML = h;
   }
   function pintarModo() {
