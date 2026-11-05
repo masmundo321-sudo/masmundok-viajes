@@ -2423,6 +2423,52 @@ function route() {
   else if (!h || h === 'inicio') window.scrollTo(0, 0);
 }
 
+/* ============ GUARDIA DE COMISIÓN ============
+   Cualquier link a una marca afiliada que no pase por Travelpayouts se convierte solo en link con tu marker,
+   sea de hoy o de un cambio futuro (también los links que se crean después de cargar la página).
+   Para sumar una marca nueva: cargala en AFILIADOS (con su p y campaign) y agregá su dominio acá. */
+const DOMINIOS_AFILIADOS = {
+  'aviasales.com':    () => AFILIADOS.vuelos.find(a => a.name === 'Aviasales'),
+  'trip.com':         () => AFILIADOS.vuelos.find(a => a.name === 'Trip.com'),
+  'traveloka.com':    () => AFILIADOS.vuelos.find(a => a.name === 'Traveloka'),
+  'agoda.com':        () => AFILIADOS.hoteles.find(a => a.name === 'Agoda'),
+  'hotels.com':       () => AFILIADOS.hoteles.find(a => a.name === 'Hotels.com'),
+  'expedia.com':      () => AFILIADOS.paquetes.find(a => a.name === 'Expedia'),
+  'klook.com':        () => AFILIADOS.tours.find(a => a.name === 'Klook'),
+  'tripadvisor.com':  () => AFILIADOS.tours.find(a => a.name === 'Tripadvisor'),
+  'getyourguide.com': () => AFILIADOS.getyourguide,
+  'airalo.com':       () => AFILIADOS.esim.find(a => a.name === 'Airalo'),
+  '12go.com':         () => AFILIADOS.transporte.find(a => a.name === '12Go')
+};
+function afiliado(href) {
+  let u; try { u = new URL(href, location.href); } catch (e) { return null; }
+  if (!/^https?:$/.test(u.protocol) || u.hostname === 'tp.media') return null;
+  const h = u.hostname.replace(/^www\./, '');
+  const d = Object.keys(DOMINIOS_AFILIADOS).find(k => h === k || h.endsWith('.' + k));
+  const a = d && DOMINIOS_AFILIADOS[d]();
+  return a && a.p && AFILIADOS.travelpayouts.marker ? linkTP(a, u.href) : null;
+}
+function guardiaComision() {
+  document.querySelectorAll('a[href]').forEach(el => {
+    const nuevo = afiliado(el.getAttribute('href'));
+    if (!nuevo) return;
+    el.setAttribute('href', nuevo);
+    el.setAttribute('rel', 'noopener sponsored');
+    if (!el.target) el.target = '_blank';
+  });
+}
+function iniciarGuardia() {
+  guardiaComision();
+  let espera = 0;
+  new MutationObserver(() => { clearTimeout(espera); espera = setTimeout(guardiaComision, 50); }).observe(document.body, { childList:true, subtree:true });
+  /* Último seguro: si un link cambió justo antes del clic, igual se convierte */
+  document.addEventListener('click', e => {
+    const el = e.target.closest && e.target.closest('a[href]');
+    const nuevo = el && afiliado(el.getAttribute('href'));
+    if (nuevo) el.setAttribute('href', nuevo);
+  }, true);
+}
+
 /* ============ Arranque ============ */
 renderStatic();
 renderDestinos();
@@ -2443,6 +2489,7 @@ initChat();
 $('#vMore').addEventListener('click', () => { vShown += 6; renderVideos(); });
 window.addEventListener('hashchange', route);
 route();
+iniciarGuardia();
 
 </script>
 </body>
