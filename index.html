@@ -1126,7 +1126,10 @@ const LOCALES = {
     { name:'Aerolíneas Argentinas', nota:'Aerolínea de bandera, vuelos locales e internacionales', home:'https://www.aerolineas.com.ar/' },
     { name:'Flybondi', nota:'Low cost con rutas dentro de Argentina', home:'https://flybondi.com/' },
     { name:'JetSMART', nota:'Low cost con rutas locales y regionales', home:'https://jetsmart.com/' },
-    { name:'Turismocity', nota:'Buscador argentino que compara precios de vuelos', home:'https://www.turismocity.com.ar/' }
+    { name:'Turismocity', nota:'Buscador argentino que compara precios de vuelos', home:'https://www.turismocity.com.ar/' },
+    { name:'KAYAK Argentina', nota:'Compara cientos de sitios, versión argentina', home:'https://www.kayak.com.ar/flights',
+      url: q => 'https://www.kayak.com.ar/flights/' + q.o.c + '-' + q.d.c + '/' + q.out + (q.oneway ? '' : '/' + q.ret) + '/' + q.pax + 'adults?currency=' + q.cur },
+    { name:'Despegar', nota:'Agencia argentina de vuelos y hoteles', home:'https://www.despegar.com.ar/' }
   ],
   'Brasil': [
     { name:'LATAM Brasil', nota:'Vuelos dentro de Brasil y a la región', home:'https://www.latamairlines.com/br/pt' },
@@ -2308,6 +2311,8 @@ function initBuscadores() {
   let ultimo = null, curElegida = false;
   cur.innerHTML = MONEDAS.map(m => '<option value="' + m[0] + '">' + m[0] + ' · ' + esc(m[1]) + '</option>').join('');
   const monedaDe = pais => MONEDA_POR_PAIS[pais] || 'USD';
+  /* Aviasales y Trip.com deciden la moneda final en su sitio: se la pedimos, pero puede salir en dólares */
+  const avisoMoneda = () => 'Pedimos los precios en ' + cur.value + ', pero Aviasales y Trip.com pueden mostrarlos en dólares según su tienda.' + (cur.value === 'ARS' ? ' Los sitios argentinos de abajo los muestran en pesos.' : '');
   try { const g = localStorage.getItem('mm_moneda'); if (g && MONEDAS.some(m => m[0] === g)) { cur.value = g; curElegida = true; } } catch (e) {}
   if (!curElegida) cur.value = monedaDe(origen().p);
   const ideas = () => { $('#skIdeasT').textContent = IDEAS.length + ' ideas desde ' + origen().n + ' para un viaje de una semana'; };
@@ -2328,8 +2333,8 @@ function initBuscadores() {
       const bloques = [o, d && (!o || d.pais !== o.pais) ? d : null].filter(Boolean);
       return bloques.map((b, i) => {
         const interno = qr && i === 0 && qr.d.p && sinTilde(qr.d.p) === sinTilde(b.pais);
-        const titulo = interno ? 'Para volar dentro de ' + b.pais : i === 0 ? 'Aerolíneas y sitios de ' + b.pais : 'Aerolíneas de ' + b.pais + ' (tu destino)';
-        return '<p class="sk-gl">' + esc(titulo) + '</p><div class="sk-ags">' + b.lista.map(a => '<a class="sk-ag" href="' + esc(a.home) + '" target="_blank" rel="noopener"><span><b>' + esc(a.name) + '</b><small>' + esc(a.nota) + '</small></span><em>Abrir →</em></a>').join('') + '</div>';
+        const titulo = (interno ? 'Para volar dentro de ' + b.pais : i === 0 ? 'Aerolíneas y sitios de ' + b.pais : 'Aerolíneas de ' + b.pais + ' (tu destino)') + (b.pais === 'Argentina' ? ' · precios en pesos' : '');
+        return '<p class="sk-gl">' + esc(titulo) + '</p><div class="sk-ags">' + b.lista.map(a => '<a class="sk-ag" href="' + esc(qr && a.url ? a.url(qr) : a.home) + '" target="_blank" rel="noopener"><span><b>' + esc(a.name) + '</b><small>' + esc(a.nota) + '</small></span><em>Abrir →</em></a>').join('') + '</div>';
       }).join('');
     };
     let h = ruta;
@@ -2367,7 +2372,7 @@ function initBuscadores() {
     const qr = { o:origen(), d:dest, out:salida, ret:vuelta, pax:+pax.value, oneway:oneway, cur:cur.value };
     ultimo = qr;
     ponerMarcas(qr);
-    msg.className = 'sk-msg'; msg.textContent = 'Listo. Pedimos los precios en ' + cur.value + '; cada sitio puede ajustarlos según tu ubicación. Abrí cada uno y compará el precio final.';
+    msg.className = 'sk-msg'; msg.textContent = 'Listo. ' + avisoMoneda() + ' Abrí cada sitio y compará el precio final.';
     $('#skCmp').scrollIntoView({ block:'start' });
   }
   async function porApi(term) {
@@ -2407,7 +2412,7 @@ function initBuscadores() {
   cur.addEventListener('change', () => {
     curElegida = true;
     try { localStorage.setItem('mm_moneda', cur.value); } catch (e) {}
-    if (ultimo) { ultimo = Object.assign({}, ultimo, { cur:cur.value }); ponerMarcas(ultimo); msg.className = 'sk-msg'; msg.textContent = 'Listo. Pedimos los precios en ' + cur.value + '; cada sitio puede ajustarlos según tu ubicación.'; }
+    if (ultimo) { ultimo = Object.assign({}, ultimo, { cur:cur.value }); ponerMarcas(ultimo); msg.className = 'sk-msg'; msg.textContent = 'Listo. ' + avisoMoneda(); }
   });
 
   $('#skCards').innerHTML = IDEAS.map(i => {
