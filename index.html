@@ -793,6 +793,7 @@ button{font:inherit;color:inherit}
         </div>
         <div class="sk-filters">
           <label class="sk-chip" id="skTripWrap"><select id="skTrip" aria-label="Tipo de viaje"><option value="rt">Ida y vuelta</option><option value="ow">Solo ida</option></select></label>
+          <label class="sk-chip" id="skCurWrap"><span>Moneda</span><select id="skCur" aria-label="Moneda de los precios"></select></label>
           <label class="sk-chip"><span id="skPaxL">Pasajeros</span><select id="skPax"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></label>
           <label class="sk-chip"><span id="skOutL">Salida</span><input type="date" id="skOut"></label>
           <label class="sk-chip" id="skRetWrap"><span id="skRetL">Vuelta</span><input type="date" id="skRet"></label>
@@ -812,7 +813,7 @@ button{font:inherit;color:inherit}
         </ul>
         <p class="sk-gl">Y para tu viaje, con nuestros códigos</p>
         <div class="sk-codes" id="skCodes"></div>
-        <p class="sk-note">Los precios los muestra cada sitio en vivo y pueden cambiar; nosotros no los fijamos. Algunos links son de afiliado: si comprás con ellos nos llevamos una comisión, y vos no pagás de más.</p>
+        <p class="sk-note">Los precios los muestra cada sitio en vivo y pueden cambiar; nosotros no los fijamos. Algunos links son de afiliado: si comprás con ellos nos llevamos una comisión, y vos no pagás de más. Los de aerolíneas y sitios locales van directo a su web oficial.</p>
       </div>
 
       <div class="sk-sh"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg><span id="skIdeasT"></span></div>
@@ -1088,12 +1089,12 @@ const AFILIADOS = {
     ] },
   vuelos: [
     { name:'Aviasales', nota:'Compara aerolíneas y agencias', p:'4114', campaign:'100', home:'https://www.aviasales.com/',
-      url: q => 'https://www.aviasales.com/search/' + q.o.c + ddmm(q.out) + q.d.c + (q.oneway ? '' : ddmm(q.ret)) + q.pax + '?currency=usd' },
+      url: q => 'https://www.aviasales.com/search/' + q.o.c + ddmm(q.out) + q.d.c + (q.oneway ? '' : ddmm(q.ret)) + q.pax + '?currency=' + q.cur.toLowerCase() },
     { name:'Trip.com', nota:'Fuerte en Asia y vuelos largos', p:'8980', campaign:'121', home:'https://www.trip.com/flights/',
-      url: q => 'https://www.trip.com/flights/showfarefirst?dcity=' + q.o.c.toLowerCase() + '&acity=' + q.d.c.toLowerCase() + '&ddate=' + q.out + (q.oneway ? '&triptype=ow' : '&rdate=' + q.ret + '&triptype=rt') + '&class=y&quantity=' + q.pax + '&locale=es-ES&curr=USD' },
+      url: q => 'https://www.trip.com/flights/showfarefirst?dcity=' + q.o.c.toLowerCase() + '&acity=' + q.d.c.toLowerCase() + '&ddate=' + q.out + (q.oneway ? '&triptype=ow' : '&rdate=' + q.ret + '&triptype=rt') + '&class=y&quantity=' + q.pax + '&locale=es-ES&curr=' + q.cur },
     { name:'Traveloka', nota:'Fuerte en vuelos dentro de Asia', fijo:true, p:'9048', campaign:'632', home:'https://www.traveloka.com/', url: () => 'https://www.traveloka.com/' },
     { name:'KAYAK', nota:'Mira cientos de sitios a la vez', p:'', campaign:'', home:'https://www.kayak.com.ar/flights',
-      url: q => 'https://www.kayak.com.ar/flights/' + q.o.c + '-' + q.d.c + '/' + q.out + (q.oneway ? '' : '/' + q.ret) + '/' + q.pax + 'adults' }
+      url: q => 'https://www.kayak.com.ar/flights/' + q.o.c + '-' + q.d.c + '/' + q.out + (q.oneway ? '' : '/' + q.ret) + '/' + q.pax + 'adults?currency=' + q.cur }
   ],
   esim: [
     { name:'Airalo', p:'8310', campaign:'541', home:'https://www.airalo.com/' }
@@ -1112,6 +1113,83 @@ const AFILIADOS = {
     { name:'Trip.com Hoteles', nota:'Ofertas con vuelo incluido', fijo:true, p:'8980', campaign:'121', home:'https://www.trip.com/hotels/', url: () => 'https://www.trip.com/hotels/' }
   ]
 };
+/* Monedas del selector (código y nombre) y la que se elige sola según el país de salida.
+   Los países que no figuran en MONEDA_POR_PAIS arrancan en dólares. */
+const MONEDAS = [['ARS','Peso argentino'],['USD','Dólar'],['BRL','Real'],['CLP','Peso chileno'],['COP','Peso colombiano'],['MXN','Peso mexicano'],['PEN','Sol'],['UYU','Peso uruguayo'],['EUR','Euro']];
+const MONEDA_POR_PAIS = { 'Argentina':'ARS', 'Brasil':'BRL', 'Chile':'CLP', 'Colombia':'COP', 'México':'MXN', 'Perú':'PEN' };
+
+/* Aerolíneas y sitios de cada lugar: se muestran las del país de salida y las del país de destino.
+   Llevan directo al sitio oficial (no son de Travelpayouts, así que acá no hay comisión).
+   Para sumar o sacar una empresa, editá su país: { name, nota, home } */
+const LOCALES = {
+  'Argentina': [
+    { name:'Aerolíneas Argentinas', nota:'Aerolínea de bandera, vuelos locales e internacionales', home:'https://www.aerolineas.com.ar/' },
+    { name:'Flybondi', nota:'Low cost con rutas dentro de Argentina', home:'https://flybondi.com/' },
+    { name:'JetSMART', nota:'Low cost con rutas locales y regionales', home:'https://jetsmart.com/' },
+    { name:'Turismocity', nota:'Buscador argentino que compara precios de vuelos', home:'https://www.turismocity.com.ar/' }
+  ],
+  'Brasil': [
+    { name:'LATAM Brasil', nota:'Vuelos dentro de Brasil y a la región', home:'https://www.latamairlines.com/br/pt' },
+    { name:'GOL', nota:'Aerolínea brasileña', home:'https://www.voegol.com.br/' },
+    { name:'Azul', nota:'Aerolínea brasileña', home:'https://www.voeazul.com.br/' }
+  ],
+  'Chile': [
+    { name:'LATAM Chile', nota:'Vuelos dentro de Chile y a la región', home:'https://www.latamairlines.com/cl/es' },
+    { name:'SKY Airline', nota:'Low cost chilena', home:'https://www.skyairline.com/' },
+    { name:'JetSMART', nota:'Low cost con rutas locales y regionales', home:'https://jetsmart.com/' }
+  ],
+  'Perú': [
+    { name:'LATAM Perú', nota:'Vuelos dentro de Perú y a la región', home:'https://www.latamairlines.com/pe/es' },
+    { name:'SKY Airline', nota:'Low cost con rutas en Perú', home:'https://www.skyairline.com/' }
+  ],
+  'Colombia': [
+    { name:'Avianca', nota:'Aerolínea de bandera de Colombia', home:'https://www.avianca.com/' },
+    { name:'LATAM Colombia', nota:'Vuelos dentro de Colombia y a la región', home:'https://www.latamairlines.com/co/es' },
+    { name:'Wingo', nota:'Low cost', home:'https://www.wingo.com/' }
+  ],
+  'México': [
+    { name:'Aeroméxico', nota:'Aerolínea de bandera de México', home:'https://www.aeromexico.com/' },
+    { name:'Volaris', nota:'Low cost', home:'https://www.volaris.com/' },
+    { name:'Viva Aerobus', nota:'Low cost', home:'https://www.vivaaerobus.com/' }
+  ],
+  'Bolivia': [ { name:'Boliviana de Aviación (BoA)', nota:'Aerolínea de bandera de Bolivia', home:'https://www.boa.bo/' } ],
+  'Paraguay': [ { name:'Paranair', nota:'Aerolínea paraguaya', home:'https://www.paranair.com/' } ],
+  'Panamá': [ { name:'Copa Airlines', nota:'Aerolínea de bandera de Panamá', home:'https://www.copaair.com/' } ],
+  'Emiratos Árabes': [
+    { name:'Emirates', nota:'Aerolínea con base en Dubái', home:'https://www.emirates.com/' },
+    { name:'flydubai', nota:'Aerolínea con base en Dubái', home:'https://www.flydubai.com/' }
+  ],
+  'Qatar': [ { name:'Qatar Airways', nota:'Aerolínea de bandera de Qatar', home:'https://www.qatarairways.com/' } ],
+  'Arabia Saudita': [ { name:'Saudia', nota:'Aerolínea de bandera de Arabia Saudita', home:'https://www.saudia.com/' } ],
+  'Egipto': [ { name:'EGYPTAIR', nota:'Aerolínea de bandera de Egipto', home:'https://www.egyptair.com/' } ],
+  'Turquía': [ { name:'Turkish Airlines', nota:'Aerolínea de bandera de Turquía', home:'https://www.turkishairlines.com/' } ],
+  'Tailandia': [
+    { name:'Thai Airways', nota:'Aerolínea de bandera de Tailandia', home:'https://www.thaiairways.com/' },
+    { name:'AirAsia', nota:'Low cost con rutas en Asia', home:'https://www.airasia.com/' }
+  ],
+  'Singapur': [ { name:'Singapore Airlines', nota:'Aerolínea de bandera de Singapur', home:'https://www.singaporeair.com/' } ],
+  'Indonesia': [ { name:'Garuda Indonesia', nota:'Aerolínea de bandera de Indonesia', home:'https://www.garuda-indonesia.com/' } ],
+  'Malasia': [ { name:'Malaysia Airlines', nota:'Aerolínea de bandera de Malasia', home:'https://www.malaysiaairlines.com/' } ],
+  'Vietnam': [ { name:'Vietnam Airlines', nota:'Aerolínea de bandera de Vietnam', home:'https://www.vietnamairlines.com/' } ],
+  'Japón': [
+    { name:'ANA', nota:'Una de las grandes de Japón', home:'https://www.ana.co.jp/' },
+    { name:'JAL', nota:'Una de las grandes de Japón', home:'https://www.jal.co.jp/' }
+  ],
+  'Corea del Sur': [ { name:'Korean Air', nota:'Aerolínea de bandera de Corea del Sur', home:'https://www.koreanair.com/' } ],
+  'China': [ { name:'Air China', nota:'Aerolínea de bandera de China', home:'https://www.airchina.com/' } ],
+  'Hong Kong': [ { name:'Cathay Pacific', nota:'Aerolínea con base en Hong Kong', home:'https://www.cathaypacific.com/' } ],
+  'Australia': [ { name:'Qantas', nota:'Aerolínea de bandera de Australia', home:'https://www.qantas.com/' } ],
+  'España': [
+    { name:'Iberia', nota:'Aerolínea de bandera de España', home:'https://www.iberia.com/' },
+    { name:'Vueling', nota:'Low cost con base en Barcelona', home:'https://www.vueling.com/' }
+  ],
+  'Italia': [ { name:'ITA Airways', nota:'Aerolínea de bandera de Italia', home:'https://www.ita-airways.com/' } ],
+  'Francia': [ { name:'Air France', nota:'Aerolínea de bandera de Francia', home:'https://www.airfrance.com/' } ],
+  'Reino Unido': [ { name:'British Airways', nota:'Aerolínea de bandera del Reino Unido', home:'https://www.britishairways.com/' } ],
+  'Portugal': [ { name:'TAP Air Portugal', nota:'Aerolínea de bandera de Portugal', home:'https://www.flytap.com/' } ],
+  'Países Bajos': [ { name:'KLM', nota:'Aerolínea de bandera de los Países Bajos', home:'https://www.klm.com/' } ]
+};
+
 /* Ciudades del buscador: nombre, código de aeropuerto y otras formas de escribirla */
 const CITIES = [
   ['Buenos Aires','BUE','Argentina','argentina'],['Córdoba','COR','Argentina'],['Mendoza','MDZ','Argentina'],['Rosario','ROS','Argentina'],['Bariloche','BRC','Argentina'],['Salta','SLA','Argentina'],['Tucumán','TUC','Argentina'],['Neuquén','NQN','Argentina'],['Iguazú','IGR','Argentina','cataratas'],['Ushuaia','USH','Argentina'],['El Calafate','FTE','Argentina','calafate'],
@@ -2223,7 +2301,15 @@ function initBuscadores() {
   const hoy = isoDe(new Date());
   out.min = hoy; ret.min = hoy;
   from.innerHTML = CITIES.filter(c => ['Argentina','Brasil','Chile','Uruguay','Paraguay','Perú','Bolivia','Colombia','México'].indexOf(c.p) >= 0).map(c => '<option value="' + c.c + '">' + esc(c.n) + '</option>').join('');
-  const origen = () => { const o = from.options[from.selectedIndex]; return { n:o.textContent, c:o.value }; };
+  const origen = () => { const o = from.options[from.selectedIndex], ci = CITIES.find(x => x.c === o.value); return { n:o.textContent, c:o.value, p:ci ? ci.p : '' }; };
+
+  /* Moneda: arranca según el país de salida (pesos si salís de Argentina), se puede cambiar y se recuerda */
+  const cur = $('#skCur');
+  let ultimo = null, curElegida = false;
+  cur.innerHTML = MONEDAS.map(m => '<option value="' + m[0] + '">' + m[0] + ' · ' + esc(m[1]) + '</option>').join('');
+  const monedaDe = pais => MONEDA_POR_PAIS[pais] || 'USD';
+  try { const g = localStorage.getItem('mm_moneda'); if (g && MONEDAS.some(m => m[0] === g)) { cur.value = g; curElegida = true; } } catch (e) {}
+  if (!curElegida) cur.value = monedaDe(origen().p);
   const ideas = () => { $('#skIdeasT').textContent = IDEAS.length + ' ideas desde ' + origen().n + ' para un viaje de una semana'; };
 
   if (!AFILIADOS.travelpayouts.marker) {
@@ -2235,10 +2321,22 @@ function initBuscadores() {
       return '<a class="sk-ag" href="' + esc(url) + '" target="_blank" rel="noopener sponsored"><span><b>' + esc(a.name) + '</b><small>' + esc(a.nota) + '</small></span><em>' + (qr && !a.fijo ? 'Ver precio →' : 'Abrir →') + '</em></a>'; }).join('') + '</div>' : ''; };
     const ruta = !qr ? '' : '<span class="sk-route">' + (mode.v === 'hoteles' ? esc(qr.d.n) : esc(qr.o.n) + ' → ' + esc(qr.d.n)) + ' · ' + fechaCorta(qr.out) + (qr.oneway && mode.v === 'vuelos' ? '' : ' – ' + fechaCorta(qr.ret)) + ' · ' + qr.pax + (mode.v === 'hoteles' ? ' huésp.' : ' pas.') + '</span>';
     const paraHotel = x => Object.assign({}, x, { ret: x.oneway ? sumarDias(x.out, 7) : x.ret });
+    /* Aerolíneas y sitios del lugar: país de salida y, si es otro, país de destino */
+    const locales = () => {
+      const buscar = pais => { const k = Object.keys(LOCALES).find(n => sinTilde(n) === sinTilde(pais || '')); return k ? { pais:k, lista:LOCALES[k] } : null; };
+      const o = buscar(origen().p), d = qr ? buscar(qr.d.p) : null;
+      const bloques = [o, d && (!o || d.pais !== o.pais) ? d : null].filter(Boolean);
+      return bloques.map((b, i) => {
+        const interno = qr && i === 0 && qr.d.p && sinTilde(qr.d.p) === sinTilde(b.pais);
+        const titulo = interno ? 'Para volar dentro de ' + b.pais : i === 0 ? 'Aerolíneas y sitios de ' + b.pais : 'Aerolíneas de ' + b.pais + ' (tu destino)';
+        return '<p class="sk-gl">' + esc(titulo) + '</p><div class="sk-ags">' + b.lista.map(a => '<a class="sk-ag" href="' + esc(a.home) + '" target="_blank" rel="noopener"><span><b>' + esc(a.name) + '</b><small>' + esc(a.nota) + '</small></span><em>Abrir →</em></a>').join('') + '</div>';
+      }).join('');
+    };
     let h = ruta;
     if (mode.v === 'paquetes') h += grupo('Todo junto en un solo lugar', AFILIADOS.paquetes, x => x);
     if (mode.v !== 'hoteles') h += grupo(mode.v === 'paquetes' ? 'O armalo vos: primero el vuelo' : 'Mirá el vuelo en cada sitio', AFILIADOS.vuelos, x => x);
     if (mode.v !== 'vuelos') h += grupo((mode.v === 'paquetes' ? 'Después sumá' : 'Mirá') + ' el hotel con las mismas fechas', AFILIADOS.hoteles, paraHotel);
+    if (mode.v !== 'hoteles') h += locales();
     if (mode.v !== 'hoteles') h += grupo('Y para moverte por tierra', AFILIADOS.transporte, x => x);
     $('#skAgs').innerHTML = h;
   }
@@ -2246,6 +2344,8 @@ function initBuscadores() {
     document.querySelectorAll('.sk-tab').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === mode.v)));
     const hotel = mode.v === 'hoteles';
     $('#skTripWrap').hidden = mode.v !== 'vuelos';
+    $('#skCurWrap').hidden = mode.v === 'hoteles';
+    ultimo = null;
     $('#skPaxL').textContent = hotel ? 'Huéspedes' : 'Pasajeros';
     $('#skOutL').textContent = hotel ? 'Entrada' : 'Salida';
     $('#skRetL').textContent = hotel ? 'Salida' : 'Vuelta';
@@ -2264,9 +2364,10 @@ function initBuscadores() {
     if (!vuelta || vuelta <= salida || texto.dias) vuelta = sumarDias(salida, dias);
     out.value = salida; ret.value = vuelta;
     const oneway = mode.v === 'vuelos' && trip.value === 'ow';
-    const qr = { o:origen(), d:dest, out:salida, ret:vuelta, pax:+pax.value, oneway:oneway };
+    const qr = { o:origen(), d:dest, out:salida, ret:vuelta, pax:+pax.value, oneway:oneway, cur:cur.value };
+    ultimo = qr;
     ponerMarcas(qr);
-    msg.className = 'sk-msg'; msg.textContent = 'Listo. Abrí cada sitio y compará el precio final.';
+    msg.className = 'sk-msg'; msg.textContent = 'Listo. Pedimos los precios en ' + cur.value + '; cada sitio puede ajustarlos según tu ubicación. Abrí cada uno y compará el precio final.';
     $('#skCmp').scrollIntoView({ block:'start' });
   }
   async function porApi(term) {
@@ -2302,7 +2403,12 @@ function initBuscadores() {
   document.addEventListener('click', e => { if (!e.target.closest('.sk-pillwrap')) sug.hidden = true; });
   document.querySelectorAll('.sk-tab').forEach(b => b.addEventListener('click', () => { mode.v = b.dataset.mode; pintarModo(); msg.textContent = ''; }));
   trip.addEventListener('change', pintarModo);
-  from.addEventListener('change', ideas);
+  from.addEventListener('change', () => { ideas(); if (!curElegida) cur.value = monedaDe(origen().p); pintarModo(); });
+  cur.addEventListener('change', () => {
+    curElegida = true;
+    try { localStorage.setItem('mm_moneda', cur.value); } catch (e) {}
+    if (ultimo) { ultimo = Object.assign({}, ultimo, { cur:cur.value }); ponerMarcas(ultimo); msg.className = 'sk-msg'; msg.textContent = 'Listo. Pedimos los precios en ' + cur.value + '; cada sitio puede ajustarlos según tu ubicación.'; }
+  });
 
   $('#skCards').innerHTML = IDEAS.map(i => {
     const d = DEST.find(x => x.slug === i[0]), c = CITIES.find(x => x.c === i[1]);

@@ -12,5 +12,7 @@ Para cambiar contenido, buscá estos bloques dentro de `index.html`:
 - `VIDEOS`: lista de videos.
 - `AFILIADOS`: códigos de Travelpayouts y GetYourGuide y marcas de los buscadores.
 - `CITIES` e `IDEAS`: ciudades del buscador y destinos sugeridos.
+- `MONEDAS` y `MONEDA_POR_PAIS`: monedas del selector y la que arranca según el país de salida.
+- `LOCALES`: aerolíneas y sitios de cada país (salida y destino); van directo a su web, sin comisión.
 - `FESTEJOS`: frases y animaciones de Yesi y Pablo.
 - `COMUNIDAD` y `COMENTARIOS`: números reales, contador de visitas y comentarios aprobados.
