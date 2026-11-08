@@ -484,9 +484,9 @@ button{font:inherit;color:inherit}
   .tk-track{animation:none}.tk-view{overflow-x:auto}.row{animation:none}.btn,.dcard,.vplay{transition:none}
 }
 /* ============ Buscadores: cielo claro, buscador en píldora, filtros y tarjetas ============ */
-.sk{--sk-bg:#fff;--sk-card:#fff;--sk-soft:#EAF2FE;--sk-line:#D5E0F0;--sk-ink:#1F2A3C;--sk-dim:#5A6678;--sk-blue:#1B66DE;--sk-blue-2:#0F4CB5;--sk-grad:linear-gradient(90deg,#1B66DE,#0A7A80);--sk-sky:#C4DBFA;--sk-sky-2:#DCE9FC;--sk-ok:#0B7A3E;background:var(--sk-bg);color:var(--sk-ink);padding-block:0 clamp(40px,6vw,72px)}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .sk{--sk-bg:#0C1626;--sk-card:#14213A;--sk-soft:#1A2B49;--sk-line:#2B3D5E;--sk-ink:#E8EEF8;--sk-dim:#A5B3C8;--sk-blue:#7DB0FF;--sk-blue-2:#A6C9FF;--sk-grad:linear-gradient(90deg,#7DB0FF,#5FE0DC);--sk-sky:#22395F;--sk-sky-2:#1A2C4C;--sk-ok:#57D68D}}
-:root[data-theme="dark"] .sk{--sk-bg:#0C1626;--sk-card:#14213A;--sk-soft:#1A2B49;--sk-line:#2B3D5E;--sk-ink:#E8EEF8;--sk-dim:#A5B3C8;--sk-blue:#7DB0FF;--sk-blue-2:#A6C9FF;--sk-grad:linear-gradient(90deg,#7DB0FF,#5FE0DC);--sk-sky:#22395F;--sk-sky-2:#1A2C4C;--sk-ok:#57D68D}
+.sk{--sk-bg:#FFF6E6;--sk-card:#fff;--sk-soft:#DDF5F2;--sk-line:#B6E0DA;--sk-ink:#0B2A3F;--sk-dim:#46606F;--sk-blue:#E0431A;--sk-blue-2:#B3300E;--sk-teal:#00A79D;--sk-grad:linear-gradient(90deg,#FF5B2E,#FFB400);--sk-bar:linear-gradient(100deg,#00A79D,#1F7AE0);--sk-sky:#BDE8F0;--sk-sky-2:#D6F2F6;--sk-sun:radial-gradient(circle,#FFD36B,#FF9F43);--sk-ok:#0B7A3E;background:var(--sk-bg);color:var(--sk-ink);padding-block:0 clamp(40px,6vw,72px)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .sk{--sk-bg:#0A1E2B;--sk-card:#11303F;--sk-soft:#123B4A;--sk-line:#245569;--sk-ink:#EAF7F9;--sk-dim:#9DC2CE;--sk-blue:#FF8A5C;--sk-blue-2:#FFB08D;--sk-teal:#3DDAD0;--sk-grad:linear-gradient(90deg,#FF8A5C,#FFD166);--sk-bar:linear-gradient(100deg,#0E8F88,#2A63B8);--sk-sky:#1B4B5E;--sk-sky-2:#123646;--sk-sun:radial-gradient(circle,#FFF6D6,#E9D9A6);--sk-ok:#57D68D}}
+:root[data-theme="dark"] .sk{--sk-bg:#0A1E2B;--sk-card:#11303F;--sk-soft:#123B4A;--sk-line:#245569;--sk-ink:#EAF7F9;--sk-dim:#9DC2CE;--sk-blue:#FF8A5C;--sk-blue-2:#FFB08D;--sk-teal:#3DDAD0;--sk-grad:linear-gradient(90deg,#FF8A5C,#FFD166);--sk-bar:linear-gradient(100deg,#0E8F88,#2A63B8);--sk-sky:#1B4B5E;--sk-sky-2:#123646;--sk-sun:radial-gradient(circle,#FFF6D6,#E9D9A6);--sk-ok:#57D68D}
 .sk-sky{position:relative;height:clamp(60px,10vw,120px);overflow:hidden;background:linear-gradient(180deg,var(--sk-sky-2),transparent)}
 .sk-sky svg{position:absolute;bottom:0;height:100%;width:auto;color:var(--sk-sky)}
 .sk-sky .l{left:max(0px,calc(50% - 600px))}.sk-sky .r{right:max(0px,calc(50% - 600px))}
@@ -566,6 +566,73 @@ button{font:inherit;color:inherit}
 .sk-q a:hover{border-color:var(--sk-blue)}
 .sk-coupon{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 12px;margin-top:14px;font-size:14px;color:var(--sk-dim)}
 .sk-coupon code{font:500 14px var(--f-mono);color:var(--sk-ink);border:1px dashed var(--sk-blue);border-radius:8px;padding:4px 10px;background:var(--sk-card)}
+/* ===== Buscador viajero: pase de abordar, moneda y regiones ===== */
+.sk-sky::before{content:"";position:absolute;right:14%;top:12%;width:clamp(44px,7vw,72px);aspect-ratio:1;border-radius:50%;background:var(--sk-sun);box-shadow:0 0 44px 14px rgba(255,170,60,.4)}
+.sk-kick{display:inline-flex;align-items:center;gap:8px;font-weight:700}
+.sk-kick::before{content:"";width:22px;height:2px;background:var(--sk-blue);border-radius:2px}
+.sk-kick::after{content:"";width:22px;height:2px;background:var(--sk-blue);border-radius:2px}
+.sk-pass{position:relative;max-width:820px;margin:16px auto 0;background:var(--sk-card);border-radius:26px;border:2px solid var(--sk-ink);box-shadow:8px 8px 0 -2px var(--sk-teal),0 22px 40px -24px rgba(8,50,70,.55)}
+.sk-pass-top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 18px;border-radius:23px 23px 0 0;background:var(--sk-bar);color:#fff;font:700 11px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase}
+.sk-pass-top span{display:inline-flex;align-items:center;gap:8px}
+.sk-pass-top .ic{width:16px;height:16px;fill:#fff;stroke:none}
+.sk-pass-route{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;padding:16px 18px 2px;text-align:center}
+.sk-pass-route small{display:block;font:500 10.5px/1.2 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--sk-dim)}
+.sk-pass-route b{display:block;font:800 clamp(2.3rem,9vw,3.6rem)/1 var(--f-display);letter-spacing:.03em;color:var(--sk-ink)}
+.sk-pass-route .n{display:block;font-size:13px;color:var(--sk-dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sk-pass-route .plane{width:clamp(34px,7vw,46px);height:clamp(34px,7vw,46px);fill:var(--sk-blue);stroke:none}
+.sk-pass-meta{text-align:center;font:500 12.5px/1.4 var(--f-mono);color:var(--sk-dim);padding:2px 18px 0}
+.sk-perf{position:relative;margin:12px 0 14px;border-top:2.5px dashed var(--sk-line)}
+.sk-perf::before,.sk-perf::after{content:"";position:absolute;top:-13px;width:24px;height:24px;border-radius:50%;background:var(--sk-bg);border:2px solid var(--sk-ink)}
+.sk-perf::before{left:-13px;clip-path:inset(0 0 0 11px)}
+.sk-perf::after{right:-13px;clip-path:inset(0 11px 0 0)}
+.sk-pass form{padding:0 clamp(12px,3vw,22px) 2px}
+.sk-pass .sk-pill{box-shadow:none;border:2px solid var(--sk-line);background:var(--sk-bg)}
+.sk-pass .sk-pill:focus-within{border-color:var(--sk-blue)}
+.sk-pass .sk-msg{padding:0 18px 16px;margin-top:8px}
+.sk-tab{border-width:2px}
+.sk-cur{position:relative;padding-right:0}
+.sk-cur>button{display:inline-flex;align-items:center;gap:4px;border:0;background:transparent;font:inherit;font-weight:700;color:inherit;cursor:pointer;padding:6px 10px 6px 0}
+.sk-cur>button .ic{width:14px;height:14px}
+.sk-curpanel{position:absolute;z-index:40;top:calc(100% + 8px);left:0;width:min(330px,86vw);max-height:340px;overflow:auto;background:var(--sk-card);border:2px solid var(--sk-ink);border-radius:16px;padding:6px;box-shadow:6px 6px 0 -2px var(--sk-teal),0 20px 36px -18px rgba(8,50,70,.5);text-align:left}
+.sk-curpanel summary,.sk-reg summary{list-style:none;cursor:pointer}
+.sk-curpanel summary::-webkit-details-marker,.sk-reg summary::-webkit-details-marker{display:none}
+.sk-curpanel summary{display:flex;justify-content:space-between;align-items:center;padding:9px 10px;font-weight:700;font-size:14px;border-radius:10px}
+.sk-curpanel summary::after,.sk-reg summary::after{content:"+";font-weight:800;color:var(--sk-blue);font-size:19px;line-height:1}
+.sk-curpanel details[open]>summary,.sk-reg[open]>summary{background:var(--sk-soft)}
+.sk-curpanel details[open]>summary::after,.sk-reg[open]>summary::after{content:"–"}
+.sk-curgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;padding:8px 4px 6px}
+.sk-curgrid button{display:flex;flex-direction:column;align-items:flex-start;border:1.5px solid var(--sk-line);background:var(--sk-card);color:var(--sk-ink);border-radius:10px;padding:7px 9px;cursor:pointer;font:inherit;text-align:left}
+.sk-curgrid button b{font:700 13.5px var(--f-mono)}
+.sk-curgrid small{font-size:11.5px;color:var(--sk-dim);line-height:1.2}
+.sk-curgrid button:hover{border-color:var(--sk-blue)}
+.sk-curgrid button[aria-pressed="true"]{background:var(--sk-blue);border-color:var(--sk-blue);color:#fff}
+.sk-curgrid button[aria-pressed="true"] small{color:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .sk-curgrid button[aria-pressed="true"],:root:not([data-theme="light"]) .sk-curgrid button[aria-pressed="true"] small{color:#0A1E2B}}
+:root[data-theme="dark"] .sk-curgrid button[aria-pressed="true"],:root[data-theme="dark"] .sk-curgrid button[aria-pressed="true"] small{color:#0A1E2B}
+.sk-cmp{border:2.5px dashed var(--sk-teal)}
+.sk-ag{border-left:6px solid var(--sk-blue);border-radius:12px 14px 14px 12px}
+.sk-ag:hover{transform:translateY(-1px)}
+.sk-regs{display:grid;gap:8px;margin-top:10px}
+.sk-reg{border:2px solid var(--sk-line);border-radius:16px;background:var(--sk-card);overflow:hidden}
+.sk-reg[open]{border-color:var(--sk-ink)}
+.sk-reg>summary{display:flex;align-items:center;gap:10px;padding:11px 14px;font:700 15.5px var(--f-display)}
+.sk-reg>summary .e{font-size:20px;line-height:1}
+.sk-reg>summary small{margin-left:auto;font:500 12px var(--f-mono);color:var(--sk-dim)}
+.sk-reg-b{padding:2px 14px 14px}
+.sk-reg-b .sk-gl{margin-top:12px}
+.sk-dest{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.sk-dest button{border:1.5px solid var(--sk-ink);background:var(--sk-card);color:var(--sk-ink);border-radius:999px;padding:.38rem .85rem;font:600 13.5px var(--f-body);cursor:pointer;box-shadow:2px 2px 0 var(--sk-teal)}
+.sk-dest button:hover{background:var(--sk-soft)}
+.sk-air{font-size:13.5px;color:var(--sk-dim);margin-top:10px;line-height:1.5}
+.sk-air b{color:var(--sk-ink)}
+.sk-cmp .sk-gl{margin-top:24px}
+@media (max-width:640px){.sk-filters{position:relative}.sk-cur{position:static}.sk-curpanel{left:0;right:0;width:auto}.sk-pass-top span:last-child{display:none}}
+.sk-cc{display:inline-flex;align-items:stretch;border:2px dashed var(--sk-blue);border-radius:12px;overflow:hidden;background:var(--sk-card)}
+.sk-codes .sk-cc a{border:0;border-radius:0;gap:2px;flex-direction:column;align-items:flex-start;padding:6px 10px}
+.sk-codes .sk-cc a small{font-size:11.5px;color:var(--sk-dim)}
+.sk-copy{border:0;border-left:2px dashed var(--sk-blue);background:var(--sk-soft);color:var(--sk-blue-2);font:700 12.5px var(--f-mono);padding:0 12px;cursor:pointer}
+.sk-copy.ok{background:var(--sk-ok);color:#fff}
+.sk-codes a.sk-solo{border:2px dashed var(--sk-blue);border-radius:12px;padding:8px 12px}
 
 /* Tira de apoyo cerca de cada buscador */
 .st{position:relative;display:grid;grid-template-columns:auto 1fr;gap:6px 16px;align-items:center;margin-top:22px;background:var(--sk-card);border:1px solid var(--sk-line);border-radius:22px;padding:12px 18px 12px 12px;overflow:hidden}
@@ -782,6 +849,15 @@ button{font:inherit;color:inherit}
         <button type="button" class="sk-tab" data-mode="hoteles" aria-pressed="false">Hoteles</button>
         <button type="button" class="sk-tab" data-mode="paquetes" aria-pressed="false">Vuelo + hotel</button>
       </div>
+      <div class="sk-pass">
+        <div class="sk-pass-top"><span><svg class="ic" viewBox="0 0 24 24"><path d="M2 16l20-6-3-3-6 2-6-5-3 1 4 6-5 2z"/></svg>Pase de abordar</span><span>Masmundok · clase viajera</span></div>
+        <div class="sk-pass-route" aria-live="polite">
+          <div><small>Salís de</small><b id="skFromC">BUE</b><span class="n" id="skFromN">Buenos Aires</span></div>
+          <svg class="ic plane" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 16l20-6-3-3-6 2-6-5-3 1 4 6-5 2z"/></svg>
+          <div><small>Vas a</small><b id="skToC">???</b><span class="n" id="skToN">Elegí tu destino</span></div>
+        </div>
+        <p class="sk-pass-meta" id="skMeta"></p>
+        <div class="sk-perf" aria-hidden="true"></div>
       <form id="skForm" autocomplete="off">
         <div class="sk-pillwrap">
           <div class="sk-pill">
@@ -793,27 +869,32 @@ button{font:inherit;color:inherit}
         </div>
         <div class="sk-filters">
           <label class="sk-chip" id="skTripWrap"><select id="skTrip" aria-label="Tipo de viaje"><option value="rt">Ida y vuelta</option><option value="ow">Solo ida</option></select></label>
-          <label class="sk-chip" id="skCurWrap"><span>Moneda</span><select id="skCur" aria-label="Moneda de los precios"></select><input id="skCurOtra" type="text" maxlength="3" size="3" placeholder="CAD" autocapitalize="characters" autocomplete="off" aria-label="Código de la moneda, 3 letras" style="width:46px;text-transform:uppercase" hidden></label>
+          <div class="sk-chip sk-cur" id="skCurWrap"><span>Moneda</span><button type="button" id="skCurBtn" aria-haspopup="true" aria-expanded="false" aria-label="Elegir la moneda de los precios"><b id="skCurTxt">USD</b><svg class="ic" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button><div class="sk-curpanel" id="skCurPanel" hidden></div></div>
           <label class="sk-chip"><span id="skPaxL">Pasajeros</span><select id="skPax"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></label>
           <label class="sk-chip"><span id="skOutL">Salida</span><input type="date" id="skOut"></label>
           <label class="sk-chip" id="skRetWrap"><span id="skRetL">Vuelta</span><input type="date" id="skRet"></label>
         </div>
       </form>
       <p class="sk-msg" id="skMsg" role="status" aria-live="polite"></p>
+      </div>
       <div id="skFlag"></div>
 
       <div class="sk-cmp" id="skCmp">
         <h3>El mismo vuelo, distintos precios. Hay que saber comprar.</h3>
         <p>Cada sitio vende el mismo asiento a un precio diferente. Te dejamos dónde mirar para que no gastes de más.</p>
         <div id="skAgs"></div>
+        <p class="sk-gl">Por si aplica: sumá nuestros códigos de descuento</p>
+        <div class="sk-codes" id="skCodes"></div>
+        <div id="skRegWrap">
+          <p class="sk-gl">Explorá por región · destinos y aerolíneas populares</p>
+          <div class="sk-regs" id="skReg"></div>
+        </div>
         <ul class="sk-tips">
           <li><b>Compará antes de pagar</b>Abrí dos sitios con las mismas fechas: el precio puede cambiar.</li>
           <li><b>Mirá el precio final</b>Sumá valija, asiento y recargos antes de decidir.</li>
           <li><b>Mové un par de días</b>Salir un día antes o después a veces baja la tarifa.</li>
         </ul>
-        <p class="sk-gl">Y para tu viaje, con nuestros códigos</p>
-        <div class="sk-codes" id="skCodes"></div>
-        <p class="sk-note">Los precios los muestra cada sitio en vivo y pueden cambiar; nosotros no los fijamos. Algunos links son de afiliado: si comprás con ellos nos llevamos una comisión, y vos no pagás de más. Los de aerolíneas y sitios locales van directo a su web oficial.</p>
+        <p class="sk-note">Los precios los muestra cada sitio en vivo y pueden cambiar; nosotros no los fijamos. Los links son de afiliado: si comprás con ellos nos llevamos una comisión, y vos no pagás de más.</p>
       </div>
 
       <div class="sk-sh"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg><span id="skIdeasT"></span></div>
@@ -1087,14 +1168,21 @@ const AFILIADOS = {
       ['iguazu,cataratas','iguazu-falls-brazil-l541'], ['muralla','great-wall-of-china-l525'], ['pekin,beijing','beijing-l186'], ['china','china-l169032'],
       ['machu picchu','machu-picchu-l1570'], ['cusco,cuzco','cusco-l359']
     ] },
+  /* r (opcional): regiones de destino donde se muestra la marca (latam, inter, asia, europa, oceania).
+     Las marcas con p vacío quedan ocultas hasta que cargues su p y su campaign de Travelpayouts. */
   vuelos: [
     { name:'Aviasales', nota:'Compara aerolíneas y agencias', p:'4114', campaign:'100', home:'https://www.aviasales.com/',
       url: q => 'https://www.aviasales.com/search/' + q.o.c + ddmm(q.out) + q.d.c + (q.oneway ? '' : ddmm(q.ret)) + q.pax + '?currency=' + q.cur.toLowerCase() },
     { name:'Trip.com', nota:'Fuerte en Asia y vuelos largos', p:'8980', campaign:'121', home:'https://www.trip.com/flights/',
       url: q => 'https://www.trip.com/flights/showfarefirst?dcity=' + q.o.c.toLowerCase() + '&acity=' + q.d.c.toLowerCase() + '&ddate=' + q.out + (q.oneway ? '&triptype=ow' : '&rdate=' + q.ret + '&triptype=rt') + '&class=y&quantity=' + q.pax + '&locale=es-ES&curr=' + q.cur },
-    { name:'Traveloka', nota:'Fuerte en vuelos dentro de Asia', fijo:true, p:'9048', campaign:'632', home:'https://www.traveloka.com/', url: () => 'https://www.traveloka.com/' },
+    { name:'Expedia', nota:'Vuelos de muchas aerolíneas', p:'8645', campaign:'594', home:'https://www.expedia.com/Flights', r:['latam','inter','europa','oceania'],
+      url: q => 'https://www.expedia.com/Flights-Search?flight-type=on&mode=search&trip=' + (q.oneway ? 'oneway' : 'roundtrip') + '&leg1=from:' + q.o.c + ',to:' + q.d.c + ',departure:' + mdy(q.out) + 'TANYT' + (q.oneway ? '' : '&leg2=from:' + q.d.c + ',to:' + q.o.c + ',departure:' + mdy(q.ret) + 'TANYT') + '&passengers=adults:' + q.pax },
+    { name:'Traveloka', nota:'Fuerte en vuelos dentro de Asia', fijo:true, p:'9048', campaign:'632', home:'https://www.traveloka.com/', r:['asia'], url: () => 'https://www.traveloka.com/' },
     { name:'KAYAK', nota:'Mira cientos de sitios a la vez', p:'', campaign:'', home:'https://www.kayak.com.ar/flights',
-      url: q => 'https://www.kayak.com.ar/flights/' + q.o.c + '-' + q.d.c + '/' + q.out + (q.oneway ? '' : '/' + q.ret) + '/' + q.pax + 'adults?currency=' + q.cur }
+      url: q => 'https://www.kayak.com.ar/flights/' + q.o.c + '-' + q.d.c + '/' + q.out + (q.oneway ? '' : '/' + q.ret) + '/' + q.pax + 'adults?currency=' + q.cur },
+    { name:'Skyscanner', nota:'Compara aerolíneas y agencias', p:'', campaign:'', home:'https://www.skyscanner.com.ar/',
+      url: q => 'https://www.skyscanner.com.ar/transporte/vuelos/' + q.o.c.toLowerCase() + '/' + q.d.c.toLowerCase() + '/' + q.out.slice(2).replace(/-/g, '') + '/' + (q.oneway ? '' : q.ret.slice(2).replace(/-/g, '') + '/') + '?adultsv2=' + q.pax + '&currency=' + q.cur },
+    { name:'Turismocity', nota:'Buscador argentino de vuelos', fijo:true, p:'', campaign:'', home:'https://www.turismocity.com.ar/', r:['latam'], url: () => 'https://www.turismocity.com.ar/' }
   ],
   esim: [
     { name:'Airalo', p:'8310', campaign:'541', home:'https://www.airalo.com/' }
@@ -1116,88 +1204,35 @@ const AFILIADOS = {
 /* Monedas del selector (código y nombre) y la que se elige sola según el país de salida.
    Los países que no figuran en MONEDA_POR_PAIS arrancan en dólares. */
 const MONEDAS_GRUPOS = [
-  ['Más usadas', [['USD','Dólar estadounidense'],['EUR','Euro'],['ARS','Peso argentino']]],
-  ['Latinoamérica', [['BRL','Real brasileño'],['CLP','Peso chileno'],['COP','Peso colombiano'],['MXN','Peso mexicano'],['PEN','Sol peruano'],['UYU','Peso uruguayo'],['BOB','Boliviano'],['PYG','Guaraní'],['CRC','Colón costarricense'],['DOP','Peso dominicano'],['GTQ','Quetzal']]],
-  ['Resto del mundo', [['GBP','Libra esterlina'],['CHF','Franco suizo'],['CAD','Dólar canadiense'],['AUD','Dólar australiano'],['NZD','Dólar neozelandés'],['JPY','Yen japonés'],['CNY','Yuan chino'],['HKD','Dólar de Hong Kong'],['KRW','Won surcoreano'],['SGD','Dólar de Singapur'],['THB','Baht tailandés'],['MYR','Ringgit malayo'],['IDR','Rupia indonesia'],['VND','Dong vietnamita'],['PHP','Peso filipino'],['INR','Rupia india'],['LKR','Rupia de Sri Lanka'],['BDT','Taka de Bangladesh'],['MVR','Rufiyaa maldiva'],['AED','Dírham de Emiratos'],['SAR','Riyal saudí'],['QAR','Riyal qatarí'],['TRY','Lira turca'],['EGP','Libra egipcia'],['ILS','Séquel israelí'],['ZAR','Rand sudafricano'],['MAD','Dírham marroquí'],['SEK','Corona sueca'],['NOK','Corona noruega'],['DKK','Corona danesa'],['PLN','Esloti polaco'],['CZK','Corona checa'],['HUF','Forinto húngaro']]]
+  ['Internacional', [['USD','Dólar estadounidense'],['EUR','Euro'],['GBP','Libra esterlina'],['CAD','Dólar canadiense']]],
+  ['LATAM', [['ARS','Peso argentino'],['BRL','Real brasileño'],['CLP','Peso chileno'],['COP','Peso colombiano'],['MXN','Peso mexicano'],['PEN','Sol peruano'],['UYU','Peso uruguayo'],['BOB','Boliviano'],['PYG','Guaraní']]],
+  ['Asia', [['AED','Dírham de Emiratos'],['INR','Rupia india'],['LKR','Rupia de Sri Lanka'],['BDT','Taka de Bangladesh'],['MVR','Rufiyaa maldiva'],['THB','Baht tailandés'],['SGD','Dólar de Singapur'],['JPY','Yen japonés'],['CNY','Yuan chino'],['KRW','Won surcoreano'],['IDR','Rupia indonesia'],['VND','Dong vietnamita']]],
+  ['Europa', [['CHF','Franco suizo'],['SEK','Corona sueca'],['NOK','Corona noruega'],['DKK','Corona danesa'],['PLN','Esloti polaco'],['CZK','Corona checa']]],
+  ['Oceanía', [['AUD','Dólar australiano'],['NZD','Dólar neozelandés']]]
 ];
-/* Además de estas, "Otra moneda…" deja escribir cualquier código de 3 letras */
 const MONEDAS = MONEDAS_GRUPOS.reduce((t, g) => t.concat(g[1]), []);
 const MONEDA_POR_PAIS = { 'Argentina':'ARS', 'Brasil':'BRL', 'Chile':'CLP', 'Colombia':'COP', 'México':'MXN', 'Perú':'PEN' };
 
-/* Aerolíneas y sitios de cada lugar: se muestran las del país de salida y las del país de destino.
-   Llevan directo al sitio oficial (no son de Travelpayouts, así que acá no hay comisión).
-   Para sumar o sacar una empresa, editá su país: { name, nota, home } */
-const LOCALES = {
-  'Argentina': [
-    { name:'Aerolíneas Argentinas', nota:'Aerolínea de bandera, vuelos locales e internacionales', home:'https://www.aerolineas.com.ar/' },
-    { name:'Flybondi', nota:'Low cost con rutas dentro de Argentina', home:'https://flybondi.com/' },
-    { name:'JetSMART', nota:'Low cost con rutas locales y regionales', home:'https://jetsmart.com/' },
-    { name:'Turismocity', nota:'Buscador argentino que compara precios de vuelos', home:'https://www.turismocity.com.ar/' },
-    { name:'KAYAK Argentina', nota:'Compara cientos de sitios, versión argentina', home:'https://www.kayak.com.ar/flights',
-      url: q => 'https://www.kayak.com.ar/flights/' + q.o.c + '-' + q.d.c + '/' + q.out + (q.oneway ? '' : '/' + q.ret) + '/' + q.pax + 'adults?currency=' + q.cur },
-    { name:'Despegar', nota:'Agencia argentina de vuelos y hoteles', home:'https://www.despegar.com.ar/' }
-  ],
-  'Brasil': [
-    { name:'LATAM Brasil', nota:'Vuelos dentro de Brasil y a la región', home:'https://www.latamairlines.com/br/pt' },
-    { name:'GOL', nota:'Aerolínea brasileña', home:'https://www.voegol.com.br/' },
-    { name:'Azul', nota:'Aerolínea brasileña', home:'https://www.voeazul.com.br/' }
-  ],
-  'Chile': [
-    { name:'LATAM Chile', nota:'Vuelos dentro de Chile y a la región', home:'https://www.latamairlines.com/cl/es' },
-    { name:'SKY Airline', nota:'Low cost chilena', home:'https://www.skyairline.com/' },
-    { name:'JetSMART', nota:'Low cost con rutas locales y regionales', home:'https://jetsmart.com/' }
-  ],
-  'Perú': [
-    { name:'LATAM Perú', nota:'Vuelos dentro de Perú y a la región', home:'https://www.latamairlines.com/pe/es' },
-    { name:'SKY Airline', nota:'Low cost con rutas en Perú', home:'https://www.skyairline.com/' }
-  ],
-  'Colombia': [
-    { name:'Avianca', nota:'Aerolínea de bandera de Colombia', home:'https://www.avianca.com/' },
-    { name:'LATAM Colombia', nota:'Vuelos dentro de Colombia y a la región', home:'https://www.latamairlines.com/co/es' },
-    { name:'Wingo', nota:'Low cost', home:'https://www.wingo.com/' }
-  ],
-  'México': [
-    { name:'Aeroméxico', nota:'Aerolínea de bandera de México', home:'https://www.aeromexico.com/' },
-    { name:'Volaris', nota:'Low cost', home:'https://www.volaris.com/' },
-    { name:'Viva Aerobus', nota:'Low cost', home:'https://www.vivaaerobus.com/' }
-  ],
-  'Bolivia': [ { name:'Boliviana de Aviación (BoA)', nota:'Aerolínea de bandera de Bolivia', home:'https://www.boa.bo/' } ],
-  'Paraguay': [ { name:'Paranair', nota:'Aerolínea paraguaya', home:'https://www.paranair.com/' } ],
-  'Panamá': [ { name:'Copa Airlines', nota:'Aerolínea de bandera de Panamá', home:'https://www.copaair.com/' } ],
-  'Emiratos Árabes': [
-    { name:'Emirates', nota:'Aerolínea con base en Dubái', home:'https://www.emirates.com/' },
-    { name:'flydubai', nota:'Aerolínea con base en Dubái', home:'https://www.flydubai.com/' }
-  ],
-  'Qatar': [ { name:'Qatar Airways', nota:'Aerolínea de bandera de Qatar', home:'https://www.qatarairways.com/' } ],
-  'Arabia Saudita': [ { name:'Saudia', nota:'Aerolínea de bandera de Arabia Saudita', home:'https://www.saudia.com/' } ],
-  'Egipto': [ { name:'EGYPTAIR', nota:'Aerolínea de bandera de Egipto', home:'https://www.egyptair.com/' } ],
-  'Turquía': [ { name:'Turkish Airlines', nota:'Aerolínea de bandera de Turquía', home:'https://www.turkishairlines.com/' } ],
-  'Tailandia': [
-    { name:'Thai Airways', nota:'Aerolínea de bandera de Tailandia', home:'https://www.thaiairways.com/' },
-    { name:'AirAsia', nota:'Low cost con rutas en Asia', home:'https://www.airasia.com/' }
-  ],
-  'Singapur': [ { name:'Singapore Airlines', nota:'Aerolínea de bandera de Singapur', home:'https://www.singaporeair.com/' } ],
-  'Indonesia': [ { name:'Garuda Indonesia', nota:'Aerolínea de bandera de Indonesia', home:'https://www.garuda-indonesia.com/' } ],
-  'Malasia': [ { name:'Malaysia Airlines', nota:'Aerolínea de bandera de Malasia', home:'https://www.malaysiaairlines.com/' } ],
-  'Vietnam': [ { name:'Vietnam Airlines', nota:'Aerolínea de bandera de Vietnam', home:'https://www.vietnamairlines.com/' } ],
-  'Japón': [
-    { name:'ANA', nota:'Una de las grandes de Japón', home:'https://www.ana.co.jp/' },
-    { name:'JAL', nota:'Una de las grandes de Japón', home:'https://www.jal.co.jp/' }
-  ],
-  'Corea del Sur': [ { name:'Korean Air', nota:'Aerolínea de bandera de Corea del Sur', home:'https://www.koreanair.com/' } ],
-  'China': [ { name:'Air China', nota:'Aerolínea de bandera de China', home:'https://www.airchina.com/' } ],
-  'Hong Kong': [ { name:'Cathay Pacific', nota:'Aerolínea con base en Hong Kong', home:'https://www.cathaypacific.com/' } ],
-  'Australia': [ { name:'Qantas', nota:'Aerolínea de bandera de Australia', home:'https://www.qantas.com/' } ],
-  'España': [
-    { name:'Iberia', nota:'Aerolínea de bandera de España', home:'https://www.iberia.com/' },
-    { name:'Vueling', nota:'Low cost con base en Barcelona', home:'https://www.vueling.com/' }
-  ],
-  'Italia': [ { name:'ITA Airways', nota:'Aerolínea de bandera de Italia', home:'https://www.ita-airways.com/' } ],
-  'Francia': [ { name:'Air France', nota:'Aerolínea de bandera de Francia', home:'https://www.airfrance.com/' } ],
-  'Reino Unido': [ { name:'British Airways', nota:'Aerolínea de bandera del Reino Unido', home:'https://www.britishairways.com/' } ],
-  'Portugal': [ { name:'TAP Air Portugal', nota:'Aerolínea de bandera de Portugal', home:'https://www.flytap.com/' } ],
-  'Países Bajos': [ { name:'KLM', nota:'Aerolínea de bandera de los Países Bajos', home:'https://www.klm.com/' } ]
+/* Regiones del desplegable de vuelos: destinos y aerolíneas populares de cada una.
+   "destinos" son códigos de CITIES; "aerolineas" es solo informativo (se muestran las primeras 8).
+   Todos los links del buscador salen con los códigos de AFILIADOS, así que acá no hay links a aerolíneas. */
+const REGIONES = [
+  { id:'latam', n:'LATAM', e:'🌎', destinos:['RIO','SCL','LIM','CUN','BOG','MVD','BRC','MDZ'], aerolineas:['Aerolíneas Argentinas','LATAM','Flybondi','JetSMART','SKY','Avianca','Copa','GOL','Azul','Aeroméxico'] },
+  { id:'inter', n:'Internacional', e:'🌐', destinos:['MIA','NYC','ORL','LAX','IST','DOH'], aerolineas:['Emirates','Qatar Airways','Turkish Airlines','Lufthansa','Air France','KLM','British Airways','United','American Airlines','Delta'] },
+  { id:'asia', n:'Asia', e:'🌏', destinos:['DXB','BKK','TYO','SIN','DPS','DEL','CMB','MLE'], aerolineas:['Emirates','Qatar Airways','Etihad','IndiGo','Air India','SriLankan','Thai Airways','Singapore Airlines','AirAsia','ANA'] },
+  { id:'europa', n:'Europa', e:'🏰', destinos:['MAD','BCN','ROM','PAR','LON','LIS','AMS'], aerolineas:['Iberia','Air Europa','Vueling','Ryanair','easyJet','Lufthansa','Air France','KLM','British Airways','ITA Airways','TAP'] },
+  { id:'oceania', n:'Oceanía', e:'🦘', destinos:['SYD','MEL','AKL'], aerolineas:['Qantas','Air New Zealand','Virgin Australia','Jetstar','Fiji Airways'] }
+];
+/* Región de cada país (para abrir sola la del destino). Lo que no figura cae en Internacional. */
+const REGION_DE_PAIS = {
+  latam:['Argentina','Brasil','Chile','Uruguay','Paraguay','Perú','Bolivia','Colombia','Ecuador','México','Cuba','República Dominicana','Aruba','Panamá'],
+  asia:['Emiratos Árabes','Qatar','Arabia Saudita','Tailandia','Indonesia','Singapur','Malasia','Vietnam','Japón','Corea del Sur','China','Hong Kong','India','Sri Lanka','Maldivas','Bangladesh'],
+  europa:['España','Italia','Francia','Reino Unido','Portugal','Países Bajos','Turquía','Grecia'],
+  oceania:['Australia','Nueva Zelanda']
 };
+const REGION_PAIS = {};
+Object.keys(REGION_DE_PAIS).forEach(r => REGION_DE_PAIS[r].forEach(p => { REGION_PAIS[sinTilde(p)] = r; }));
+function regionDe(pais) { return REGION_PAIS[sinTilde(pais || '')] || 'inter'; }
 
 /* Ciudades del buscador: nombre, código de aeropuerto y otras formas de escribirla */
 const CITIES = [
@@ -1208,8 +1243,8 @@ const CITIES = [
   ['Miami','MIA','Estados Unidos'],['Orlando','ORL','Estados Unidos'],['Nueva York','NYC','Estados Unidos','new york,estados unidos'],['Los Ángeles','LAX','Estados Unidos','los angeles'],
   ['Madrid','MAD','España','espana'],['Barcelona','BCN','España'],['Roma','ROM','Italia','italia'],['París','PAR','Francia','francia'],['Londres','LON','Reino Unido','inglaterra'],['Lisboa','LIS','Portugal','portugal'],['Ámsterdam','AMS','Países Bajos','holanda'],['Estambul','IST','Turquía','turquia'],
   ['Dubái','DXB','Emiratos Árabes','dubai,emiratos'],['Doha','DOH','Qatar','qatar'],['Riad','RUH','Arabia Saudita','arabia'],['El Cairo','CAI','Egipto','cairo,egipto'],
-  ['Bangkok','BKK','Tailandia','tailandia'],['Phuket','HKT','Tailandia'],['Chiang Mai','CNX','Tailandia'],['Bali','DPS','Indonesia','indonesia'],['Singapur','SIN','Singapur'],['Kuala Lumpur','KUL','Malasia','malasia'],['Hanói','HAN','Vietnam','hanoi,vietnam'],['Ho Chi Minh','SGN','Vietnam'],
-  ['Tokio','TYO','Japón','japon'],['Osaka','OSA','Japón'],['Seúl','SEL','Corea del Sur','seul,corea'],['Pekín','BJS','China','pekin,beijing,china'],['Shanghái','SHA','China','shanghai'],['Hong Kong','HKG','Hong Kong'],['Sídney','SYD','Australia','sidney,australia']
+  ['Bangkok','BKK','Tailandia','tailandia'],['Phuket','HKT','Tailandia'],['Chiang Mai','CNX','Tailandia'],['Bali','DPS','Indonesia','indonesia'],['Delhi','DEL','India','india,nueva delhi,new delhi'],['Bombay','BOM','India','mumbai'],['Colombo','CMB','Sri Lanka','sri lanka,srilanka'],['Malé','MLE','Maldivas','maldivas,male'],['Daca','DAC','Bangladesh','bangladesh,dhaka'],['Singapur','SIN','Singapur'],['Kuala Lumpur','KUL','Malasia','malasia'],['Hanói','HAN','Vietnam','hanoi,vietnam'],['Ho Chi Minh','SGN','Vietnam'],
+  ['Tokio','TYO','Japón','japon'],['Osaka','OSA','Japón'],['Seúl','SEL','Corea del Sur','seul,corea'],['Pekín','BJS','China','pekin,beijing,china'],['Shanghái','SHA','China','shanghai'],['Hong Kong','HKG','Hong Kong'],['Sídney','SYD','Australia','sidney,australia'],['Melbourne','MEL','Australia'],['Auckland','AKL','Nueva Zelanda','nueva zelanda'],['Atenas','ATH','Grecia','grecia']
 ].map(c => ({ n:c[0], c:c[1], p:c[2], k:[c[0]].concat(c[3] ? c[3].split(',') : []).map(sinTilde) }));
 const IDEAS = [ ['tailandia','BKK'], ['brasil','RIO'], ['egipto','CAI'], ['china','BJS'], ['aruba','AUA'], ['peru','LIM'] ];
 const FESTEJOS = [
@@ -2269,6 +2304,7 @@ function initSearch() {
 
 /* ============ Buscadores de vuelos, hoteles, paquetes y tours ============ */
 function sinTilde(s) { return String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim(); }
+function mdy(iso) { return iso.slice(5, 7) + '/' + iso.slice(8, 10) + '/' + iso.slice(0, 4); }
 function ddmm(iso) { return iso.slice(8, 10) + iso.slice(5, 7); }
 function isoDe(dt) { return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0') + '-' + String(dt.getDate()).padStart(2, '0'); }
 function sumarDias(iso, n) { const p = iso.split('-').map(Number); return isoDe(new Date(p[0], p[1] - 1, p[2] + n)); }
@@ -2311,55 +2347,93 @@ function initBuscadores() {
   out.min = hoy; ret.min = hoy;
   from.innerHTML = CITIES.filter(c => ['Argentina','Brasil','Chile','Uruguay','Paraguay','Perú','Bolivia','Colombia','México'].indexOf(c.p) >= 0).map(c => '<option value="' + c.c + '">' + esc(c.n) + '</option>').join('');
   const origen = () => { const o = from.options[from.selectedIndex], ci = CITIES.find(x => x.c === o.value); return { n:o.textContent, c:o.value, p:ci ? ci.p : '' }; };
-
-  /* Moneda: arranca según el país de salida (pesos si salís de Argentina), se puede cambiar y se recuerda */
-  const cur = $('#skCur'), otra = $('#skCurOtra');
-  let ultimo = null, curElegida = false;
-  cur.innerHTML = MONEDAS_GRUPOS.map(g => '<optgroup label="' + esc(g[0]) + '">' + g[1].map(m => '<option value="' + m[0] + '">' + m[0] + ' · ' + esc(m[1]) + '</option>').join('') + '</optgroup>').join('') + '<option value="OTRA">Otra moneda…</option>';
-  const monedaDe = pais => MONEDA_POR_PAIS[pais] || 'USD';
-  /* Moneda activa: la de la lista o, si elige "Otra moneda…", el código de 3 letras que escribió */
-  const monedaSel = () => { if (cur.value !== 'OTRA') return cur.value; const c = otra.value.trim().toUpperCase(); return /^[A-Z]{3}$/.test(c) ? c : 'USD'; };
-  const ponerMoneda = code => { if (MONEDAS.some(m => m[0] === code)) { cur.value = code; otra.hidden = true; } else { cur.value = 'OTRA'; otra.value = code; otra.hidden = false; } };
-  /* Aviasales y Trip.com deciden la moneda final en su sitio: se la pedimos, pero pueden mostrarla en otra (por lo general dólares) */
-  const avisoMoneda = () => 'Pedimos los precios en ' + monedaSel() + ', pero Aviasales y Trip.com pueden mostrarlos en otra moneda (por lo general dólares) según su tienda.' + (monedaSel() === 'ARS' ? ' Los sitios argentinos de abajo los muestran en pesos.' : '');
-  try { const g = localStorage.getItem('mm_moneda'); if (g && /^[A-Z]{3}$/.test(g)) { ponerMoneda(g); curElegida = true; } } catch (e) {}
-  if (!curElegida) ponerMoneda(monedaDe(origen().p));
   const ideas = () => { $('#skIdeasT').textContent = IDEAS.length + ' ideas desde ' + origen().n + ' para un viaje de una semana'; };
+
+  /* Lo que se elige: destino y moneda. Salida, fechas y pasajeros se leen siempre del formulario,
+     así cualquier cambio (ciudad de salida, fechas, moneda…) actualiza todos los links juntos. */
+  let dest = null, curCode = 'USD', curElegida = false;
+  const monedaDe = pais => MONEDA_POR_PAIS[pais] || 'USD';
+  const avisoMoneda = () => 'Pedimos los precios en ' + curCode + '; cada sitio decide la moneda final y, si no la admite, la muestra en dólares.';
+
+  /* La búsqueda queda grabada en este navegador: al volver, destino, fechas y moneda siguen ahí */
+  const guardar = () => { try { localStorage.setItem('mm_busqueda', JSON.stringify({ d:dest, f:from.value, o:out.value, r:ret.value, x:pax.value, t:trip.value, c:curCode, e:curElegida })); } catch (e) {} };
+  const esFecha = v => /^\d{4}-\d{2}-\d{2}$/.test(v || '');
+  function cargar() {
+    let g = null;
+    try { g = JSON.parse(localStorage.getItem('mm_busqueda') || 'null'); } catch (e) {}
+    if (!g || typeof g !== 'object') return;
+    if (Array.prototype.some.call(from.options, o => o.value === g.f)) from.value = g.f;
+    if (/^[1-6]$/.test(String(g.x))) pax.value = String(g.x);
+    if (g.t === 'rt' || g.t === 'ow') trip.value = g.t;
+    if (MONEDAS.some(m => m[0] === g.c)) { curCode = g.c; curElegida = !!g.e; }
+    if (esFecha(g.o) && g.o >= hoy) { out.value = g.o; if (esFecha(g.r) && g.r > g.o) ret.value = g.r; }
+    const d = g.d;
+    if (d && typeof d.n === 'string' && /^[A-Z]{3}$/.test(d.c || '')) { dest = { n:d.n.slice(0, 60), c:d.c, p:typeof d.p === 'string' ? d.p.slice(0, 60) : '' }; q.value = dest.n; }
+  }
+
+  /* Moneda: desplegable separado por región */
+  const curBtn = $('#skCurBtn'), curPanel = $('#skCurPanel');
+  const regionDeMoneda = c => { const g = MONEDAS_GRUPOS.find(x => x[1].some(m => m[0] === c)); return g ? g[0] : MONEDAS_GRUPOS[0][0]; };
+  function pintarMonedas() {
+    const abierta = regionDeMoneda(curCode);
+    curPanel.innerHTML = MONEDAS_GRUPOS.map(g => '<details name="skCurReg"' + (g[0] === abierta ? ' open' : '') + '><summary>' + esc(g[0]) + '</summary><div class="sk-curgrid">' + g[1].map(m => '<button type="button" data-cur="' + m[0] + '"' + (m[0] === curCode ? ' aria-pressed="true"' : '') + '><b>' + m[0] + '</b><small>' + esc(m[1]) + '</small></button>').join('') + '</div></details>').join('');
+    $('#skCurTxt').textContent = curCode;
+  }
+  const abrirMonedas = on => { curPanel.hidden = !on; curBtn.setAttribute('aria-expanded', String(on)); };
+  curBtn.addEventListener('click', () => { if (curPanel.hidden) pintarMonedas(); abrirMonedas(curPanel.hidden); });
+  curPanel.addEventListener('click', e => {
+    const b = e.target.closest('[data-cur]'); if (!b) return;
+    curCode = b.dataset.cur; curElegida = true; abrirMonedas(false); $('#skCurTxt').textContent = curCode;
+    refrescar(true);
+  });
+  document.addEventListener('click', e => { if (!e.target.closest('#skCurWrap')) abrirMonedas(false); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') abrirMonedas(false); });
 
   if (!AFILIADOS.travelpayouts.marker) {
     $('#skFlag').innerHTML = '<p class="sk-flag"><b>Vista previa:</b> faltan códigos en el bloque AFILIADOS. Hasta cargarlos, algunas búsquedas no generan comisión.</p>';
   }
   function ponerMarcas(qr) {
-    const grupo = (titulo, lista, fn) => { const ls = marcasActivas(lista); return ls.length ? '<p class="sk-gl">' + titulo + '</p><div class="sk-ags">' + ls.map(a => {
+    const regD = qr && qr.d.p ? regionDe(qr.d.p) : null;
+    const visible = a => !a.r || !regD || a.r.indexOf(regD) >= 0;
+    const grupo = (titulo, lista, fn) => { const ls = marcasActivas(lista).filter(visible); return ls.length ? '<p class="sk-gl">' + titulo + '</p><div class="sk-ags">' + ls.map(a => {
       const url = linkTP(a, qr ? a.url(fn(qr)) : a.home);
       return '<a class="sk-ag" href="' + esc(url) + '" target="_blank" rel="noopener sponsored"><span><b>' + esc(a.name) + '</b><small>' + esc(a.nota) + '</small></span><em>' + (qr && !a.fijo ? 'Ver precio →' : 'Abrir →') + '</em></a>'; }).join('') + '</div>' : ''; };
-    const ruta = !qr ? '' : '<span class="sk-route">' + (mode.v === 'hoteles' ? esc(qr.d.n) : esc(qr.o.n) + ' → ' + esc(qr.d.n)) + ' · ' + fechaCorta(qr.out) + (qr.oneway && mode.v === 'vuelos' ? '' : ' – ' + fechaCorta(qr.ret)) + ' · ' + qr.pax + (mode.v === 'hoteles' ? ' huésp.' : ' pas.') + '</span>';
+    const ruta = !qr ? '' : '<span class="sk-route">' + (mode.v === 'hoteles' ? esc(qr.d.n) : esc(qr.o.n) + ' → ' + esc(qr.d.n)) + ' · ' + fechaCorta(qr.out) + (qr.oneway && mode.v === 'vuelos' ? '' : ' – ' + fechaCorta(qr.ret)) + ' · ' + qr.pax + (mode.v === 'hoteles' ? ' huésp.' : ' pas.') + ' · ' + esc(qr.cur) + '</span>';
     const paraHotel = x => Object.assign({}, x, { ret: x.oneway ? sumarDias(x.out, 7) : x.ret });
-    /* Aerolíneas y sitios del lugar: país de salida y, si es otro, país de destino */
-    const locales = () => {
-      const buscar = pais => { const k = Object.keys(LOCALES).find(n => sinTilde(n) === sinTilde(pais || '')); return k ? { pais:k, lista:LOCALES[k] } : null; };
-      const o = buscar(origen().p), d = qr ? buscar(qr.d.p) : null;
-      const bloques = [o, d && (!o || d.pais !== o.pais) ? d : null].filter(Boolean);
-      return bloques.map((b, i) => {
-        const interno = qr && i === 0 && qr.d.p && sinTilde(qr.d.p) === sinTilde(b.pais);
-        const titulo = (interno ? 'Para volar dentro de ' + b.pais : i === 0 ? 'Aerolíneas y sitios de ' + b.pais : 'Aerolíneas de ' + b.pais + ' (tu destino)') + (b.pais === 'Argentina' ? ' · precios en pesos' : '');
-        return '<p class="sk-gl">' + esc(titulo) + '</p><div class="sk-ags">' + b.lista.map(a => '<a class="sk-ag" href="' + esc(qr && a.url ? a.url(qr) : a.home) + '" target="_blank" rel="noopener"><span><b>' + esc(a.name) + '</b><small>' + esc(a.nota) + '</small></span><em>Abrir →</em></a>').join('') + '</div>';
-      }).join('');
-    };
     let h = ruta;
     if (mode.v === 'paquetes') h += grupo('Todo junto en un solo lugar', AFILIADOS.paquetes, x => x);
     if (mode.v !== 'hoteles') h += grupo(mode.v === 'paquetes' ? 'O armalo vos: primero el vuelo' : 'Mirá el vuelo en cada sitio', AFILIADOS.vuelos, x => x);
     if (mode.v !== 'vuelos') h += grupo((mode.v === 'paquetes' ? 'Después sumá' : 'Mirá') + ' el hotel con las mismas fechas', AFILIADOS.hoteles, paraHotel);
-    if (mode.v !== 'hoteles') h += locales();
     if (mode.v !== 'hoteles') h += grupo('Y para moverte por tierra', AFILIADOS.transporte, x => x);
     $('#skAgs').innerHTML = h;
+  }
+  /* Pase de abordar: muestra de dónde salís, a dónde vas y lo que ya quedó cargado */
+  function pintarPase(qr) {
+    const o = origen();
+    $('#skFromC').textContent = o.c; $('#skFromN').textContent = o.n;
+    $('#skToC').textContent = dest ? dest.c : '???'; $('#skToN').textContent = dest ? dest.n : 'Elegí tu destino';
+    $('#skMeta').textContent = qr ? fechaCorta(qr.out) + (qr.oneway && mode.v === 'vuelos' ? '' : ' – ' + fechaCorta(qr.ret)) + ' · ' + qr.pax + (mode.v === 'hoteles' ? ' huésp.' : ' pas.') + ' · ' + qr.cur : 'Elegí destino, fechas y moneda: todos los buscadores usan lo mismo.';
+  }
+  function armar() {
+    if (!dest) return null;
+    const salida = out.value && out.value >= hoy ? out.value : sumarDias(hoy, 30);
+    let vuelta = ret.value;
+    if (!vuelta || vuelta <= salida) vuelta = sumarDias(salida, 7);
+    out.value = salida; ret.value = vuelta;
+    return { o:origen(), d:dest, out:salida, ret:vuelta, pax:+pax.value, oneway:mode.v === 'vuelos' && trip.value === 'ow', cur:curCode };
+  }
+  function refrescar(avisar) {
+    const qr = armar();
+    ponerMarcas(qr); pintarPase(qr); guardar();
+    $('#skCurTxt').textContent = curCode;
+    if (avisar && qr) { msg.className = 'sk-msg'; msg.textContent = 'Listo. ' + avisoMoneda(); }
   }
   function pintarModo() {
     document.querySelectorAll('.sk-tab').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === mode.v)));
     const hotel = mode.v === 'hoteles';
     $('#skTripWrap').hidden = mode.v !== 'vuelos';
-    $('#skCurWrap').hidden = mode.v === 'hoteles';
-    ultimo = null;
+    $('#skCurWrap').hidden = hotel;
+    $('#skRegWrap').hidden = hotel;
     $('#skPaxL').textContent = hotel ? 'Huéspedes' : 'Pasajeros';
     $('#skOutL').textContent = hotel ? 'Entrada' : 'Salida';
     $('#skRetL').textContent = hotel ? 'Salida' : 'Vuelta';
@@ -2367,22 +2441,25 @@ function initBuscadores() {
     q.placeholder = hotel ? '¿En qué ciudad buscás hotel?' : mode.v === 'paquetes' ? '¿A dónde querés ir? Vuelo y hotel juntos' : '¿A dónde y cuándo querés viajar?';
     const h3 = $('#skCmp h3');
     h3.textContent = hotel ? 'La misma habitación, distintos precios. Hay que saber comprar.' : 'El mismo vuelo, distintos precios. Hay que saber comprar.';
-    ponerMarcas(null);
+    refrescar(false);
   }
-  function resolver(dest) {
+  /* Desplegable por región: destinos populares (un toque y se busca) y aerolíneas populares */
+  function ponerRegiones(abierta) {
+    $('#skReg').innerHTML = REGIONES.map(r => '<details class="sk-reg" name="skRegs"' + (r.id === abierta ? ' open' : '') + '><summary><span class="e" aria-hidden="true">' + r.e + '</span>' + esc(r.n) + '<small>' + r.destinos.length + ' destinos</small></summary><div class="sk-reg-b"><p class="sk-gl">Destinos populares</p><div class="sk-dest">' +
+      r.destinos.map(c => { const ci = CITIES.find(x => x.c === c); return ci ? '<button type="button" data-c="' + c + '">' + esc(ci.n) + '</button>' : ''; }).join('') +
+      '</div><p class="sk-air"><b>Aerolíneas populares:</b> ' + esc(r.aerolineas.slice(0, 8).join(' · ')) + '. Compará sus precios en los buscadores de arriba.</p></div></details>').join('');
+  }
+  function resolver(d, sinScroll) {
+    dest = d;
     const texto = leerTexto(q.value);
     if (texto.out && !out.value) out.value = texto.out;
     const salida = out.value && out.value >= hoy ? out.value : sumarDias(hoy, 30);
-    const dias = texto.dias || 7;
-    let vuelta = ret.value;
-    if (!vuelta || vuelta <= salida || texto.dias) vuelta = sumarDias(salida, dias);
-    out.value = salida; ret.value = vuelta;
-    const oneway = mode.v === 'vuelos' && trip.value === 'ow';
-    const qr = { o:origen(), d:dest, out:salida, ret:vuelta, pax:+pax.value, oneway:oneway, cur:monedaSel() };
-    ultimo = qr;
-    ponerMarcas(qr);
+    out.value = salida;
+    if (texto.dias || !ret.value || ret.value <= salida) ret.value = sumarDias(salida, texto.dias || 7);
+    refrescar(false);
+    ponerRegiones(regionDe(d.p));
     msg.className = 'sk-msg'; msg.textContent = 'Listo. ' + avisoMoneda() + ' Abrí cada sitio y compará el precio final.';
-    $('#skCmp').scrollIntoView({ block:'start' });
+    if (!sinScroll) $('#skCmp').scrollIntoView({ block:'start' });
   }
   async function porApi(term) {
     try {
@@ -2414,28 +2491,27 @@ function initBuscadores() {
     sug.hidden = !hits.length;
   });
   sug.addEventListener('click', e => { const b = e.target.closest('[data-c]'); if (!b) return; const c = CITIES.find(x => x.c === b.dataset.c); q.value = c.n; sug.hidden = true; resolver(c); });
+  $('#skReg').addEventListener('click', e => { const b = e.target.closest('[data-c]'); if (!b) return; const c = CITIES.find(x => x.c === b.dataset.c); q.value = c.n; resolver(c, true); });
   document.addEventListener('click', e => { if (!e.target.closest('.sk-pillwrap')) sug.hidden = true; });
   document.querySelectorAll('.sk-tab').forEach(b => b.addEventListener('click', () => { mode.v = b.dataset.mode; pintarModo(); msg.textContent = ''; }));
   trip.addEventListener('change', pintarModo);
-  from.addEventListener('change', () => { ideas(); if (!curElegida) ponerMoneda(monedaDe(origen().p)); pintarModo(); });
-  const aplicarMoneda = () => {
-    curElegida = true;
-    otra.hidden = cur.value !== 'OTRA';
-    if (cur.value === 'OTRA' && !/^[A-Za-z]{3}$/.test(otra.value.trim())) { otra.focus(); msg.className = 'sk-msg'; msg.textContent = 'Escribí el código de tu moneda, son 3 letras (por ejemplo CAD).'; return; }
-    const c = monedaSel();
-    try { localStorage.setItem('mm_moneda', c); } catch (e) {}
-    if (ultimo) { ultimo = Object.assign({}, ultimo, { cur:c }); ponerMarcas(ultimo); msg.className = 'sk-msg'; msg.textContent = 'Listo. ' + avisoMoneda(); }
-  };
-  cur.addEventListener('change', aplicarMoneda);
-  otra.addEventListener('input', () => { otra.value = otra.value.replace(/[^A-Za-z]/g, '').toUpperCase(); if (otra.value.length === 3) aplicarMoneda(); });
+  [pax, out, ret].forEach(el => el.addEventListener('change', () => refrescar(false)));
+  from.addEventListener('change', () => { ideas(); if (!curElegida) curCode = monedaDe(origen().p); refrescar(false); });
 
   $('#skCards').innerHTML = IDEAS.map(i => {
     const d = DEST.find(x => x.slug === i[0]), c = CITIES.find(x => x.c === i[1]);
     return '<button type="button" class="sk-card" data-idea="' + i[1] + '"><span class="sk-art" style="--c1:' + d.c1 + '">' + sceneSVG(d.code) + '<b>' + esc(d.name) + '</b><i>' + esc(d.tagline) + '</i></span><span class="sk-card-b"><span>' + esc(c.n) + ' · ida y vuelta</span><span class="sk-badge">Ver precio de hoy</span></span></button>';
   }).join('');
   $('#skCards').addEventListener('click', e => { const b = e.target.closest('[data-idea]'); if (!b) return; const c = CITIES.find(x => x.c === b.dataset.idea); q.value = c.n; if (mode.v === 'hoteles') { mode.v = 'vuelos'; pintarModo(); } resolver(c); });
-  $('#skCodes').innerHTML = PARTNERS.map(p => '<a href="' + esc(p.url) + '" target="_blank" rel="noopener sponsored">' + esc(p.name) + ' <code>' + esc(p.code) + '</code></a>').join('') + AFILIADOS.esim.map(a => '<a href="' + esc(linkTP(a, a.home)) + '" target="_blank" rel="noopener sponsored">' + esc(a.name) + ' <code>eSIM</code></a>').join('');
-  ideas(); pintarModo();
+  /* Códigos de descuento: cada uno lleva a la marca y se puede copiar */
+  $('#skCodes').innerHTML = PARTNERS.map(p => '<span class="sk-cc"><a href="' + esc(p.url) + '" target="_blank" rel="noopener sponsored"><b>' + esc(p.name) + '</b><small>' + esc(p.kind) + '</small></a><button type="button" class="sk-copy" data-cc="' + esc(p.code) + '" aria-label="Copiar el código de ' + esc(p.name) + '">' + esc(p.code) + ' · copiar</button></span>').join('') + AFILIADOS.esim.map(a => '<a class="sk-solo" href="' + esc(linkTP(a, a.home)) + '" target="_blank" rel="noopener sponsored">' + esc(a.name) + ' <code>eSIM</code></a>').join('');
+  $('#skCodes').addEventListener('click', e => { const b = e.target.closest('[data-cc]'); if (b) copyText(b.dataset.cc, b, null); });
+
+  cargar();
+  if (!curElegida) curCode = monedaDe(origen().p);
+  ideas(); pintarMonedas();
+  ponerRegiones(dest ? regionDe(dest.p) : regionDe(origen().p));
+  pintarModo();
 
   /* GetYourGuide */
   const gq = $('#gyQ'), gg = $('#gyGo'), gy = PARTNERS.find(p => p.name === 'GetYourGuide');
