@@ -793,7 +793,7 @@ button{font:inherit;color:inherit}
         </div>
         <div class="sk-filters">
           <label class="sk-chip" id="skTripWrap"><select id="skTrip" aria-label="Tipo de viaje"><option value="rt">Ida y vuelta</option><option value="ow">Solo ida</option></select></label>
-          <label class="sk-chip" id="skCurWrap"><span>Moneda</span><select id="skCur" aria-label="Moneda de los precios"></select></label>
+          <label class="sk-chip" id="skCurWrap"><span>Moneda</span><select id="skCur" aria-label="Moneda de los precios"></select><input id="skCurOtra" type="text" maxlength="3" size="3" placeholder="CAD" autocapitalize="characters" autocomplete="off" aria-label="Código de la moneda, 3 letras" style="width:46px;text-transform:uppercase" hidden></label>
           <label class="sk-chip"><span id="skPaxL">Pasajeros</span><select id="skPax"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></label>
           <label class="sk-chip"><span id="skOutL">Salida</span><input type="date" id="skOut"></label>
           <label class="sk-chip" id="skRetWrap"><span id="skRetL">Vuelta</span><input type="date" id="skRet"></label>
@@ -1115,7 +1115,13 @@ const AFILIADOS = {
 };
 /* Monedas del selector (código y nombre) y la que se elige sola según el país de salida.
    Los países que no figuran en MONEDA_POR_PAIS arrancan en dólares. */
-const MONEDAS = [['ARS','Peso argentino'],['USD','Dólar'],['BRL','Real'],['CLP','Peso chileno'],['COP','Peso colombiano'],['MXN','Peso mexicano'],['PEN','Sol'],['UYU','Peso uruguayo'],['EUR','Euro']];
+const MONEDAS_GRUPOS = [
+  ['Más usadas', [['USD','Dólar estadounidense'],['EUR','Euro'],['ARS','Peso argentino']]],
+  ['Latinoamérica', [['BRL','Real brasileño'],['CLP','Peso chileno'],['COP','Peso colombiano'],['MXN','Peso mexicano'],['PEN','Sol peruano'],['UYU','Peso uruguayo'],['BOB','Boliviano'],['PYG','Guaraní'],['CRC','Colón costarricense'],['DOP','Peso dominicano'],['GTQ','Quetzal']]],
+  ['Resto del mundo', [['GBP','Libra esterlina'],['CHF','Franco suizo'],['CAD','Dólar canadiense'],['AUD','Dólar australiano'],['NZD','Dólar neozelandés'],['JPY','Yen japonés'],['CNY','Yuan chino'],['HKD','Dólar de Hong Kong'],['KRW','Won surcoreano'],['SGD','Dólar de Singapur'],['THB','Baht tailandés'],['MYR','Ringgit malayo'],['IDR','Rupia indonesia'],['VND','Dong vietnamita'],['PHP','Peso filipino'],['INR','Rupia india'],['LKR','Rupia de Sri Lanka'],['BDT','Taka de Bangladesh'],['MVR','Rufiyaa maldiva'],['AED','Dírham de Emiratos'],['SAR','Riyal saudí'],['QAR','Riyal qatarí'],['TRY','Lira turca'],['EGP','Libra egipcia'],['ILS','Séquel israelí'],['ZAR','Rand sudafricano'],['MAD','Dírham marroquí'],['SEK','Corona sueca'],['NOK','Corona noruega'],['DKK','Corona danesa'],['PLN','Esloti polaco'],['CZK','Corona checa'],['HUF','Forinto húngaro']]]
+];
+/* Además de estas, "Otra moneda…" deja escribir cualquier código de 3 letras */
+const MONEDAS = MONEDAS_GRUPOS.reduce((t, g) => t.concat(g[1]), []);
 const MONEDA_POR_PAIS = { 'Argentina':'ARS', 'Brasil':'BRL', 'Chile':'CLP', 'Colombia':'COP', 'México':'MXN', 'Perú':'PEN' };
 
 /* Aerolíneas y sitios de cada lugar: se muestran las del país de salida y las del país de destino.
@@ -2307,14 +2313,17 @@ function initBuscadores() {
   const origen = () => { const o = from.options[from.selectedIndex], ci = CITIES.find(x => x.c === o.value); return { n:o.textContent, c:o.value, p:ci ? ci.p : '' }; };
 
   /* Moneda: arranca según el país de salida (pesos si salís de Argentina), se puede cambiar y se recuerda */
-  const cur = $('#skCur');
+  const cur = $('#skCur'), otra = $('#skCurOtra');
   let ultimo = null, curElegida = false;
-  cur.innerHTML = MONEDAS.map(m => '<option value="' + m[0] + '">' + m[0] + ' · ' + esc(m[1]) + '</option>').join('');
+  cur.innerHTML = MONEDAS_GRUPOS.map(g => '<optgroup label="' + esc(g[0]) + '">' + g[1].map(m => '<option value="' + m[0] + '">' + m[0] + ' · ' + esc(m[1]) + '</option>').join('') + '</optgroup>').join('') + '<option value="OTRA">Otra moneda…</option>';
   const monedaDe = pais => MONEDA_POR_PAIS[pais] || 'USD';
-  /* Aviasales y Trip.com deciden la moneda final en su sitio: se la pedimos, pero puede salir en dólares */
-  const avisoMoneda = () => 'Pedimos los precios en ' + cur.value + ', pero Aviasales y Trip.com pueden mostrarlos en dólares según su tienda.' + (cur.value === 'ARS' ? ' Los sitios argentinos de abajo los muestran en pesos.' : '');
-  try { const g = localStorage.getItem('mm_moneda'); if (g && MONEDAS.some(m => m[0] === g)) { cur.value = g; curElegida = true; } } catch (e) {}
-  if (!curElegida) cur.value = monedaDe(origen().p);
+  /* Moneda activa: la de la lista o, si elige "Otra moneda…", el código de 3 letras que escribió */
+  const monedaSel = () => { if (cur.value !== 'OTRA') return cur.value; const c = otra.value.trim().toUpperCase(); return /^[A-Z]{3}$/.test(c) ? c : 'USD'; };
+  const ponerMoneda = code => { if (MONEDAS.some(m => m[0] === code)) { cur.value = code; otra.hidden = true; } else { cur.value = 'OTRA'; otra.value = code; otra.hidden = false; } };
+  /* Aviasales y Trip.com deciden la moneda final en su sitio: se la pedimos, pero pueden mostrarla en otra (por lo general dólares) */
+  const avisoMoneda = () => 'Pedimos los precios en ' + monedaSel() + ', pero Aviasales y Trip.com pueden mostrarlos en otra moneda (por lo general dólares) según su tienda.' + (monedaSel() === 'ARS' ? ' Los sitios argentinos de abajo los muestran en pesos.' : '');
+  try { const g = localStorage.getItem('mm_moneda'); if (g && /^[A-Z]{3}$/.test(g)) { ponerMoneda(g); curElegida = true; } } catch (e) {}
+  if (!curElegida) ponerMoneda(monedaDe(origen().p));
   const ideas = () => { $('#skIdeasT').textContent = IDEAS.length + ' ideas desde ' + origen().n + ' para un viaje de una semana'; };
 
   if (!AFILIADOS.travelpayouts.marker) {
@@ -2369,7 +2378,7 @@ function initBuscadores() {
     if (!vuelta || vuelta <= salida || texto.dias) vuelta = sumarDias(salida, dias);
     out.value = salida; ret.value = vuelta;
     const oneway = mode.v === 'vuelos' && trip.value === 'ow';
-    const qr = { o:origen(), d:dest, out:salida, ret:vuelta, pax:+pax.value, oneway:oneway, cur:cur.value };
+    const qr = { o:origen(), d:dest, out:salida, ret:vuelta, pax:+pax.value, oneway:oneway, cur:monedaSel() };
     ultimo = qr;
     ponerMarcas(qr);
     msg.className = 'sk-msg'; msg.textContent = 'Listo. ' + avisoMoneda() + ' Abrí cada sitio y compará el precio final.';
@@ -2408,12 +2417,17 @@ function initBuscadores() {
   document.addEventListener('click', e => { if (!e.target.closest('.sk-pillwrap')) sug.hidden = true; });
   document.querySelectorAll('.sk-tab').forEach(b => b.addEventListener('click', () => { mode.v = b.dataset.mode; pintarModo(); msg.textContent = ''; }));
   trip.addEventListener('change', pintarModo);
-  from.addEventListener('change', () => { ideas(); if (!curElegida) cur.value = monedaDe(origen().p); pintarModo(); });
-  cur.addEventListener('change', () => {
+  from.addEventListener('change', () => { ideas(); if (!curElegida) ponerMoneda(monedaDe(origen().p)); pintarModo(); });
+  const aplicarMoneda = () => {
     curElegida = true;
-    try { localStorage.setItem('mm_moneda', cur.value); } catch (e) {}
-    if (ultimo) { ultimo = Object.assign({}, ultimo, { cur:cur.value }); ponerMarcas(ultimo); msg.className = 'sk-msg'; msg.textContent = 'Listo. ' + avisoMoneda(); }
-  });
+    otra.hidden = cur.value !== 'OTRA';
+    if (cur.value === 'OTRA' && !/^[A-Za-z]{3}$/.test(otra.value.trim())) { otra.focus(); msg.className = 'sk-msg'; msg.textContent = 'Escribí el código de tu moneda, son 3 letras (por ejemplo CAD).'; return; }
+    const c = monedaSel();
+    try { localStorage.setItem('mm_moneda', c); } catch (e) {}
+    if (ultimo) { ultimo = Object.assign({}, ultimo, { cur:c }); ponerMarcas(ultimo); msg.className = 'sk-msg'; msg.textContent = 'Listo. ' + avisoMoneda(); }
+  };
+  cur.addEventListener('change', aplicarMoneda);
+  otra.addEventListener('input', () => { otra.value = otra.value.replace(/[^A-Za-z]/g, '').toUpperCase(); if (otra.value.length === 3) aplicarMoneda(); });
 
   $('#skCards').innerHTML = IDEAS.map(i => {
     const d = DEST.find(x => x.slug === i[0]), c = CITIES.find(x => x.c === i[1]);
