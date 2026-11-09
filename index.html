@@ -813,6 +813,100 @@ button{font:inherit;color:inherit}
 .cm-hp{position:absolute;left:-9999px}
 .cm-msg{font-size:14px;min-height:1.2em;color:var(--ink-2)}
 .cm-legal{font-size:12.5px;color:var(--ink-2)}
+
+/* ===== Noticiero arriba, periodista y barra de último momento ===== */
+.nsr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.board-band{padding-block:clamp(26px,4.5vw,48px)}
+.sc-tl{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.sc-tl .live{box-shadow:0 4px 14px rgba(0,0,0,.35)}
+.lt-head h3{font-size:clamp(1.25rem,2.6vw,1.85rem)}
+.lt-meta{justify-content:flex-start}
+.lt-meta:empty,.lt-meta:not(:has(a)){display:none}
+.sc-anchor{position:absolute;z-index:2;right:12px;top:84px;width:118px;aspect-ratio:4/3;border:3px solid #fff;border-radius:6px;overflow:hidden;box-shadow:0 8px 22px rgba(0,0,0,.5);background:#0B2236}
+.sc-anchor::before{content:"";position:absolute;z-index:1;top:6px;left:6px;width:9px;height:9px;border-radius:50%;background:var(--news-red);box-shadow:0 0 0 2px rgba(255,255,255,.85);animation:blink 1.3s infinite}
+@media (min-width:700px){.sc-anchor{top:auto;bottom:12px;width:clamp(150px,22vw,190px)}.sc-lower{margin-right:calc(clamp(150px,22vw,190px) + 24px)}}
+.av{width:100%;height:100%;display:block}
+.av-body{animation:avBreath 3.4s ease-in-out infinite}
+.av-head{animation:avNod 5.2s ease-in-out infinite;transform-origin:90px 84px}
+.av-eyes{animation:avBlink 4.6s infinite;transform-box:fill-box;transform-origin:center}
+.av-mic{animation:avMic 2.8s ease-in-out infinite;transform-origin:160px 135px}
+@keyframes avBreath{50%{transform:translateY(-1.8px)}}
+@keyframes avNod{0%,100%{transform:rotate(0)}30%{transform:rotate(2.4deg)}65%{transform:rotate(-2deg)}}
+@keyframes avBlink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.08)}}
+@keyframes avMic{0%,100%{transform:rotate(0)}50%{transform:rotate(-3.5deg)}}
+@media (prefers-reduced-motion:reduce){.av-body,.av-head,.av-eyes,.av-mic,.sc-anchor::before{animation:none}}
+
+.lm{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;align-items:stretch;background:#031317;color:#E9F7F6;border-top:2px solid var(--news-red);padding-bottom:env(safe-area-inset-bottom,0px);box-shadow:0 -6px 18px rgba(0,0,0,.25)}
+.lm-tag{flex:none;display:flex;align-items:center;gap:8px;background:var(--news-red);color:#fff;font:800 12px/1 var(--f-body);letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding:0 14px}
+.lm-tag i{width:8px;height:8px;border-radius:50%;background:#fff;animation:blink 1.3s infinite}
+.lm-view{overflow:hidden;flex:1;min-width:0}
+.lm-track{display:flex;width:max-content;animation:lmtick var(--lm-dur,120s) linear infinite}
+.lm-view:hover .lm-track,.lm-view:focus-within .lm-track,.lm-view:active .lm-track{animation-play-state:paused}
+.lm-i{display:flex;align-items:center;gap:8px;padding:0 20px;min-height:40px;white-space:nowrap;color:#E9F7F6;text-decoration:none;font:500 14px/1 var(--f-body)}
+.lm-i:hover{color:#fff;text-decoration:underline}
+.lm-i b{font:800 11px/1 var(--f-body);letter-spacing:.12em;color:#ff8d91}
+.lm-of b{color:#46D68A}
+.lm-i::after{content:"";width:7px;height:7px;background:var(--news-red);transform:rotate(45deg);margin-left:12px;flex:none}
+@keyframes lmtick{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.lm-track{animation:none}.lm-view{overflow-x:auto}}
+.has-lm{padding-bottom:calc(42px + env(safe-area-inset-bottom,0px))}
+.has-lm .mm-fab{bottom:calc(54px + env(safe-area-inset-bottom,0px))}
+.has-lm .mm-tease{bottom:calc(102px + env(safe-area-inset-bottom,0px))}
+.has-lm .mm-panel{bottom:calc(54px + env(safe-area-inset-bottom,0px))}
+@media (max-width:560px){.has-lm .mm-panel{bottom:0}}
+
+/* ===== Buscador: monedas rápidas, empresas y regiones desplegables, aerolíneas ===== */
+.sk-f.sk-cur{position:relative;margin-top:12px}
+.sk-currow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.sk-quick{display:flex;flex-wrap:wrap;gap:6px}
+.sk-quick button{min-width:52px;min-height:40px;padding:0 12px;border:2px solid var(--sk-line);border-radius:999px;background:var(--sk-card);color:var(--sk-ink);font:700 14px var(--f-mono);cursor:pointer}
+.sk-quick button:hover{border-color:var(--sk-ink)}
+.sk-quick button[aria-pressed="true"]{background:var(--sk-blue);border-color:var(--sk-blue);color:#fff}
+.sk-currow>#skCurBtn{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 14px;border:2px dashed var(--sk-ink);border-radius:999px;background:transparent;color:var(--sk-ink);font:600 14px var(--f-body);cursor:pointer;width:auto}
+.sk-currow>#skCurBtn .ic{width:16px;height:16px}
+.sk-curpanel{left:0;right:0;width:auto;top:calc(100% + 6px)}
+.sk-pick{display:grid;gap:10px;grid-template-columns:minmax(0,1fr);align-items:start;margin-top:12px}
+@media (min-width:760px){.sk-pick{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.sk-pick>.sk-grp{margin-top:0}
+.sk-cmp>h3{margin-bottom:0}
+#skAgs{padding:4px 12px 12px}
+#skAgs .sk-ags{padding:0;margin:0 0 6px}
+#skAgs .sk-gl,.sk-reg-b .sk-gl{margin:10px 0 6px;font:700 11.5px/1.2 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--sk-dim)}
+.sk-regs{padding:8px 10px 10px;display:grid;gap:8px}
+.sk-als{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 8px}
+.sk-al{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:4px 14px 4px 5px;border:2px solid var(--sk-ink);border-radius:999px;background:var(--sk-card);color:var(--sk-ink);font:600 14px var(--f-body);cursor:pointer;text-align:left}
+.sk-al i{display:grid;place-items:center;min-width:32px;height:32px;border-radius:50%;background:var(--sk-soft);color:var(--sk-ink);font:700 11px var(--f-mono);font-style:normal}
+.sk-al:hover{box-shadow:0 3px 0 var(--sk-ink)}
+.sk-al[aria-pressed="true"]{background:var(--sk-blue);border-color:var(--sk-blue);color:#fff}
+.sk-al[aria-pressed="true"] i{background:rgba(255,255,255,.28);color:#fff}
+.sk-alsel{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin:0 0 10px;padding:8px 12px;border-radius:10px;background:var(--sk-soft);font:600 14px var(--f-body)}
+.sk-alsel:empty{display:none}
+.sk-alsel a{color:var(--sk-blue-2);font-weight:700}
+.sk-alsel button{margin-left:auto;border:0;background:transparent;color:var(--sk-dim);text-decoration:underline;font:600 13px var(--f-body);cursor:pointer}
+
+.sk-pr{margin:12px 0 0;padding:12px;border:2px solid var(--sk-ink);border-radius:14px;background:var(--sk-card)}
+.sk-pr-h{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px;margin-bottom:8px}
+.sk-pr-h b{font:700 16px var(--f-display)}
+.sk-pr-h span{font:500 12.5px var(--f-mono);color:var(--sk-dim);text-transform:capitalize}
+.sk-pr-l{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.sk-pr-l li{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;align-items:center;padding:8px 10px;border:1.5px solid var(--sk-line);border-radius:10px}
+.sk-pr-l li.best{border-color:#169A55;background:rgba(70,214,138,.14)}
+.sk-pr-l .al{display:flex;align-items:center;gap:10px;min-width:0}
+.sk-pr-l .al>span{display:flex;flex-direction:column;min-width:0;font-weight:700;font-size:14.5px}
+.sk-pr-l .al small{font:500 12px var(--f-body);color:var(--sk-dim)}
+.sk-pr-l .al i{flex:none;display:grid;place-items:center;min-width:34px;height:34px;border-radius:50%;background:var(--sk-soft);font:700 11px var(--f-mono);font-style:normal}
+.sk-pr-l .pc{display:flex;flex-direction:column;align-items:flex-end}
+.sk-pr-l .pc b{font:800 16px var(--f-display)}
+.sk-pr-l .pc em{font:700 10.5px var(--f-body);font-style:normal;letter-spacing:.08em;text-transform:uppercase;color:#0E7A42}
+.sk-pr-go{min-height:38px;display:inline-flex;align-items:center;padding:0 14px;border-radius:999px;background:var(--sk-blue);color:#fff;font:700 14px var(--f-body);text-decoration:none}
+.sk-pr-s{margin:10px 0 0;font-size:14px}
+.sk-pr-n{margin:6px 0 0;font-size:12.5px;color:var(--sk-dim)}
+@media (max-width:480px){.sk-pr-l li{grid-template-columns:minmax(0,1fr) auto}.sk-pr-go{grid-column:1/-1;justify-content:center}}
+/* v6: noticiero justo debajo del titulo; buscador de paises va despues */
+.hero{padding-block:clamp(30px,5vw,60px) clamp(22px,3.5vw,40px)}
+@media (max-width:959px){.hero-art{display:none}}
+.find{padding-block:clamp(26px,4vw,44px) clamp(30px,4.5vw,52px)}
+.find .search{margin-top:0;max-width:640px}
 </style>
 
 </head>
@@ -836,10 +930,10 @@ button{font:inherit;color:inherit}
       <span>Mas<b>mundo</b>k</span>
     </a>
     <nav class="nav" aria-label="Secciones">
+      <a href="#noticias">News</a>
       <a href="#buscar">Vuelos y tours</a>
       <a href="#destinos">Destinos</a>
       <a href="#descuentos">Descuentos</a>
-      <a href="#noticias">News</a>
       <a href="#videos">Videos y redes</a>
       <a href="#comunidad">Comunidad</a>
       <a href="#trabaja">Trabajá con nosotros</a>
@@ -851,19 +945,9 @@ button{font:inherit;color:inherit}
   <section class="band hero" id="inicio">
     <div class="in hero-grid">
       <div>
-        <span class="eyebrow">Guía de viajes de Yesi y Pablo</span>
+        <span class="eyebrow">Guía de viajes</span>
         <h1>Todo lo que necesitás saber antes de viajar, <em>en un solo lugar.</em></h1>
         <p class="lead">Requisitos de entrada, apps, tours, consejos y códigos de descuento para cada destino. Buscá tu país y salí tranquilo.</p>
-        <div class="search">
-          <label for="q">¿A dónde vas?</label>
-          <div class="sbox">
-            <svg class="ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-            <input id="q" type="text" role="combobox" aria-expanded="false" aria-controls="sres" aria-autocomplete="list" autocomplete="off" placeholder="Tailandia, Bali, China, Aruba…">
-            <button type="button" class="btn btn-primary" id="qgo">Buscar</button>
-          </div>
-          <ul class="sres" id="sres" role="listbox" hidden></ul>
-        </div>
-        <div class="chips" id="heroChips" aria-label="Destinos más elegidos"></div>
       </div>
       <div class="hero-art" aria-hidden="true">
         <div class="pp">
@@ -887,6 +971,55 @@ button{font:inherit;color:inherit}
   </section>
 
   <!-- ============ BUSCADORES: los textos y links se cambian en AFILIADOS (dentro del script) ============ -->
+  <section class="band dz board-band" id="noticias">
+    <div class="in">
+      <h2 class="nsr">Noticias de viaje: últimas noticias en vivo</h2>
+      <div class="nwrap">
+        <div class="screen" id="screen" role="region" aria-roledescription="carrusel" aria-label="News de Masmundok: últimas noticias">
+          <div class="sc-art" id="scArt"></div>
+          <div class="sc-top">
+            <div class="sc-tl"><span class="live"><i></i>En vivo</span><span class="bug" aria-hidden="true"><b>NEWS</b><span>Últimas noticias</span></span></div>
+            <span class="brk" id="scTag"></span>
+          </div>
+          <div class="sc-anchor" id="scAnchor" aria-hidden="true"></div>
+          <div class="sc-lower" id="scLower">
+            <span class="lt-label" id="scPlace"></span>
+            <div class="lt-head"><h3 id="scHead"></h3></div>
+            <div class="lt-sub" id="scText"></div>
+            <div class="lt-meta"><span id="scSrc"></span><span id="scPh"></span></div>
+            <div class="sc-bar"><i id="scBar"></i></div>
+          </div>
+        </div>
+        <div class="rail-box">
+          <div class="rail-hd"><span>Más noticias</span>
+            <span class="cc"><span id="stCnt"></span>
+              <button type="button" id="nPrev" aria-label="Noticia anterior"><svg class="ic" viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></svg></button>
+              <button type="button" id="nPlay" aria-label="Pausar" aria-pressed="false"></button>
+              <button type="button" id="nNext" aria-label="Noticia siguiente"><svg class="ic" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></button>
+            </span>
+          </div>
+          <ol class="rail" id="rail"></ol>
+        </div>
+      </div>
+      <p class="note">Las reglas de ingreso, equipaje y multas cambian sin aviso. Antes de viajar confirmá siempre en el sitio oficial del país, en tu aerolínea o en el consulado.</p>
+    </div>
+  </section>
+
+  <section class="band find" id="buscaPais" aria-label="Buscar requisitos por país">
+    <div class="in">
+        <div class="search">
+          <label for="q">¿A dónde vas?</label>
+          <div class="sbox">
+            <svg class="ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input id="q" type="text" role="combobox" aria-expanded="false" aria-controls="sres" aria-autocomplete="list" autocomplete="off" placeholder="Tailandia, Bali, China, Aruba…">
+            <button type="button" class="btn btn-primary" id="qgo">Buscar</button>
+          </div>
+          <ul class="sres" id="sres" role="listbox" hidden></ul>
+        </div>
+        <div class="chips" id="heroChips" aria-label="Destinos más elegidos"></div>
+    </div>
+  </section>
+
   <section class="sk" id="buscar">
     <div class="sk-sky" aria-hidden="true">
       <svg class="l" viewBox="0 0 300 110" fill="currentColor"><path d="M0 110V82l34-30 22 20 40-52 34 44 26-22 44 40 30-14 40 34z"/><path d="M96 20l-11 14 11-4 10 5z" fill="#fff" opacity=".85"/><path d="M0 110c30-16 70-14 96-6 30-14 74-16 110 0 22-6 50-4 64 6z" fill="#fff" opacity=".45"/></svg>
@@ -931,7 +1064,14 @@ button{font:inherit;color:inherit}
             <div class="sk-f"><label for="skOut" id="skOutL">Ida</label><input type="date" id="skOut"></div>
             <div class="sk-f" id="skRetWrap"><label for="skRet" id="skRetL">Vuelta</label><input type="date" id="skRet"></div>
             <div class="sk-f"><label for="skPax" id="skPaxL">Pasajeros</label><select id="skPax"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></div>
-            <div class="sk-f sk-cur" id="skCurWrap"><label id="skCurL">Moneda</label><button type="button" id="skCurBtn" aria-haspopup="true" aria-expanded="false" aria-label="Elegir la moneda de los precios"><b id="skCurTxt">USD</b><svg class="ic" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button><div class="sk-curpanel" id="skCurPanel" hidden></div></div>
+          </div>
+          <div class="sk-f sk-cur" id="skCurWrap">
+            <label id="skCurL">Moneda de los precios</label>
+            <div class="sk-currow">
+              <div class="sk-quick" id="skQuick" role="group" aria-label="Monedas más usadas"></div>
+              <button type="button" id="skCurBtn" aria-haspopup="true" aria-expanded="false" aria-label="Ver todas las monedas"><span>Más monedas</span><b id="skCurTxt" hidden>USD</b><svg class="ic" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button>
+            </div>
+            <div class="sk-curpanel" id="skCurPanel" hidden></div>
           </div>
         </form>
         <p class="sk-msg" id="skMsg" role="status" aria-live="polite"></p>
@@ -939,11 +1079,13 @@ button{font:inherit;color:inherit}
       <div id="skFlag"></div>
 
       <div class="sk-cmp" id="skCmp">
-        <h3>Elegí dónde ver los precios</h3>
-        <p class="sk-lead">El mismo vuelo cuesta distinto según el sitio. Abrí dos y compará.</p>
-        <div id="skAgs"></div>
+        <h3 id="skCmpH">Elegí dónde ver los precios</h3>
+        <div class="sk-pr" id="skPr" hidden></div>
+        <div class="sk-pick">
+          <details class="sk-grp" id="skSitios"><summary><span class="e" aria-hidden="true">✈️</span><span id="skSitiosT">Vuelos · Empresas</span><small id="skSitiosN"></small></summary><div id="skAgs"></div></details>
+          <details class="sk-grp" id="skRegWrap"><summary><span class="e" aria-hidden="true">🌍</span>Región<small>por continente</small></summary><div class="sk-regs" id="skReg"></div></details>
+        </div>
         <details class="sk-grp" id="skCodesWrap"><summary><span class="e" aria-hidden="true">🎟️</span>Códigos de descuento<small id="skCodesN"></small></summary><div class="sk-codes" id="skCodes"></div></details>
-        <details class="sk-grp" id="skRegWrap"><summary><span class="e" aria-hidden="true">🧭</span>Destinos y aerolíneas populares<small>5 regiones</small></summary><div class="sk-regs" id="skReg"></div></details>
         <details class="sk-grp"><summary><span class="e" aria-hidden="true">💡</span>Consejos para ahorrar<small>3 ideas</small></summary>
           <ul class="sk-tips">
             <li><b>Compará antes de pagar</b>Abrí dos sitios con las mismas fechas: el precio puede cambiar.</li>
@@ -951,7 +1093,7 @@ button{font:inherit;color:inherit}
             <li><b>Mové un par de días</b>Salir un día antes o después a veces baja la tarifa.</li>
           </ul>
         </details>
-        <p class="sk-note">Los precios los muestra cada sitio en vivo y pueden cambiar; nosotros no los fijamos. Los links son de afiliado: si comprás con ellos nos llevamos una comisión, y vos no pagás de más.</p>
+        <p class="sk-note">Los precios los muestra cada sitio en vivo y pueden cambiar; nosotros no los fijamos. Los links de las empresas son de afiliado: si comprás con ellos nos llevamos una comisión, y vos no pagás de más. Las aerolíneas elegidas llevan a su sitio oficial, sin comisión.</p>
       </div>
 
       <div class="sk-sh"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg><span id="skIdeasT"></span></div>
@@ -977,46 +1119,6 @@ button{font:inherit;color:inherit}
         <p class="sk-coupon">El mismo tour también puede cambiar de precio: compará en <span id="gyTa"></span></p>
         <div id="stB"></div>
       </div>
-    </div>
-  </section>
-
-  <section class="band dz board-band" id="noticias">
-    <div class="in">
-      <div class="nhead">
-        <div>
-          <span class="live"><i></i>En vivo</span>
-          <h2>News <span>Últimas noticias</span></h2>
-        </div>
-        <span class="nmeta" id="nEdition"></span>
-      </div>
-      <div class="nwrap">
-        <div class="screen" id="screen" role="region" aria-roledescription="carrusel" aria-label="News de Masmundok: últimas noticias">
-          <div class="sc-art" id="scArt"></div>
-          <div class="sc-top"><span class="brk" id="scTag"></span><span class="bug" aria-hidden="true"><b>MM</b><span>NEWS</span></span></div>
-          <div class="sc-lower" id="scLower">
-            <span class="lt-label" id="scPlace"></span>
-            <div class="lt-head"><h3 id="scHead"></h3></div>
-            <div class="lt-sub" id="scText"></div>
-            <div class="lt-meta"><span id="scWhen"></span><span id="scSrc"></span></div>
-            <div class="sc-bar"><i id="scBar"></i></div>
-          </div>
-        </div>
-        <div class="rail-box">
-          <div class="rail-hd"><span>Más noticias</span>
-            <span class="cc"><span id="stCnt"></span>
-              <button type="button" id="nPrev" aria-label="Noticia anterior"><svg class="ic" viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></svg></button>
-              <button type="button" id="nPlay" aria-label="Pausar" aria-pressed="false"></button>
-              <button type="button" id="nNext" aria-label="Noticia siguiente"><svg class="ic" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></button>
-            </span>
-          </div>
-          <ol class="rail" id="rail"></ol>
-        </div>
-      </div>
-      <div class="ticker" aria-label="Titulares">
-        <span class="tk-label">Últimas noticias</span>
-        <div class="tk-view"><div class="tk-track" id="tkTrack"></div></div>
-      </div>
-      <p class="note">Las reglas de ingreso, equipaje y multas cambian sin aviso. Antes de viajar confirmá siempre en el sitio oficial del país, en tu aerolínea o en el consulado.</p>
     </div>
   </section>
 
@@ -1169,6 +1271,11 @@ button{font:inherit;color:inherit}
 
 <div id="view-country" hidden></div>
 
+<div class="lm" id="lm" role="region" aria-label="Último momento: noticias, requisitos y ofertas de viaje">
+  <a class="lm-tag" href="#noticias"><i></i>Último momento</a>
+  <div class="lm-view"><div class="lm-track" id="lmTrack"></div></div>
+</div>
+
 <footer class="foot dz">
   <div class="in">
     <a class="brand" href="#inicio"><span>Mas<b>mundo</b>k</span></a>
@@ -1213,7 +1320,8 @@ const PARTNERS = [
    p y campaign: los códigos de cada marca, salen del generador de links de Travelpayouts.
    Una marca sin p no se muestra en la web publicada, así ningún clic queda sin comisión. */
 const AFILIADOS = {
-  travelpayouts: { marker: '768557', proyecto: '565499' },
+  /* token: tu token de la API de Travelpayouts (Perfil > API token). Con él aparece la comparativa de precios y las ofertas de hoy. */
+  travelpayouts: { marker: '768557', proyecto: '565499', token: '' },
   tours: [
     { name:'Tripadvisor', p:'4456', campaign:'149', url: t => t ? 'https://www.tripadvisor.com/Search?q=' + encodeURIComponent(t) : 'https://www.tripadvisor.com/Attractions' },
     { name:'Klook', p:'4110', campaign:'137', url: t => t ? 'https://www.klook.com/es/search/result/?query=' + encodeURIComponent(t) : 'https://www.klook.com/es/' }
@@ -1232,7 +1340,7 @@ const AFILIADOS = {
       url: q => 'https://www.aviasales.com/search/' + q.o.c + ddmm(q.out) + q.d.c + (q.oneway ? '' : ddmm(q.ret)) + q.pax + '?currency=' + q.cur.toLowerCase() },
     { name:'Trip.com', nota:'Fuerte en Asia y vuelos largos', p:'8980', campaign:'121', home:'https://www.trip.com/flights/',
       url: q => 'https://www.trip.com/flights/showfarefirst?dcity=' + q.o.c.toLowerCase() + '&acity=' + q.d.c.toLowerCase() + '&ddate=' + q.out + (q.oneway ? '&triptype=ow' : '&rdate=' + q.ret + '&triptype=rt') + '&class=y&quantity=' + q.pax + '&locale=es-ES&curr=' + q.cur },
-    { name:'Expedia', nota:'Vuelos de muchas aerolíneas', p:'8645', campaign:'594', home:'https://www.expedia.com/Flights', r:['latam','inter','europa','oceania'],
+    { name:'Expedia', nota:'Vuelos de muchas aerolíneas', p:'8645', campaign:'594', home:'https://www.expedia.com/Flights', r:['latam','norteamerica','europa','oceania','africa','inter'],
       url: q => 'https://www.expedia.com/Flights-Search?flight-type=on&mode=search&trip=' + (q.oneway ? 'oneway' : 'roundtrip') + '&leg1=from:' + q.o.c + ',to:' + q.d.c + ',departure:' + mdy(q.out) + 'TANYT' + (q.oneway ? '' : '&leg2=from:' + q.d.c + ',to:' + q.o.c + ',departure:' + mdy(q.ret) + 'TANYT') + '&passengers=adults:' + q.pax },
     { name:'Traveloka', nota:'Fuerte en vuelos dentro de Asia', fijo:true, p:'9048', campaign:'632', home:'https://www.traveloka.com/', r:['asia'], url: () => 'https://www.traveloka.com/' },
     { name:'KAYAK', nota:'Mira cientos de sitios a la vez', p:'', campaign:'', home:'https://www.kayak.com.ar/flights',
@@ -1271,13 +1379,28 @@ const MONEDAS = MONEDAS_GRUPOS.reduce((t, g) => t.concat(g[1]), []);
 const MONEDA_POR_PAIS = { 'Argentina':'ARS', 'Brasil':'BRL', 'Chile':'CLP', 'Colombia':'COP', 'México':'MXN', 'Perú':'PEN' };
 
 /* Regiones del desplegable de vuelos: destinos y aerolíneas populares de cada una.
-   "destinos" son códigos de CITIES; "aerolineas" es solo informativo (se muestran las primeras 8).
+   "destinos" son códigos de CITIES; "aerolineas" son nombres de AEROLINEAS (con su código y sitio oficial).
    Todos los links del buscador salen con los códigos de AFILIADOS, así que acá no hay links a aerolíneas. */
+/* Aerolíneas: nombre → [código IATA, sitio oficial] */
+const AEROLINEAS = {
+  'JetSMART':['JA','https://jetsmart.com'], 'Aerolíneas Argentinas':['AR','https://www.aerolineas.com.ar'], 'LATAM':['LA','https://www.latamairlines.com'],
+  'GOL':['G3','https://www.voegol.com.br'], 'Flybondi':['FO','https://flybondi.com'], 'SKY':['H2','https://www.skyairline.com'],
+  'Avianca':['AV','https://www.avianca.com'], 'Copa':['CM','https://www.copaair.com'], 'Azul':['AD','https://www.voeazul.com.br'], 'Aeroméxico':['AM','https://www.aeromexico.com'],
+  'American Airlines':['AA','https://www.aa.com'], 'United':['UA','https://www.united.com'], 'Delta':['DL','https://www.delta.com'], 'Air Canada':['AC','https://www.aircanada.com'],
+  'Iberia':['IB','https://www.iberia.com'], 'Air Europa':['UX','https://www.aireuropa.com'], 'Air France':['AF','https://www.airfrance.com'], 'Lufthansa':['LH','https://www.lufthansa.com'], 'TAP':['TP','https://www.flytap.com'],
+  'Emirates':['EK','https://www.emirates.com'], 'Qatar Airways':['QR','https://www.qatarairways.com'], 'Etihad':['EY','https://www.etihad.com'], 'Turkish Airlines':['TK','https://www.turkishairlines.com'],
+  'Singapore Airlines':['SQ','https://www.singaporeair.com'], 'Thai Airways':['TG','https://www.thaiairways.com'], 'Air India':['AI','https://www.airindia.com'], 'ANA':['NH','https://www.ana.co.jp'],
+  'Ethiopian Airlines':['ET','https://www.ethiopianairlines.com'], 'EgyptAir':['MS','https://www.egyptair.com'], 'Royal Air Maroc':['AT','https://www.royalairmaroc.com'], 'South African Airways':['SA','https://www.flysaa.com'], 'Kenya Airways':['KQ','https://www.kenya-airways.com'],
+  'Qantas':['QF','https://www.qantas.com'], 'Air New Zealand':['NZ','https://www.airnewzealand.com'], 'Virgin Australia':['VA','https://www.virginaustralia.com'], 'Jetstar':['JQ','https://www.jetstar.com'], 'Fiji Airways':['FJ','https://www.fijiairways.com']
+};
+const AER_IATA = {};
+Object.keys(AEROLINEAS).forEach(n => { AER_IATA[AEROLINEAS[n][0]] = n; });
 const REGIONES = [
-  { id:'latam', n:'LATAM', e:'🌎', destinos:['RIO','SCL','LIM','CUN','BOG','MVD','BRC','MDZ'], aerolineas:['Aerolíneas Argentinas','LATAM','Flybondi','JetSMART','SKY','Avianca','Copa','GOL','Azul','Aeroméxico'] },
-  { id:'inter', n:'Internacional', e:'🌐', destinos:['MIA','NYC','ORL','LAX','IST','DOH'], aerolineas:['Emirates','Qatar Airways','Turkish Airlines','Lufthansa','Air France','KLM','British Airways','United','American Airlines','Delta'] },
-  { id:'asia', n:'Asia', e:'🌏', destinos:['DXB','BKK','TYO','SIN','DPS','DEL','CMB','MLE'], aerolineas:['Emirates','Qatar Airways','Etihad','IndiGo','Air India','SriLankan','Thai Airways','Singapore Airlines','AirAsia','ANA'] },
-  { id:'europa', n:'Europa', e:'🏰', destinos:['MAD','BCN','ROM','PAR','LON','LIS','AMS'], aerolineas:['Iberia','Air Europa','Vueling','Ryanair','easyJet','Lufthansa','Air France','KLM','British Airways','ITA Airways','TAP'] },
+  { id:'latam', n:'LATAM', e:'🌎', destinos:['RIO','SCL','LIM','CUN','BOG','MVD','BRC','MDZ'], aerolineas:['JetSMART','Aerolíneas Argentinas','LATAM','GOL','Flybondi','SKY','Avianca','Copa','Azul'] },
+  { id:'norteamerica', n:'Norteamérica', e:'🗽', destinos:['MIA','NYC','ORL','LAX','LAS','YTO'], aerolineas:['American Airlines','United','Delta','Air Canada','Aeroméxico'] },
+  { id:'europa', n:'Europa', e:'🏰', destinos:['MAD','BCN','ROM','PAR','LON'], aerolineas:['Iberia','Air Europa','Air France','Lufthansa','TAP'] },
+  { id:'asia', n:'Asia', e:'🌏', destinos:['DXB','BKK','TYO','SIN','DPS','DEL','CMB','MLE'], aerolineas:['Emirates','Qatar Airways','Etihad','Turkish Airlines','Singapore Airlines','Thai Airways','Air India','ANA'] },
+  { id:'africa', n:'África', e:'🦁', destinos:['CAI','RAK','CPT','JNB','NBO','ZNZ'], aerolineas:['Ethiopian Airlines','EgyptAir','Royal Air Maroc','South African Airways','Kenya Airways'] },
   { id:'oceania', n:'Oceanía', e:'🦘', destinos:['SYD','MEL','AKL'], aerolineas:['Qantas','Air New Zealand','Virgin Australia','Jetstar','Fiji Airways'] }
 ];
 /* Región de cada país (para abrir sola la del destino). Lo que no figura cae en Internacional. */
@@ -1285,7 +1408,9 @@ const REGION_DE_PAIS = {
   latam:['Argentina','Brasil','Chile','Uruguay','Paraguay','Perú','Bolivia','Colombia','Ecuador','México','Cuba','República Dominicana','Aruba','Panamá'],
   asia:['Emiratos Árabes','Qatar','Arabia Saudita','Tailandia','Indonesia','Singapur','Malasia','Vietnam','Japón','Corea del Sur','China','Hong Kong','India','Sri Lanka','Maldivas','Bangladesh'],
   europa:['España','Italia','Francia','Reino Unido','Portugal','Países Bajos','Turquía','Grecia'],
-  oceania:['Australia','Nueva Zelanda']
+  oceania:['Australia','Nueva Zelanda'],
+  norteamerica:['Estados Unidos','Canadá'],
+  africa:['Egipto','Marruecos','Sudáfrica','Kenia','Tanzania','Etiopía','Túnez','Namibia','Mauricio','Seychelles']
 };
 const REGION_PAIS = {};
 Object.keys(REGION_DE_PAIS).forEach(r => REGION_DE_PAIS[r].forEach(p => { REGION_PAIS[sinTilde(p)] = r; }));
@@ -1297,7 +1422,7 @@ const CITIES = [
   ['Río de Janeiro','RIO','Brasil','rio,brasil'],['São Paulo','SAO','Brasil','sao paulo'],['Florianópolis','FLN','Brasil','floripa'],['Salvador de Bahía','SSA','Brasil','salvador,bahia'],['Foz de Iguazú','IGU','Brasil','foz'],['Brasilia','BSB','Brasil'],['Belo Horizonte','BHZ','Brasil'],['Porto Alegre','POA','Brasil'],['Recife','REC','Brasil'],['Fortaleza','FOR','Brasil'],['Curitiba','CWB','Brasil'],['Natal','NAT','Brasil'],['Maceió','MCZ','Brasil','maceio'],
   ['Santiago de Chile','SCL','Chile','santiago,chile'],['Punta Arenas','PUQ','Chile'],['Puerto Montt','PMC','Chile'],['Antofagasta','ANF','Chile'],['Calama (San Pedro de Atacama)','CJC','Chile','calama,atacama'],['Concepción','CCP','Chile'],['Montevideo','MVD','Uruguay','uruguay'],['Punta del Este','PDP','Uruguay','punta'],['Asunción','ASU','Paraguay','paraguay'],['Lima','LIM','Perú','peru'],['Cusco','CUZ','Perú','machu picchu'],['Arequipa','AQP','Perú'],['La Paz','LPB','Bolivia','bolivia'],['Santa Cruz de la Sierra','SRZ','Bolivia','santa cruz'],
   ['Bogotá','BOG','Colombia','colombia'],['Cartagena','CTG','Colombia'],['Medellín','MDE','Colombia'],['Cali','CLO','Colombia'],['Quito','UIO','Ecuador','ecuador'],['Guayaquil','GYE','Ecuador'],['Cancún','CUN','México'],['Guadalajara','GDL','México'],['Monterrey','MTY','México'],['Ciudad de México','MEX','México','cdmx,mexico'],['Punta Cana','PUJ','República Dominicana','dominicana'],['La Habana','HAV','Cuba','cuba'],['Aruba','AUA','Aruba'],['Panamá','PTY','Panamá'],
-  ['Miami','MIA','Estados Unidos'],['Orlando','ORL','Estados Unidos'],['Nueva York','NYC','Estados Unidos','new york,estados unidos'],['Los Ángeles','LAX','Estados Unidos','los angeles'],
+  ['Miami','MIA','Estados Unidos'],['Orlando','ORL','Estados Unidos'],['Nueva York','NYC','Estados Unidos','new york,estados unidos'],['Los Ángeles','LAX','Estados Unidos','los angeles'],['Las Vegas','LAS','Estados Unidos'],['Toronto','YTO','Canadá','canada'],['Marrakech','RAK','Marruecos','marruecos'],['Ciudad del Cabo','CPT','Sudáfrica','sudafrica,cape town'],['Johannesburgo','JNB','Sudáfrica','sudafrica'],['Nairobi','NBO','Kenia','kenia,safari'],['Zanzíbar','ZNZ','Tanzania','tanzania'],
   ['Madrid','MAD','España','espana'],['Barcelona','BCN','España'],['Roma','ROM','Italia','italia'],['París','PAR','Francia','francia'],['Londres','LON','Reino Unido','inglaterra'],['Lisboa','LIS','Portugal','portugal'],['Ámsterdam','AMS','Países Bajos','holanda'],['Estambul','IST','Turquía','turquia'],
   ['Dubái','DXB','Emiratos Árabes','dubai,emiratos'],['Doha','DOH','Qatar','qatar'],['Riad','RUH','Arabia Saudita','arabia'],['El Cairo','CAI','Egipto','cairo,egipto'],
   ['Bangkok','BKK','Tailandia','tailandia'],['Phuket','HKT','Tailandia'],['Chiang Mai','CNX','Tailandia'],['Bali','DPS','Indonesia','indonesia'],['Delhi','DEL','India','india,nueva delhi,new delhi'],['Bombay','BOM','India','mumbai'],['Colombo','CMB','Sri Lanka','sri lanka,srilanka'],['Malé','MLE','Maldivas','maldivas,male'],['Daca','DAC','Bangladesh','bangladesh,dhaka'],['Singapur','SIN','Singapur'],['Kuala Lumpur','KUL','Malasia','malasia'],['Hanói','HAN','Vietnam','hanoi,vietnam'],['Ho Chi Minh','SGN','Vietnam'],
@@ -1526,7 +1651,7 @@ DEST.push({
 /* ============ Noticiero. cat: ultimo | oferta | visa | equipaje | reglas | dato ============ */
 const NEWS = [
   { cat:'ultimo', tag:'Último momento', c:'ar', place:'Cataratas del Iguazú', when:'Parte del 25 oct', t:'Iguazú: nuevo cierre parcial por la crecida del río', x:'El 25/10 cerraron el Circuito Superior del lado argentino, con el río en 12.800 m³/s. Siguen abiertos el Circuito Inferior y el sendero verde. El 12/10 el parque había cerrado entero y reabrió el 13/10. Confirmá el estado en los canales oficiales antes de ir.', src:{ l:'Noticias NQN', u:'https://www.noticiasnqn.com.ar/noticias/2026/10/25/358083-cerraron-parcialmente-las-cataratas-del-iguazu-por-la-crecida-del-rio' } },
-  { cat:'ultimo', tag:'Último momento', c:'ar', place:'Argentina', when:'8 al 11 nov', t:'El Papa León XIV visita Argentina del 8 al 11 de noviembre', x:'Estará en Buenos Aires, Luján y Córdoba, y después sigue a Perú (Lima, Chiclayo, Cusco y Pucallpa) hasta el 17/11. Si viajás a esas ciudades en esas fechas, reservá con tiempo y revisá los operativos de tránsito.', src:{ l:'Perfil', u:'https://www.perfil.com/noticias/sociedad/papa-leon-xiv-en-la-argentina-agenda-confirmada-fechas-y-que-lugares-visitara.phtml' } },
+  { cat:'ultimo', tag:'Último momento', c:'ar', place:'Argentina', foto:'obelisco', when:'8 al 11 nov', t:'El Papa León XIV visita Argentina del 8 al 11 de noviembre', x:'Estará en Buenos Aires, Luján y Córdoba, y después sigue a Perú (Lima, Chiclayo, Cusco y Pucallpa) hasta el 17/11. Si viajás a esas ciudades en esas fechas, reservá con tiempo y revisá los operativos de tránsito.', src:{ l:'Perfil', u:'https://www.perfil.com/noticias/sociedad/papa-leon-xiv-en-la-argentina-agenda-confirmada-fechas-y-que-lugares-visitara.phtml' } },
   { cat:'oferta', tag:'Oferta', c:'br', place:'Maceió, Brasil', when:'Publicada el 29 oct', t:'Paquetes a Maceió en verano desde USD 900 por persona', x:'Incluye vuelo directo desde Buenos Aires y hotel con desayuno, según una oferta publicada el 29/10 (referencia: 29/1 al 5/2 de 2027). El precio y la disponibilidad cambian: confirmalos antes de reservar.', src:{ l:'Promos Aéreas', u:'https://promociones-aereas.com.ar/?p=360058' } },
   { cat:'visa', tag:'Visa', c:'th', when:'Desde el 15 sep', t:'Tailandia terminó con los 60 días, pero los argentinos siguen con 90', x:'Desde el 15 de septiembre de 2026 rige un esquema de 30 días para unos 60 países. Argentina conserva los 90 días por acuerdo bilateral. Confirmalo en tu aerolínea o consulado antes de salir.', src:{ l:'TAT News', u:'https://www.tatnews.org/2026/07/thai-cabinet-approves-updated-visa-measures-pending-royal-gazette-publication/' } },
   { cat:'visa', tag:'Trámite', c:'th', when:'Vigente', t:'En Tailandia la TDAC reemplazó a la tarjeta de papel', x:'Es obligatoria para todos los viajeros. Se completa online hasta 72 horas antes de llegar y te da un QR que te escanean en migraciones.', src:{ l:'Pattaya Mail', u:'https://www.pattayamail.com/latestnews/news/thailand-tightens-visa-exemptions-and-expands-digital-arrival-controls-561411' } },
@@ -1789,7 +1914,6 @@ function renderStatic() {
   $('#mailTxt').textContent = SITE.email;
   $('#mailTxt2').innerHTML = '<b>' + esc(SITE.email) + '</b>';
   $('#wmailTxt').textContent = SITE.email;
-  $('#nEdition').textContent = 'Edición del ' + SITE.edicion;
   $('#ytAll').href = SITE.youtube;
   $('#mailCopy').addEventListener('click', e => copyText(SITE.email, e.currentTarget, $('#mailTxt')));
   $('#wmailCopy').addEventListener('click', e => copyText(SITE.email, e.currentTarget, $('#wmailTxt')));
@@ -1823,6 +1947,27 @@ function renderTickets() {
 }
 
 /* ============ News ============ */
+/* Fotos reales de Wikimedia Commons (licencias libres). Cada una enlaza a su página con autor y licencia.
+   Para usar una foto tuya: poné foto:'mi-clave' en la noticia y sumá la clave acá con su archivo. */
+const FOTOS = {
+  iguazu:'Garganta del Diablo or Devil Throat Iguazu Falls Argentina Luca Galuzzi 2005.JPG',
+  obelisco:'Avenida 9 de Julio - Obelisco - Buenos Aires.jpg',
+  maceio:'Praia de Pajuçara - Maceió - Alagoas (13125463894).jpg',
+  watarun:'Wat Arun from Chao Phraya River.jpg',
+  muralla:'Great Wall of China at Mutianyu.JPG',
+  shibuya:'Shibuya Crossing Tokyo At Night (150285427).jpeg',
+  giza:'Giza-pyramids.JPG',
+  aruba:'Eagle Beach Aruba.jpg',
+  tanahlot:'Tanah-Lot Bali Indonesia Pura-Tanah-Lot-01.jpg',
+  eiffel:'Tour Eiffel Wikimedia Commons.jpg',
+  singapur:'Skyline of Singapore from Marina Bay Sands.jpg',
+  santiago:'Skyline of Santiago, Chile.jpg',
+  avion:'Plane wing at sunset.jpg'
+};
+const FOTO_PAIS = { ar:'iguazu', br:'maceio', th:'watarun', cn:'muralla', jp:'shibuya', eg:'giza', aw:'aruba', id:'tanahlot', eu:'eiffel', sg:'singapur', cl:'santiago', '':'avion' };
+function fotoDe(n) { const k = n.foto || FOTO_PAIS[n.c || '']; return FOTOS[k] ? FOTOS[k] : ''; }
+const fotoURL = (f, w) => 'https://commons.wikimedia.org/wiki/Special:FilePath/' + encodeURIComponent(f) + '?width=' + w;
+const fotoPag = f => 'https://commons.wikimedia.org/wiki/File:' + encodeURIComponent(f.replace(/ /g, '_'));
 const NDUR = 9500;
 let ni = 0, nElapsed = 0, nHold = false, nPaused = false, nLast = performance.now(), railEls = [];
 ICON.pause = '<svg class="ic" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></svg>';
@@ -1830,11 +1975,13 @@ function showNews(i) {
   ni = (i + NEWS.length) % NEWS.length; nElapsed = 0;
   const n = NEWS[ni], art = $('#scArt'), low = $('#scLower'), tag = $('#scTag');
   [art, low, tag].forEach(el => { el.style.animation = 'none'; void el.offsetWidth; el.style.animation = ''; });
-  art.innerHTML = sceneSVG(n.c);
+  const fo = fotoDe(n);
+  art.innerHTML = sceneSVG(n.c) + (fo ? '<img class="ph" alt="" decoding="async" referrerpolicy="no-referrer" src="' + fotoURL(fo, 1280) + '">' : '');
   tag.className = 'brk nt-' + n.cat; tag.textContent = n.tag;
   $('#scPlace').innerHTML = (n.c ? flag(n.c) : ICON.plane) + esc(n.place || placeName(n.c) || 'Viajes');
-  $('#scHead').textContent = n.t; $('#scText').textContent = n.x; $('#scWhen').textContent = n.when;
+  $('#scHead').textContent = n.t; $('#scText').textContent = n.x;
   $('#scSrc').innerHTML = n.src ? '<a href="' + n.src.u + '" target="_blank" rel="noopener">Fuente: ' + esc(n.src.l) + '</a>' : '';
+  $('#scPh').innerHTML = fo ? '<a href="' + fotoPag(fo) + '" target="_blank" rel="noopener">Foto: Wikimedia Commons</a>' : '';
   $('#stCnt').textContent = (ni + 1) + ' / ' + NEWS.length;
   railEls.forEach((r, j) => { r.classList.toggle('on', j === ni); r.setAttribute('aria-current', String(j === ni)); });
   const r = railEls[ni], rail = $('#rail');
@@ -1849,7 +1996,37 @@ function setPlay() {
   p.setAttribute('aria-label', nPaused ? 'Seguir' : 'Pausar');
   p.setAttribute('aria-pressed', String(nPaused));
 }
+function anchorSVG() {
+  return '<svg class="av" viewBox="0 0 180 135" aria-hidden="true">' +
+    '<defs><linearGradient id="avbg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#245E86"/><stop offset="1" stop-color="#0B2236"/></linearGradient></defs>' +
+    '<rect width="180" height="135" fill="url(#avbg)"/>' +
+    '<g opacity=".55"><rect x="10" y="12" width="34" height="46" rx="3" fill="#3C9AC6"/><rect x="136" y="12" width="34" height="46" rx="3" fill="#3C9AC6"/><path d="M27 12v46M10 35h34M153 12v46M136 35h34" stroke="#0B2236" stroke-width="2"/></g>' +
+    '<g class="av-body">' +
+      '<path d="M24 135q2-44 66-48t66 48z" fill="#0F1F33"/>' +
+      '<path d="M76 90l14 29 14-29z" fill="#fff"/>' +
+      '<path d="M76 90 62 108l22 22 6-11zM104 90l14 18-22 22-6-11z" fill="#1B3556"/>' +
+      '<path d="M86 96h8l3 9-7 24-7-24z" fill="#D61F26"/><path d="M86 96h8l-1.5 5h-5z" fill="#9E1318"/>' +
+      '<rect x="82" y="76" width="16" height="18" rx="6" fill="#D39B72"/>' +
+      '<g class="av-head">' +
+        '<circle cx="64" cy="60" r="5" fill="#E8B48C"/><circle cx="116" cy="60" r="5" fill="#E8B48C"/>' +
+        '<ellipse cx="90" cy="58" rx="25" ry="27" fill="#E8B48C"/>' +
+        '<path d="M64 54q-3-27 26-27t26 27q-8-13-26-13T64 54z" fill="#2B1B12"/>' +
+        '<path d="M72 48q7-4 14 0M94 48q7-4 14 0" stroke="#2B1B12" stroke-width="2.4" fill="none" stroke-linecap="round"/>' +
+        '<g class="av-eyes"><circle cx="79" cy="58" r="2.6" fill="#1A1008"/><circle cx="101" cy="58" r="2.6" fill="#1A1008"/></g>' +
+        '<g fill="none" stroke="#111" stroke-width="2"><circle cx="79" cy="58" r="8.5"/><circle cx="101" cy="58" r="8.5"/><path d="M87.5 57h5M70.5 56 65 54M109.5 56l5-2"/></g>' +
+        '<path d="M90 60q-3 7 1 8" stroke="#C4875E" stroke-width="1.8" fill="none" stroke-linecap="round"/>' +
+        '<path d="M81 72q9 7 18 0q-9 2-18 0z" fill="#8E2B1E"/>' +
+      '</g>' +
+      '<g class="av-mic"><path d="M160 135q3-26-22-36" fill="none" stroke="#0F1F33" stroke-width="15" stroke-linecap="round"/>' +
+        '<path d="M138 99 133 84" stroke="#20313A" stroke-width="7" stroke-linecap="round"/><circle cx="138" cy="99" r="6.5" fill="#E8B48C"/>' +
+        '<circle cx="132" cy="77" r="8.5" fill="#D61F26"/><path d="M125 74q7-6 14 0" stroke="#fff" stroke-width="1.6" fill="none" opacity=".6"/>' +
+        '<rect x="123" y="87" width="18" height="6" rx="2" fill="#fff" transform="rotate(-14 132 90)"/></g>' +
+    '</g>' +
+    '<rect y="119" width="180" height="16" fill="#D61F26"/><text x="10" y="131" fill="#fff" font-size="9.5" font-weight="800" letter-spacing="1.3" font-family="Arial,sans-serif">MASMUNDOK NEWS</text>' +
+  '</svg>';
+}
 function initNoticiero() {
+  $('#scAnchor').innerHTML = anchorSVG();
   $('#rail').innerHTML = NEWS.map((n, j) => '<li><button type="button" class="ri" data-i="' + j + '"><span class="ri-ic">' + (n.c ? flag(n.c) : ICON.plane) + '</span><span><small>' + esc(n.tag) + '</small><span class="t">' + esc(n.t) + '</span></span></button></li>').join('');
   railEls = $$('.ri', $('#rail'));
   railEls.forEach((b, j) => b.addEventListener('click', () => showNews(j)));
@@ -1873,10 +2050,23 @@ function initNoticiero() {
   }
   requestAnimationFrame(loop);
 }
+let OFERTAS_VIVO = [];
 function renderTicker() {
-  const one = NEWS.map(n => '<span class="tk-item">' + (n.c ? flag(n.c) : '') + '<b>' + esc(n.tag.toUpperCase()) + '</b>' + esc(n.t) + '</span>').join('');
-  $('#tkTrack').innerHTML = one + one;
+  const orden = ['ultimo', 'oferta', 'visa', 'equipaje', 'reglas', 'dato'];
+  const news = NEWS.map((n, i) => ({ n, i })).sort((a, b) => orden.indexOf(a.n.cat) - orden.indexOf(b.n.cat) || a.i - b.i);
+  const vivo = OFERTAS_VIVO.map(o => '<a class="lm-i lm-of" href="' + esc(o.u) + '" target="_blank" rel="noopener sponsored"><b>OFERTA DE HOY</b>' + esc(o.t) + '</a>').join('');
+  const one = vivo + news.map(x => '<a class="lm-i" href="#noticias" data-n="' + x.i + '">' + (x.n.c ? flag(x.n.c) : '') + '<b>' + esc(x.n.tag.toUpperCase()) + '</b>' + esc(x.n.t) + '</a>').join('');
+  const tr = $('#lmTrack');
+  tr.innerHTML = one + one.replace(/<a /g, '<a tabindex="-1" aria-hidden="true" ');
+  document.body.classList.add('has-lm');
+  requestAnimationFrame(() => tr.style.setProperty('--lm-dur', Math.max(60, Math.round(tr.scrollWidth / 2 / 65)) + 's'));
 }
+$('#lmTrack').addEventListener('click', e => {
+  const a = e.target.closest('a[data-n]'); if (!a) return;
+  e.preventDefault();
+  const ir = () => { showNews(+a.dataset.n); const sec = $('#noticias'); if (sec) sec.scrollIntoView({ behavior: RM.matches ? 'auto' : 'smooth', block: 'start' }); };
+  if ($('#view-home').hidden) { location.hash = 'noticias'; setTimeout(ir, 150); } else ir();
+});
 
 /* ============ Imágenes con respaldo ============ */
 function onImg(e) {
@@ -2365,11 +2555,45 @@ function mdy(iso) { return iso.slice(5, 7) + '/' + iso.slice(8, 10) + '/' + iso.
 function ddmm(iso) { return iso.slice(8, 10) + iso.slice(5, 7); }
 function isoDe(dt) { return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0') + '-' + String(dt.getDate()).padStart(2, '0'); }
 function sumarDias(iso, n) { const p = iso.split('-').map(Number); return isoDe(new Date(p[0], p[1] - 1, p[2] + n)); }
+function mesLargo(iso) { const p = iso.split('-').map(Number); return new Date(p[0], p[1] - 1, 1).toLocaleDateString('es-AR', { month:'long', year:'numeric' }); }
 function fechaCorta(iso) { const p = iso.split('-').map(Number); return new Date(p[0], p[1] - 1, p[2]).toLocaleDateString('es-AR', { day:'numeric', month:'short' }); }
 function linkTP(a, url) {
   const t = AFILIADOS.travelpayouts;
   if (!t.marker || !a.p) return url;
   return 'https://tp.media/r?marker=' + encodeURIComponent(t.marker) + (t.proyecto ? '&trs=' + encodeURIComponent(t.proyecto) : '') + '&p=' + a.p + '&u=' + encodeURIComponent(url) + (a.campaign ? '&campaign_id=' + a.campaign : '');
+}
+function fmtMoney(n, cur) {
+  try { return new Intl.NumberFormat('es-AR', { style:'currency', currency:cur, maximumFractionDigits:0 }).format(n); } catch (e) { return cur + ' ' + Math.round(n); }
+}
+/* Precios más bajos que encontraron otros viajeros (API de datos de Travelpayouts).
+   Solo se usa si cargás AFILIADOS.travelpayouts.token; si falla, la página sigue igual. */
+async function preciosVuelos(o, d, out, ret, cur, token, limite) {
+  const pedir = async c => {
+    const u = 'https://api.travelpayouts.com/aviasales/v3/prices_for_dates?origin=' + encodeURIComponent(o) + '&destination=' + encodeURIComponent(d) +
+      '&departure_at=' + out.slice(0, 7) + (ret ? '&return_at=' + ret.slice(0, 7) + '&one_way=false' : '&one_way=true') +
+      '&unique=false&sorting=price&limit=' + (limite || 60) + '&currency=' + c.toLowerCase() + '&token=' + encodeURIComponent(token);
+    const r = await fetch(u);
+    if (!r.ok) throw new Error('http ' + r.status);
+    const j = await r.json();
+    if (!j || !j.success || !Array.isArray(j.data)) throw new Error('api');
+    return { cur:c, lista:j.data };
+  };
+  try { return await pedir(cur); } catch (e) { if (cur === 'USD') throw e; return await pedir('USD'); }
+}
+const RUTAS_OFERTA = ['MDZ', 'BRC', 'IGR', 'USH', 'FTE', 'RIO'];
+async function cargarOfertasVivo() {
+  const t = AFILIADOS.travelpayouts.token; if (!t) return;
+  const av = AFILIADOS.vuelos.find(a => a.name === 'Aviasales');
+  const sal = isoDe(new Date(Date.now() + 30 * 864e5)), vue = isoDe(new Date(Date.now() + 37 * 864e5));
+  const res = await Promise.allSettled(RUTAS_OFERTA.map(d => preciosVuelos('BUE', d, sal, vue, 'ARS', t, 1)));
+  OFERTAS_VIVO = [];
+  res.forEach((r, k) => {
+    if (r.status !== 'fulfilled' || !r.value.lista.length) return;
+    const x = r.value.lista[0], ci = CITIES.find(c => c.c === RUTAS_OFERTA[k]);
+    if (!x.price || !ci || !x.link) return;
+    OFERTAS_VIVO.push({ t:'Buenos Aires → ' + ci.n + ' desde ' + fmtMoney(x.price, r.value.cur) + ' (ida y vuelta)', u:linkTP(av || {}, 'https://www.aviasales.com' + x.link) });
+  });
+  if (OFERTAS_VIVO.length) renderTicker();
 }
 function marcasActivas(lista) { return AFILIADOS.travelpayouts.marker ? lista.filter(a => a.p) : lista; }
 function lugarGYG(term) {
@@ -2409,12 +2633,12 @@ function initBuscadores() {
 
   /* Lo que se elige: destino y moneda. Salida, fechas y pasajeros se leen siempre del formulario,
      así cualquier cambio (ciudad de salida, fechas, moneda…) actualiza todos los links juntos. */
-  let dest = null, curCode = 'USD', curElegida = false;
+  let dest = null, curCode = 'USD', curElegida = false, air = '';
   const monedaDe = pais => MONEDA_POR_PAIS[pais] || 'USD';
   const avisoMoneda = () => 'Moneda pedida: ' + curCode + '. Si un sitio no la admite, muestra dólares.';
 
   /* La búsqueda queda grabada en este navegador: al volver, destino, fechas y moneda siguen ahí */
-  const guardar = () => { try { localStorage.setItem('mm_busqueda', JSON.stringify({ d:dest, f:from.value, o:out.value, r:ret.value, x:pax.value, t:trip.value, c:curCode, e:curElegida })); } catch (e) {} };
+  const guardar = () => { try { localStorage.setItem('mm_busqueda', JSON.stringify({ d:dest, f:from.value, o:out.value, r:ret.value, x:pax.value, t:trip.value, c:curCode, e:curElegida, a:air })); } catch (e) {} };
   const esFecha = v => /^\d{4}-\d{2}-\d{2}$/.test(v || '');
   function cargar() {
     let g = null;
@@ -2424,6 +2648,7 @@ function initBuscadores() {
     if (/^[1-6]$/.test(String(g.x))) pax.value = String(g.x);
     if (g.t === 'rt' || g.t === 'ow') trip.value = g.t;
     if (MONEDAS.some(m => m[0] === g.c)) { curCode = g.c; curElegida = !!g.e; }
+    if (typeof g.a === 'string' && AEROLINEAS[g.a]) air = g.a;
     if (esFecha(g.o) && g.o >= hoy) { out.value = g.o; if (esFecha(g.r) && g.r > g.o) ret.value = g.r; }
     const d = g.d;
     if (d && typeof d.n === 'string' && /^[A-Z]{3}$/.test(d.c || '')) { dest = { n:d.n.slice(0, 60), c:d.c, p:typeof d.p === 'string' ? d.p.slice(0, 60) : '' }; q.value = dest.n; }
@@ -2439,46 +2664,79 @@ function initBuscadores() {
   }
   const abrirMonedas = on => { curPanel.hidden = !on; curBtn.setAttribute('aria-expanded', String(on)); };
   curBtn.addEventListener('click', () => { if (curPanel.hidden) pintarMonedas(); abrirMonedas(curPanel.hidden); });
-  curPanel.addEventListener('click', e => {
-    const b = e.target.closest('[data-cur]'); if (!b) return;
-    curCode = b.dataset.cur; curElegida = true; abrirMonedas(false); $('#skCurTxt').textContent = curCode;
-    refrescar(true);
-  });
+  function elegirMoneda(c) { curCode = c; curElegida = true; abrirMonedas(false); refrescar(true); }
+  curPanel.addEventListener('click', e => { const b = e.target.closest('[data-cur]'); if (b) elegirMoneda(b.dataset.cur); });
+  $('#skQuick').addEventListener('click', e => { const b = e.target.closest('[data-cur]'); if (b) elegirMoneda(b.dataset.cur); });
+  function pintarRapidas() {
+    const base = ['ARS', 'USD', 'EUR', 'BRL', 'CLP'], l = base.indexOf(curCode) >= 0 ? base : base.concat([curCode]);
+    $('#skQuick').innerHTML = l.map(c => '<button type="button" data-cur="' + c + '" aria-pressed="' + (c === curCode) + '">' + c + '</button>').join('');
+  }
   document.addEventListener('click', e => { if (!e.target.closest('#skCurWrap')) abrirMonedas(false); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') abrirMonedas(false); });
 
   if (!AFILIADOS.travelpayouts.marker) {
     $('#skFlag').innerHTML = '<p class="sk-flag"><b>Vista previa:</b> faltan códigos en el bloque AFILIADOS. Hasta cargarlos, algunas búsquedas no generan comisión.</p>';
   }
-  const abiertoG = {};
   function ponerMarcas(qr) {
     const regD = qr && qr.d.p ? regionDe(qr.d.p) : null;
     const visible = a => !a.r || !regD || a.r.indexOf(regD) >= 0;
     const paraHotel = x => Object.assign({}, x, { ret: x.oneway ? sumarDias(x.out, 7) : x.ret });
     const defs = [];
-    if (mode.v === 'paquetes') defs.push({ g:'paquetes', e:'🎁', t:'Vuelo + hotel en una sola compra', l:AFILIADOS.paquetes, fn:x => x });
-    if (mode.v !== 'hoteles') defs.push({ g:'vuelos', e:'✈️', t:'Vuelos', l:AFILIADOS.vuelos, fn:x => x });
-    if (mode.v !== 'vuelos') defs.push({ g:'hoteles', e:'🏨', t:'Hoteles', l:AFILIADOS.hoteles, fn:paraHotel });
-    if (mode.v !== 'hoteles') defs.push({ g:'tierra', e:'🚌', t:'Por tierra: trenes, buses y ferris', l:AFILIADOS.transporte, fn:x => x });
-    let primero = true;
+    if (mode.v === 'paquetes') defs.push({ t:'Vuelo + hotel en una sola compra', l:AFILIADOS.paquetes, fn:x => x });
+    if (mode.v !== 'hoteles') defs.push({ t:'Vuelos', l:AFILIADOS.vuelos, fn:x => x });
+    if (mode.v !== 'vuelos') defs.push({ t:'Hoteles', l:AFILIADOS.hoteles, fn:paraHotel });
+    if (mode.v !== 'hoteles') defs.push({ t:'Por tierra: trenes, buses y ferris', l:AFILIADOS.transporte, fn:x => x });
+    let total = 0;
     const grupos = defs.map(d => {
       const ls = marcasActivas(d.l).filter(visible);
       if (!ls.length) return '';
-      const clave = mode.v + d.g, abierto = abiertoG[clave] === undefined ? primero : abiertoG[clave];
-      primero = false;
-      return '<details class="sk-grp" data-g="' + clave + '"' + (abierto ? ' open' : '') + '><summary><span class="e" aria-hidden="true">' + d.e + '</span>' + esc(d.t) + '<small>' + ls.length + (ls.length === 1 ? ' sitio' : ' sitios') + '</small></summary><div class="sk-ags">' + ls.map(a => {
+      total += ls.length;
+      return '<p class="sk-gl">' + esc(d.t) + '</p><div class="sk-ags">' + ls.map(a => {
         const url = linkTP(a, qr ? a.url(d.fn(qr)) : a.home);
-        return '<a class="sk-ag" href="' + esc(url) + '" target="_blank" rel="noopener sponsored"><span><b>' + esc(a.name) + '</b><small>' + esc(a.nota) + '</small></span><em>' + (qr && !a.fijo ? 'Ver precio →' : 'Abrir →') + '</em></a>'; }).join('') + '</div></details>';
+        return '<a class="sk-ag" href="' + esc(url) + '" target="_blank" rel="noopener sponsored"><span><b>' + esc(a.name) + '</b><small>' + esc(a.nota) + '</small></span><em>' + (qr && !a.fijo ? 'Ver precio →' : 'Abrir →') + '</em></a>'; }).join('') + '</div>';
     }).join('');
-    $('#skAgs').innerHTML = (qr ? '' : '<p class="sk-hint">' + (mismo ? 'Saliste y llegás al mismo lugar. Cambiá el paso 1 o el paso 2 para ver precios.' : 'Primero elegí a dónde vas (paso 2). Después los links se arman solos con tus fechas y tu moneda.') + '</p>') + grupos;
+    const pista = !qr ? '<p class="sk-hint">' + (mismo ? 'Saliste y llegás al mismo lugar. Cambiá el paso 1 o el paso 2 para ver precios.' : 'Primero elegí a dónde vas (paso 2). Después los links se arman solos con tus fechas y tu moneda.') + '</p>'
+      : (air && mode.v !== 'hoteles' ? '<p class="sk-hint">Elegiste <b>' + esc(air) + '</b>. Los sitios muestran todas las aerolíneas: en la página del sitio, filtrá por <b>' + esc(air) + '</b>.</p>' : '');
+    $('#skAgs').innerHTML = pista + grupos;
+    $('#skSitiosN').textContent = total + (total === 1 ? ' sitio' : ' sitios');
+    $('#skSitiosT').textContent = ({ vuelos:'Vuelos', hoteles:'Hoteles', paquetes:'Vuelo + hotel' })[mode.v] + ' · Empresas';
   }
-  $('#skAgs').addEventListener('toggle', e => { const d = e.target.closest ? e.target.closest('details[data-g]') : null; if (d) abiertoG[d.dataset.g] = d.open; }, true);
+  let prSeq = 0;
+  async function pintarPrecios(qr) {
+    const box = $('#skPr'), t = AFILIADOS.travelpayouts.token;
+    if (!t || !qr || mode.v === 'hoteles') { prSeq++; box.hidden = true; box.innerHTML = ''; return; }
+    const mi = ++prSeq;
+    box.hidden = false; box.innerHTML = '<p class="sk-pr-s">Buscando los precios más bajos para tu viaje…</p>';
+    try {
+      const r = await preciosVuelos(qr.o.c, qr.d.c, qr.out, qr.oneway ? '' : qr.ret, qr.cur, t, 80);
+      if (mi !== prSeq) return;
+      const por = {};
+      r.lista.forEach(x => { if (x.airline && x.price > 0 && (!por[x.airline] || x.price < por[x.airline].price)) por[x.airline] = x; });
+      let items = Object.keys(por).map(k => por[k]).sort((a, b) => a.price - b.price);
+      const cod = air && AEROLINEAS[air] ? AEROLINEAS[air][0] : '';
+      if (cod) items = items.filter(x => x.airline === cod);
+      items = items.slice(0, 5);
+      if (!items.length) { box.innerHTML = '<p class="sk-pr-s">' + (cod ? 'Todavía no vimos precios de ' + esc(air) + ' para esta ruta y mes. Probá con otra aerolínea o mirá los sitios de abajo.' : 'Todavía no hay precios guardados para esta ruta y mes. Mirá los sitios de abajo.') + '</p>'; return; }
+      const av = AFILIADOS.vuelos.find(a => a.name === 'Aviasales') || {};
+      const min = items[0].price, max = items[items.length - 1].price;
+      box.innerHTML = '<div class="sk-pr-h"><b>Comparativa de precios</b><span>' + esc(qr.o.n) + ' → ' + esc(qr.d.n) + ' · ' + esc(mesLargo(qr.out)) + '</span></div><ol class="sk-pr-l">' +
+        items.map((x, k) => {
+          const nom = AER_IATA[x.airline] || x.airline, esc2 = x.transfers === 0 ? 'Directo' : x.transfers + (x.transfers === 1 ? ' escala' : ' escalas');
+          return '<li' + (k === 0 ? ' class="best"' : '') + '><span class="al"><i>' + esc(x.airline) + '</i><span>' + esc(nom) + '<small>' + esc(fechaCorta(x.departure_at.slice(0, 10)) + (x.return_at ? ' – ' + fechaCorta(x.return_at.slice(0, 10)) : '') + ' · ' + esc2) + '</small></span></span>' +
+            '<span class="pc"><b>' + esc(fmtMoney(x.price, r.cur)) + '</b>' + (k === 0 ? '<em>Más barato</em>' : '') + '</span>' +
+            '<a class="sk-pr-go" href="' + esc(linkTP(av, 'https://www.aviasales.com' + x.link)) + '" target="_blank" rel="noopener sponsored">Ver</a></li>';
+        }).join('') + '</ol>' +
+        (items.length > 1 && max > min ? '<p class="sk-pr-s">Elegir la más barata te ahorra <b>' + esc(fmtMoney(max - min, r.cur)) + '</b> (' + Math.round((max - min) / max * 100) + '%) frente a la más cara de esta lista.</p>' : '') +
+        '<p class="sk-pr-n">Son los precios más bajos que otros viajeros encontraron en las últimas horas. Cambian rápido: confirmá el precio final en el sitio' + (r.cur !== qr.cur ? '. Para esta ruta no hay datos en ' + esc(qr.cur) + ', por eso se muestra en ' + esc(r.cur) : '') + '.</p>';
+    } catch (e) { if (mi === prSeq) { box.hidden = true; box.innerHTML = ''; } }
+  }
   /* Pase de abordar: muestra de dónde salís, a dónde vas y lo que ya quedó cargado */
   function pintarPase(qr) {
     const o = origen();
     $('#skFromC').textContent = o.c; $('#skFromN').textContent = o.n;
     $('#skToC').textContent = dest ? dest.c : '???'; $('#skToN').textContent = dest ? dest.n : 'Elegí tu destino';
     $('#skMeta').textContent = qr ? fechaCorta(qr.out) + (qr.oneway && mode.v === 'vuelos' ? '' : ' – ' + fechaCorta(qr.ret)) + ' · ' + qr.pax + (mode.v === 'hoteles' ? ' huésp.' : ' pas.') + ' · ' + qr.cur : (mismo ? 'Origen y destino iguales: cambiá uno de los dos.' : 'Elegí destino, fechas y moneda: todos los buscadores usan lo mismo.');
+    if (air && mode.v !== 'hoteles') $('#skMeta').textContent += ' · ' + air;
   }
   let mismo = false;
   function armar() {
@@ -2493,7 +2751,7 @@ function initBuscadores() {
   function refrescar(avisar) {
     const qr = armar();
     ponerMarcas(qr); pintarPase(qr); guardar();
-    $('#skCurTxt').textContent = curCode;
+    $('#skCurTxt').textContent = curCode; pintarRapidas(); pintarPrecios(qr);
     if (avisar && qr) { msg.className = 'sk-msg'; msg.textContent = 'Listo. ' + avisoMoneda(); }
     else if (mismo) { msg.className = 'sk-msg err'; msg.dataset.m = '1'; msg.textContent = 'El origen y el destino son el mismo lugar. Elegí uno distinto.'; }
     else if (msg.dataset.m) { delete msg.dataset.m; msg.className = 'sk-msg'; msg.textContent = ''; }
@@ -2510,15 +2768,30 @@ function initBuscadores() {
     $('#skRetL').textContent = hotel ? 'Salida' : 'Vuelta';
     $('#skRetWrap').hidden = mode.v === 'vuelos' && trip.value === 'ow';
     q.placeholder = hotel ? 'Ciudad del hotel. Ej.: Posadas, Bangkok, Roma' : 'Ciudad o provincia. Ej.: Misiones, Bangkok, Roma';
-    $('#skCmp h3').textContent = hotel ? 'Elegí dónde ver los precios de hoteles' : 'Elegí dónde ver los precios';
-    $('#skCmp .sk-lead').textContent = hotel ? 'La misma habitación cuesta distinto según el sitio. Abrí dos y compará.' : 'El mismo vuelo cuesta distinto según el sitio. Abrí dos y compará.';
+    $('#skCmpH').textContent = hotel ? 'Elegí dónde ver los precios de hoteles' : 'Elegí dónde ver los precios';
     refrescar(false);
   }
-  /* Desplegable por región: destinos populares (un toque y se busca) y aerolíneas populares */
+  /* Región por continente: aerolíneas (se eligen con un toque) y destinos populares (un toque y se busca) */
   function ponerRegiones(abierta) {
-    $('#skReg').innerHTML = REGIONES.map(r => '<details class="sk-reg" name="skRegs"' + (r.id === abierta ? ' open' : '') + '><summary><span class="e" aria-hidden="true">' + r.e + '</span>' + esc(r.n) + '<small>' + r.destinos.length + ' destinos</small></summary><div class="sk-reg-b"><p class="sk-gl">Destinos populares</p><div class="sk-dest">' +
-      r.destinos.map(c => { const ci = CITIES.find(x => x.c === c); return ci ? '<button type="button" data-c="' + c + '">' + esc(ci.n) + '</button>' : ''; }).join('') +
-      '</div><p class="sk-air"><b>Aerolíneas populares:</b> ' + esc(r.aerolineas.slice(0, 8).join(' · ')) + '. Compará sus precios en los buscadores de arriba.</p></div></details>').join('');
+    $('#skReg').innerHTML = REGIONES.map(r => {
+      const als = r.aerolineas.filter(n => AEROLINEAS[n]);
+      return '<details class="sk-reg" name="skRegs"' + (r.id === abierta ? ' open' : '') + '><summary><span class="e" aria-hidden="true">' + r.e + '</span>' + esc(r.n) + '<small>' + als.length + ' aerolíneas</small></summary><div class="sk-reg-b">' +
+        '<p class="sk-gl">Aerolíneas: tocá una para elegirla</p><div class="sk-als">' +
+        als.map(n => '<button type="button" class="sk-al" data-al="' + esc(n) + '" aria-pressed="' + (n === air) + '"><i>' + AEROLINEAS[n][0] + '</i>' + esc(n) + '</button>').join('') +
+        '</div><div class="sk-alsel" data-reg="' + r.id + '"></div>' +
+        '<p class="sk-gl">Destinos populares: tocá uno para buscar</p><div class="sk-dest">' +
+        r.destinos.map(c => { const ci = CITIES.find(x => x.c === c); return ci ? '<button type="button" data-c="' + c + '">' + esc(ci.n) + '</button>' : ''; }).join('') +
+        '</div></div></details>';
+    }).join('');
+    pintarAereo();
+  }
+  function pintarAereo() {
+    document.querySelectorAll('.sk-al').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.al === air)));
+    document.querySelectorAll('.sk-alsel').forEach(el => {
+      const r = REGIONES.find(x => x.id === el.dataset.reg);
+      el.innerHTML = air && r && r.aerolineas.indexOf(air) >= 0
+        ? '<span>✓ <b>' + esc(air) + '</b> elegida</span><a href="' + esc(AEROLINEAS[air][1]) + '" target="_blank" rel="noopener">Ir al sitio oficial ↗</a><button type="button" data-alx>Quitar</button>' : '';
+    });
   }
   function resolver(d, sinScroll) {
     dest = d;
@@ -2573,7 +2846,13 @@ function initBuscadores() {
     bs.forEach((b, k) => b.classList.toggle('on', k === selIdx));
   });
   sug.addEventListener('click', e => { const b = e.target.closest('[data-c]'); if (!b) return; const c = CITIES.find(x => x.c === b.dataset.c); q.value = c.n; sug.hidden = true; resolver(c); });
-  $('#skReg').addEventListener('click', e => { const b = e.target.closest('[data-c]'); if (!b) return; const c = CITIES.find(x => x.c === b.dataset.c); q.value = c.n; resolver(c, true); });
+  $('#skReg').addEventListener('click', e => {
+    const al = e.target.closest('[data-al]');
+    if (al) { air = air === al.dataset.al ? '' : al.dataset.al; pintarAereo(); refrescar(false); return; }
+    if (e.target.closest('[data-alx]')) { air = ''; pintarAereo(); refrescar(false); return; }
+    const b = e.target.closest('[data-c]'); if (!b) return;
+    const c = CITIES.find(x => x.c === b.dataset.c); q.value = c.n; resolver(c, true);
+  });
   document.addEventListener('click', e => { if (!e.target.closest('.sk-pillwrap')) sug.hidden = true; });
   document.querySelectorAll('.sk-tab').forEach(b => b.addEventListener('click', () => { mode.v = b.dataset.mode; pintarModo(); msg.textContent = ''; }));
   trip.addEventListener('change', pintarModo);
@@ -2792,6 +3071,7 @@ bindHelp($('#helpHome'), 'home');
 renderTickets();
 initNoticiero();
 renderTicker();
+cargarOfertasVivo();
 renderVideos();
 renderSocs();
 initForm();
