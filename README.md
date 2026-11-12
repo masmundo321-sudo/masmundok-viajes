@@ -16,8 +16,12 @@ Para cambiar contenido, buscá estos bloques dentro de `index.html`:
 - `ORIGENES` (dentro de `initBuscadores`): países cuyos aeropuertos aparecen en "Salgo desde".
 - `MONEDAS_GRUPOS` y `MONEDA_POR_PAIS`: monedas del selector (por región) y la que arranca según el país de salida.
 - `REGIONES` y `REGION_DE_PAIS`: desplegable "Región" por continente (LATAM, Norteamérica, Europa, Asia, África, Oceanía) con aerolíneas y destinos populares.
-- `AEROLINEAS`: nombre → `[código IATA, sitio oficial]`. Al elegir una aerolínea se filtra la comparativa y se ofrece "Ir al sitio oficial" (ese link no paga comisión).
+- `AEROLINEAS`: nombre → `[código IATA, sitio oficial]`. Al elegir una aerolínea se filtra la comparativa (ya no se muestra link al sitio oficial: no paga comisión).
 - `AFILIADOS.travelpayouts.token`: token de la API de Travelpayouts (Perfil → API token). Vacío por defecto. Con token aparecen la comparativa de precios por aerolínea ("Elegir la más barata te ahorra…") y las ofertas de hoy en la barra de abajo. Ojo: el token queda visible en el código de la página.
 - En `AFILIADOS.vuelos`, las marcas con `p` vacío (KAYAK, Skyscanner, Turismocity) quedan ocultas hasta cargar su código de Travelpayouts.
 - `FESTEJOS`: frases y animaciones de Yesi y Pablo.
 - `COMUNIDAD` y `COMENTARIOS`: números reales, contador de visitas y comentarios aprobados.
+- `BF`: campaña de Black Friday (dentro del script). Aparece sola desde `desde` y se oculta sola después de `hasta`; cada marca lleva sus fechas (`from`/`to`), oferta, nota, código y botones. Todos los botones salen con tu marker de Travelpayouts (`linkTP`) o con tus links y códigos de Holafly, Assist 365 y GetYourGuide. Los logos se piden al servicio de íconos de Google (si no cargan queda la inicial). Para otro año: cambiá `dia`, `cyber`, `desde`, `hasta`, `revisado` y las marcas. Si una marca no confirmó fechas o porcentajes, no los inventes.
+- `I18N`: traducciones al portugués e inglés de los textos fijos (`data-i18n="clave"` en el HTML; el español vive en el propio HTML). Las fichas de países, noticias, videos y el buscador de vuelos siguen en español. Banderas y botones en `#langSel`.
+- Noticias con `hasta:'AAAA-MM-DD'` se quitan solas después de esa fecha.
+- `SITE.edicionISO`: fecha de la última actualización (se muestra abajo, en el idioma elegido).

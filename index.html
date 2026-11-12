@@ -90,6 +90,8 @@ button{font:inherit;color:inherit}
 .nav::-webkit-scrollbar{display:none}
 .nav a{white-space:nowrap;padding:.45rem .8rem;border-radius:999px;text-decoration:none;color:var(--ink);font-weight:600;font-size:14.5px}
 .nav a:hover{background:var(--surface-2)}
+.nav a[hidden]{display:none}
+.nav a#navBF{background:#FFD25A;color:#062A30}
 @media (min-width:900px){.nav{order:0;width:auto}}
 
 /* hero */
@@ -907,6 +909,52 @@ button{font:inherit;color:inherit}
 @media (max-width:959px){.hero-art{display:none}}
 .find{padding-block:clamp(26px,4vw,44px) clamp(30px,4.5vw,52px)}
 .find .search{margin-top:0;max-width:640px}
+
+/* ============ Black Friday + selector de idioma ============ */
+.lang{display:flex;gap:4px}
+.lang button{display:inline-flex;align-items:center;gap:6px;background:transparent;border:1px solid var(--board-line);border-radius:999px;padding:3px 10px 3px 6px;color:#CDEBEA;font:500 12px var(--f-mono);cursor:pointer}
+.lang button svg{width:20px;height:14px;border-radius:2px;display:block;flex:none}
+.lang button:hover{border-color:#FFD25A}
+.lang button[aria-pressed="true"]{border-color:#FFD25A;color:#FFD25A}
+.bf-strip{display:flex;align-items:center;justify-content:center;gap:6px 12px;flex-wrap:wrap;padding:9px 16px;background:linear-gradient(90deg,#FFD25A,#FFB347);color:#062A30;font:700 14px/1.3 var(--f-body);text-decoration:none;text-align:center}
+.bf-strip[hidden]{display:none}
+.bf-strip b{font:500 11.5px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;background:#062A30;color:#FFD25A;padding:3px 8px;border-radius:6px}
+.bf-strip:hover{filter:brightness(1.05)}
+.bf{background:var(--board);color:#E4F6F5}
+.bf[hidden]{display:none}
+.bf .eyebrow{color:var(--board-fg)}
+.bf-head{display:grid;gap:.75rem;margin-bottom:28px;max-width:70ch}
+.bf-head h2{font:800 clamp(1.9rem,4.4vw,2.9rem)/1.05 var(--f-display);color:#fff}
+.bf-lead{color:var(--board-dim)}
+.bf-count{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.bf-pill{font:500 13px var(--f-mono);letter-spacing:.05em;padding:6px 12px;border-radius:999px;border:1px solid var(--board-line);color:var(--board-fg);background:var(--board-2)}
+.bf-grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.bf-card{background:var(--board-2);border:1px solid var(--board-line);border-radius:16px;padding:20px;display:grid;gap:12px;align-content:start}
+.bf-top{display:flex;align-items:center;gap:12px}
+.bf-logo{position:relative;flex:none;width:48px;height:48px;border-radius:12px;background:#fff;display:grid;place-items:center;overflow:hidden}
+.bf-logo b{font:800 20px var(--f-display);color:#062A30}
+.bf-logo img{position:absolute;inset:0;margin:auto;width:32px;height:32px;object-fit:contain;background:#fff;opacity:0;transition:opacity .2s}
+.bf-top h3{font:800 1.3rem/1.1 var(--f-display);color:#fff}
+.bf-top small{display:block;font:500 11px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--board-dim);margin-top:3px}
+.bf-deal{font:800 1.5rem/1.12 var(--f-display);color:var(--board-fg)}
+.bf-when{font:500 12.5px/1.45 var(--f-mono);color:var(--board-dim)}
+.bf-st{justify-self:start;font:500 11px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:999px;background:#0A7D57;color:#fff}
+.bf-st.soon{background:var(--board-line);color:var(--board-fg)}
+.bf-st.end{background:#44666D}
+.bf-note{font-size:13.5px;color:var(--board-dim)}
+.bf-code{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;border:1.5px dashed var(--board-fg);border-radius:10px;padding:10px 12px}
+.bf-code small{display:block;font:500 10px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--board-dim);margin-bottom:3px}
+.bf-code b{font:500 1.2rem var(--f-mono);letter-spacing:.06em;color:#fff;user-select:all}
+.bf-code em{font-style:normal;font:500 12px var(--f-mono);color:var(--board-fg);margin-left:6px}
+.bf .btn-primary{background:var(--board-fg);color:#062A30}
+.bf .btn-ghost{color:#E4F6F5;border-color:var(--board-line)}
+.bf .btn-ghost:hover{border-color:var(--board-fg)}
+.bf-acts{display:flex;flex-wrap:wrap;gap:8px}
+.bf-tip{border-style:dashed}
+.bf-tip h3{font:800 1.3rem/1.1 var(--f-display);color:#fff}
+.bf-tip ol{margin:0;padding-left:1.2em;display:grid;gap:8px;color:var(--board-dim);font-size:14px}
+.bf-tip li::marker{color:var(--board-fg);font-weight:700}
+.bf-foot{margin-top:22px;color:var(--board-dim);font-size:13px;max-width:78ch}
 </style>
 
 </head>
@@ -919,9 +967,12 @@ button{font:inherit;color:inherit}
       <span id="mailTxt">masmundo321@gmail.com</span>
       <button type="button" id="mailCopy">Copiar</button>
     </div>
+    <div class="lang" id="langSel" role="group" aria-label="Idioma / Idioma / Language"><button type="button" data-lang="es" lang="es" aria-pressed="true" title="Español"><svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#74ACDF"/><rect y="5.33" width="24" height="5.34" fill="#fff"/><circle cx="12" cy="8" r="1.9" fill="#F6B40E"/></svg>ES</button><button type="button" data-lang="pt" lang="pt" aria-pressed="false" title="Português"><svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#009C3B"/><path d="M12 2.2 21.4 8 12 13.8 2.6 8z" fill="#FFDF00"/><circle cx="12" cy="8" r="3.2" fill="#002776"/></svg>PT</button><button type="button" data-lang="en" lang="en" aria-pressed="false" title="English"><svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#012169"/><path d="M0 0l24 16M24 0L0 16" stroke="#fff" stroke-width="3"/><path d="M0 0l24 16M24 0L0 16" stroke="#C8102E" stroke-width="1.2"/><path d="M12 0v16M0 8h24" stroke="#fff" stroke-width="5"/><path d="M12 0v16M0 8h24" stroke="#C8102E" stroke-width="3"/></svg>EN</button></div>
     <div class="soc" id="utilSoc"></div>
   </div>
 </div>
+
+<a class="bf-strip" id="bfStrip" href="#blackfriday" hidden></a>
 
 <header class="hdr">
   <div class="in">
@@ -930,13 +981,14 @@ button{font:inherit;color:inherit}
       <span>Mas<b>mundo</b>k</span>
     </a>
     <nav class="nav" aria-label="Secciones">
-      <a href="#noticias">News</a>
-      <a href="#buscar">Vuelos y tours</a>
-      <a href="#destinos">Destinos</a>
-      <a href="#descuentos">Descuentos</a>
-      <a href="#videos">Videos y redes</a>
-      <a href="#comunidad">Comunidad</a>
-      <a href="#trabaja">Trabajá con nosotros</a>
+      <a href="#blackfriday" id="navBF" data-i18n="nav.bf" hidden>Black Friday</a>
+      <a href="#noticias" data-i18n="nav.news">News</a>
+      <a href="#buscar" data-i18n="nav.buscar">Vuelos y tours</a>
+      <a href="#destinos" data-i18n="nav.dest">Destinos</a>
+      <a href="#descuentos" data-i18n="nav.disc">Descuentos</a>
+      <a href="#videos" data-i18n="nav.videos">Videos y redes</a>
+      <a href="#comunidad" data-i18n="nav.comm">Comunidad</a>
+      <a href="#trabaja" data-i18n="nav.work">Trabajá con nosotros</a>
     </nav>
   </div>
 </header>
@@ -945,9 +997,9 @@ button{font:inherit;color:inherit}
   <section class="band hero" id="inicio">
     <div class="in hero-grid">
       <div>
-        <span class="eyebrow">Guía de viajes</span>
-        <h1>Todo lo que necesitás saber antes de viajar, <em>en un solo lugar.</em></h1>
-        <p class="lead">Requisitos de entrada, apps, tours, consejos y códigos de descuento para cada destino. Buscá tu país y salí tranquilo.</p>
+        <span class="eyebrow" data-i18n="hero.eyebrow">Guía de viajes</span>
+        <h1 data-i18n-html="hero.h1">Todo lo que necesitás saber antes de viajar, <em>en un solo lugar.</em></h1>
+        <p class="lead" data-i18n="hero.lead">Requisitos de entrada, apps, tours, consejos y códigos de descuento para cada destino. Buscá tu país y salí tranquilo.</p>
       </div>
       <div class="hero-art" aria-hidden="true">
         <div class="pp">
@@ -970,10 +1022,23 @@ button{font:inherit;color:inherit}
     </div>
   </section>
 
+  <section class="band bf" id="blackfriday" aria-labelledby="bfT" hidden>
+    <div class="in">
+      <div class="bf-head">
+        <span class="eyebrow" id="bfEy"></span>
+        <h2 id="bfT"></h2>
+        <p class="bf-lead" id="bfLead"></p>
+        <div class="bf-count" id="bfCount"></div>
+      </div>
+      <div class="bf-grid" id="bfGrid"></div>
+      <p class="bf-foot" id="bfFoot"></p>
+    </div>
+  </section>
+
   <!-- ============ BUSCADORES: los textos y links se cambian en AFILIADOS (dentro del script) ============ -->
   <section class="band dz board-band" id="noticias">
     <div class="in">
-      <h2 class="nsr">Noticias de viaje: últimas noticias en vivo</h2>
+      <h2 class="nsr" data-i18n="news.h2">Noticias de viaje: últimas noticias en vivo</h2>
       <div class="nwrap">
         <div class="screen" id="screen" role="region" aria-roledescription="carrusel" aria-label="News de Masmundok: últimas noticias">
           <div class="sc-art" id="scArt"></div>
@@ -1001,18 +1066,18 @@ button{font:inherit;color:inherit}
           <ol class="rail" id="rail"></ol>
         </div>
       </div>
-      <p class="note">Las reglas de ingreso, equipaje y multas cambian sin aviso. Antes de viajar confirmá siempre en el sitio oficial del país, en tu aerolínea o en el consulado.</p>
+      <p class="note" data-i18n="news.note">Las reglas de ingreso, equipaje y multas cambian sin aviso. Antes de viajar confirmá siempre en el sitio oficial del país, en tu aerolínea o en el consulado.</p>
     </div>
   </section>
 
   <section class="band find" id="buscaPais" aria-label="Buscar requisitos por país">
     <div class="in">
         <div class="search">
-          <label for="q">¿A dónde vas?</label>
+          <label for="q" data-i18n="find.label">¿A dónde vas?</label>
           <div class="sbox">
             <svg class="ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-            <input id="q" type="text" role="combobox" aria-expanded="false" aria-controls="sres" aria-autocomplete="list" autocomplete="off" placeholder="Tailandia, Bali, China, Aruba…">
-            <button type="button" class="btn btn-primary" id="qgo">Buscar</button>
+            <input id="q" type="text" role="combobox" aria-expanded="false" aria-controls="sres" aria-autocomplete="list" autocomplete="off" placeholder="Tailandia, Bali, China, Aruba…" data-i18n-ph="find.ph">
+            <button type="button" class="btn btn-primary" id="qgo" data-i18n="find.btn">Buscar</button>
           </div>
           <ul class="sres" id="sres" role="listbox" hidden></ul>
         </div>
@@ -1027,13 +1092,13 @@ button{font:inherit;color:inherit}
     </div>
     <div class="in">
       <div class="sk-head">
-        <span class="sk-kick">Soñá grande, gastá mejor</span>
-        <h2>Nosotros cuidamos tu plata</h2>
+        <span class="sk-kick" data-i18n="sk.kick">Soñá grande, gastá mejor</span>
+        <h2 data-i18n="sk.h2">Nosotros cuidamos tu plata</h2>
       </div>
       <div class="sk-tabs" role="group" aria-label="Qué querés buscar">
-        <button type="button" class="sk-tab" data-mode="vuelos" aria-pressed="true">Vuelos</button>
-        <button type="button" class="sk-tab" data-mode="hoteles" aria-pressed="false">Hoteles</button>
-        <button type="button" class="sk-tab" data-mode="paquetes" aria-pressed="false">Vuelo + hotel</button>
+        <button type="button" class="sk-tab" data-mode="vuelos" aria-pressed="true" data-i18n="sk.flights">Vuelos</button>
+        <button type="button" class="sk-tab" data-mode="hoteles" aria-pressed="false" data-i18n="sk.hotels">Hoteles</button>
+        <button type="button" class="sk-tab" data-mode="paquetes" aria-pressed="false" data-i18n="sk.pack">Vuelo + hotel</button>
       </div>
       <div class="sk-pass">
         <div class="sk-pass-top"><span><svg class="ic" viewBox="0 0 24 24"><path d="M2 16l20-6-3-3-6 2-6-5-3 1 4 6-5 2z"/></svg>Pase de abordar</span><span>Masmundok · clase viajera</span></div>
@@ -1093,7 +1158,7 @@ button{font:inherit;color:inherit}
             <li><b>Mové un par de días</b>Salir un día antes o después a veces baja la tarifa.</li>
           </ul>
         </details>
-        <p class="sk-note">Los precios los muestra cada sitio en vivo y pueden cambiar; nosotros no los fijamos. Los links de las empresas son de afiliado: si comprás con ellos nos llevamos una comisión, y vos no pagás de más. Las aerolíneas elegidas llevan a su sitio oficial, sin comisión.</p>
+        <p class="sk-note">Los precios los muestra cada sitio en vivo y pueden cambiar; nosotros no los fijamos. Los links de las empresas son de afiliado: si comprás con ellos nos llevamos una comisión, y vos no pagás de más.</p>
       </div>
 
       <div class="sk-sh"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg><span id="skIdeasT"></span></div>
@@ -1125,9 +1190,9 @@ button{font:inherit;color:inherit}
   <section class="band" id="destinos">
     <div class="in">
       <div class="sh">
-        <span class="eyebrow">Destinos</span>
-        <h2>Elegí un destino y mirá la ficha completa</h2>
-        <p>Requisitos para pasaporte argentino, qué hacer, qué evitar, apps útiles, idioma, moneda y religión. Usá el buscador de arriba para ver el resto.</p>
+        <span class="eyebrow" data-i18n="dest.eyebrow">Destinos</span>
+        <h2 data-i18n="dest.h2">Elegí un destino y mirá la ficha completa</h2>
+        <p data-i18n="dest.p">Requisitos para pasaporte argentino, qué hacer, qué evitar, apps útiles, idioma, moneda y religión. Usá el buscador de arriba para ver el resto.</p>
       </div>
       <div class="dgrid" id="dgrid"></div>
       <div class="more">
@@ -1141,21 +1206,21 @@ button{font:inherit;color:inherit}
   <section class="band tband" id="descuentos">
     <div class="in">
       <div class="sh">
-        <span class="eyebrow">Códigos y descuentos</span>
-        <h2>Viajá con nuestros códigos</h2>
-        <p>Copiá el código y usalo al pagar. Si entrás desde nuestro link, el descuento puede aplicarse solo.</p>
+        <span class="eyebrow" data-i18n="disc.eyebrow">Códigos y descuentos</span>
+        <h2 data-i18n="disc.h2">Viajá con nuestros códigos</h2>
+        <p data-i18n="disc.p">Copiá el código y usalo al pagar. Si entrás desde nuestro link, el descuento puede aplicarse solo.</p>
       </div>
       <div class="tgrid" id="tgrid"></div>
-      <p class="disc">Los links son de afiliado: si comprás con ellos nos llevamos una comisión, y vos no pagás de más. Es una de las formas en que financiamos el canal.</p>
+      <p class="disc" data-i18n="disc.note">Los links son de afiliado: si comprás con ellos nos llevamos una comisión, y vos no pagás de más. Es una de las formas en que financiamos el canal.</p>
     </div>
   </section>
 
   <section class="band" id="videos">
     <div class="in">
       <div class="sh">
-        <span class="eyebrow">Videos y redes</span>
-        <h2>Los destinos, contados desde adentro</h2>
-        <p>Guías completas en YouTube, clips en TikTok y reels en Instagram. Filtrá por país.</p>
+        <span class="eyebrow" data-i18n="vid.eyebrow">Videos y redes</span>
+        <h2 data-i18n="vid.h2">Los destinos, contados desde adentro</h2>
+        <p data-i18n="vid.p">Guías completas en YouTube, clips en TikTok y reels en Instagram. Filtrá por país.</p>
       </div>
       <div class="vtools chips" id="vChips"></div>
       <div id="vTop" class="vtop"></div>
@@ -1171,9 +1236,9 @@ button{font:inherit;color:inherit}
   <section class="band cta" id="asesoria">
     <div class="in cta-grid">
       <div>
-        <span class="eyebrow">Asesoría de viaje</span>
-        <h2>¿Querés que te asesoremos en tu próximo viaje?</h2>
-        <p>Escribinos en nuestras redes y te asesoramos.</p>
+        <span class="eyebrow" data-i18n="cta.eyebrow">Asesoría de viaje</span>
+        <h2 data-i18n="cta.h2">¿Querés que te asesoremos en tu próximo viaje?</h2>
+        <p data-i18n="cta.p">Escribinos en nuestras redes y te asesoramos.</p>
         <div class="cta-btns" id="ctaBtns"></div>
       </div>
       <div class="cta-art" id="ctaArt" aria-hidden="true"></div>
@@ -1183,9 +1248,9 @@ button{font:inherit;color:inherit}
   <section class="band tband" id="trabaja" style="--notch:var(--surface-2)">
     <div class="in wgrid">
       <div class="wl">
-        <span class="eyebrow">Trabajá con nosotros</span>
-        <h2>Mostramos tu marca a viajeros que están planeando su próximo viaje.</h2>
-        <p class="lead">Si tenés un destino, hotel, tour, aerolínea, app o producto de viaje, contanos y armamos una propuesta.</p>
+        <span class="eyebrow" data-i18n="work.eyebrow">Trabajá con nosotros</span>
+        <h2 data-i18n="work.h2">Mostramos tu marca a viajeros que están planeando su próximo viaje.</h2>
+        <p class="lead" data-i18n="work.lead">Si tenés un destino, hotel, tour, aerolínea, app o producto de viaje, contanos y armamos una propuesta.</p>
         <div class="stats">
           <div class="stat"><b>~700 mil</b><span>vistas por mes</span></div>
           <div class="stat"><b>16 mil</b><span>seguidores en TikTok</span></div>
@@ -1235,9 +1300,9 @@ button{font:inherit;color:inherit}
   <section class="band" id="comunidad">
     <div class="in">
       <div class="sh">
-        <span class="eyebrow">Nuestra comunidad</span>
-        <h2>Viajamos juntos</h2>
-        <p>Esto es lo que venimos construyendo con ustedes. Si la página te sirvió, contanos: tu comentario ayuda a otros viajeros.</p>
+        <span class="eyebrow" data-i18n="comm.eyebrow">Nuestra comunidad</span>
+        <h2 data-i18n="comm.h2">Viajamos juntos</h2>
+        <p data-i18n="comm.p">Esto es lo que venimos construyendo con ustedes. Si la página te sirvió, contanos: tu comentario ayuda a otros viajeros.</p>
       </div>
       <div class="cm-stats" id="cmStats"></div>
       <p class="cm-src" id="cmSrc"></p>
@@ -1280,10 +1345,10 @@ button{font:inherit;color:inherit}
   <div class="in">
     <a class="brand" href="#inicio"><span>Mas<b>mundo</b>k</span></a>
     <div class="links">
-      <a href="#destinos">Destinos</a><a href="#descuentos">Descuentos</a><a href="#noticias">News</a><a href="#videos">Videos y redes</a><a href="#trabaja">Trabajá con nosotros</a>
+      <a href="#destinos" data-i18n="nav.dest">Destinos</a><a href="#descuentos" data-i18n="nav.disc">Descuentos</a><a href="#noticias" data-i18n="nav.news">News</a><a href="#videos" data-i18n="nav.videos">Videos y redes</a><a href="#trabaja" data-i18n="nav.work">Trabajá con nosotros</a>
     </div>
     <div class="soc" id="footSoc" style="display:flex;gap:8px"></div>
-    <p>Sitio actualizado el 2 de noviembre de 2026. La información de ingreso es orientativa y cambia con frecuencia: confirmá siempre en fuentes oficiales antes de viajar. Algunos enlaces son de afiliado.</p>
+    <p><span data-i18n="foot.upd">Sitio actualizado el</span> <span id="edicionTxt">11 de noviembre de 2026</span>. <span data-i18n="foot.rest">La información de ingreso es orientativa y cambia con frecuencia: confirmá siempre en fuentes oficiales antes de viajar. Algunos enlaces son de afiliado.</span></p>
   </div>
 </footer>
 
@@ -1297,7 +1362,8 @@ const SITE = {
   instagram: 'https://www.instagram.com/masmundok/',
   reel: 'https://www.instagram.com/reel/DeRrhugCS_C/',
   cafecito: 'https://cafecito.app/masmundok/c/69137e5b96e9d887414f4b30',
-  edicion: '2 de noviembre de 2026',
+  edicion: '11 de noviembre de 2026',
+  edicionISO: '2026-11-11',
   /* Formulario "Trabajá con nosotros": envía los mensajes por correo con FormSubmit (la primera vez hay que confirmar el correo). Dejalo vacío para que solo arme el mensaje. */
   formEndpoint: 'https://formsubmit.co/ajax/masmundo321@gmail.com',
   /* Chat con IA real (opcional): URL de un servicio propio que responda {answer}. Vacío = el chat usa la información de esta página. */
@@ -1310,9 +1376,12 @@ const PLACE = { th:'Tailandia', br:'Brasil', eg:'Egipto', cn:'China', jp:'Japón
 
 /* Descuentos: agregar o quitar objetos de esta lista */
 const PARTNERS = [
-  { name:'Holafly', kind:'eSIM para viajar', blurb:'Internet apenas aterrizás, sin buscar chips locales.', code:'MASMUNDO', url:'https://holafly.sjv.io/masmundo', cta:'Ir a Holafly' },
-  { name:'Assist 365', kind:'Seguro de viaje', blurb:'Asistencia médica y cobertura de viaje. El voucher ya viaja en el link.', code:'MASMUNDO', url:'https://assist-365.com/?voucher=MASMUNDO', cta:'Cotizar seguro' },
-  { name:'GetYourGuide', kind:'Tours y entradas', blurb:'Reservá tours y entradas. Instalá la app con nuestro link y usá el código.', code:'MASMUNDOK5', off:'5% OFF', url:'https://gyg.me/masmundok-app', cta:'Instalar la app' }
+  { name:'Holafly', kind:'eSIM para viajar', blurb:'Internet apenas aterrizás, sin buscar chips locales.', code:'MASMUNDO', url:'https://holafly.sjv.io/masmundo', cta:'Ir a Holafly',
+    i18n:{ pt:{ kind:'eSIM para viagens', blurb:'Internet assim que você aterrissa, sem procurar chips locais.', cta:'Ir para a Holafly' }, en:{ kind:'Travel eSIM', blurb:'Data as soon as you land, no hunting for local SIMs.', cta:'Go to Holafly' } } },
+  { name:'Assist 365', kind:'Seguro de viaje', blurb:'Asistencia médica y cobertura de viaje. El voucher ya viaja en el link.', code:'MASMUNDO', url:'https://assist-365.com/?voucher=MASMUNDO', cta:'Cotizar seguro',
+    i18n:{ pt:{ kind:'Seguro viagem', blurb:'Assistência médica e cobertura de viagem. O voucher já vai no link.', cta:'Cotar seguro' }, en:{ kind:'Travel insurance', blurb:'Medical assistance and trip coverage. The voucher already travels in the link.', cta:'Get a quote' } } },
+  { name:'GetYourGuide', kind:'Tours y entradas', blurb:'Reservá tours y entradas. Instalá la app con nuestro link y usá el código.', code:'MASMUNDOK5', off:'5% OFF', url:'https://gyg.me/masmundok-app', cta:'Instalar la app',
+    i18n:{ pt:{ kind:'Passeios e ingressos', blurb:'Reserve passeios e ingressos. Instale o app pelo nosso link e use o código.', cta:'Instalar o app' }, en:{ kind:'Tours & tickets', blurb:'Book tours and tickets. Install the app with our link and use the code.', cta:'Install the app' } } }
 ];
 
 /* ============ AFILIADOS: pegá acá tus códigos y todos los buscadores los usan ============
@@ -1381,7 +1450,7 @@ const MONEDA_POR_PAIS = { 'Argentina':'ARS', 'Brasil':'BRL', 'Chile':'CLP', 'Col
 /* Regiones del desplegable de vuelos: destinos y aerolíneas populares de cada una.
    "destinos" son códigos de CITIES; "aerolineas" son nombres de AEROLINEAS (con su código y sitio oficial).
    Todos los links del buscador salen con los códigos de AFILIADOS, así que acá no hay links a aerolíneas. */
-/* Aerolíneas: nombre → [código IATA, sitio oficial] */
+/* Aerolíneas: nombre → [código IATA, sitio oficial]. El sitio oficial ya no se muestra como link (no paga comisión); queda solo como dato. */
 const AEROLINEAS = {
   'JetSMART':['JA','https://jetsmart.com'], 'Aerolíneas Argentinas':['AR','https://www.aerolineas.com.ar'], 'LATAM':['LA','https://www.latamairlines.com'],
   'GOL':['G3','https://www.voegol.com.br'], 'Flybondi':['FO','https://flybondi.com'], 'SKY':['H2','https://www.skyairline.com'],
@@ -1650,9 +1719,8 @@ DEST.push({
 
 /* ============ Noticiero. cat: ultimo | oferta | visa | equipaje | reglas | dato ============ */
 const NEWS = [
-  { cat:'ultimo', tag:'Último momento', c:'ar', place:'Cataratas del Iguazú', when:'Parte del 25 oct', t:'Iguazú: nuevo cierre parcial por la crecida del río', x:'El 25/10 cerraron el Circuito Superior del lado argentino, con el río en 12.800 m³/s. Siguen abiertos el Circuito Inferior y el sendero verde. El 12/10 el parque había cerrado entero y reabrió el 13/10. Confirmá el estado en los canales oficiales antes de ir.', src:{ l:'Noticias NQN', u:'https://www.noticiasnqn.com.ar/noticias/2026/10/25/358083-cerraron-parcialmente-las-cataratas-del-iguazu-por-la-crecida-del-rio' } },
-  { cat:'ultimo', tag:'Último momento', c:'ar', place:'Argentina', foto:'obelisco', when:'8 al 11 nov', t:'El Papa León XIV visita Argentina del 8 al 11 de noviembre', x:'Estará en Buenos Aires, Luján y Córdoba, y después sigue a Perú (Lima, Chiclayo, Cusco y Pucallpa) hasta el 17/11. Si viajás a esas ciudades en esas fechas, reservá con tiempo y revisá los operativos de tránsito.', src:{ l:'Perfil', u:'https://www.perfil.com/noticias/sociedad/papa-leon-xiv-en-la-argentina-agenda-confirmada-fechas-y-que-lugares-visitara.phtml' } },
-  { cat:'oferta', tag:'Oferta', c:'br', place:'Maceió, Brasil', when:'Publicada el 29 oct', t:'Paquetes a Maceió en verano desde USD 900 por persona', x:'Incluye vuelo directo desde Buenos Aires y hotel con desayuno, según una oferta publicada el 29/10 (referencia: 29/1 al 5/2 de 2027). El precio y la disponibilidad cambian: confirmalos antes de reservar.', src:{ l:'Promos Aéreas', u:'https://promociones-aereas.com.ar/?p=360058' } },
+  { cat:'dato', tag:'Aviso', c:'ar', place:'Cataratas del Iguazú', when:'Octubre 2026', t:'Iguazú: las crecidas del río pueden cerrar circuitos sin aviso', x:'En octubre el parque cerró entero el 12/10 y reabrió el 13/10, y el 25/10 cerraron el Circuito Superior del lado argentino, con el río en 12.800 m³/s. Antes de ir, confirmá en los canales oficiales del Parque Nacional y de la concesionaria qué circuitos están abiertos.', src:{ l:'Noticias NQN', u:'https://www.noticiasnqn.com.ar/noticias/2026/10/25/358083-cerraron-parcialmente-las-cataratas-del-iguazu-por-la-crecida-del-rio' } },
+  { cat:'oferta', tag:'Black Friday', c:'', place:'Black Friday 2026', foto:'avion', when:'Hasta el 1 dic', hasta:'2026-12-01', t:'Black Friday: hasta 50% en tours, vuelos y hoteles', x:'El Black Friday es el viernes 27 de noviembre. Trip.com tiene su campaña del 10/11 al 1/12, con hasta 50% en cupones de vuelos y hoteles, y GetYourGuide llega a hasta 50% con acceso anticipado del 14 al 22 y fase principal del 23 al 29. Mirá todas las ofertas, con nuestros códigos, en la sección Black Friday. Los descuentos y los cupos son de cada empresa: confirmalos antes de pagar.' },
   { cat:'visa', tag:'Visa', c:'th', when:'Desde el 15 sep', t:'Tailandia terminó con los 60 días, pero los argentinos siguen con 90', x:'Desde el 15 de septiembre de 2026 rige un esquema de 30 días para unos 60 países. Argentina conserva los 90 días por acuerdo bilateral. Confirmalo en tu aerolínea o consulado antes de salir.', src:{ l:'TAT News', u:'https://www.tatnews.org/2026/07/thai-cabinet-approves-updated-visa-measures-pending-royal-gazette-publication/' } },
   { cat:'visa', tag:'Trámite', c:'th', when:'Vigente', t:'En Tailandia la TDAC reemplazó a la tarjeta de papel', x:'Es obligatoria para todos los viajeros. Se completa online hasta 72 horas antes de llegar y te da un QR que te escanean en migraciones.', src:{ l:'Pattaya Mail', u:'https://www.pattayamail.com/latestnews/news/thailand-tightens-visa-exemptions-and-expands-digital-arrival-controls-561411' } },
   { cat:'visa', tag:'Visa', c:'cn', when:'Hasta el 31 dic', t:'Sin visa para argentinos en China hasta el 31 de diciembre de 2026', x:'Hasta 30 días por viaje, para turismo, negocios, visita a familiares y tránsito. Todavía hay que confirmar si se prorroga para 2027.', src:{ l:'Sir Chandler', u:'https://www.sirchandler.com.ar/2025/11/china-extiende-ingreso-sin-visa-a-argentinos-hasta-final-del-2026/' } },
@@ -1660,7 +1728,7 @@ const NEWS = [
   { cat:'visa', tag:'Visa', c:'eg', when:'Vigente', t:'Egipto: los argentinos necesitan visa, e-Visa o a la llegada', x:'Estadía de hasta 30 días y pasaporte con 6 meses de vigencia. La e-Visa cuesta US$30 por una entrada y desde el 1/1/2027 la de una entrada sube a US$33: mirá el valor vigente en el sitio oficial.', src:{ l:'Sitio oficial', u:'https://visa2egypt.gov.eg' } },
   { cat:'visa', tag:'Trámite', c:'aw', when:'Vigente', t:'Aruba: ED Card online obligatoria y tasa de US$20', x:'Se completa hasta 7 días antes de viajar. Quienes llegan en avión pagan US$20 de Sustainability Fee, que se cobra en la misma ED Card. Los argentinos no necesitan visa por 30 días.', src:{ l:'Visit Aruba', u:'https://www.visitaruba.com/traveling-to-aruba/entry-requirements-and-visas/' } },
   { cat:'visa', tag:'Visa', c:'id', when:'Vigente', t:'Indonesia: visa a la llegada de IDR 500.000 y tasa para Bali', x:'Son 30 días, ampliables una vez por otros 30. Aparte, quien visita Bali paga una tasa turística de IDR 150.000, unos US$10.', src:{ l:'Wego', u:'https://blog.wego.com/indonesia-visa-on-arrival/' } },
-  { cat:'visa', tag:'Trámite', c:'eu', place:'Europa (Schengen)', when:'Sin fecha', t:'El ETIAS todavía no tiene fecha oficial', x:'Costará €7 y lo van a necesitar los viajeros sin visa, como los argentinos. Se esperaba para fines de 2026, pero 2027 aparece como lo más probable. El control biométrico EES arrancó en octubre de 2025, de forma gradual.', src:{ l:'ETIAS-EU.net', u:'https://etias-eu.net/en/etias-postponed/' } },
+  { cat:'visa', tag:'Trámite', c:'eu', place:'Europa (Schengen)', when:'Sin fecha', t:'El ETIAS todavía no está en funcionamiento y no tiene fecha confirmada', x:'La Unión Europea no anunció una fecha definitiva y hoy se prevé que arranque en 2027. Todavía no se puede tramitar, y los sitios que cobran por hacerlo no son oficiales. Cuando entre en vigor lo van a necesitar los viajeros sin visa, como los argentinos, para estancias de hasta 90 días. El control biométrico EES arrancó en octubre de 2025, de forma gradual.', src:{ l:'RR.EE. de Chequia', u:'https://mzv.gov.cz/santiago/es/visas_e_informaciones_consulares/etias_nueva_autorizacion_de_viaje_para.html' } },
   { cat:'equipaje', tag:'Equipaje', c:'', place:'En el avión', when:'Desde mar 2026', t:'Power banks: siempre en cabina, máximo 2 y sin usarlos en vuelo', x:'Hasta 100 Wh viajan sin permiso; de 101 a 160 Wh necesitás aprobación de la aerolínea. Varias aerolíneas ya prohíben usarlos o recargarlos a bordo y piden no guardarlos en el compartimiento superior.', src:{ l:'JetsetterGuide', u:'https://jetsetterguide.com/asia/power-trip-new-airline-power-bank-rules-for-2026' } },
   { cat:'equipaje', tag:'Drones', c:'', place:'En el avión', when:'Siempre', t:'Drones: baterías de repuesto en cabina, nunca en bodega', x:'Las baterías de litio sueltas van en el equipaje de mano, con los bornes protegidos y de menos de 100 Wh cada una. Fijate la política de tu aerolínea para el drone y qué permiso pide cada país: en Egipto, por ejemplo, pueden retenerlo en el aeropuerto.' },
   { cat:'reglas', tag:'Multas', c:'sg', when:'Vigente', t:'Singapur multa hasta por no tirar la cadena en un baño público', x:'Son S$150 y puede llegar hasta S$1.000. También multan por vapear (desde S$200), tirar basura (hasta S$1.000) y llevar durián en el transporte público (S$500).', src:{ l:'Time Out', u:'https://www.timeout.com/singapore/things-to-do/odd-things-that-are-illegal-in-singapore' } },
@@ -1670,6 +1738,9 @@ const NEWS = [
   { cat:'dato', tag:'Dato', c:'cn', when:'Para saber', t:'En China, Google, YouTube e Instagram no funcionan sin VPN', x:'Configurá la VPN y las apps de pago (Alipay o WeChat) antes de salir de Argentina.' },
   { cat:'dato', tag:'Dato', c:'id', when:'Para saber', t:'En Bali, el Día del Silencio cierra hasta el aeropuerto', x:'Durante Nyepi todo el isla se frena por 24 horas, aeropuerto incluido. Revisá la fecha antes de reservar vuelos y hoteles.' }
 ];
+
+/* Noticias con fecha de vencimiento (hasta:'AAAA-MM-DD'): se quitan solas después de esa fecha */
+(function () { const h = isoDe(new Date()); for (let k = NEWS.length - 1; k >= 0; k--) if (NEWS[k].hasta && NEWS[k].hasta < h) NEWS.splice(k, 1); })();
 
 /* ============ Videos de YouTube (IDs reales del canal) ============ */
 const V = (id, c, m, t, top) => ({ id, c, m, t, top });
@@ -1893,10 +1964,10 @@ async function copyText(text, btn, src) {
   const reset = () => { btn.textContent = label; btn.classList.remove('ok'); };
   try {
     await navigator.clipboard.writeText(text);
-    btn.textContent = 'Copiado'; btn.classList.add('ok'); setTimeout(reset, 1800);
+    btn.textContent = T('copied', 'Copiado'); btn.classList.add('ok'); setTimeout(reset, 1800);
   } catch (e) {
     if (src) { const r = document.createRange(); r.selectNodeContents(src); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
-    btn.textContent = 'Seleccionado: copialo'; setTimeout(reset, 2600);
+    btn.textContent = T('sel', 'Seleccionado: copialo'); setTimeout(reset, 2600);
   }
 }
 const placeName = c => PLACE[c] || '';
@@ -1933,10 +2004,10 @@ function renderDestinos() {
 
 /* ============ Tickets de descuento ============ */
 function ticketHTML(p) {
-  return '<article class="tix"><div class="tix-main"><span class="k">' + esc(p.kind) + '</span><h3>' + esc(p.name) + '</h3><p>' + esc(p.blurb) + '</p>' +
-    '<a class="btn btn-primary btn-sm" href="' + p.url + '" target="_blank" rel="noopener">' + esc(p.cta) + ' ' + ICON.arrow + '</a></div>' +
-    '<div class="tix-stub"><div class="code"><small>Código</small><b>' + esc(p.code) + '</b>' + (p.off ? '<em>' + esc(p.off) + '</em>' : '') + '</div>' +
-    '<button type="button" class="btn btn-ghost btn-sm" data-copy="' + esc(p.code) + '">Copiar código</button></div></article>';
+  return '<article class="tix"><div class="tix-main"><span class="k">' + esc(Li(p, 'kind')) + '</span><h3>' + esc(p.name) + '</h3><p>' + esc(Li(p, 'blurb')) + '</p>' +
+    '<a class="btn btn-primary btn-sm" href="' + esc(p.url) + '" target="_blank" rel="noopener sponsored">' + esc(Li(p, 'cta')) + ' ' + ICON.arrow + '</a></div>' +
+    '<div class="tix-stub"><div class="code"><small>' + esc(T('tix.code', 'Código')) + '</small><b>' + esc(p.code) + '</b>' + (p.off ? '<em>' + esc(p.off) + '</em>' : '') + '</div>' +
+    '<button type="button" class="btn btn-ghost btn-sm" data-copy="' + esc(p.code) + '">' + esc(T('tix.copy', 'Copiar código')) + '</button></div></article>';
 }
 function bindCopy(root) {
   $$('[data-copy]', root).forEach(b => b.addEventListener('click', () => copyText(b.dataset.copy, b, b.closest('.tix-stub').querySelector('b'))));
@@ -2790,7 +2861,7 @@ function initBuscadores() {
     document.querySelectorAll('.sk-alsel').forEach(el => {
       const r = REGIONES.find(x => x.id === el.dataset.reg);
       el.innerHTML = air && r && r.aerolineas.indexOf(air) >= 0
-        ? '<span>✓ <b>' + esc(air) + '</b> elegida</span><a href="' + esc(AEROLINEAS[air][1]) + '" target="_blank" rel="noopener">Ir al sitio oficial ↗</a><button type="button" data-alx>Quitar</button>' : '';
+        ? '<span>✓ <b>' + esc(air) + '</b> elegida</span><button type="button" data-alx>Quitar</button>' : '';
     });
   }
   function resolver(d, sinScroll) {
@@ -3059,6 +3130,207 @@ function iniciarGuardia() {
   }, true);
 }
 
+/* ============ Idiomas: español (base), portugués e inglés ============
+   Los textos fijos llevan data-i18n="clave" (texto), data-i18n-html (con formato) o data-i18n-ph (placeholder).
+   El español es el original y vive en el propio HTML: acá solo se cargan las traducciones.
+   Lo que se arma con datos (fichas de países, noticias, videos y el buscador de vuelos) sigue en español. */
+const I18N = {
+  pt: {
+    'nav.news':'Notícias', 'nav.buscar':'Voos e passeios', 'nav.dest':'Destinos', 'nav.disc':'Descontos', 'nav.bf':'Black Friday', 'nav.videos':'Vídeos e redes', 'nav.comm':'Comunidade', 'nav.work':'Trabalhe com a gente',
+    'hero.eyebrow':'Guia de viagens',
+    'hero.h1':'Tudo o que você precisa saber antes de viajar, <em>em um só lugar.</em>',
+    'hero.lead':'Requisitos de entrada, apps, passeios, dicas e códigos de desconto para cada destino, para quem viaja com passaporte argentino. As fichas dos países estão em espanhol por enquanto.',
+    'news.h2':'Notícias de viagem: últimas notícias ao vivo',
+    'news.note':'As regras de entrada, bagagem e multas mudam sem aviso. Antes de viajar, confirme sempre no site oficial do país, na sua companhia aérea ou no consulado.',
+    'find.label':'Para onde você vai?', 'find.ph':'Tailândia, Bali, China, Aruba…', 'find.btn':'Buscar',
+    'sk.kick':'Sonhe grande, gaste melhor', 'sk.h2':'A gente cuida do seu dinheiro', 'sk.flights':'Voos', 'sk.hotels':'Hotéis', 'sk.pack':'Voo + hotel',
+    'dest.eyebrow':'Destinos', 'dest.h2':'Escolha um destino e veja a ficha completa',
+    'dest.p':'Requisitos para passaporte argentino, o que fazer, o que evitar, apps úteis, idioma, moeda e religião. Use a busca acima para ver o resto.',
+    'disc.eyebrow':'Códigos e descontos', 'disc.h2':'Viaje com os nossos códigos',
+    'disc.p':'Copie o código e use na hora de pagar. Se você entrar pelo nosso link, o desconto pode ser aplicado sozinho.',
+    'disc.note':'Os links são de afiliado: se você comprar por eles, ganhamos uma comissão, e você não paga a mais. É uma das formas de financiar o canal.',
+    'vid.eyebrow':'Vídeos e redes', 'vid.h2':'Os destinos, contados por dentro',
+    'vid.p':'Guias completos no YouTube, clipes no TikTok e reels no Instagram (em espanhol). Filtre por país.',
+    'cta.eyebrow':'Consultoria de viagem', 'cta.h2':'Quer que a gente te ajude na sua próxima viagem?', 'cta.p':'Escreva para a gente nas redes e te ajudamos.',
+    'work.eyebrow':'Trabalhe com a gente', 'work.h2':'Mostramos a sua marca para viajantes que estão planejando a próxima viagem.',
+    'work.lead':'Se você tem um destino, hotel, passeio, companhia aérea, app ou produto de viagem, conte para a gente e montamos uma proposta.',
+    'comm.eyebrow':'Nossa comunidade', 'comm.h2':'Viajamos juntos',
+    'comm.p':'Isto é o que vimos construindo com vocês. Se o site foi útil, conte para a gente: o seu comentário ajuda outros viajantes.',
+    'foot.upd':'Site atualizado em',
+    'foot.rest':'As informações de entrada são orientativas e mudam com frequência: confirme sempre em fontes oficiais antes de viajar. Alguns links são de afiliado.',
+    'tix.code':'Código', 'tix.copy':'Copiar código', 'copied':'Copiado', 'sel':'Selecionado: copie'
+  },
+  en: {
+    'nav.news':'News', 'nav.buscar':'Flights & tours', 'nav.dest':'Destinations', 'nav.disc':'Discounts', 'nav.bf':'Black Friday', 'nav.videos':'Videos & social', 'nav.comm':'Community', 'nav.work':'Work with us',
+    'hero.eyebrow':'Travel guide',
+    'hero.h1':'Everything you need to know before you travel, <em>in one place.</em>',
+    'hero.lead':'Entry requirements, apps, tours, tips and discount codes for every destination, for travelers holding an Argentine passport. Country guides are in Spanish for now.',
+    'news.h2':'Travel news: latest updates, live',
+    'news.note':'Entry, baggage and fine rules change without notice. Before you travel, always check the country’s official site, your airline or the consulate.',
+    'find.label':'Where are you going?', 'find.ph':'Thailand, Bali, China, Aruba…', 'find.btn':'Search',
+    'sk.kick':'Dream big, spend smarter', 'sk.h2':'We look after your money', 'sk.flights':'Flights', 'sk.hotels':'Hotels', 'sk.pack':'Flight + hotel',
+    'dest.eyebrow':'Destinations', 'dest.h2':'Pick a destination and see the full guide',
+    'dest.p':'Requirements for Argentine passport holders, what to do and avoid, useful apps, language, currency and religion. Use the search above to see the rest.',
+    'disc.eyebrow':'Codes & discounts', 'disc.h2':'Travel with our codes',
+    'disc.p':'Copy the code and use it at checkout. If you come in through our link, the discount may apply automatically.',
+    'disc.note':'These are affiliate links: if you buy through them we earn a commission, and you don’t pay more. It’s one of the ways we fund the channel.',
+    'vid.eyebrow':'Videos & social', 'vid.h2':'Destinations, told from the inside',
+    'vid.p':'Full guides on YouTube, clips on TikTok and reels on Instagram (in Spanish). Filter by country.',
+    'cta.eyebrow':'Travel advice', 'cta.h2':'Want us to help plan your next trip?', 'cta.p':'Message us on social media and we’ll help.',
+    'work.eyebrow':'Work with us', 'work.h2':'We put your brand in front of travelers planning their next trip.',
+    'work.lead':'If you have a destination, hotel, tour, airline, app or travel product, tell us and we’ll put together a proposal.',
+    'comm.eyebrow':'Our community', 'comm.h2':'We travel together',
+    'comm.p':'This is what we’ve been building with you. If the site helped, tell us: your comment helps other travelers.',
+    'foot.upd':'Site updated on',
+    'foot.rest':'Entry information is a guide and changes often: always confirm with official sources before you travel. Some links are affiliate links.',
+    'tix.code':'Code', 'tix.copy':'Copy code', 'copied':'Copied', 'sel':'Selected: copy it'
+  }
+};
+const LOCALE = { es:'es-AR', pt:'pt-BR', en:'en-US' };
+let LANG = 'es';
+try { const g = localStorage.getItem('mm_lang'); if (g === 'pt' || g === 'en') LANG = g; } catch (e) {}
+function T(k, es) { return LANG === 'es' ? es : ((I18N[LANG] && I18N[LANG][k]) || es); }
+function Lx(o) { return (o && (o[LANG] || o.es)) || ''; }
+function Li(o, k) { return (LANG !== 'es' && o.i18n && o.i18n[LANG] && o.i18n[LANG][k]) || o[k]; }
+function fechaL(iso, largo) {
+  const p = iso.split('-').map(Number);
+  return new Date(p[0], p[1] - 1, p[2]).toLocaleDateString(LOCALE[LANG], largo ? { day:'numeric', month:'long', year:'numeric' } : { day:'numeric', month:'short' });
+}
+function aplicarIdioma(l) {
+  LANG = l;
+  document.documentElement.lang = l;
+  $$('[data-i18n]').forEach(el => { if (el.dataset.es === undefined) el.dataset.es = el.textContent; el.textContent = T(el.dataset.i18n, el.dataset.es); });
+  $$('[data-i18n-html]').forEach(el => { if (el.dataset.esHtml === undefined) el.dataset.esHtml = el.innerHTML; el.innerHTML = T(el.dataset.i18nHtml, el.dataset.esHtml); });
+  $$('[data-i18n-ph]').forEach(el => { if (el.dataset.esPh === undefined) el.dataset.esPh = el.getAttribute('placeholder') || ''; el.setAttribute('placeholder', T(el.dataset.i18nPh, el.dataset.esPh)); });
+  $$('#langSel button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === l)));
+  const ed = $('#edicionTxt'); if (ed) ed.textContent = SITE.edicionISO ? fechaL(SITE.edicionISO, true) : SITE.edicion;
+  renderTickets();
+  renderBF();
+}
+function initIdioma() {
+  const sel = $('#langSel');
+  if (sel) sel.addEventListener('click', e => {
+    const b = e.target.closest('button[data-lang]'); if (!b) return;
+    try { localStorage.setItem('mm_lang', b.dataset.lang); } catch (x) {}
+    aplicarIdioma(b.dataset.lang);
+  });
+  aplicarIdioma(LANG);
+}
+
+/* ============ BLACK FRIDAY ============
+   Todo se edita acá. La sección aparece sola desde "desde" y se oculta sola después de "hasta".
+   Cada compra sale con tu código: los links pasan por linkTP (tu marker de Travelpayouts) o son tus links/códigos de Holafly, Assist 365 y GetYourGuide.
+   from/to (opcional): fechas de la campaña de esa marca, para mostrar "Empieza el…", "En curso" o "Terminó".
+   Si una marca todavía no confirmó fechas o porcentajes, no los inventamos: queda el texto genérico. */
+const BF = {
+  dia: '2026-11-27', cyber: '2026-11-30',
+  desde: '2026-11-10', hasta: '2026-12-01',
+  revisado: '2026-11-11',
+  marcas: [
+    { name:'GetYourGuide', domain:'getyourguide.com', from:'2026-11-14', to:'2026-11-29', code:'MASMUNDOK5', off:'5% OFF',
+      kind:{ es:'Tours y entradas', pt:'Passeios e ingressos', en:'Tours & tickets' },
+      deal:{ es:'Hasta 50% OFF en tours y actividades', pt:'Até 50% OFF em passeios e atividades', en:'Up to 50% off tours & activities' },
+      when:{ es:'Acceso anticipado del 14 al 22 de nov · Fase principal del 23 al 29', pt:'Acesso antecipado de 14 a 22 de nov · Fase principal de 23 a 29', en:'Early access Nov 14–22 · Main phase Nov 23–29' },
+      note:{ es:'El código MASMUNDOK5 es para la app: instalala desde nuestro link.', pt:'O código MASMUNDOK5 vale para o app: instale pelo nosso link.', en:'Code MASMUNDOK5 works in the app: install it from our link.' },
+      acts:[
+        { t:{ es:'Ver ofertas', pt:'Ver ofertas', en:'See deals' }, p:true, u:() => linkTP(AFILIADOS.getyourguide, 'https://www.getyourguide.com/c/black-friday-sale') },
+        { t:{ es:'Instalar la app', pt:'Instalar o app', en:'Install the app' }, u:() => 'https://gyg.me/masmundok-app' }
+      ] },
+    { name:'Trip.com', domain:'trip.com', from:'2026-11-10', to:'2026-12-01',
+      kind:{ es:'Vuelos y hoteles', pt:'Voos e hotéis', en:'Flights & hotels' },
+      deal:{ es:'Hasta 50% en cupones de vuelos y hoteles', pt:'Até 50% em cupons de voos e hotéis', en:'Up to 50% off flight & hotel coupons' },
+      when:{ es:'Del 10 de nov al 1 de dic · Black Friday 27/11 · Cyber Monday 30/11', pt:'De 10 de nov a 1º de dez · Black Friday 27/11 · Cyber Monday 30/11', en:'Nov 10 – Dec 1 · Black Friday Nov 27 · Cyber Monday Nov 30' },
+      note:{ es:'Las ofertas cambian según el mercado y la disponibilidad. Comprá desde nuestro link: no pagás de más.', pt:'As ofertas variam conforme o mercado e a disponibilidade. Compre pelo nosso link: você não paga a mais.', en:'Deals vary by market and availability. Book through our link: you don’t pay extra.' },
+      acts:[
+        { t:{ es:'Vuelos', pt:'Voos', en:'Flights' }, p:true, u:() => linkTP(AFILIADOS.vuelos.find(a => a.name === 'Trip.com') || {}, 'https://www.trip.com/flights/') },
+        { t:{ es:'Hoteles', pt:'Hotéis', en:'Hotels' }, u:() => linkTP(AFILIADOS.hoteles.find(a => a.name === 'Trip.com Hoteles') || {}, 'https://www.trip.com/hotels/') }
+      ] },
+    { name:'Holafly', domain:'holafly.com', code:'MASMUNDO',
+      kind:{ es:'eSIM para viajar', pt:'eSIM para viagens', en:'Travel eSIM' },
+      deal:{ es:'Campaña de eSIM de Black Friday', pt:'Campanha de eSIM da Black Friday', en:'Black Friday eSIM campaign' },
+      when:{ es:'Black Friday: viernes 27 de noviembre', pt:'Black Friday: sexta, 27 de novembro', en:'Black Friday: Friday, Nov 27' },
+      note:{ es:'Holafly confirma los descuentos de la campaña en su web. Nuestro código y nuestro link ya funcionan.', pt:'A Holafly confirma os descontos da campanha no site dela. O nosso código e o nosso link já funcionam.', en:'Holafly confirms the campaign discounts on its site. Our code and link already work.' },
+      acts:[ { t:{ es:'Ir a Holafly', pt:'Ir para a Holafly', en:'Go to Holafly' }, p:true, u:() => 'https://holafly.sjv.io/masmundo' } ] },
+    { name:'Assist 365', domain:'assist-365.com', code:'MASMUNDO', codeLabel:{ es:'Voucher', pt:'Voucher', en:'Voucher' },
+      kind:{ es:'Seguro de viaje', pt:'Seguro viagem', en:'Travel insurance' },
+      deal:{ es:'Promos de Black Friday en seguro de viaje', pt:'Promoções de Black Friday em seguro viagem', en:'Black Friday travel insurance promos' },
+      when:{ es:'Semana de Black Friday', pt:'Semana da Black Friday', en:'Black Friday week' },
+      note:{ es:'Cotizá con nuestro voucher y confirmá el descuento y las cuotas vigentes antes de pagar.', pt:'Cote com o nosso voucher e confirme o desconto e as parcelas vigentes antes de pagar.', en:'Get a quote with our voucher and confirm the current discount and installments before paying.' },
+      acts:[ { t:{ es:'Cotizar seguro', pt:'Cotar seguro', en:'Get a quote' }, p:true, u:() => 'https://assist-365.com/?voucher=MASMUNDO' } ] },
+    { name:'Agoda', domain:'agoda.com',
+      kind:{ es:'Hoteles', pt:'Hotéis', en:'Hotels' },
+      deal:{ es:'Hoteles en Asia y el resto del mundo', pt:'Hotéis na Ásia e no resto do mundo', en:'Hotels in Asia and worldwide' },
+      when:{ es:'Fechas de campaña por confirmar', pt:'Datas da campanha a confirmar', en:'Campaign dates to be confirmed' },
+      note:{ es:'Agoda todavía no publicó sus fechas de Black Friday. Cuando lo haga, las sumamos acá. Reservá desde nuestro link: no pagás de más.', pt:'A Agoda ainda não divulgou as datas da Black Friday. Quando divulgar, colocamos aqui. Reserve pelo nosso link: você não paga a mais.', en:'Agoda hasn’t published its Black Friday dates yet. We’ll add them here when it does. Book through our link: you don’t pay extra.' },
+      acts:[ { t:{ es:'Ver hoteles', pt:'Ver hotéis', en:'See hotels' }, p:true, u:() => linkTP(AFILIADOS.hoteles.find(a => a.name === 'Agoda') || {}, 'https://www.agoda.com/es-ar/') } ] }
+  ],
+  tx: {
+    badge:{ es:'Black Friday', pt:'Black Friday', en:'Black Friday' },
+    strip:{ es:'Hasta 50% OFF en tours, vuelos y hoteles, con nuestros códigos', pt:'Até 50% OFF em passeios, voos e hotéis, com os nossos códigos', en:'Up to 50% off tours, flights and hotels, with our codes' },
+    stripGo:{ es:'Ver ofertas →', pt:'Ver ofertas →', en:'See deals →' },
+    ey:{ es:'Black Friday 2026', pt:'Black Friday 2026', en:'Black Friday 2026' },
+    h2:{ es:'Black Friday: las ofertas de viaje en un solo lugar', pt:'Black Friday: as ofertas de viagem em um só lugar', en:'Black Friday: travel deals in one place' },
+    lead:{ es:'Reunimos las campañas de nuestros socios y sus códigos. Comprando desde acá no pagás de más y nos ayudás a seguir haciendo contenido.', pt:'Reunimos as campanhas dos nossos parceiros e seus códigos. Comprando por aqui você não paga a mais e nos ajuda a continuar criando conteúdo.', en:'We gather our partners’ campaigns and their codes. Buying through here costs you nothing extra and helps us keep making content.' },
+    code:{ es:'Código', pt:'Código', en:'Code' },
+    copy:{ es:'Copiar', pt:'Copiar', en:'Copy' },
+    foot:{ es:'Descuentos, fechas y cupos son de cada empresa y pueden cambiar o agotarse: confirmá las condiciones en su sitio antes de pagar. Los links son de afiliado: si comprás con ellos nos llevamos una comisión y vos no pagás de más. Datos de las campañas al {d}.', pt:'Descontos, datas e vagas são de cada empresa e podem mudar ou esgotar: confirme as condições no site delas antes de pagar. Os links são de afiliado: se você comprar por eles, ganhamos uma comissão e você não paga a mais. Dados das campanhas em {d}.', en:'Discounts, dates and availability belong to each company and may change or sell out: confirm the terms on their site before paying. Links are affiliate links: if you buy through them we earn a commission and you don’t pay more. Campaign data as of {d}.' },
+    tipT:{ es:'Cómo comprar con nuestro código', pt:'Como comprar com o nosso código', en:'How to buy with our code' },
+    tip:{ es:['Entrá desde el botón de cada marca: el link ya lleva nuestro código.', 'Si te pide un código o voucher, copialo y pegalo al pagar.', 'Antes de pagar, revisá el precio final y las condiciones de la oferta.'],
+          pt:['Entre pelo botão de cada marca: o link já leva o nosso código.', 'Se pedir um código ou voucher, copie e cole na hora de pagar.', 'Antes de pagar, confira o preço final e as condições da oferta.'],
+          en:['Go in through each brand\u2019s button: the link already carries our code.', 'If it asks for a code or voucher, copy and paste it at checkout.', 'Before paying, check the final price and the offer terms.'] },
+    ya:{ es:'Empieza el {d}', pt:'Começa em {d}', en:'Starts {d}' },
+    vivo:{ es:'En curso', pt:'Em andamento', en:'Live now' },
+    fin:{ es:'Terminó', pt:'Terminou', en:'Ended' },
+    faltan:{ es:'Faltan {n} días para el Black Friday · viernes 27 de noviembre', pt:'Faltam {n} dias para a Black Friday · sexta, 27 de novembro', en:'{n} days to Black Friday · Friday, Nov 27' },
+    falta1:{ es:'Falta 1 día para el Black Friday · viernes 27 de noviembre', pt:'Falta 1 dia para a Black Friday · sexta, 27 de novembro', en:'1 day to Black Friday · Friday, Nov 27' },
+    hoy:{ es:'¡Hoy es Black Friday!', pt:'Hoje é Black Friday!', en:'It’s Black Friday!' },
+    hoyCyber:{ es:'¡Hoy es Cyber Monday!', pt:'Hoje é Cyber Monday!', en:'It’s Cyber Monday!' },
+    semana:{ es:'Semana de Black Friday en curso', pt:'Semana da Black Friday em andamento', en:'Black Friday week is on' }
+  }
+};
+function bfHoy() { return isoDe(new Date()); }
+function bfActivo() { const h = bfHoy(); return h >= BF.desde && h <= BF.hasta; }
+function bfDias(a, b) { const f = s => { const p = s.split('-').map(Number); return Date.UTC(p[0], p[1] - 1, p[2]); }; return Math.round((f(b) - f(a)) / 864e5); }
+function bfEstado(b) {
+  if (!b.from || !b.to) return '';
+  const h = bfHoy();
+  if (h < b.from) return '<span class="bf-st soon">' + esc(Lx(BF.tx.ya).replace('{d}', fechaL(b.from))) + '</span>';
+  if (h <= b.to) return '<span class="bf-st">' + esc(Lx(BF.tx.vivo)) + '</span>';
+  return '<span class="bf-st end">' + esc(Lx(BF.tx.fin)) + '</span>';
+}
+function bfCard(b) {
+  const logo = '<span class="bf-logo" aria-hidden="true"><b>' + esc(b.name.charAt(0)) + '</b><img src="https://www.google.com/s2/favicons?domain=' + b.domain + '&sz=128" alt="" width="32" height="32" referrerpolicy="no-referrer" onload="this.style.opacity=1" onerror="this.remove()"></span>';
+  const code = b.code ? '<div class="bf-code"><div><small>' + esc(Lx(b.codeLabel || BF.tx.code)) + '</small><b>' + esc(b.code) + '</b>' + (b.off ? '<em>' + esc(b.off) + '</em>' : '') + '</div><button type="button" class="btn btn-ghost btn-sm" data-copy="' + esc(b.code) + '">' + esc(Lx(BF.tx.copy)) + '</button></div>' : '';
+  const acts = b.acts.map(a => '<a class="btn ' + (a.p ? 'btn-primary' : 'btn-ghost') + ' btn-sm" href="' + esc(a.u()) + '" target="_blank" rel="noopener sponsored">' + esc(Lx(a.t)) + ' ' + ICON.arrow + '</a>').join('');
+  return '<article class="bf-card"><div class="bf-top">' + logo + '<div><h3>' + esc(b.name) + '</h3><small>' + esc(Lx(b.kind)) + '</small></div></div>' +
+    bfEstado(b) + '<p class="bf-deal">' + esc(Lx(b.deal)) + '</p><p class="bf-when">' + esc(Lx(b.when)) + '</p><p class="bf-note">' + esc(Lx(b.note)) + '</p>' + code + '<div class="bf-acts">' + acts + '</div></article>';
+}
+function renderBF() {
+  const on = bfActivo(), sec = $('#blackfriday'), strip = $('#bfStrip'), nav = $('#navBF');
+  if (sec) sec.hidden = !on;
+  if (strip) strip.hidden = !on;
+  if (nav) nav.hidden = !on;
+  if (!on || !sec) return;
+  const h = bfHoy(), tx = BF.tx;
+  strip.innerHTML = '<b>' + esc(Lx(tx.badge)) + '</b><span>' + esc(Lx(tx.strip)) + '</span><span>' + esc(Lx(tx.stripGo)) + '</span>';
+  $('#bfEy').textContent = Lx(tx.ey);
+  $('#bfT').textContent = Lx(tx.h2);
+  $('#bfLead').textContent = Lx(tx.lead);
+  const n = bfDias(h, BF.dia);
+  const msg = n > 1 ? Lx(tx.faltan).replace('{n}', n) : n === 1 ? Lx(tx.falta1) : h === BF.dia ? Lx(tx.hoy) : h === BF.cyber ? Lx(tx.hoyCyber) : Lx(tx.semana);
+  $('#bfCount').innerHTML = '<span class="bf-pill">' + esc(msg) + '</span>';
+  $('#bfGrid').innerHTML = BF.marcas.map(bfCard).join('') + '<article class="bf-card bf-tip"><h3>' + esc(Lx(tx.tipT)) + '</h3><ol>' + Lx(tx.tip).map(x => '<li>' + esc(x) + '</li>').join('') + '</ol></article>';
+  $('#bfFoot').textContent = Lx(tx.foot).replace('{d}', fechaL(BF.revisado, true));
+}
+function initBF() {
+  const g = $('#bfGrid');
+  if (g) g.addEventListener('click', e => {
+    const b = e.target.closest('[data-copy]'); if (!b) return;
+    copyText(b.dataset.copy, b, b.closest('.bf-code').querySelector('b'));
+  });
+  renderBF();
+}
+
 /* ============ Arranque ============ */
 renderStatic();
 renderDestinos();
@@ -3069,6 +3341,8 @@ initComunidad();
 $('#helpHome').innerHTML = helpHTML();
 bindHelp($('#helpHome'), 'home');
 renderTickets();
+initBF();
+initIdioma();
 initNoticiero();
 renderTicker();
 cargarOfertasVivo();
