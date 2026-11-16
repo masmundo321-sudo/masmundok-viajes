@@ -1362,8 +1362,8 @@ const SITE = {
   instagram: 'https://www.instagram.com/masmundok/',
   reel: 'https://www.instagram.com/reel/DeRrhugCS_C/',
   cafecito: 'https://cafecito.app/masmundok/c/69137e5b96e9d887414f4b30',
-  edicion: '11 de noviembre de 2026',
-  edicionISO: '2026-11-11',
+  edicion: '16 de noviembre de 2026',
+  edicionISO: '2026-11-16',
   /* Formulario "Trabajá con nosotros": envía los mensajes por correo con FormSubmit (la primera vez hay que confirmar el correo). Dejalo vacío para que solo arme el mensaje. */
   formEndpoint: 'https://formsubmit.co/ajax/masmundo321@gmail.com',
   /* Chat con IA real (opcional): URL de un servicio propio que responda {answer}. Vacío = el chat usa la información de esta página. */
@@ -1372,7 +1372,7 @@ const SITE = {
   miniaturas: true
 };
 
-const PLACE = { th:'Tailandia', br:'Brasil', eg:'Egipto', cn:'China', jp:'Japón', sg:'Singapur', id:'Indonesia', cl:'Chile', pe:'Perú', bo:'Bolivia', aw:'Aruba', eu:'Europa', ar:'Argentina', uy:'Uruguay', hk:'Hong Kong', vn:'Vietnam' };
+const PLACE = { th:'Tailandia', br:'Brasil', eg:'Egipto', cn:'China', jp:'Japón', sg:'Singapur', id:'Indonesia', cl:'Chile', pe:'Perú', bo:'Bolivia', aw:'Aruba', eu:'Europa', ar:'Argentina', uy:'Uruguay', hk:'Hong Kong', vn:'Vietnam', ae:'Emiratos Árabes Unidos', in:'India', lk:'Sri Lanka', mv:'Maldivas' };
 
 /* Descuentos: agregar o quitar objetos de esta lista */
 const PARTNERS = [
@@ -1549,6 +1549,10 @@ const FLAGS = {
   aw: () => '<rect width="60" height="40" fill="#418FDE"/><rect y="27" width="60" height="3" fill="#FBE122"/><rect y="32" width="60" height="3" fill="#FBE122"/><polygon points="11,3 12.8,8.2 18,10 12.8,11.8 11,17 9.2,11.8 4,10 9.2,8.2" fill="#EF3340" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/>',
   vn: () => '<rect width="60" height="40" fill="#DA251D"/><g fill="#FFFF00">' + star(30, 21, 12, 0) + '</g>',
   ar: () => '<rect width="60" height="40" fill="#74ACDF"/><rect y="13.33" width="60" height="13.34" fill="#fff"/><circle cx="30" cy="20" r="3.2" fill="#F6B40E"/>',
+  ae: () => '<rect width="60" height="13.34" fill="#00732F"/><rect y="13.33" width="60" height="13.34" fill="#fff"/><rect y="26.66" width="60" height="13.34" fill="#000"/><rect width="15" height="40" fill="#EF3340"/>',
+  in: () => '<rect width="60" height="13.34" fill="#FF9933"/><rect y="13.33" width="60" height="13.34" fill="#fff"/><rect y="26.66" width="60" height="13.34" fill="#138808"/><circle cx="30" cy="20" r="4.6" fill="none" stroke="#000080" stroke-width="1"/><path d="M30 15.4v9.2M25.4 20h9.2M26.75 16.75l6.5 6.5M33.25 16.75l-6.5 6.5" stroke="#000080" stroke-width=".6"/>',
+  lk: () => '<rect width="60" height="40" fill="#FFBE29"/><rect x="2" y="2" width="56" height="36" fill="#8D153A"/><rect x="4" y="4" width="5" height="32" fill="#00534E"/><rect x="9" y="4" width="5" height="32" fill="#EB7400"/><circle cx="36" cy="20" r="8" fill="#FFBE29"/><circle cx="36" cy="20" r="4.5" fill="#8D153A"/>',
+  mv: () => '<rect width="60" height="40" fill="#D21034"/><rect x="10" y="8" width="40" height="24" fill="#007E3A"/><circle cx="30" cy="20" r="7" fill="#fff"/><circle cx="32.4" cy="20" r="6" fill="#007E3A"/>',
   uy: () => {
     let r = '';
     for (let i = 0; i < 9; i++) r += '<rect y="' + (i * 40 / 9).toFixed(2) + '" width="60" height="' + (40 / 9 + 0.05).toFixed(2) + '" fill="' + (i % 2 ? '#0038A8' : '#fff') + '"/>';
@@ -1671,6 +1675,54 @@ DEST.push({
   tips:['Tramitá la e-Visa solo en el portal oficial: otros sitios cobran comisión extra.','Pedila con tiempo y revisá bien los datos del pasaporte antes de pagar.','Llevá algo de efectivo en dong para mercados y puestos callejeros.']
 });
 DEST.push({
+  slug:'emiratos', code:'ae', name:'Emiratos Árabes Unidos', c1:'#d99b3d', c2:'#14405c',
+  tagline:'Dubái, Abu Dabi y desierto', badge:'Sin visa · ver aviso',
+  facts:{ 'Idioma':'Árabe (el inglés se usa en todo el turismo)', 'Moneda':'Dírham de los EAU (AED)', 'Religión':'Islam (religión oficial); se respetan otros cultos', 'Enchufe':'Tipo G (británico) · 230 V', 'Mejor época':'Noviembre a marzo: clima agradable' },
+  req:{ status:'sin-visa', stamp:'Sin visa', headline:'Sin visa hasta 90 días, pero leé el aviso de seguridad', verified:false,
+    items:['AVISO: la página de la Embajada argentina en los EAU recomienda no hacer viajes no esenciales o de turismo y evitar el tránsito por sus aeropuertos mientras no se estabilice la situación regional (la página no muestra fecha). Antes de viajar, confirmá con tu aerolínea y en los canales oficiales de la Cancillería.','Los argentinos pueden entrar sin visa por turismo, hasta 90 días por visita: te sellan el pasaporte al llegar.','Pasaporte con al menos 6 meses de vigencia.','Pueden pedirte pasaje de salida y comprobante de alojamiento.','Llevá seguro de viaje con cobertura médica: la atención privada es cara.'],
+    src:{ l:'Embajada argentina en los EAU', u:'https://eearb.cancilleria.gob.ar/en/node/85682' } },
+  hacer:['Dubái: Burj Khalifa, Dubai Mall y la fuente.','Barrio antiguo: zocos del oro y de las especias, y cruzar el Creek en abra.','Safari por el desierto al atardecer.','Abu Dabi: Gran Mezquita Sheikh Zayed y Louvre Abu Dabi.','Caminar por Dubai Marina y la costa.'],
+  noHacer:['No vueles un dron sin registro y permiso previos: hay multas y pueden decomisarlo.','No difundas rumores ni noticias de fuentes dudosas en redes: la Fiscalía de los EAU advierte sanciones.','No tomes alcohol en la calle: solo en lugares habilitados.','No fotografíes a personas sin permiso ni edificios oficiales o militares.','No vayas con ropa reveladora a mezquitas ni zonas públicas: cubrí hombros y rodillas.'],
+  apps:[['Careem','Taxis y viajes con precio estimado'],['Uber','Traslados en las ciudades'],['RTA Dubai','Metro, tranvía y buses'],['Google Maps','Rutas y reseñas']],
+  tips:['Con una tarjeta Nol el Metro y los buses de Dubái salen mucho más baratos que los taxis.','Con eSIM tenés datos apenas aterrizás.','En Ramadán hay reglas especiales para comer y beber en público.','Mirá el estado de tu vuelo antes de ir al aeropuerto: hubo cambios y demoras.']
+});
+DEST.push({
+  slug:'india', code:'in', name:'India', c1:'#e8872e', c2:'#7a2e1e',
+  tagline:'Palacios, templos y trenes eternos', badge:'E-Visa · 30 días',
+  facts:{ 'Idioma':'Hindi e inglés (con más de 20 idiomas oficiales)', 'Moneda':'Rupia india (INR)', 'Religión':'Hinduismo mayoritario; también islam, cristianismo, sijismo y budismo', 'Enchufe':'Tipos C, D y M · 230 V', 'Mejor época':'Octubre a marzo: más seco y fresco' },
+  req:{ status:'evisa', stamp:'E-Visa', headline:'Necesitás visa: e-Visa online (30 días, alrededor de US$25)', verified:false,
+    items:['Los argentinos necesitan visa: la e-Visa de turista se tramita online en el portal oficial, evisa.india.gov.in.','La de 30 días cuesta alrededor de US$25 (también hay de 1 año y de 5 años). El valor puede cambiar: confirmalo en el portal.','Pedila con al menos 4 días de margen, e imprimí la aprobada para llevarla con el pasaporte.','Pasaporte con 6 meses de vigencia y 2 páginas en blanco; la foto, con fondo blanco liso y sin anteojos.','La Embajada de la India en Buenos Aires pide el certificado internacional de vacunación contra la fiebre amarilla: confirmalo antes de salir.'],
+    src:{ l:'Portal oficial de la e-Visa de India', u:'https://evisa.india.gov.in/' } },
+  hacer:['Agra: el Taj Mahal al amanecer.','Delhi: Fuerte Rojo, Jama Masjid y los mercados de Old Delhi.','Jaipur: Fuerte Amber y el Palacio de la Ciudad.','Varanasi: la ceremonia de la tarde en los ghats del Ganges.','Kerala: remansos en casa-bote.'],
+  noHacer:['No tomes agua de la canilla ni hielo de lugares dudosos: elegí agua embotellada sellada.','No comas ni pases cosas con la mano izquierda.','No entres a templos con zapatos ni con hombros y rodillas descubiertos.','No sigas a quien te "ayuda" en la estación y te desvía a una agencia: comprá pasajes en ventanillas y apps oficiales.','No subas a un taxi o tuk-tuk sin acordar el precio o sin app.'],
+  apps:[['Uber','Taxis y tuk-tuks con precio estimado'],['Ola','Alternativa local a Uber'],['IRCTC','Trenes: reservas oficiales'],['Google Maps','Rutas y reseñas']],
+  tips:['Reservá los trenes con anticipación: los asientos de las rutas turísticas se agotan.','El Taj Mahal cierra los viernes.','Regateá en los mercados y acordá el precio del tuk-tuk antes de subir.','Con eSIM tenés datos apenas aterrizás y podés pedir el taxi desde el aeropuerto.']
+});
+DEST.push({
+  slug:'sri-lanka', code:'lk', name:'Sri Lanka', c1:'#2aa889', c2:'#7a3a12',
+  tagline:'Trenes entre té, templos y playas', badge:'ETA online',
+  facts:{ 'Idioma':'Cingalés y tamil (el inglés se entiende en turismo)', 'Moneda':'Rupia de Sri Lanka (LKR)', 'Religión':'Budismo theravada mayoritario; también hinduismo, islam y cristianismo', 'Enchufe':'Tipos D, G y M · 230 V', 'Mejor época':'Costa oeste y sur: diciembre a marzo; costa este: abril a septiembre' },
+  req:{ status:'evisa', stamp:'ETA', headline:'Necesitás la autorización electrónica (ETA) online', verified:false,
+    items:['Los argentinos necesitan la ETA de turista: lo más seguro es tramitarla online antes de viajar, en el sitio oficial eta.gov.lk.','Desde el 25/5/2026 la ETA es gratis para 40 países, pero Argentina no está en esa lista: se paga la tarifa estándar. Confirmá el monto vigente en el sitio.','Pasaporte con 6 meses de vigencia.','Pueden pedirte pasaje de salida y fondos suficientes.'],
+    src:{ l:'VisasNews', u:'https://visasnews.com/en/sri-lanka-makes-tourist-eta-free-for-40-nationalities-from-may-25/' } },
+  hacer:['Sigiriya: subir a la Roca del León.','El tren Kandy–Ella entre plantaciones de té.','Kandy: el Templo del Diente.','Safari en el Parque Nacional Yala.','Galle: el fuerte y las playas del sur, como Mirissa.'],
+  noHacer:['No te saques fotos de espaldas a una estatua de Buda ni la uses de decoración: es una falta de respeto grave.','No entres a templos con zapatos ni con hombros y rodillas descubiertos.','No subas a elefantes de paseo: elegí santuarios o safaris responsables.','No lleves tatuajes ni ropa con imágenes de Buda: pueden traerte problemas en migraciones.','No subas a un tuk-tuk sin acordar el precio.'],
+  apps:[['PickMe','Taxis y tuk-tuks locales'],['Uber','Traslados en Colombo'],['Google Maps','Rutas y reseñas'],['Klook','Excursiones y entradas']],
+  tips:['Los trenes panorámicos se llenan: reservá asiento con anticipación.','Cambiá plata en casas de cambio o cajeros, no en la calle.','Llevá efectivo para tuk-tuks y comida callejera.','La temporada de ballenas en Mirissa va, más o menos, de noviembre a abril.']
+});
+DEST.push({
+  slug:'maldivas', code:'mv', name:'Maldivas', c1:'#1fb7c9', c2:'#0a3f6b',
+  tagline:'Atolones, snorkel y agua turquesa', badge:'Visa a la llegada',
+  facts:{ 'Idioma':'Divehi (el inglés se habla en todo el turismo)', 'Moneda':'Rufiyaa maldiva (MVR); los resorts cobran en dólares', 'Religión':'Islam (religión oficial)', 'Enchufe':'Tipos D, G y J · 230 V', 'Mejor época':'Noviembre a abril: estación seca' },
+  req:{ status:'voa', stamp:'Visa a la llegada', headline:'Visa de turista a la llegada y declaración IMUGA online', verified:false,
+    items:['La visa de turista se otorga al llegar, sin trámite previo.','Tenés que completar online la declaración de viajero IMUGA (es gratis), hasta 96 horas antes de llegar.','Pasaporte con lectura mecánica y al menos 1 mes de vigencia.','Te piden pasaje de salida confirmado, reserva paga en un alojamiento registrado y fondos suficientes.','Certificado de vacunación contra la fiebre amarilla, si corresponde.'],
+    src:{ l:'Misión de Maldivas: información de visa', u:'https://2026.mdvmission.gov.mv/jed/articles/maldives-visa-information-21' } },
+  hacer:['Snorkel con tiburón ballena y mantas en el atolón de Ari.','Islas locales con guesthouses: mucho más baratas que los resorts.','Malé: el mercado de pescado y la mezquita Hukuru Miskiy.','Excursión de delfines al atardecer.','Ver la bioluminiscencia en algunas islas, según la época.'],
+  noHacer:['No traigas alcohol ni carne de cerdo: están prohibidos al ingresar.','No uses bikini ni tomes alcohol en islas locales fuera de las playas habilitadas.','No vueles un dron sin permiso previo: pueden decomisarlo en el aeropuerto.','No te lleves corales ni conchas: está prohibido.','No toques ni persigas a tortugas, mantas ni tiburones.'],
+  apps:[['Google Maps','Rutas y reseñas'],['Google Translate','Para entenderte en islas locales'],['Klook','Excursiones y entradas'],['Agoda','Guesthouses y hoteles']],
+  tips:['Las islas locales con guesthouse salen mucho menos que un resort: compará en Agoda.','Los traslados son en ferry, lancha o hidroavión: reservalos con tu alojamiento.','Llevá protector solar apto para arrecifes.','Pagá con tarjeta y llevá algo de efectivo en dólares para propinas y excursiones.']
+});
+DEST.push({
   slug:'chile', code:'cl', name:'Chile', c1:'#3a7bd5', c2:'#0b2e63',
   tagline:'Cordillera, desierto y Patagonia', badge:'Solo con DNI',
   facts:{ 'Idioma':'Español, con muchos chilenismos', 'Moneda':'Peso chileno (CLP)', 'Religión':'Cristianismo, con mayoría católica', 'Enchufe':'C y L · 220 V', 'Mejor época':'Septiembre a abril; esquí de junio a septiembre' },
@@ -1719,6 +1771,7 @@ DEST.push({
 
 /* ============ Noticiero. cat: ultimo | oferta | visa | equipaje | reglas | dato ============ */
 const NEWS = [
+  { cat:'dato', tag:'Aviso', c:'ae', place:'Emiratos Árabes Unidos', when:'Al 16 nov', t:'Emiratos: la Cancillería argentina recomienda evitar viajes turísticos y el tránsito por sus aeropuertos', x:'La página de la Embajada argentina en los EAU mantiene esa recomendación mientras no se estabilice la situación regional, y no muestra fecha. Los aeropuertos y las aerolíneas operan, pero hubo cambios y demoras. Si ya tenés pasaje, hablá con tu aerolínea, mirá el estado del vuelo antes de salir y revisá las alertas oficiales.', src:{ l:'Embajada argentina en los EAU', u:'https://eearb.cancilleria.gob.ar/en/node/85682' } },
   { cat:'dato', tag:'Aviso', c:'ar', place:'Cataratas del Iguazú', when:'Octubre 2026', t:'Iguazú: las crecidas del río pueden cerrar circuitos sin aviso', x:'En octubre el parque cerró entero el 12/10 y reabrió el 13/10, y el 25/10 cerraron el Circuito Superior del lado argentino, con el río en 12.800 m³/s. Antes de ir, confirmá en los canales oficiales del Parque Nacional y de la concesionaria qué circuitos están abiertos.', src:{ l:'Noticias NQN', u:'https://www.noticiasnqn.com.ar/noticias/2026/10/25/358083-cerraron-parcialmente-las-cataratas-del-iguazu-por-la-crecida-del-rio' } },
   { cat:'oferta', tag:'Black Friday', c:'', place:'Black Friday 2026', foto:'avion', when:'Hasta el 1 dic', hasta:'2026-12-01', t:'Black Friday: hasta 50% en tours, vuelos y hoteles', x:'El Black Friday es el viernes 27 de noviembre. Trip.com tiene su campaña del 10/11 al 1/12, con hasta 50% en cupones de vuelos y hoteles, y GetYourGuide llega a hasta 50% con acceso anticipado del 14 al 22 y fase principal del 23 al 29. Mirá todas las ofertas, con nuestros códigos, en la sección Black Friday. Los descuentos y los cupos son de cada empresa: confirmalos antes de pagar.' },
   { cat:'visa', tag:'Visa', c:'th', when:'Desde el 15 sep', t:'Tailandia terminó con los 60 días, pero los argentinos siguen con 90', x:'Desde el 15 de septiembre de 2026 rige un esquema de 30 días para unos 60 países. Argentina conserva los 90 días por acuerdo bilateral. Confirmalo en tu aerolínea o consulado antes de salir.', src:{ l:'TAT News', u:'https://www.tatnews.org/2026/07/thai-cabinet-approves-updated-visa-measures-pending-royal-gazette-publication/' } },
@@ -1728,7 +1781,10 @@ const NEWS = [
   { cat:'visa', tag:'Visa', c:'eg', when:'Vigente', t:'Egipto: los argentinos necesitan visa, e-Visa o a la llegada', x:'Estadía de hasta 30 días y pasaporte con 6 meses de vigencia. La e-Visa cuesta US$30 por una entrada y desde el 1/1/2027 la de una entrada sube a US$33: mirá el valor vigente en el sitio oficial.', src:{ l:'Sitio oficial', u:'https://visa2egypt.gov.eg' } },
   { cat:'visa', tag:'Trámite', c:'aw', when:'Vigente', t:'Aruba: ED Card online obligatoria y tasa de US$20', x:'Se completa hasta 7 días antes de viajar. Quienes llegan en avión pagan US$20 de Sustainability Fee, que se cobra en la misma ED Card. Los argentinos no necesitan visa por 30 días.', src:{ l:'Visit Aruba', u:'https://www.visitaruba.com/traveling-to-aruba/entry-requirements-and-visas/' } },
   { cat:'visa', tag:'Visa', c:'id', when:'Vigente', t:'Indonesia: visa a la llegada de IDR 500.000 y tasa para Bali', x:'Son 30 días, ampliables una vez por otros 30. Aparte, quien visita Bali paga una tasa turística de IDR 150.000, unos US$10.', src:{ l:'Wego', u:'https://blog.wego.com/indonesia-visa-on-arrival/' } },
-  { cat:'visa', tag:'Trámite', c:'eu', place:'Europa (Schengen)', when:'Sin fecha', t:'El ETIAS todavía no está en funcionamiento y no tiene fecha confirmada', x:'La Unión Europea no anunció una fecha definitiva y hoy se prevé que arranque en 2027. Todavía no se puede tramitar, y los sitios que cobran por hacerlo no son oficiales. Cuando entre en vigor lo van a necesitar los viajeros sin visa, como los argentinos, para estancias de hasta 90 días. El control biométrico EES arrancó en octubre de 2025, de forma gradual.', src:{ l:'RR.EE. de Chequia', u:'https://mzv.gov.cz/santiago/es/visas_e_informaciones_consulares/etias_nueva_autorizacion_de_viaje_para.html' } },
+  { cat:'visa', tag:'Visa', c:'in', when:'Vigente', t:'India: los argentinos necesitan e-Visa y se tramita online', x:'La de turista de 30 días sale alrededor de US$25 y conviene pedirla con al menos 4 días de margen en el portal oficial. También hay de 1 y de 5 años. Confirmá el valor vigente antes de pagar.', src:{ l:'Portal oficial de la e-Visa de India', u:'https://evisa.india.gov.in/' } },
+  { cat:'visa', tag:'Trámite', c:'lk', when:'Desde el 25 may', t:'Sri Lanka: ETA gratis para 40 países, pero Argentina no está en la lista', x:'Desde el 25 de mayo de 2026 la ETA de turista es gratis (30 días, doble entrada) para ciudadanos de 40 países. Los argentinos siguen necesitando la ETA y pagando la tarifa estándar: tramitala online en el sitio oficial antes de viajar.', src:{ l:'VisasNews', u:'https://visasnews.com/en/sri-lanka-makes-tourist-eta-free-for-40-nationalities-from-may-25/' } },
+  { cat:'visa', tag:'Trámite', c:'mv', when:'Vigente', t:'Maldivas: visa a la llegada y declaración IMUGA gratis', x:'No hace falta visa previa, pero tenés que completar online la declaración IMUGA hasta 96 horas antes de llegar y mostrar pasaje de salida, reserva paga y fondos suficientes.', src:{ l:'Misión de Maldivas', u:'https://2026.mdvmission.gov.mv/jed/articles/maldives-visa-information-21' } },
+  { cat:'visa', tag:'Trámite', c:'eu', place:'Europa (Schengen)', when:'Sin fecha', t:'El ETIAS sigue sin fecha de inicio y todavía no se puede tramitar', x:'Al 19 de octubre de 2026 la Unión Europea no había anunciado cuándo arranca: su portal oficial sacó la referencia al último trimestre de 2026 y dice que avisará con varios meses de anticipación. Los sitios que cobran por tramitarlo hoy no son oficiales. Cuando entre en vigor lo van a necesitar los viajeros sin visa, como los argentinos, para estancias de hasta 90 días. El control biométrico EES funciona de forma completa desde abril de 2026.', src:{ l:'Majorca Daily Bulletin', u:'https://www.majorcadailybulletin.com/news/local/2026/10/19/146693/new-visa-free-travel-scheme-for-britons-has-been-kicked-into-the-long-grass.html' } },
   { cat:'equipaje', tag:'Equipaje', c:'', place:'En el avión', when:'Desde mar 2026', t:'Power banks: siempre en cabina, máximo 2 y sin usarlos en vuelo', x:'Hasta 100 Wh viajan sin permiso; de 101 a 160 Wh necesitás aprobación de la aerolínea. Varias aerolíneas ya prohíben usarlos o recargarlos a bordo y piden no guardarlos en el compartimiento superior.', src:{ l:'JetsetterGuide', u:'https://jetsetterguide.com/asia/power-trip-new-airline-power-bank-rules-for-2026' } },
   { cat:'equipaje', tag:'Drones', c:'', place:'En el avión', when:'Siempre', t:'Drones: baterías de repuesto en cabina, nunca en bodega', x:'Las baterías de litio sueltas van en el equipaje de mano, con los bornes protegidos y de menos de 100 Wh cada una. Fijate la política de tu aerolínea para el drone y qué permiso pide cada país: en Egipto, por ejemplo, pueden retenerlo en el aeropuerto.' },
   { cat:'reglas', tag:'Multas', c:'sg', when:'Vigente', t:'Singapur multa hasta por no tirar la cadena en un baño público', x:'Son S$150 y puede llegar hasta S$1.000. También multan por vapear (desde S$200), tirar basura (hasta S$1.000) y llevar durián en el transporte público (S$500).', src:{ l:'Time Out', u:'https://www.timeout.com/singapore/things-to-do/odd-things-that-are-illegal-in-singapore' } },
@@ -3225,7 +3281,7 @@ function initIdioma() {
 const BF = {
   dia: '2026-11-27', cyber: '2026-11-30',
   desde: '2026-11-10', hasta: '2026-12-01',
-  revisado: '2026-11-11',
+  revisado: '2026-11-16',
   marcas: [
     { name:'GetYourGuide', domain:'getyourguide.com', from:'2026-11-14', to:'2026-11-29', code:'MASMUNDOK5', off:'5% OFF',
       kind:{ es:'Tours y entradas', pt:'Passeios e ingressos', en:'Tours & tickets' },
